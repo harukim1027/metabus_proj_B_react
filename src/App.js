@@ -51,6 +51,8 @@ import PageIntroduceMain from 'Pages/PageIntroduce/PageIntroduceMain';
 // errorpage
 import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
+// map
+import CyMap from 'Components/Map/Map';
 
 function App() {
   const { auth } = useAuth();
@@ -184,6 +186,8 @@ function App() {
             </>
           )}
           <Route path="*" element={<NotFound />} />
+
+          <Route path="/map/" element={<CyMap />} />
         </Routes>
         <p className="header mt-10 text-center text-gray-500 text-xxs">
           &copy;2022 METABUS Corp. All rights reserved.
