@@ -51,6 +51,8 @@ import PageIntroduceMain from 'Pages/PageIntroduce/PageIntroduceMain';
 // errorpage
 import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
+import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
+import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
 
 function App() {
   const { auth } = useAuth();
@@ -80,6 +82,9 @@ function App() {
           <Route path="/review/:reviewId/" element={<PageReviewDetail />} />
           <Route path="/review/dog/" element={<PageReviewIndexDog />} />
           <Route path="/review/cat/" element={<PageReviewIndexCat />} />
+
+          {/* findOwnerBoard */}
+          <Route path="/findboard/" element={<PageFindOwnerBoardIndex />} />
 
           {/* ------------admin------------ */}
           {auth?.isLoggedIn && auth?.is_staff && (
@@ -179,6 +184,16 @@ function App() {
               <Route path="/review/new/" element={<PageReviewForm />} />
               <Route
                 path="/review/:reviewId/edit/"
+                element={<PageReviewForm />}
+              />
+
+              {/* findOwnerBoard */}
+              <Route
+                path="/findboard/new/"
+                element={<PageFindOwnerBoardForm />}
+              />
+              <Route
+                path="/findboard/:findBoardId/edit/"
                 element={<PageReviewForm />}
               />
             </>
