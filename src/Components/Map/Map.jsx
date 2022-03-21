@@ -33,6 +33,7 @@ function CyMap({ centersData }) {
             ...prevLocs,
             {
               center_name: cenData?.center_name,
+              center_call: cenData?.center_call,
               center_coords: { lat: coords.Ma, lng: coords.La },
             },
           ]);
