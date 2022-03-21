@@ -32,28 +32,23 @@ function FindOwnerBoardList() {
 
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
-  const moveCategory = () => {
-    fieldValues.category === '전체' && navigate(`/findboard/`);
-    fieldValues.category === '강아지' && navigate(`/findboard/dog/`);
-    fieldValues.category === '고양이' && navigate(`/findboard/cat/`);
-  };
-
-  useEffect(() => {
-    moveCategory();
-  }, [fieldValues]);
+  const [searchLocation, setSearchLocation] = useState('');
+  const [searchAnimal, setSearchAnimal] = useState('');
 
   const fetchFindBoard = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
         page: newPage,
         query: newQuery,
+        location: searchLocation,
+        animaltype: searchAnimal,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
       setPageCount(Math.ceil(data.count / itemsPerPage));
       setCurrentItems(data?.results);
     },
-    [query],
+    [query, searchLocation, searchAnimal],
   );
 
   useEffect(() => {
@@ -77,25 +72,6 @@ function FindOwnerBoardList() {
       fetchFindBoard(1, query);
     }
   };
-
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [findBoardList]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [findBoardList]);
 
   //-------------
 
@@ -125,38 +101,48 @@ function FindOwnerBoardList() {
             )}
           </div>
 
-          {/* 검색 필드 + CSS */}
-          {/* 검색, 카테고리, 글 작성 버튼 위치 고정하기 (xxs랑 sm 범위에서만) */}
+          {/* 검색 필드 */}
           <div className="mb-6 mt-10">
             <div>
               <div className=" xs:flex-none xl:flex xl:justify-between">
+                {/* 발견 장소 선택 */}
                 <div>
-                  <form
-                    onSubmit={() => moveCategory()}
-                    className="flex justify-center"
-                  >
+                  <form className="flex justify-center">
                     <select
-                      name="category"
-                      value={fieldValues.category}
-                      onChange={handleFieldChange}
+                      name="find_location"
+                      value={fieldValues.find_location}
+                      onChange={(e) => setSearchLocation(e.target.value)}
                       className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
-                      defaultValue="전체"
+                      defaultValue="발견 장소"
                     >
-                      <option value="전체">전체</option>
+                      <option value="">발견 장소</option>
+                      <option value="서울">서울</option>
+                      <option value="경기">경기</option>
+                      <option value="인천">인천</option>
+                      <option value="대전">대전</option>
+                      <option value="세종">세종</option>
+                    </select>
+                  </form>
+                </div>
+
+                {/* 동물 종류 선택 */}
+                <div>
+                  <form className="flex justify-center">
+                    <select
+                      name="animal_type"
+                      value={fieldValues.animal_type}
+                      onChange={(e) => setSearchAnimal(e.target.value)}
+                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      defaultValue="동물 종류"
+                    >
+                      <option value="">동물 종류</option>
                       <option value="강아지">강아지</option>
                       <option value="고양이">고양이</option>
                     </select>
                   </form>
                 </div>
+
                 <div className="flex justify-center xs:mt-5 xl:mt-0">
-                  <input
-                    type="text"
-                    name="query"
-                    onChange={getQuery}
-                    onKeyPress={handleKeyPress}
-                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
-                    placeholder="제목, 작성자 ID를 검색하세요."
-                  />
                   <button
                     onClick={handleBTNPress}
                     className="rounded bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
@@ -172,7 +158,7 @@ function FindOwnerBoardList() {
           <hr className="mb-3" />
 
           <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
-            {findBoardList?.results?.map((findboard) => (
+            {findBoardList?.results.map((findboard) => (
               <div
                 key={findboard.find_board_no}
                 className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"

@@ -53,8 +53,14 @@ import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
 // map
 import CyMap from 'Components/Map/Map';
-import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
+// FindOwnerBoard
+import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
+import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardDetail';
+// LostPetBoard
+import PageLostPetBoardList from 'Pages/PageLostPetBoard/PageLostPetBoardList';
+import PageLostPetBoardForm from 'Pages/PageLostPetBoard/PageLostPetBoardForm';
+import PageLostPetBoardDetail from 'Pages/PageLostPetBoard/PageLostPetBoardDetail';
 
 function App() {
   const { auth } = useAuth();
@@ -86,7 +92,18 @@ function App() {
           <Route path="/review/cat/" element={<PageReviewIndexCat />} />
 
           {/* findOwnerBoard */}
-          <Route path="/findboard/" element={<PageFindOwnerBoardIndex />} />
+          <Route path="/findboard/" element={<PageFindOwnerBoardList />} />
+          <Route
+            path="/findboard/:findboardId/"
+            element={<PageFindOwnerBoardDetail />}
+          />
+
+          {/* lostPetBoard */}
+          <Route path="/lostpetboard/" element={<PageLostPetBoardList />} />
+          <Route
+            path="/lostpetboard/:lostpetboardId/"
+            element={<PageLostPetBoardDetail />}
+          />
 
           {/* ------------admin------------ */}
           {auth?.isLoggedIn && auth?.is_staff && (
@@ -196,7 +213,17 @@ function App() {
               />
               <Route
                 path="/findboard/:findBoardId/edit/"
-                element={<PageReviewForm />}
+                element={<PageFindOwnerBoardForm />}
+              />
+
+              {/* LostPetBoard */}
+              <Route
+                path="/lostpetboard/new/"
+                element={<PageLostPetBoardForm />}
+              />
+              <Route
+                path="/lostpetboard/:lostpetboardId/edit/"
+                element={<PageLostPetBoardForm />}
               />
             </>
           )}
