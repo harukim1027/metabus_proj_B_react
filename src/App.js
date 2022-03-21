@@ -52,9 +52,10 @@ import PageIntroduceMain from 'Pages/PageIntroduce/PageIntroduceMain';
 import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
 // map
-import CyMap from 'Components/Map/Map';
 import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
+import Kmap from 'Components/Map/KakaoMap';
+import PageMap from 'Pages/PageMap/PageMap';
 
 function App() {
   const { auth } = useAuth();
@@ -202,7 +203,8 @@ function App() {
           )}
           <Route path="*" element={<NotFound />} />
 
-          <Route path="/map/" element={<CyMap />} />
+          <Route path="/map/" element={<PageMap />} />
+          <Route path="/kmap/" element={<Kmap />} />
         </Routes>
         <p className="header mt-10 text-center text-gray-500 text-xxs">
           &copy;2022 METABUS Corp. All rights reserved.
