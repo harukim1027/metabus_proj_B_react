@@ -8,7 +8,7 @@ function PageReviewDetail() {
   return (
     <>
       <TopNav />
-      <ReviewDetail reviewId={reviewId} />
+      <ReviewDetail reviewId={reviewId} reviewCommentId={reviewCommentId} />
     </>
   );
 }

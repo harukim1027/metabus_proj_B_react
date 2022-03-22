@@ -7,9 +7,10 @@ import './Review.css';
 import LoadingIndicator from 'LoadingIndicator';
 import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 
-function ReviewDetail({ reviewId }) {
+function ReviewDetail({ reviewId, reviewCommentId }) {
   const navigate = useNavigate();
   const { auth } = useAuth();
+  const [delComment, setDelComment] = useState('');
 
   const [{ data: review, loading, error }, refetch] = useApiAxios(
     `/adopt_review/api/reviews/${reviewId}/`,
@@ -37,56 +38,28 @@ function ReviewDetail({ reviewId }) {
     }
   };
 
+  const [{ loading: loa, error: err }, delCommentRefetch] = useApiAxios(
+    {
+      url: `/adopt_review/api/comments/${delComment}/`,
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
+    { manual: true },
+  );
+
+  const commentDelete = () => {
+    if (window.confirm('댓글을 정말 삭제 할까요?')) {
+      delCommentRefetch().then(() => {
+        refetch();
+      });
+    }
+  };
+
   useEffect(() => {
     refetch();
   }, []);
-
-  // 댓글 시작
-
-  // const [input, setInput] = useState();
-  // //   const { userData } = useContext(UserContext);
-  // const [comments, setComments] = useState([]);
-
-  // const onChange = (e) => {
-  //   setInput(e.target.value);
-  // };
-
-  // const addComment = () => {
-  //   // 코멘트 추가
-  //   setComments(
-  //     comments.concat({
-  //       review_comment_no: comments.length + 1,
-  //       comment_content: input,
-  //       // userName: userData[0].id,
-  //     }),
-  //   );
-  //   setInput('');
-  // };
-
-  // const removeComment = (review_comment_no) => {
-  //   // 코멘트 삭제
-  //   return setComments(
-  //     comments.filter(
-  //       (comment) => comment.review_comment_no !== review_comment_no,
-  //     ),
-  //   );
-  // };
-
-  // const chagneContent = (review_comment_no, inputWord) => {
-  //   // 코멘트 수정
-  //   return setComments(
-  //     comments.map((comments) => {
-  //       if (comments.review_comment_no === review_comment_no) {
-  //         return {
-  //           ...comments,
-  //           comment_content: inputWord,
-  //         };
-  //       }
-  //       return comments;
-  //     }),
-  //   );
-  // };
-  // 댓글 끝
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
@@ -213,7 +186,16 @@ function ReviewDetail({ reviewId }) {
                   <>
                     {review?.comments.map((comment) => (
                       <tr>
-                        {comment.comment_content} by.{comment.user}
+                        {comment.comment_content} by.{comment.user}{' '}
+                        <button
+                          onMouseOver={() =>
+                            setDelComment(comment.review_comment_no)
+                          }
+                          onClick={() => commentDelete()}
+                        >
+                          삭제
+                        </button>
+                        <button>수정</button>
                       </tr>
                     ))}
 

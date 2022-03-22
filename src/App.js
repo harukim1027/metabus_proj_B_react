@@ -55,6 +55,7 @@ import Forbidden from 'Components/ErrorPage/Forbidden403';
 import CyMap from 'Components/Map/Map';
 import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
+import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 
 function App() {
   const { auth } = useAuth();

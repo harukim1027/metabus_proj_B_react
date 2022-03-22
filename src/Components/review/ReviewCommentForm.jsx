@@ -18,7 +18,7 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
   const navigate = useNavigate();
 
   const { auth } = useAuth();
-  const [{ data: comments }, refetchComment] = useApiAxios(
+  const [{ data: commentsData }, refetchComment] = useApiAxios(
     {
       url: `/adopt_review/api/comments/${reviewCommentId}/`,
     },
@@ -53,21 +53,13 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
   INIT_FIELD_VALUES.review = reviewId;
 
   const { fieldValues, handleFieldChange, setFieldValues, clearFieldValues } =
-    useFieldValues(comments || INIT_FIELD_VALUES);
-
-  // useEffect(() => {
-  //   setFieldValues(
-  //     produce((draft) => {
-  //       draft.review_id = selectReviewId;
-  //     }),
-  //   );
-  // }, [auth.userID, setFieldValues, selectReviewId]);
+    useFieldValues(commentsData || INIT_FIELD_VALUES);
 
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
       ...prevFieldValues,
     }));
-  }, [comments]);
+  }, [commentsData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,9 +80,7 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
     });
   };
 
-  // console.log('review?.review_no', reviewId);
-  console.log('fieldValues', fieldValues);
-  // console.log('selectReviewId', selectReviewId);
+  console.log('commentsData', commentsData);
 
   return (
     <>
