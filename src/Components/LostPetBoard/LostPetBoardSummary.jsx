@@ -6,7 +6,7 @@ function LostPetBoardSummary({ lostpetboard }) {
   return (
     <>
       <div className="lostpetboard_header h-full">
-        <Link to={`/lostpetboard/${lostpetboard.lost_pet_no}/`}>
+        <Link to={`/lostpetboard/${lostpetboard.lost_board_no}/`}>
           {lostpetboard.board_image && (
             <div className="h-2/3 overflow-hidden">
               <img

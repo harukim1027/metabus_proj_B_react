@@ -63,7 +63,6 @@ function LostPetBoardDetail({ lostpetboardId }) {
               </p>
             </>
           )}
-
           <div className="flex justify-center">
             <div className="px-4 py-5 xs:w-full sm:w-2/3">
               {lostpetboard && (
