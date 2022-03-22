@@ -13,6 +13,7 @@ function CyMap({ centersData }) {
   });
 
   const [position, setPosition] = useState();
+  const [detailAddr, setDetailAddr] = useState({});
   const [map, setMap] = useState();
   const [info, setInfo] = useState();
 
@@ -80,21 +81,20 @@ function CyMap({ centersData }) {
   }, [centersData]);
   // console.log('geocode:', geocode);
   // console.log('locations: ', locations);
+  // -----------------useEffect 하나 끝---------------------------
+
   function map_marker(marker_obj) {
     return <MapMarker position={marker_obj.center_coords} />;
   }
   //-------------
 
-  // 주소로 변환하기
-  useEffect(() => {}, []);
-
-  // 지오코더로 좌표를 주소로 변환하는 함수들-----활용
+  // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------
+  // 화면 중앙의 행정동 주소 정보 화면 좌상단에 뿌려주기
   function searchAddrFromCoords(coords, callback) {
     // 좌표로 행정동 주소 정보를 요청합니다
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
   }
 
-  // 화면 중앙의 행정동 주소 정보 화면 좌상단에 뿌려주기
   function searchDetailAddrFromCoords(coords, callback) {
     // 좌표로 법정동 상세 주소 정보를 요청합니다
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
@@ -114,6 +114,25 @@ function CyMap({ centersData }) {
       }
     }
   }
+  // displayAddressInfo
+
+  // 클릭한 마커 위치(위,경도)를 주소로 변환하기
+  useEffect(() => {
+    position &&
+      searchDetailAddrFromCoords(position.center, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          result[0].road_address
+            ? setDetailAddr({
+                road_addr: result[0].road_address.address_name,
+                addr: result[0].address.address_name,
+              })
+            : setDetailAddr({ addr: result[0].address.address_name });
+        } else {
+        }
+      });
+  }, [setPosition]);
+
+  console.log('detailAddr: ', detailAddr, 'position: ', position);
 
   return (
     <>
@@ -121,13 +140,16 @@ function CyMap({ centersData }) {
         center={currentLoc.center}
         style={{ width: '100%', height: '700px' }}
         level="9"
-        onClick={(_t, mouseEvent) =>
+        onClick={(_t, mouseEvent) => {
           setPosition({
-            lat: mouseEvent.latLng.getLat(),
-            lng: mouseEvent.latLng.getLng(),
-          })
-        }
+            center: {
+              lat: mouseEvent.latLng.getLat(),
+              lng: mouseEvent.latLng.getLng(),
+            },
+          });
+        }}
         onCreate={(map) => setMap(map)}
+        // 지도 중심의 행정동 표시를 위해 함수 사용
         onCenterChanged={(map) =>
           searchAddrFromCoords(map.getCenter(), displayCenterInfo)
         }
@@ -152,8 +174,29 @@ function CyMap({ centersData }) {
         {locations.map((marker_obj) => {
           return map_marker(marker_obj);
         })}
-        {/* 클릭으로 위치 마커(포인터) 표시 */}
-        {position && <MapMarker position={position} draggable={true} />}
+
+        {/* 클릭한 위치 마커 표시 */}
+        {position && (
+          <MapMarker position={position.center} draggable={true}>
+            <div style={{ padding: '5px', color: '#000' }}>
+              <div
+                style={{
+                  padding: '5px',
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                <h2 className="font-semibold">법정동 주소정보</h2>
+                {detailAddr?.road_addr && (
+                  <h2>도로명 주소 : {detailAddr.road_addr}</h2>
+                )}
+
+                <h2>지번 주소 : {detailAddr?.addr}</h2>
+              </div>
+            </div>
+          </MapMarker>
+        )}
 
         {/* 현위치 마커 */}
         {!currentLoc.isLoading && (
@@ -178,9 +221,9 @@ function CyMap({ centersData }) {
       {position && (
         <p>
           {'클릭한 위치의 위도는 ' +
-            position.lat +
+            position.center.lat +
             ' 이고, 경도는 ' +
-            position.lng +
+            position.center.lng +
             ' 입니다'}
         </p>
       )}
