@@ -85,7 +85,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   </div>
 
                   <ul>
-                    <li>유실장소:{lostpetboard.find_location}</li>
+                    <li>유실장소:{lostpetboard.lost_location}</li>
                     <li>동물이름:{lostpetboard.pet_name}</li>
                     <li>동물종류:{lostpetboard.animal_type}</li>
                     <li>
@@ -94,23 +94,33 @@ function LostPetBoardDetail({ lostpetboardId }) {
                         ? lostpetboard.dog_breed
                         : lostpetboard.cat_breed}
                     </li>
+                    <li>
+                      성별:{''}
+                      {lostpetboard.sex === '암컷' ? '암컷' : '수컷'}
+                    </li>
                     <li>사이즈:{lostpetboard.size}</li>
                     <li>인식표:{lostpetboard.animal_tag}</li>
                   </ul>
 
                   <div className="my-5 text-right">
-                    <button
-                      className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
-                      onClick={() => handleDelete()}
-                    >
-                      삭제
-                    </button>
-                    <Link
-                      className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
-                      to={`/lostpetboard/${lostpetboardId}/edit/`}
-                    >
-                      수정
-                    </Link>
+                    {(auth.userID === lostpetboard?.user || auth.is_staff) && (
+                      <button
+                        className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
+                        onClick={() => handleDelete()}
+                      >
+                        삭제
+                      </button>
+                    )}
+
+                    {(auth.userID === lostpetboard?.user || auth.is_staff) && (
+                      <Link
+                        className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
+                        to={`/lostpetboard/${lostpetboardId}/edit/`}
+                      >
+                        수정
+                      </Link>
+                    )}
+
                     <Link
                       className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
                       to="/lostpetboard/"

@@ -30,16 +30,17 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
 
   const [saveImage, setSaveImage] = useState('');
 
-  const [{ data: findBoard, loading, error }] = useApiAxios(
-    {
-      url: `/find_owner_board/api/board/`,
-      method: 'GET',
-      data: { user: auth.userID },
-    },
-    {
-      manual: false,
-    },
-  );
+  // 조회 (작성 글 수정시 기존 데이터가 남아있도록 하기위함)
+  const [{ data: findBoard, loading: getLoading, error: getError }] =
+    useApiAxios(
+      {
+        url: `/find_owner_board/api/board/${findBoardId}/`,
+        method: 'GET',
+      },
+      {
+        manual: !findBoardId,
+      },
+    );
 
   const [
     {
@@ -158,10 +159,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
           </blockquote>
 
           {/* 로딩 에러 */}
-          {loading && (
+          {getLoading && (
             <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
           )}
-          {error && (
+          {getError && (
             <>
               <p className="text-red-400 text-center">
                 &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !

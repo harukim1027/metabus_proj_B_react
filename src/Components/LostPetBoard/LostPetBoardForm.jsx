@@ -27,16 +27,17 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
 
   const [saveImage, setSaveImage] = useState('');
 
-  const [{ data: lostpetBoard, loading, error }] = useApiAxios(
-    {
-      url: `/lost_pet_board/api/board/`,
-      method: 'GET',
-      data: { user: auth.userID },
-    },
-    {
-      manual: false,
-    },
-  );
+  const [{ data: lostpetBoard, loading: getLoading, error: getError }] =
+    useApiAxios(
+      {
+        url: `/lost_pet_board/api/board/${lostpetboardId}/`,
+        method: 'GET',
+        data: { user: auth.userID },
+      },
+      {
+        manual: !lostpetboardId,
+      },
+    );
 
   const [
     {
@@ -125,10 +126,10 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
           </blockquote>
 
           {/* 로딩 에러 */}
-          {loading && (
+          {getLoading && (
             <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
           )}
-          {error && (
+          {getError && (
             <>
               <p className="text-red-400 text-center">
                 &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !
