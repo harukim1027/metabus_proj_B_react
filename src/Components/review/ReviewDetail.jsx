@@ -7,10 +7,11 @@ import './Review.css';
 import LoadingIndicator from 'LoadingIndicator';
 import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 
-function ReviewDetail({ reviewId, reviewCommentId }) {
+function ReviewDetail({ reviewId }) {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [delComment, setDelComment] = useState('');
+  const [changeCom, setChangeCom] = useState([]);
 
   const [{ data: review, loading, error }, refetch] = useApiAxios(
     `/adopt_review/api/reviews/${reviewId}/`,
@@ -37,7 +38,7 @@ function ReviewDetail({ reviewId, reviewCommentId }) {
       });
     }
   };
-
+  // 댓글 삭제
   const [{ loading: loa, error: err }, delCommentRefetch] = useApiAxios(
     {
       url: `/adopt_review/api/comments/${delComment}/`,
@@ -195,7 +196,22 @@ function ReviewDetail({ reviewId, reviewCommentId }) {
                         >
                           삭제
                         </button>
-                        <button>수정</button>
+                        {/* <button
+                          onClick={() => {
+                            navigate(
+                              `/review/comments/${comment.review_comment_no}/`,
+                            );
+                          }}
+                        > */}
+                        <button
+                          onClick={() => {
+                            navigate(
+                              `/review/comments/${comment.review_comment_no}/`,
+                            );
+                          }}
+                        >
+                          수정
+                        </button>
                       </tr>
                     ))}
 

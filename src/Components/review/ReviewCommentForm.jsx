@@ -59,7 +59,7 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
     setFieldValues((prevFieldValues) => ({
       ...prevFieldValues,
     }));
-  }, [commentsData]);
+  }, [commentsData, setFieldValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

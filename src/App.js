@@ -48,6 +48,8 @@ import PageMyInquiry from 'Pages/PageMypage/PageMyInquiry';
 import PageFindId from 'Pages/PageAccounts/PageFindId';
 import PageChangePassword from 'Pages/PageAccounts/PageChangePassword';
 import PageIntroduceMain from 'Pages/PageIntroduce/PageIntroduceMain';
+import PageMyComments from 'Pages/PageMypage/PageMyComments';
+
 // errorpage
 import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
@@ -181,6 +183,7 @@ function App() {
                 element={<PageMyAssignInfo />}
               />
               <Route path="/mypage/myposts/" element={<PageMyReview />} />
+              <Route path="/mypage/mycomments/" element={<PageMyComments />} />
               <Route path="/mypage/myinquiry/" element={<PageMyInquiry />} />
 
               {/* review */}
@@ -188,6 +191,11 @@ function App() {
               <Route
                 path="/review/:reviewId/edit/"
                 element={<PageReviewForm />}
+              />
+
+              <Route
+                path="/review/comments/:reviewCommentId"
+                element={<PageReviewCommentForm />}
               />
 
               {/* findOwnerBoard */}
