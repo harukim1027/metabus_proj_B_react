@@ -1,5 +1,6 @@
 import { useApiAxios } from 'api/base';
 import CyMap from 'Components/Map/Map';
+import LoadingIndicator from 'LoadingIndicator';
 import { useEffect } from 'react';
 
 function PageMap() {
@@ -23,6 +24,11 @@ function PageMap() {
   //-------------------
   // console.log('centersData: ', centersData);
 
-  return <CyMap centersData={centersData} />;
+  return (
+    <>
+      {getCenterLoading && <LoadingIndicator />}
+      <CyMap centersData={centersData} />
+    </>
+  );
 }
 export default PageMap;
