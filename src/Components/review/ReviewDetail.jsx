@@ -5,6 +5,7 @@ import { useAuth } from 'contexts/AuthContext';
 import '../../App.css';
 import './Review.css';
 import LoadingIndicator from 'LoadingIndicator';
+import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 
 function ReviewDetail({ reviewId }) {
   const navigate = useNavigate();
@@ -40,7 +41,52 @@ function ReviewDetail({ reviewId }) {
     refetch();
   }, []);
 
-  // console.log('review', review);
+  // 댓글 시작
+
+  // const [input, setInput] = useState();
+  // //   const { userData } = useContext(UserContext);
+  // const [comments, setComments] = useState([]);
+
+  // const onChange = (e) => {
+  //   setInput(e.target.value);
+  // };
+
+  // const addComment = () => {
+  //   // 코멘트 추가
+  //   setComments(
+  //     comments.concat({
+  //       review_comment_no: comments.length + 1,
+  //       comment_content: input,
+  //       // userName: userData[0].id,
+  //     }),
+  //   );
+  //   setInput('');
+  // };
+
+  // const removeComment = (review_comment_no) => {
+  //   // 코멘트 삭제
+  //   return setComments(
+  //     comments.filter(
+  //       (comment) => comment.review_comment_no !== review_comment_no,
+  //     ),
+  //   );
+  // };
+
+  // const chagneContent = (review_comment_no, inputWord) => {
+  //   // 코멘트 수정
+  //   return setComments(
+  //     comments.map((comments) => {
+  //       if (comments.review_comment_no === review_comment_no) {
+  //         return {
+  //           ...comments,
+  //           comment_content: inputWord,
+  //         };
+  //       }
+  //       return comments;
+  //     }),
+  //   );
+  // };
+  // 댓글 끝
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
@@ -146,30 +192,12 @@ function ReviewDetail({ reviewId }) {
                   <br />
 
                   <div className="mb-4 flex justify-center">
-                    {review.image1 && (
-                      <img src={review.image1} alt="" className="w-full" />
-                    )}
-                  </div>
-
-                  <div className="mb-4 flex justify-center">
-                    {review.image2 && (
-                      <img src={review.image2} alt="" className="w-full" />
-                    )}
-                  </div>
-                  <div className="mb-4 flex justify-center">
-                    {review.image3 && (
-                      <img src={review.image3} alt="" className="w-full" />
-                    )}
-                  </div>
-
-                  <div className="mb-4 flex justify-center">
-                    {review.image4 && (
-                      <img src={review.image4} alt="" className="w-full" />
-                    )}
-                  </div>
-                  <div className="mb-4 flex justify-center">
-                    {review.image5 && (
-                      <img src={review.image5} alt="" className="w-full" />
+                    {review.review_image.image && (
+                      <img
+                        src={review.review_image.image}
+                        alt=""
+                        className="w-full"
+                      />
                     )}
                   </div>
 
@@ -180,6 +208,23 @@ function ReviewDetail({ reviewId }) {
                   </h2>
                   <br />
                   <hr className="mt-3 mb-3" />
+
+                  {/* 댓글 */}
+                  <>
+                    {review?.comments.map((comment) => (
+                      <tr>
+                        {comment.comment_content} by.{comment.user}
+                      </tr>
+                    ))}
+
+                    <PageReviewCommentForm
+                      reviewId={reviewId}
+                      refetch={refetch}
+                    />
+                  </>
+                  <hr className="mt-3 mb-3" />
+
+                  {/*  */}
 
                   <div className="my-5 text-right">
                     {(auth.userID === review.user.userID || auth.is_staff) && (
