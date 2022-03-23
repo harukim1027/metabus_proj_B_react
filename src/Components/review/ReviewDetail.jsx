@@ -5,6 +5,7 @@ import { useAuth } from 'contexts/AuthContext';
 import '../../App.css';
 import './Review.css';
 import LoadingIndicator from 'LoadingIndicator';
+import PageReviewCommentList from 'Pages/PageReview/PageReviewCommentList';
 import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 
 function ReviewDetail({ reviewId }) {
@@ -185,40 +186,15 @@ function ReviewDetail({ reviewId }) {
 
                   {/* 댓글 */}
                   <>
-                    {review?.comments.map((comment) => (
-                      <tr>
-                        {comment.comment_content} by.{comment.user}{' '}
-                        <button
-                          onMouseOver={() =>
-                            setDelComment(comment.review_comment_no)
-                          }
-                          onClick={() => commentDelete()}
-                        >
-                          삭제
-                        </button>
-                        {/* <button
-                          onClick={() => {
-                            navigate(
-                              `/review/comments/${comment.review_comment_no}/`,
-                            );
-                          }}
-                        > */}
-                        <button
-                          onClick={() => {
-                            navigate(
-                              `/review/comments/${comment.review_comment_no}/`,
-                            );
-                          }}
-                        >
-                          수정
-                        </button>
-                      </tr>
-                    ))}
-
-                    <PageReviewCommentForm
+                    <PageReviewCommentList
                       reviewId={reviewId}
                       refetch={refetch}
                     />
+
+                    {/* <PageReviewCommentForm
+                      reviewId={reviewId}
+                      refetch={refetch}
+                    /> */}
                   </>
                   <hr className="mt-3 mb-3" />
 

@@ -26,16 +26,19 @@ function MyComments() {
     },
   );
 
-  const fetchComments = useCallback(async (newPage = query) => {
-    const params = {
-      page: newPage,
-      query: auth.userID,
-    };
-    const { data } = await refetch({ params });
-    setPage(newPage);
-    setPageCount(Math.ceil(data.count / itemsPerPage));
-    setCurrentItems(data?.results);
-  }, []);
+  const fetchComments = useCallback(
+    async (newPage = query) => {
+      const params = {
+        page: newPage,
+        query: auth.userID,
+      };
+      const { data } = await refetch({ params });
+      setPage(newPage);
+      setPageCount(Math.ceil(data.count / itemsPerPage));
+      setCurrentItems(data?.results);
+    },
+    [query],
+  );
 
   useEffect(() => {
     fetchComments(1);

@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import { React } from 'react';
-import { useState } from 'react/cjs/react.production.min';
-import produce from 'immer';
 import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = {
