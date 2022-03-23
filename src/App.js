@@ -19,6 +19,8 @@ import PageUserManagementDetail from 'Pages/PageUserManagement/PageUserManagemen
 import PageUserAssignList from 'Pages/PageUserManagement/PageUserAssignList';
 import PageUserReviewList from 'Pages/PageUserManagement/PageUserReviewList';
 import PageUserInquiryList from 'Pages/PageUserManagement/PageUserInquiryList';
+import PageUserFindOwnerBoardList from 'Pages/PageUserManagement/PageUserFindOwnerBoardList';
+import PageUserLostPetBoardList from 'Pages/PageUserManagement/PageUserLostPetBoardList';
 // admin/assignment
 import PageAssignList from 'Pages/PageAssignManagement/PageAssignList';
 import PageAssignDetail from 'Pages/PageAssignManagement/PageAssignDetail';
@@ -147,6 +149,16 @@ function App() {
               <Route
                 path="/admin/usermanage/:userId/userinquiry/"
                 element={<PageUserInquiryList />}
+              />
+
+              <Route
+                path="/admin/usermanage/:userId/userfindboard/"
+                element={<PageUserFindOwnerBoardList />}
+              />
+
+              <Route
+                path="/admin/usermanage/:userId/userlostpetboard/"
+                element={<PageUserLostPetBoardList />}
               />
 
               {/* admin/inquiry */}
