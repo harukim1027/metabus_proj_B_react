@@ -14,6 +14,27 @@
   }
 }
 
+.main_header {
+  font-family: 'Hahmlet', serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid #a0a0a0;
+  z-index: 1000;
+}
+
+.main_header .inner p {
+  margin-left: 30px;
+}
+
+.main_header .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -26,7 +47,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {
@@ -40,5 +61,5 @@
 
 .header {
   font-family: 'Hahmlet', serif;
-  background-color: #dbf1f6;
+  background-color: #ffffff;
 }

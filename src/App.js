@@ -55,14 +55,23 @@ import Forbidden from 'Components/ErrorPage/Forbidden403';
 import CyMap from 'Components/Map/Map';
 import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
+import PageTopNav from 'Pages/PageMainMenu';
 
 function App() {
   const { auth } = useAuth();
   return (
     <>
+      <header className="main_header">
+        <div className="inner">
+          <p>
+            Contact Us <strong>metabusemail@gmail.com</strong>
+          </p>
+        </div>
+      </header>
       <div className="app header">
         <Routes>
           <Route path="/" element={<PageMainScreen />} />
+          <Route path="/menu/" element={<PageTopNav />} />
           {/* accounts */}
           <Route path="/accounts/login/" element={<PageLoginForm />} />
           <Route path="/accounts/signup/" element={<PageSignupForm />} />
@@ -204,9 +213,6 @@ function App() {
 
           <Route path="/map/" element={<CyMap />} />
         </Routes>
-        <p className="header mt-10 text-center text-gray-500 text-xxs">
-          &copy;2022 METABUS Corp. All rights reserved.
-        </p>
       </div>
     </>
   );
