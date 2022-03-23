@@ -40,11 +40,11 @@ ul.pagination_lostPetBoard li a {
   font-weight: 600;
 }
 ul.pagination_lostPetBoard li:hover {
-  background-color: rgb(192 132 252);
+  background-color: rgb(239 68 68);
   color: white;
 }
 ul.pagination_lostPetBoard li.selected {
-  background-color: rgb(192 132 252);
+  background-color: rgb(239 68 68);
 }
 ul.pagination_lostPetBoard li.selected a {
   color: white;

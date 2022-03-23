@@ -80,7 +80,7 @@ function FindOwnerBoardList() {
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
-            <span className="mt-7 mb-6 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
+            <span className="mt-7 mb-6 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
               <span className="relative text-white">
                 " 이 아이 가족 찾아요😭 "
               </span>
@@ -112,15 +112,26 @@ function FindOwnerBoardList() {
                       name="find_location"
                       value={fieldValues.find_location}
                       onChange={(e) => setSearchLocation(e.target.value)}
-                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      className="md:text-xl xs:text-base border-2 border-black rounded p-2 xs:w-32 md:w-60 text-center py-2"
                       defaultValue="발견 장소"
                     >
                       <option value="">발견 장소</option>
-                      <option value="서울">서울</option>
-                      <option value="경기">경기</option>
-                      <option value="인천">인천</option>
-                      <option value="대전">대전</option>
-                      <option value="세종">세종</option>
+                      <option value="서울시">서울시</option>
+                      <option value="부산시">부산시</option>
+                      <option value="대구시">대구시</option>
+                      <option value="인천시">인천시</option>
+                      <option value="광주시">광주시</option>
+                      <option value="대전시">대전시</option>
+                      <option value="울산시">울산시</option>
+                      <option value="세종시">세종시</option>
+                      <option value="경기도">경기도</option>
+                      <option value="강원도">강원도</option>
+                      <option value="충청북도">충청북도</option>
+                      <option value="충청남도">충청남도</option>
+                      <option value="전라북도">전라북도</option>
+                      <option value="경상북도">경상북도</option>
+                      <option value="경상남도">경상남도</option>
+                      <option value="제주도">제주도</option>
                     </select>
                   </form>
                 </div>
@@ -132,7 +143,7 @@ function FindOwnerBoardList() {
                       name="animal_type"
                       value={fieldValues.animal_type}
                       onChange={(e) => setSearchAnimal(e.target.value)}
-                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      className="md:text-xl xs:text-base border-2 border-black rounded p-2 xs:w-32 md:w-60 text-center py-2"
                       defaultValue="동물 종류"
                     >
                       <option value="">동물 종류</option>
@@ -145,7 +156,7 @@ function FindOwnerBoardList() {
                 <div className="flex justify-center xs:mt-5 xl:mt-0">
                   <button
                     onClick={handleBTNPress}
-                    className="rounded bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
+                    className="rounded bg-gray-700 hover:bg-black border-gray-700 hover:border-black md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
                     readOnly
                   >
                     검색

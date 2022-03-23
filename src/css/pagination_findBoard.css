@@ -40,11 +40,11 @@ ul.pagination_findBoard li a {
   font-weight: 600;
 }
 ul.pagination_findBoard li:hover {
-  background-color: rgb(192 132 252);
+  background-color: rgb(39, 39, 39);
   color: white;
 }
 ul.pagination_findBoard li.selected {
-  background-color: rgb(192 132 252);
+  background-color: rgb(39, 39, 39);
 }
 ul.pagination_findBoard li.selected a {
   color: white;

@@ -45,7 +45,7 @@ function FindOwnerBoardDetail({ findboardId }) {
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 review_header rounded-xl shadow-md overflow-hidden pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-3 mb-10 font-semibold italic text-center text-slate-900">
-            <span className="mt-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl ">
+            <span className="mt-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl ">
               <span className="relative text-white">
                 " 이 아이 가족찾아요 "
               </span>
@@ -103,7 +103,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                   <div className="my-5 text-right">
                     {(auth.userID === findboard?.user || auth.is_staff) && (
                       <button
-                        className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
+                        className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                         onClick={() => handleDelete()}
                       >
                         삭제
@@ -112,7 +112,7 @@ function FindOwnerBoardDetail({ findboardId }) {
 
                     {(auth.userID === findboard?.user || auth.is_staff) && (
                       <Link
-                        className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
+                        className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                         to={`/findboard/${findboardId}/edit/`}
                       >
                         수정
@@ -120,7 +120,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                     )}
 
                     <Link
-                      className="ml-3 flex-shrink-0 bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 text-sm border-4 text-white py-1 px-2 rounded"
+                      className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                       to="/findboard/"
                     >
                       목록
