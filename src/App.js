@@ -56,7 +56,6 @@ import CyMap from 'Components/Map/Map';
 import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
 import PageTopNav from 'Pages/PageMainMenu';
-import PageTest from 'Pages/PageTest';
 
 function App() {
   const { auth } = useAuth();
@@ -72,7 +71,6 @@ function App() {
       <div className="app header">
         <Routes>
           <Route path="/" element={<PageMainScreen />} />
-          <Route path="/test" element={<PageTest />} />
           <Route path="/menu/" element={<PageTopNav />} />
           {/* accounts */}
           <Route path="/accounts/login/" element={<PageLoginForm />} />
