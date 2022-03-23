@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useState, useEffect, useMemo } from 'react';
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
+import './Map.css';
 
 function CyMap({ centersData }) {
   const [openDiv, setOpenDiv] = useState(false);
@@ -11,6 +12,7 @@ function CyMap({ centersData }) {
     errMsg: null,
     isLoading: true,
   });
+  const [clickLoc, setClickLoc] = useState({});
 
   const [position, setPosition] = useState();
   const [detailAddr, setDetailAddr] = useState({});
@@ -26,7 +28,10 @@ function CyMap({ centersData }) {
     },
   ]);
 
-  const geocoder = new kakao.maps.services.Geocoder();
+  const geocoder = useMemo(function () {
+    return new kakao.maps.services.Geocoder();
+  }, []);
+
   useEffect(() => {
     centersData?.map((cenData) => {
       geocoder.addressSearch(cenData.center_address, function (result, status) {
@@ -97,7 +102,7 @@ function CyMap({ centersData }) {
 
   function searchDetailAddrFromCoords(coords, callback) {
     // 좌표로 법정동 상세 주소 정보를 요청합니다
-    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    geocoder.coord2Address(coords.lng, coords.lat, callback);
   }
 
   // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
@@ -130,18 +135,25 @@ function CyMap({ centersData }) {
         } else {
         }
       });
-  }, [setPosition]);
+  }, [position]);
 
-  console.log('detailAddr: ', detailAddr, 'position: ', position);
+  // console.log('detailAddr: ', detailAddr, 'position: ', position);
 
   return (
     <>
       <Map
-        center={currentLoc.center}
+        center={clickLoc.center || currentLoc.center}
         style={{ width: '100%', height: '700px' }}
         level="9"
         onClick={(_t, mouseEvent) => {
+          // console.log('mouseEvent: ', mouseEvent);
           setPosition({
+            center: {
+              lat: mouseEvent.latLng.getLat(),
+              lng: mouseEvent.latLng.getLng(),
+            },
+          });
+          setClickLoc({
             center: {
               lat: mouseEvent.latLng.getLat(),
               lng: mouseEvent.latLng.getLng(),
@@ -177,25 +189,20 @@ function CyMap({ centersData }) {
 
         {/* 클릭한 위치 마커 표시 */}
         {position && (
-          <MapMarker position={position.center} draggable={true}>
-            <div style={{ padding: '5px', color: '#000' }}>
-              <div
-                style={{
-                  padding: '5px',
-                  textOverflow: 'ellipsis',
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                <h2 className="font-semibold">법정동 주소정보</h2>
-                {detailAddr?.road_addr && (
-                  <h2>도로명 주소 : {detailAddr.road_addr}</h2>
-                )}
-
-                <h2>지번 주소 : {detailAddr?.addr}</h2>
+          <>
+            <MapMarker position={position.center} />
+            <CustomOverlayMap position={position.center}>
+              <div className="wrap">
+                <div className="info">
+                  <div className="title">법정동 주소정보</div>
+                  도로명 주소 :{' '}
+                  {detailAddr.road_addr ? detailAddr.road_addr : '없음'}
+                  <br />
+                  지번 주소 : {detailAddr?.addr}
+                </div>
               </div>
-            </div>
-          </MapMarker>
+            </CustomOverlayMap>
+          </>
         )}
 
         {/* 현위치 마커 */}
@@ -227,6 +234,14 @@ function CyMap({ centersData }) {
             ' 입니다'}
         </p>
       )}
+      <button
+        className="p-2 bg-green-300 rounded-lg"
+        onClick={() => {
+          setClickLoc(currentLoc);
+        }}
+      >
+        내 위치
+      </button>
     </>
   );
 }

@@ -6,7 +6,7 @@
   height: 132px;
   margin-left: -144px;
   text-align: left;
-  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 12px;
   font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
   line-height: 1.5;
@@ -22,7 +22,6 @@
   border-radius: 5px;
   border-bottom: 2px solid #ccc;
   border-right: 1px solid #ccc;
-  overflow: hidden;
   background: #fff;
 }
 .wrap .info:nth-child(1) {
@@ -32,8 +31,8 @@
 .info .title {
   padding: 5px 0 0 10px;
   height: 30px;
-  background: #f5c3c3;
-  border-bottom: 1px solid #ddd;
+  background: #61dfff;
+  border-bottom: 1px solid #61dfff;
   font-size: 18px;
   font-weight: bold;
   line-height: 20px;
