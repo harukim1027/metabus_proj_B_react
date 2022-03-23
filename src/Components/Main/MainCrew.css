@@ -440,7 +440,6 @@
   transform: translateY(-50%);
 }
 .section01 .scrollGuide {
-  display: inline-block;
   transform: rotate(90deg) translate(100%, -50%);
   font-weight: 700;
 }
@@ -480,7 +479,6 @@
   margin-top: 60px;
 }
 .section02 .innerCont .scrollGuide {
-  display: block;
   margin-top: 50px;
 }
 .section02 .innerCont .inner {

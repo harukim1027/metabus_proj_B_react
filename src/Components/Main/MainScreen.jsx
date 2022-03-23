@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
+import useScrollFadeIn from 'hooks/useScrollFadeIn';
 
 function MainScreen() {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ function MainScreen() {
   // 좌표를 위한 상탯값
   const [ScrollY, setScrollY] = useState(0);
 
+  const [activeCount, setActiveCount] = useState(1);
+  console.log(activeCount);
+
   // 스크롤 기능
   const { auth, logout } = useAuth();
   const gotoTop = () => {
@@ -23,6 +27,28 @@ function MainScreen() {
       top: 0,
       behavior: 'smooth',
     });
+  };
+
+  function wheel(event) {
+    // event.preventDefault();
+
+    if (event.deltaY > 0) {
+      //
+      if (activeCount < 3) {
+        setActiveCount((prevActiveCount) => prevActiveCount + 1);
+      }
+    } else {
+      //
+      if (activeCount > 1) {
+        setActiveCount((prevActiveCount) => prevActiveCount - 1);
+      }
+    }
+  }
+
+  const animatedItem = {
+    0: useScrollFadeIn('up', 1, 0),
+    1: useScrollFadeIn('up', 1, 0.2),
+    2: useScrollFadeIn('up', 1, 0.3),
   };
 
   const handleFollow = () => {
@@ -74,9 +100,9 @@ function MainScreen() {
 
   return (
     <>
-      <div className=""></div>
+      <div></div>
       {/* 본문 시작 */}
-      <div id="header_warp">
+      <div id="header_warp" onWheel={(e) => wheel(e)}>
         {/* <!-- 헤더 : 공통 --> */}
         <header className="main_header">
           {/* <h1 className="logo">
@@ -204,7 +230,13 @@ function MainScreen() {
         {/* <!-- 메인 --> */}
         <div className="main">
           <div className="mainContents">
-            <div className="page section01 active_scene">
+            <div
+              className={
+                activeCount === 1
+                  ? 'page section01 active_scene'
+                  : 'page section01'
+              }
+            >
               <div className="innerCont bgLayer">
                 <div className="cover"></div>
                 <div className="inner">
@@ -240,7 +272,13 @@ function MainScreen() {
               <div className="hoverLayer"></div>
             </div>
 
-            <div className="page section02">
+            <div
+              className={
+                activeCount === 2
+                  ? 'page section02 active_scene'
+                  : 'page section02'
+              }
+            >
               <div className="innerCont bgLayer">
                 <div className="cover"></div>
                 <div className="inner">
@@ -272,7 +310,13 @@ function MainScreen() {
               </div>
             </div>
 
-            <div className="page section03">
+            <div
+              className={
+                activeCount === 3
+                  ? 'page section03 active_scene'
+                  : 'page section03'
+              }
+            >
               <div className="innerCont bgLayer">
                 <div className="top">
                   <p className="main-tit-txt">
