@@ -1,16 +1,12 @@
 import ReviewCommentList from 'Components/review/ReviewCommentList';
 import { useParams } from 'react-router-dom';
 
-function PageReviewCommentList({ reviewId, refetch, review }) {
-  const { reviewCommentId } = useParams();
+function PageReviewCommentList({ reviewId }) {
+  // const {  } = useParams();
 
   return (
     <>
-      <ReviewCommentList
-        reviewCommentId={reviewCommentId}
-        reviewId={reviewId}
-        refetch={refetch}
-      />
+      <ReviewCommentList reviewId={reviewId} />
     </>
   );
 }

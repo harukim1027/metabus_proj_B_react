@@ -2,29 +2,29 @@ import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
-import { React } from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const INIT_FIELD_VALUES = {
-  comment_content: '',
+  // comment_content: '',
   // review: '',
 };
 
-function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
-  //   const [input, setInput] = useState();
-  //   const [comments, setComments] = useState(INITIAL_STATE);\
-  const navigate = useNavigate();
-
+function ReviewCommentForm({
+  reviewCommentId,
+  reviewId,
+  refetch,
+  editCommentId,
+}) {
   const { auth } = useAuth();
-  const [{ data: commentsData }, refetchComment] = useApiAxios(
+  const [hidden, setHidden] = useState(true);
+  const [{ data: commentsData }] = useApiAxios(
     {
       url: `/adopt_review/api/comments/${reviewCommentId}/`,
     },
 
     { manual: !reviewCommentId },
   );
-
-  // const [selectReviewId, setSelectReviewId] = useState(comments?.review_id);
 
   // 저장
   const [
@@ -36,10 +36,10 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: !reviewCommentId
+      url: !editCommentId
         ? `/adopt_review/api/comments/`
-        : `/adopt_review/api/comments/${reviewCommentId}/`,
-      method: !reviewCommentId ? 'POST' : 'PUT',
+        : `/adopt_review/api/comments/${editCommentId}/`,
+      method: !editCommentId ? 'POST' : 'PUT',
       headers: {
         Authorization: `Bearer ${auth.access}`,
       },
@@ -49,10 +49,12 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
 
   INIT_FIELD_VALUES.user = auth.userID;
   INIT_FIELD_VALUES.review = reviewId;
+  INIT_FIELD_VALUES.comment_content = reviewId.comment?.comment_content;
 
-  const { fieldValues, handleFieldChange, setFieldValues, clearFieldValues } =
-    useFieldValues(commentsData || INIT_FIELD_VALUES);
-
+  const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
+    commentsData || INIT_FIELD_VALUES,
+  );
+  console.log('reviewId', reviewId);
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
       ...prevFieldValues,
@@ -73,44 +75,56 @@ function ReviewCommentForm({ reviewCommentId, reviewId, refetch }) {
     });
     saveRequest({
       data: formData,
-    }).then(() => {
-      refetch().then(() => clearFieldValues());
-    });
+    })
+      .then(() => {
+        setHidden(!hidden);
+      })
+      .then(() => {
+        refetch();
+      });
   };
-
-  console.log('commentsData', commentsData);
 
   return (
     <>
-      <div>
-        <h1>
-          <div class="max-w-lg shadow-md">
-            <form action="" class="w-full p-4">
-              <div class="mb-2">
-                <label for="comment" class="text-lg text-gray-600">
-                  댓글 달기
-                </label>
-                <textarea
-                  class="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
-                  name="comment_content"
-                  placeholder="댓글을 입력해 주세요"
-                  value={fieldValues?.comments?.map(
-                    (comment) => comment.comment_content,
-                  )}
-                  onChange={handleFieldChange}
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                onClick={(e) => handleSubmit(e)}
-              >
-                등록
-              </button>
-            </form>
-          </div>
-        </h1>
-      </div>
+      {hidden && (
+        <div>
+          <h1>
+            <div className="max-w-lg shadow-md">
+              <form className="w-full p-4">
+                <div className="mb-2">
+                  <label form="comment" class="text-lg text-gray-600">
+                    댓글 달기
+                  </label>
+                  <textarea
+                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                    name="comment_content"
+                    placeholder="댓글을 입력해주세요"
+                    value={fieldValues?.comment_content}
+                    onChange={handleFieldChange}
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  등록
+                </button>
+
+                <button
+                  type="button"
+                  name="clear"
+                  className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
+                  onClick={() => setHidden(!hidden)}
+                >
+                  취소
+                </button>
+              </form>
+            </div>
+          </h1>
+        </div>
+      )}
     </>
   );
 }

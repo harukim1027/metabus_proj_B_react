@@ -11,8 +11,6 @@ import PageReviewCommentForm from 'Pages/PageReview/PageReviewCommentForm';
 function ReviewDetail({ reviewId }) {
   const navigate = useNavigate();
   const { auth } = useAuth();
-  const [delComment, setDelComment] = useState('');
-  const [changeCom, setChangeCom] = useState([]);
 
   const [{ data: review, loading, error }, refetch] = useApiAxios(
     `/adopt_review/api/reviews/${reviewId}/`,
@@ -36,25 +34,6 @@ function ReviewDetail({ reviewId }) {
       deleteReview().then(() => {
         navigate('/review/');
         window.location.reload();
-      });
-    }
-  };
-  // 댓글 삭제
-  const [{ loading: loa, error: err }, delCommentRefetch] = useApiAxios(
-    {
-      url: `/adopt_review/api/comments/${delComment}/`,
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${auth.access}`,
-      },
-    },
-    { manual: true },
-  );
-
-  const commentDelete = () => {
-    if (window.confirm('댓글을 정말 삭제 할까요?')) {
-      delCommentRefetch().then(() => {
-        refetch();
       });
     }
   };
@@ -190,11 +169,6 @@ function ReviewDetail({ reviewId }) {
                       reviewId={reviewId}
                       refetch={refetch}
                     />
-
-                    {/* <PageReviewCommentForm
-                      reviewId={reviewId}
-                      refetch={refetch}
-                    /> */}
                   </>
                   <hr className="mt-3 mb-3" />
 

@@ -193,11 +193,6 @@ function App() {
                 element={<PageReviewForm />}
               />
 
-              {/* <Route
-                path="/review/comments/:reviewCommentId"
-                element={<PageReviewCommentForm />}
-              /> */}
-
               {/* findOwnerBoard */}
               <Route
                 path="/findboard/new/"

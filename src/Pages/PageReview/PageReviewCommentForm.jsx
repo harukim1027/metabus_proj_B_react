@@ -1,14 +1,12 @@
 import ReviewCommentForm from 'Components/review/ReviewCommentForm';
 import { useNavigate, useParams } from 'react-router-dom';
 
-function PageReviewCommentForm({ reviewId, refetch, review }) {
-  const navigate = useNavigate();
-  const { reviewCommentId } = useParams();
-
+function PageReviewCommentForm({ reviewId, refetch, editCommentId }) {
+  // const { editCommentId } = useParams();
   return (
     <>
       <ReviewCommentForm
-        reviewCommentId={reviewCommentId}
+        editCommentId={editCommentId}
         reviewId={reviewId}
         refetch={refetch}
       />
