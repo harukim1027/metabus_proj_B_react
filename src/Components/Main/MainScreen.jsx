@@ -45,12 +45,6 @@ function MainScreen() {
     }
   }
 
-  const animatedItem = {
-    0: useScrollFadeIn('up', 1, 0),
-    1: useScrollFadeIn('up', 1, 0.2),
-    2: useScrollFadeIn('up', 1, 0.3),
-  };
-
   const handleFollow = () => {
     setScrollY(window.pageYOffset);
   };
@@ -234,7 +228,7 @@ function MainScreen() {
               className={
                 activeCount === 1
                   ? 'page section01 active_scene'
-                  : 'page section01'
+                  : 'page section01 preEle'
               }
             >
               <div className="innerCont bgLayer">
@@ -276,7 +270,7 @@ function MainScreen() {
               className={
                 activeCount === 2
                   ? 'page section02 active_scene'
-                  : 'page section02'
+                  : 'page section02 preEle'
               }
             >
               <div className="innerCont bgLayer">
@@ -314,7 +308,7 @@ function MainScreen() {
               className={
                 activeCount === 3
                   ? 'page section03 active_scene'
-                  : 'page section03'
+                  : 'page section03 preEle'
               }
             >
               <div className="innerCont bgLayer">
@@ -426,7 +420,16 @@ function MainScreen() {
 
             {/* <!-- main scrollbar --> */}
             <div className="mainScrollBar">
-              <span className="thumb"></span>
+              <span
+                className="thumb"
+                style={
+                  activeCount === 1
+                    ? { top: '0%' }
+                    : activeCount === 2
+                    ? { top: '50%' }
+                    : { top: '85%' }
+                }
+              ></span>
             </div>
 
             <div className="page_cover"></div>
