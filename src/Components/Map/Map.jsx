@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { makeAspectCrop } from 'react-image-crop';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
 
@@ -12,10 +13,12 @@ function CyMap({ centersData }) {
     errMsg: null,
     isLoading: true,
   });
-  const [clickLoc, setClickLoc] = useState({});
+  // const [clickLoc, setClickLoc] = useState({});
+  const [myLoc, setMyLoc] = useState({});
 
   const [position, setPosition] = useState();
   const [detailAddr, setDetailAddr] = useState({});
+  const [isopen, setIsopen] = useState(true);
   const [map, setMap] = useState();
   const [info, setInfo] = useState();
 
@@ -47,6 +50,7 @@ function CyMap({ centersData }) {
               center_name: cenData?.center_name,
               center_call: cenData?.center_call,
               center_coords: { lat: coords.Ma, lng: coords.La },
+              showInfo: false,
             },
           ]);
         }
@@ -84,13 +88,49 @@ function CyMap({ centersData }) {
     }
     //--------------------
   }, [centersData]);
+  // 지도 중심좌표 설정
+  useEffect(() => {
+    setMyLoc(currentLoc);
+  }, [currentLoc]);
   // console.log('geocode:', geocode);
   // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
-  function map_marker(marker_obj) {
-    return <MapMarker position={marker_obj.center_coords} />;
-  }
+  const EventMarkerContainer = ({ marker_obj }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    return (
+      <>
+        <MapMarker
+          position={marker_obj.center_coords}
+          onClick={() => {
+            setIsVisible(true);
+          }}
+        />
+        {isVisible && (
+          <CustomOverlayMap position={marker_obj.center_coords}>
+            <div className="wrap">
+              <div className="info">
+                <div className="title flex justify-between">
+                  <h2 className="">{marker_obj.center_name}</h2>
+                  <button
+                    className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
+                    onClick={() => {
+                      setIsVisible(false);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+                주소 : {marker_obj.center_address}
+                <br />
+                연락처 : {marker_obj.center_call}
+              </div>
+            </div>
+          </CustomOverlayMap>
+        )}
+      </>
+    );
+  };
   //-------------
 
   // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------
@@ -138,93 +178,132 @@ function CyMap({ centersData }) {
   }, [position]);
 
   // console.log('detailAddr: ', detailAddr, 'position: ', position);
-
+  // console.log('currentLoc: ', currentLoc);
+  useEffect(() => {
+    console.log('myLoc: ', myLoc);
+  }, [myLoc]);
   return (
     <>
-      <Map
-        center={clickLoc.center || currentLoc.center}
-        style={{ width: '100%', height: '700px' }}
-        level="9"
-        onClick={(_t, mouseEvent) => {
-          // console.log('mouseEvent: ', mouseEvent);
-          setPosition({
-            center: {
-              lat: mouseEvent.latLng.getLat(),
-              lng: mouseEvent.latLng.getLng(),
-            },
-          });
-          setClickLoc({
-            center: {
-              lat: mouseEvent.latLng.getLat(),
-              lng: mouseEvent.latLng.getLng(),
-            },
-          });
-        }}
-        onCreate={(map) => setMap(map)}
-        // 지도 중심의 행정동 표시를 위해 함수 사용
-        onCenterChanged={(map) =>
-          searchAddrFromCoords(map.getCenter(), displayCenterInfo)
-        }
-      >
-        {/* 행정동 위치 표기 */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '10px',
-            top: '10px',
-            borderRadius: '2px',
-            background: 'rgba(255, 255, 255, 0.8)',
-            zIndex: 1,
-            padding: '5px',
-          }}
-        >
-          <span class=" font-semibold">지도중심기준 행정동 주소정보</span>
-          <br />
-          <span id="centerAddr"></span>
-        </div>
-        {/* ---------- */}
-        {locations.map((marker_obj) => {
-          return map_marker(marker_obj);
-        })}
-
-        {/* 클릭한 위치 마커 표시 */}
-        {position && (
-          <>
-            <MapMarker position={position.center} />
-            <CustomOverlayMap position={position.center}>
-              <div className="wrap">
-                <div className="info">
-                  <div className="title">법정동 주소정보</div>
-                  도로명 주소 :{' '}
-                  {detailAddr.road_addr ? detailAddr.road_addr : '없음'}
-                  <br />
-                  지번 주소 : {detailAddr?.addr}
-                </div>
-              </div>
-            </CustomOverlayMap>
-          </>
-        )}
-
-        {/* 현위치 마커 */}
-        {!currentLoc.isLoading && (
-          <MapMarker
-            position={currentLoc.center}
-            image={{
-              src: '/curlocationmarker.png',
-              size: {
-                width: 40,
-                height: 44,
+      {myLoc.center && (
+        <Map
+          center={myLoc.center}
+          style={{ width: '100%', height: '700px' }}
+          level="9"
+          onClick={(_t, mouseEvent) => {
+            // console.log('mouseEvent: ', mouseEvent);
+            setPosition({
+              center: {
+                lat: mouseEvent.latLng.getLat(),
+                lng: mouseEvent.latLng.getLng(),
               },
+            });
+            // setClickLoc({
+            //   center: {
+            //     lat: mouseEvent.latLng.getLat(),
+            //     lng: mouseEvent.latLng.getLng(),
+            //   },
+            // });
+            setIsopen(true);
+          }}
+          onCreate={(map) => setMap(map)}
+          // 지도 중심의 행정동 표시를 위해 함수 사용
+          onCenterChanged={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('map.getCenter: ', map.getCenter());
+          }}
+          onDragEnd={(map) =>
+            setMyLoc({
+              center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
+            })
+          }
+        >
+          {/* 행정동 위치 표기 */}
+          <div
+            style={{
+              position: 'absolute',
+              left: '10px',
+              top: '10px',
+              borderRadius: '2px',
+              background: 'rgba(255, 255, 255, 0.8)',
+              zIndex: 1,
+              padding: '5px',
             }}
           >
-            <div style={{ padding: '5px', color: '#000' }}>
-              {currentLoc.errMsg
-                ? currentLoc.errMsg
-                : '현위치 (PC로 접속 시 오차가 있을 수 있습니다.)'}
-            </div>
-          </MapMarker>
-        )}
-      </Map>
+            <span class=" font-semibold">지도중심기준 행정동 주소정보</span>
+            <br />
+            <span id="centerAddr"></span>
+          </div>
+          {/* ---------- */}
+
+          {/* 전체 보호센터 위치 마커 */}
+          {locations.map((marker_obj, index) => {
+            return (
+              <EventMarkerContainer marker_obj={marker_obj} key={`${index}`} />
+            );
+          })}
+
+          {/* 클릭한 위치 마커 표시 */}
+          {isopen && position && (
+            <>
+              <MapMarker position={position.center} />
+              <CustomOverlayMap position={position.center}>
+                <div className="wrap">
+                  <div className="info">
+                    <div className="title flex justify-between">
+                      <h2 className="">법정동 주소정보</h2>
+                      <button
+                        className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
+                        onClick={() => {
+                          setIsopen(false);
+                        }}
+                      >
+                        X
+                      </button>
+                    </div>
+                    도로명 주소 :{' '}
+                    {detailAddr.road_addr ? detailAddr.road_addr : '없음'}
+                    <br />
+                    지번 주소 : {detailAddr?.addr}
+                  </div>
+                </div>
+              </CustomOverlayMap>
+            </>
+          )}
+
+          {/* 현위치 마커 */}
+          {!currentLoc.isLoading && (
+            <MapMarker
+              position={currentLoc.center}
+              image={{
+                src: '/curlocationmarker.png',
+                size: {
+                  width: 40,
+                  height: 44,
+                },
+              }}
+            >
+              <div style={{ padding: '5px', color: '#000' }}>
+                {currentLoc.errMsg
+                  ? currentLoc.errMsg
+                  : '현위치 (PC로 접속 시 오차가 있을 수 있습니다.)'}
+              </div>
+            </MapMarker>
+          )}
+          <div
+            style={{
+              display: 'flex',
+              gap: '10px',
+            }}
+          >
+            <button
+              className="p-2 bg-green-300 rounded-lg"
+              onClick={() => setMyLoc(currentLoc)}
+            >
+              내 위치
+            </button>
+          </div>
+        </Map>
+      )}
       {position && (
         <p>
           {'클릭한 위치의 위도는 ' +
@@ -234,14 +313,6 @@ function CyMap({ centersData }) {
             ' 입니다'}
         </p>
       )}
-      <button
-        className="p-2 bg-green-300 rounded-lg"
-        onClick={() => {
-          setClickLoc(currentLoc);
-        }}
-      >
-        내 위치
-      </button>
     </>
   );
 }
