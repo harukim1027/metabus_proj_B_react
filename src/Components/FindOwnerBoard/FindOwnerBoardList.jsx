@@ -34,6 +34,7 @@ function FindOwnerBoardList() {
 
   const [searchLocation, setSearchLocation] = useState('');
   const [searchAnimal, setSearchAnimal] = useState('');
+  const [searchStatus, setSearchStatus] = useState('');
 
   const fetchFindBoard = useCallback(
     async (newPage, newQuery = query) => {
@@ -42,13 +43,14 @@ function FindOwnerBoardList() {
         query: newQuery,
         location: searchLocation,
         animaltype: searchAnimal,
+        status: searchStatus,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
       setPageCount(Math.ceil(data.count / itemsPerPage));
       setCurrentItems(data?.results);
     },
-    [query, searchLocation, searchAnimal],
+    [query, searchLocation, searchAnimal, searchStatus],
   );
 
   useEffect(() => {
@@ -149,6 +151,23 @@ function FindOwnerBoardList() {
                       <option value="">동물 종류</option>
                       <option value="강아지">강아지</option>
                       <option value="고양이">고양이</option>
+                    </select>
+                  </form>
+                </div>
+
+                {/* 상태 선택 */}
+                <div>
+                  <form className="flex justify-center">
+                    <select
+                      name="status"
+                      value={fieldValues.status}
+                      onChange={(e) => setSearchStatus(e.target.value)}
+                      className="md:text-xl xs:text-base border-2 border-black rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      defaultValue="상태 선택"
+                    >
+                      <option value="">상태 선택</option>
+                      <option value="찾는 중">찾는 중</option>
+                      <option value="찾았어요">찾았어요</option>
                     </select>
                   </form>
                 </div>

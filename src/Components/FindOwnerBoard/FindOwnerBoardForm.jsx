@@ -42,6 +42,18 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
       },
     );
 
+  // images를 조회 하는게 맞나?
+  // const [{ data: findBoardImg, loading2: getLoading2, error2: getError2 }] =
+  //   useApiAxios(
+  //     {
+  //       url: `/find_owner_board/api/images/${findBoardId}/`,
+  //       method: 'GET',
+  //     },
+  //     {
+  //       manual: !findBoardId,
+  //     },
+  //   );
+
   const [
     {
       loading: saveLoading,
@@ -62,23 +74,23 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     { manual: true },
   );
 
-  const [
-    {
-      loading: saveLoading2,
-      error: saveError2,
-      errorMessages: saveErrorMessages2,
-    },
-    saveRequest2,
-  ] = useApiAxios(
-    {
-      url: `/find_owner_board/api/images/`,
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${auth.access}`,
-      },
-    },
-    { manual: true },
-  );
+  // const [
+  //   {
+  //     loading: saveLoading2,
+  //     error: saveError2,
+  //     errorMessages: saveErrorMessages2,
+  //   },
+  //   saveRequest2,
+  // ] = useApiAxios(
+  //   {
+  //     url: `/find_owner_board/api/images/${findBoardId}/`,
+  //     method: !findBoardId ? 'POST' : 'PATCH',
+  //     headers: {
+  //       Authorization: `Bearer ${auth.access}`,
+  //     },
+  //   },
+  //   { manual: true },
+  // );
 
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     findBoard || INIT_FIELD_VALUES,
