@@ -80,21 +80,21 @@ function NewNav() {
               <div className="inner">
                 <nav className="menu">
                   <ul>
-                    <li className="font-bold">
+                    <li>
                       <a href="/">메인</a>
                     </li>
-                    <li className="font-bold">
+                    <li>
                       {' '}
                       <a href="/introduce/">소개 </a>
                     </li>
 
-                    <li className="font-bold">
+                    <li>
                       {' '}
                       <a href="/notice/"> 공지사항 </a>
                     </li>
 
                     {auth.is_staff ? (
-                      <li className="font-bold">
+                      <li>
                         {' '}
                         <a href="/inquiry/">Q&A</a>
                       </li>
@@ -109,7 +109,7 @@ function NewNav() {
                         </button>
                       </li>
                     )}
-                    <li className="font-bold">
+                    <li>
                       {' '}
                       <a href="/review/"> 커뮤니티</a>
                     </li>
