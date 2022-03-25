@@ -1,14 +1,13 @@
+import NewNav from 'Components/Main/NewNav';
+
 const {
   default: IntroduceMain,
 } = require('Components/introduce/IntroduceMain');
-const { default: TopNav } = require('Components/Main/TopNavi');
 
 function PageIntroduceMain() {
   return (
     <>
-      <div>
-        <TopNav />
-      </div>
+      <NewNav />
       <div>
         <IntroduceMain />
       </div>

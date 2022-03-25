@@ -7,6 +7,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import useScrollFadeIn from 'hooks/useScrollFadeIn';
+import AnimalList from 'Components/StreetAnimal/AnimalList';
 
 function MainScreen() {
   const navigate = useNavigate();
@@ -242,9 +243,7 @@ function MainScreen() {
                     METABUS는 <br /> 사지 않고 <br />
                     가족이 되는 문화를 만듭니다.
                   </p>
-                  <span className="scrollGuide">
-                    Scroll Down ▽ <img src="" alt="" />
-                  </span>
+                  <span className="scrollGuide">Scroll Down ▽ </span>
                 </div>
               </div>
               <div className="innerCont maskLayer">
@@ -258,9 +257,7 @@ function MainScreen() {
                     사지 않고 <br />
                     가족이 되는 문화를 만듭니다.
                   </p>
-                  <span className="scrollGuide">
-                    Scroll Down ▽<img src="" alt="" />
-                  </span>
+                  <span className="scrollGuide">Scroll Down ▽ </span>
                 </div>
               </div>
               <div className="hoverLayer"></div>
@@ -283,9 +280,7 @@ function MainScreen() {
                     </span>
                     유기동물이 가족을 찾도록 돕고 있습니다.
                   </p>
-                  <span className="scrollGuide">
-                    <img src="" alt="" />
-                  </span>
+                  <span className="scrollGuide">Scroll Down ▽ </span>
                 </div>
               </div>
               <div className="innerCont maskLayer">
@@ -297,9 +292,7 @@ function MainScreen() {
                     </span>
                     유기동물이 가족을 찾도록 돕고 있습니다.
                   </p>
-                  <span className="scrollGuide">
-                    <img src="" alt="" />
-                  </span>
+                  <span className="scrollGuide">Scroll Down ▽ </span>
                 </div>
               </div>
             </div>
@@ -426,8 +419,8 @@ function MainScreen() {
                   activeCount === 1
                     ? { top: '0%' }
                     : activeCount === 2
-                    ? { top: '50%' }
-                    : { top: '85%' }
+                    ? { top: '35%' }
+                    : { top: '83%' }
                 }
               ></span>
             </div>

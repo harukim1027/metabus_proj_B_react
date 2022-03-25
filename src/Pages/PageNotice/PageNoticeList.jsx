@@ -1,10 +1,10 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 import NoticeList from 'Components/Notice/NoticeList';
 
 function PageNoticeList() {
   return (
     <>
-      <TopNav />
+      <NewNav />
 
       <NoticeList />
     </>

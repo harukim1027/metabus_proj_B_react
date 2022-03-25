@@ -1,4 +1,5 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import NoticeDetail from 'Components/Notice/NoticeDetail';
 import { useParams } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ function PageNoticeDetail() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
 
       <NoticeDetail noticeId={noticeId} />
     </>

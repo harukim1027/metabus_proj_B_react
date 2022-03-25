@@ -226,6 +226,7 @@
 }
 .mainContents .preEle {
   transform: translate3d(0, 0, 0);
+  transform: translate(0%, -5%);
   z-index: 1;
 }
 .mainContents .active_scene {
@@ -446,6 +447,7 @@
 .section01 .scrollGuide img {
   margin-left: 5px;
   vertical-align: middle;
+  margin-bottom: auto;
 }
 
 /* 메인 두번째 섹션 */
