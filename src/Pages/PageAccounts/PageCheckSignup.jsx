@@ -1,11 +1,11 @@
 import CheckSignup from 'Components/accounts/CheckSignup';
+import NewNav from 'Components/Main/NewNav';
 // import ChcekBox from 'Components/accounts/CheckBox';
-import TopNav from 'Components/Main/TopNavi';
 
 function PageCheckSignup() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <CheckSignup />
       </div>

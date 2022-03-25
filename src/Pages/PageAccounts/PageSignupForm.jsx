@@ -1,10 +1,10 @@
 import SignupForm from 'Components/accounts/SignupForm';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageSignupForm() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <SignupForm />
       </div>
