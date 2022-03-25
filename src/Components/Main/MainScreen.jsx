@@ -109,6 +109,11 @@ function MainScreen() {
                   : 'page section01 preEle'
               }
             >
+              <img
+                className="xs:w-5/6 xl:w-3/5"
+                src="/main_icon_dog.png"
+                alt=""
+              />
               <div className="innerCont bgLayer">
                 <div className="cover"></div>
                 <div className="inner">

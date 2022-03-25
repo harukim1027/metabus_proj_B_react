@@ -39,6 +39,7 @@ function NewNav() {
           {/* <h1 className="logo">
             <img src="metabusBnormal.png" alt="" />
           </h1> */}
+
           <button
             type="button"
             onClick={() => handleClick()}
@@ -71,28 +72,36 @@ function NewNav() {
                 transform: 'matrix(1, 0, 0, 1, 0, -10)',
               }}
             >
+              <img
+                className="xs:w-3/4 xl:w-3/5"
+                src="/main_icon_dog_gray.png"
+                alt=""
+              />
               <div className="inner">
                 <nav className="menu">
                   <ul>
-                    <li>
+                    <li className="font-bold">
                       <a href="/">메인</a>
                     </li>
-                    <li>
+                    <li className="font-bold">
+                      {' '}
                       <a href="/introduce/">소개 </a>
                     </li>
 
-                    <li>
+                    <li className="font-bold">
+                      {' '}
                       <a href="/notice/"> 공지사항 </a>
                     </li>
 
                     {auth.is_staff ? (
-                      <li>
+                      <li className="font-bold">
+                        {' '}
                         <a href="/inquiry/">Q&A</a>
                       </li>
                     ) : (
                       <li>
+                        {' '}
                         <button
-                          className=""
                           style={{ transition: 'color 0.3s ease' }}
                           onClick={checkLogin}
                         >
@@ -100,7 +109,8 @@ function NewNav() {
                         </button>
                       </li>
                     )}
-                    <li>
+                    <li className="font-bold">
+                      {' '}
                       <a href="/review/"> 커뮤니티</a>
                     </li>
                   </ul>
