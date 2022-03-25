@@ -27,6 +27,7 @@ function CyMap({ centersData }) {
   const [locations, setLocations] = useState([
     {
       center_name: '대전지식산업센터',
+      center_address: '대전광역시 동구 계족로 151',
       center_coords: { lat: 36.3276637140944, lng: 127.4438988132827 },
     },
   ]);
@@ -49,6 +50,7 @@ function CyMap({ centersData }) {
             {
               center_name: cenData?.center_name,
               center_call: cenData?.center_call,
+              center_address: cenData?.center_address,
               center_coords: { lat: coords.Ma, lng: coords.La },
               showInfo: false,
             },
@@ -107,7 +109,10 @@ function CyMap({ centersData }) {
           }}
         />
         {isVisible && (
-          <CustomOverlayMap position={marker_obj.center_coords}>
+          <CustomOverlayMap
+            position={marker_obj.center_coords}
+            clickable={true}
+          >
             <div className="wrap">
               <div className="info">
                 <div className="title flex justify-between">
@@ -238,7 +243,11 @@ function CyMap({ centersData }) {
           {/* 전체 보호센터 위치 마커 */}
           {locations.map((marker_obj, index) => {
             return (
-              <EventMarkerContainer marker_obj={marker_obj} key={`${index}`} />
+              <EventMarkerContainer
+                marker_obj={marker_obj}
+                key={`${index}`}
+                map={map}
+              />
             );
           })}
 

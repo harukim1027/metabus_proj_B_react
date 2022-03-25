@@ -10,7 +10,7 @@
   font-size: 12px;
   font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
   line-height: 1.5;
-  z-index: 0;
+  z-index: 3;
 }
 .wrap * {
   padding: 0;
