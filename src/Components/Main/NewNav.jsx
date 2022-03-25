@@ -75,6 +75,9 @@ function NewNav() {
                 <nav className="menu">
                   <ul>
                     <li>
+                      <a href="/">메인</a>
+                    </li>
+                    <li>
                       <a href="/introduce/">소개 </a>
                     </li>
 
