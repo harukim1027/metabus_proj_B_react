@@ -10,6 +10,7 @@ import '../../App.css';
 
 const INIT_FIELD_VALUES = {
   title: '',
+  status: '상태 선택',
   animal_type: '동물 종류',
   dog_breed: '전체',
   cat_breed: '전체',
@@ -168,6 +169,36 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 ))}
               </div>
               <br />
+
+              {/* 상태 선택 */}
+              <div className="mb-3 w-full">
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
+                  상태 선택
+                </span>
+                <div className="relative">
+                  <select
+                    name="status"
+                    value={fieldValues.status}
+                    onChange={handleFieldChange}
+                    className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
+                    defaultValue="상태 선택"
+                  >
+                    <option value="">상태 선택</option>
+                    <option value="찾는중">찾는중</option>
+                    <option value="찾았어요">찾았어요</option>
+                  </select>
+
+                  <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
+                    <svg
+                      className="fill-current h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
 
               {/* 동물 종류 선택 */}
               <div className="mb-3 w-full">

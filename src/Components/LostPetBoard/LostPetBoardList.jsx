@@ -33,6 +33,7 @@ function LostPetBoardList() {
 
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
+  // 검색을 위한 초기값 설정
   const [searchLocation, setSearchLocation] = useState('');
   const [searchAnimal, setSearchAnimal] = useState('');
   const [searchStatus, setSearchStatus] = useState('');
@@ -89,7 +90,7 @@ function LostPetBoardList() {
               </span>
             </span>
           </blockquote>
-          <hr />
+
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -167,7 +168,7 @@ function LostPetBoardList() {
                       defaultValue="상태 선택"
                     >
                       <option value="">상태 선택</option>
-                      <option value="찾는 중">찾는 중</option>
+                      <option value="찾는중">찾는중</option>
                       <option value="찾았어요">찾았어요</option>
                     </select>
                   </form>

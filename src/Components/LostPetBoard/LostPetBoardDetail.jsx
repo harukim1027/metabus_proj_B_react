@@ -2,6 +2,7 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import LostPetBoardStatus from './LostPetBoardStatus';
 import './LostPetBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
@@ -9,12 +10,18 @@ import LoadingIndicator from 'LoadingIndicator';
 function LostPetBoardDetail({ lostpetboardId }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const [clicked, setClicked] = useState(false);
 
-  const [{ data: lostpetboard, loading, error }, refetch] = useApiAxios(
-    `/lost_pet_board/api/board/${lostpetboardId}/`,
+  // get 요청
+  const [{ data: lostpetboard }, refetch] = useApiAxios(
+    {
+      url: `/lost_pet_board/api/board/${lostpetboardId}/`,
+      method: `GET`,
+    },
     { manual: true },
   );
 
+  // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteLostPetboard] =
     useApiAxios(
       {
@@ -26,6 +33,30 @@ function LostPetBoardDetail({ lostpetboardId }) {
       },
       { manual: true },
     );
+
+  // patch 요청
+  const [{ loading, error }, changeAPS] = useApiAxios(
+    {
+      url: `/lost_pet_board/api/board/${lostpetboard?.lostpetboardId}/`,
+      method: 'PATCH',
+      data: { status: '찾는중' },
+    },
+    { manual: true },
+  );
+
+  const [
+    { loading: changeStatusLoading, error: changeStatusError },
+    patchLostPetboardStatus,
+  ] = useApiAxios(
+    {
+      url: `/lost_pet_board/api/board/${lostpetboard?.lostpetboardId}/`,
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
+    { manual: true },
+  );
 
   const handleDelete = () => {
     if (window.confirm('정말 삭제 할까요?')) {
@@ -39,6 +70,8 @@ function LostPetBoardDetail({ lostpetboardId }) {
   useEffect(() => {
     refetch();
   }, []);
+
+  //-------------
 
   return (
     <>
@@ -76,6 +109,42 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   >
                     {lostpetboard.title}
                   </h1>
+
+                  <div className="my-5 text-right">
+                    <span className=" font-bold">상태: </span>
+                    <span
+                      className=" font-bold"
+                      onClick={() => {
+                        auth.is_staff && setClicked(!clicked);
+                      }}
+                    >
+                      {lostpetboard.status}
+                      {auth.is_staff && <span>(수정하려면 클릭)</span>}
+                    </span>
+                  </div>
+
+                  {clicked && lostpetboard && (
+                    <div className="flex justify-center">
+                      <LostPetBoardStatus
+                        lostpetboardId={lostpetboardId}
+                        lostpetboard={lostpetboard}
+                        handleDidSave={(savedPost) => {
+                          savedPost && window.location.reload();
+                          savedPost && setClicked(0);
+                          if (savedPost?.status === '찾는중') {
+                            patchLostPetboardStatus({
+                              data: { status: '찾는중' },
+                            });
+                          } else {
+                            patchLostPetboardStatus({
+                              data: { status: '찾았어요' },
+                            });
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+
                   <hr className="mt-3 mb-3" />
 
                   <div className="flex justify-center">

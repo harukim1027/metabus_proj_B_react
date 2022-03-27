@@ -2,6 +2,7 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import FindBoardStatus from './FindBoardStatus';
 import './FindOwnerBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
@@ -9,12 +10,18 @@ import LoadingIndicator from 'LoadingIndicator';
 function FindOwnerBoardDetail({ findboardId }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
+  const [clicked, setClicked] = useState(false);
 
-  const [{ data: findboard, loading, error }, refetch] = useApiAxios(
-    `/find_owner_board/api/board/${findboardId}/`,
+  // get 요청
+  const [{ data: findboard }, refetch] = useApiAxios(
+    {
+      url: `/find_owner_board/api/board/${findboardId}/`,
+      method: `GET`,
+    },
     { manual: true },
   );
 
+  // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteFindboard] =
     useApiAxios(
       {
@@ -26,6 +33,30 @@ function FindOwnerBoardDetail({ findboardId }) {
       },
       { manual: true },
     );
+
+  // patch 요청
+  const [{ loading, error }, changeAPS] = useApiAxios(
+    {
+      url: `/find_owner_board/api/board/${findboard?.findboardId}/`,
+      method: 'PATCH',
+      data: { status: '찾는중' },
+    },
+    { manual: true },
+  );
+
+  const [
+    { loading: changeStatusLoading, error: changeStatusError },
+    patchFindboardStatus,
+  ] = useApiAxios(
+    {
+      url: `/find_owner_board/api/board/${findboard?.findboardId}/`,
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${auth.access}`,
+      },
+    },
+    { manual: true },
+  );
 
   const handleDelete = () => {
     if (window.confirm('정말 삭제 할까요?')) {
@@ -39,6 +70,8 @@ function FindOwnerBoardDetail({ findboardId }) {
   useEffect(() => {
     refetch();
   }, []);
+
+  //-------------
 
   return (
     <>
@@ -79,6 +112,42 @@ function FindOwnerBoardDetail({ findboardId }) {
                   >
                     {findboard.title}
                   </h1>
+
+                  <div className="my-5 text-right">
+                    <span className=" font-bold">상태: </span>
+                    <span
+                      className=" font-bold"
+                      onClick={() => {
+                        auth.is_staff && setClicked(!clicked);
+                      }}
+                    >
+                      {findboard.status}
+                      {auth.is_staff && <span>(수정하려면 클릭)</span>}
+                    </span>
+                  </div>
+
+                  {clicked && findboard && (
+                    <div className="flex justify-center">
+                      <FindBoardStatus
+                        findboardId={findboardId}
+                        findboard={findboard}
+                        handleDidSave={(savedPost) => {
+                          savedPost && window.location.reload();
+                          savedPost && setClicked(0);
+                          if (savedPost?.status === '찾는중') {
+                            patchFindboardStatus({
+                              data: { status: '찾는중' },
+                            });
+                          } else {
+                            patchFindboardStatus({
+                              data: { status: '찾았어요' },
+                            });
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+
                   <hr className="mt-3 mb-3" />
 
                   <div className="flex justify-center">
