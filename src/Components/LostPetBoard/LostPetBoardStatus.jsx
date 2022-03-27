@@ -11,8 +11,6 @@ function LostPetBoardStatus({ lostpetboardId, handleDidSave, lostpetboard }) {
   const { auth } = useAuth();
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_VALUES);
 
-  INIT_VALUES.status = lostpetboard.status;
-
   // patch 요청
   const [
     {

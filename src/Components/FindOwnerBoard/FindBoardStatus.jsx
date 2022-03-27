@@ -11,8 +11,6 @@ function FindBoardStatus({ findboardId, handleDidSave, findboard }) {
   const { auth } = useAuth();
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_VALUES);
 
-  INIT_VALUES.status = findboard.status;
-
   // patch 요청
   const [
     {

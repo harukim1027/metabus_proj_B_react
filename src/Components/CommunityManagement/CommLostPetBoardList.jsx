@@ -87,6 +87,9 @@ function CommLostPetBoardList() {
                     제목
                   </th>
                   <th className="px-3 py-3 text-center text-xl font-bold text-gray-500 tracking-wider">
+                    상태
+                  </th>
+                  <th className="px-3 py-3 text-center text-xl font-bold text-gray-500 tracking-wider">
                     등록 일시
                   </th>
                 </tr>
@@ -112,6 +115,14 @@ function CommLostPetBoardList() {
                           {commlostpetboard.title.length > 15
                             ? commlostpetboard.title.substring(0, 15) + '...'
                             : commlostpetboard.title}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div>
+                        <span className="inline-flex text-lg leading-5 font-semibold rounded-full bg-red-200">
+                          {commlostpetboard.status}
                         </span>
                       </div>
                     </td>
