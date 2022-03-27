@@ -68,7 +68,7 @@ function UserManageSidebar({ userId }) {
                       }
                       className="flex items-center gap-4 text-lg text-gray-700 font-semibold px-4 py-3 rounded-lg cursor-pointer"
                     >
-                      입양후기
+                      입양 다이어리
                     </div>
                   </li>
                 </li>

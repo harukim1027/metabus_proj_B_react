@@ -1,14 +1,13 @@
 import TopNav from 'Components/Main/TopNavi';
 import ReviewDetail from 'Components/review/ReviewDetail';
 import { useParams } from 'react-router-dom';
-import PageReviewCommentForm from './PageReviewCommentForm';
 
 function PageReviewDetail() {
   const { reviewId } = useParams();
   return (
     <>
       <TopNav />
-      <ReviewDetail reviewId={reviewId} />
+      {reviewId && <ReviewDetail reviewId={reviewId} />}
     </>
   );
 }
