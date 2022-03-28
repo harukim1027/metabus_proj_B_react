@@ -64,7 +64,6 @@ import Forbidden from 'Components/ErrorPage/Forbidden403';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
 import Kmap from 'Components/Map/KakaoMap';
 import PageMap from 'Pages/PageMap/PageMap';
-import CyMap from 'Components/Map/Map';
 // FindOwnerBoard
 // LostPetBoard
 import PageLostPetBoardList from 'Pages/PageLostPetBoard/PageLostPetBoardList';
