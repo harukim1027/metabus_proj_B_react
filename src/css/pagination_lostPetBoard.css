@@ -1,4 +1,4 @@
-.pagination_findBoard {
+.pagination_lostPetBoard {
   display: flex;
   justify-content: center;
   margin-top: 15px;
@@ -7,7 +7,7 @@ ul {
   list-style: none;
   padding: 0;
 }
-ul.pagination_findBoard li {
+ul.pagination_lostPetBoard li {
   display: inline-block;
   width: 50px;
   height: 50px;
@@ -20,33 +20,33 @@ ul.pagination_findBoard li {
   font-size: 1rem;
   border-radius: 10px;
 }
-ul.pagination_findBoard li:first-child {
+ul.pagination_lostPetBoard li:first-child {
   border-radius: 10px 5px 5px 10px;
 }
-ul.pagination_findBoard li:last-child {
+ul.pagination_lostPetBoard li:last-child {
   border-radius: 5px 10px 10px 5px;
 }
-ul.pagination_findBoard li:first-child:hover {
+ul.pagination_lostPetBoard li:first-child:hover {
   background-color: white;
 }
-ul.pagination_findBoard li:last-child:hover {
+ul.pagination_lostPetBoard li:last-child:hover {
   background-color: white;
 }
-ul.pagination_findBoard li a {
+ul.pagination_lostPetBoard li a {
   text-decoration: none;
   background-color: 88e7ff;
   color: #000000;
   font-size: 1.3em;
   font-weight: 600;
 }
-ul.pagination_findBoard li:hover {
-  background-color: rgb(39, 39, 39);
+ul.pagination_lostPetBoard li:hover {
+  background-color: rgb(239 68 68);
   color: white;
 }
-ul.pagination_findBoard li.selected {
-  background-color: rgb(39, 39, 39);
+ul.pagination_lostPetBoard li.selected {
+  background-color: rgb(239 68 68);
 }
-ul.pagination_findBoard li.selected a {
+ul.pagination_lostPetBoard li.selected a {
   color: white;
 }
 

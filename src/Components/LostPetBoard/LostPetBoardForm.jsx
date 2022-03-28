@@ -1,14 +1,12 @@
 import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
-import DebugStates from 'DebugStates';
+import { useNavigate } from 'react-router-dom';
 import useFieldValues from 'hooks/useFieldValues';
 import { useEffect, useState } from 'react';
+import DebugStates from 'DebugStates';
 import produce from 'immer';
-
-import './FindOwnerBoard.css';
-import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
-import { useNavigate } from 'react-router-dom';
+import '../../App.css';
 
 const INIT_FIELD_VALUES = {
   title: '',
@@ -21,39 +19,26 @@ const INIT_FIELD_VALUES = {
   animal_tag: '',
   find_location: '',
   content: '',
-  image: '',
 };
 
-function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
+function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const [image, setImage] = useState('');
 
   const [saveImage, setSaveImage] = useState('');
 
-  // 조회 (작성 글 수정시 기존 데이터가 남아있도록 하기위함)
-  const [{ data: findBoard, loading: getLoading, error: getError }] =
+  const [{ data: lostpetBoard, loading: getLoading, error: getError }] =
     useApiAxios(
       {
-        url: `/find_owner_board/api/board/${findBoardId}/`,
+        url: `/lost_pet_board/api/board/${lostpetboardId}/`,
         method: 'GET',
+        data: { user: auth.userID },
       },
       {
-        manual: !findBoardId,
+        manual: !lostpetboardId,
       },
     );
-
-  // images를 조회 하는게 맞나?
-  // const [{ data: findBoardImg, loading2: getLoading2, error2: getError2 }] =
-  //   useApiAxios(
-  //     {
-  //       url: `/find_owner_board/api/images/${findBoardId}/`,
-  //       method: 'GET',
-  //     },
-  //     {
-  //       manual: !findBoardId,
-  //     },
-  //   );
 
   const [
     {
@@ -64,10 +49,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     saveRequest,
   ] = useApiAxios(
     {
-      url: !findBoardId
-        ? '/find_owner_board/api/board/'
-        : `/find_owner_board/api/board/${findBoardId}/`,
-      method: !findBoardId ? 'POST' : 'PATCH',
+      url: !lostpetboardId
+        ? '/lost_pet_board/api/board/'
+        : `/lost_pet_board/api/board/${lostpetboardId}/`,
+      method: !lostpetboardId ? 'POST' : 'PATCH',
       headers: {
         Authorization: `Bearer ${auth.access}`,
       },
@@ -75,33 +60,15 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     { manual: true },
   );
 
-  // const [
-  //   {
-  //     loading: saveLoading2,
-  //     error: saveError2,
-  //     errorMessages: saveErrorMessages2,
-  //   },
-  //   saveRequest2,
-  // ] = useApiAxios(
-  //   {
-  //     url: `/find_owner_board/api/images/${findBoardId}/`,
-  //     method: !findBoardId ? 'POST' : 'PATCH',
-  //     headers: {
-  //       Authorization: `Bearer ${auth.access}`,
-  //     },
-  //   },
-  //   { manual: true },
-  // );
-
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
-    findBoard || INIT_FIELD_VALUES,
+    lostpetBoard || INIT_FIELD_VALUES,
   );
 
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
       ...prevFieldValues,
     }));
-  }, [findBoard]);
+  }, [lostpetBoard]);
 
   useEffect(() => {
     setFieldValues(
@@ -109,16 +76,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
         draft.user = auth.userID;
       }),
     );
-  }, [findBoard, auth]);
-
-  // useEffect(() => {
-  //   setFieldValues(
-  //     produce((draft) => {
-  //       draft.image = '';
-  //       draft.user = auth.userID;
-  //     }),
-  //   );
-  // }, [findBoard, auth]);
+  }, [lostpetBoard, auth]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -156,15 +114,14 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
 
   return (
     <>
-      {/* review_header : 배경 흰색 */}
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 review_header rounded-xl shadow-md overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-10 mb-6 text-2xl font-semibold italic text-center text-slate-900">
-            <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">
+            <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">
               <span className="relative text-white">
-                {!findBoardId
-                  ? ' " 이 아이 가족 찾아요😭 작성 " '
-                  : ' " 이 아이 가족 찾아요😭 수정 " '}
+                {!lostpetboardId
+                  ? ' " 우리 아이 찾아요😭 작성 " '
+                  : ' " 우리 아이 찾아요😭 수정 " '}
               </span>
             </span>
           </blockquote>
@@ -181,19 +138,12 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
             </>
           )}
           <br />
-
-          {/*  */}
         </div>
       </div>
 
-      {/* FindOwnerBoard 글 폼 */}
-
+      {/* LostPetBoard 글 폼 */}
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 notice_header rounded-md shadow-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          {/* <form
-            onSubmit={handleSubmit}
-            className="review_header rounded-md sm:px-0 md:px-20 pt-6 pb-8"
-          > */}
           {/* 제목 입력 input 박스 */}
           <div className="w-full">
             <form
@@ -413,6 +363,25 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 </div>
               </div>
 
+              {/* 펫 이름 */}
+              <div className="mb-3 w-full">
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
+                  동물 이름 입력
+                </span>
+                <input
+                  name="pet_name"
+                  value={fieldValues.pet_name}
+                  onChange={handleFieldChange}
+                  placeholder="동물 이름을 입력해주세요."
+                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
+                />
+                {saveErrorMessages.pet_name?.map((message, index) => (
+                  <p key={index} className="text-base text-red-400">
+                    동물 이름을 입력해주세요.
+                  </p>
+                ))}
+              </div>
+
               {/* 사이즈 선택 */}
               <div className="mb-3 w-full">
                 <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
@@ -502,41 +471,21 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 ))}
               </div>
 
-              {/* 발견장소 input 박스 */}
+              {/* 유실장소 input 박스 */}
               <div className="mb-3 w-full">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
-                  발견 장소
+                  유실 장소
                 </span>
                 <input
-                  name="find_location"
-                  value={fieldValues.find_location}
+                  name="lost_location"
+                  value={fieldValues.lost_location}
                   onChange={handleFieldChange}
-                  placeholder="발견 장소를 입력해주세요."
+                  placeholder="유실 장소를 입력해주세요."
                   className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
                 />
-                {saveErrorMessages.find_location?.map((message, index) => (
+                {saveErrorMessages.lost_location?.map((message, index) => (
                   <p key={index} className="text-base text-red-400">
-                    발견장소를 입력해주세요.
-                  </p>
-                ))}
-              </div>
-
-              {/* 발견 시각 */}
-              <div className="mb-3 w-full">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
-                  발견 시각
-                </span>
-                <input
-                  type="datetime-local"
-                  name="find_time"
-                  value={fieldValues.find_time}
-                  onChange={handleFieldChange}
-                  placeholder="발견 시각을 입력해주세요."
-                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
-                />
-                {saveErrorMessages.find_location?.map((message, index) => (
-                  <p key={index} className="text-base text-red-400">
-                    발견 시각을 입력해주세요.
+                    유실장소를 입력해주세요.
                   </p>
                 ))}
               </div>
@@ -578,10 +527,8 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                     <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
                       <input
                         type="file"
-                        multiple={true}
-                        max={5}
                         accept=".png, .jpg, .jpeg, .jfif"
-                        name="board_image"
+                        name="image"
                         className="xs:text-sm md:text-base"
                         onChange={(e) => {
                           imgpreview(e, e.target.files[0]);
@@ -589,7 +536,11 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                       />
                       {!image && (
                         <div>
-                          <img src={findBoard?.image} alt="" className="h-44" />
+                          <img
+                            src={lostpetBoard?.image}
+                            alt=""
+                            className="h-44"
+                          />
                         </div>
                       )}
 
@@ -625,18 +576,20 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="shadow-md bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-lg border-4 font-bold text-white py-1 px-2 rounded"
+                  className="shadow-md bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-lg border-4 font-bold text-white py-1 px-2 rounded"
                   onClick={(e) => handleSubmit(e)}
-                  // onSubmit={handleSubmit}
+                  onSubmit={handleSubmit}
                 >
                   저장
                 </button>
 
                 <button
                   onClick={() => {
-                    navigate(`/findboard/${findBoardId ? findBoardId : ''}`);
+                    navigate(
+                      `/lostpetboard/${lostpetboardId ? lostpetboardId : ''}`,
+                    );
                   }}
-                  className="shadow-md ml-3 bg-gray-700 hover:bg-black border-gray-700 hover:border-black font-bold text-lg border-4 text-white py-1 px-2 rounded"
+                  className="shadow-md ml-3 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 font-bold text-lg border-4 text-white py-1 px-2 rounded"
                 >
                   취소
                 </button>
@@ -656,18 +609,12 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
               </div>
             </form>
           </div>
-          {/* </form> */}
         </div>
       </div>
 
-      <DebugStates
-        findBoard={findBoard}
-        // getLoading={getLoading}
-        // getError={getError}
-        fieldValues={fieldValues}
-      />
+      <DebugStates lostpetBoard={lostpetBoard} fieldValues={fieldValues} />
     </>
   );
 }
 
-export default FindOwnerBoardForm;
+export default LostPetBoardForm;

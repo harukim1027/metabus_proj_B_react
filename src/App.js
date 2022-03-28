@@ -19,6 +19,13 @@ import PageUserManagementDetail from 'Pages/PageUserManagement/PageUserManagemen
 import PageUserAssignList from 'Pages/PageUserManagement/PageUserAssignList';
 import PageUserReviewList from 'Pages/PageUserManagement/PageUserReviewList';
 import PageUserInquiryList from 'Pages/PageUserManagement/PageUserInquiryList';
+import PageUserFindOwnerBoardList from 'Pages/PageUserManagement/PageUserFindOwnerBoardList';
+import PageUserLostPetBoardList from 'Pages/PageUserManagement/PageUserLostPetBoardList';
+// admin/CommunityManagement
+import PageCommFindOwnerBoardList from 'Pages/PageCommunityManagement/PageCommFindOwnerBoardList';
+import PageCommFindOwnerBoardDetail from 'Pages/PageCommunityManagement/PageCommFindOwnerBoardDetail';
+import PageCommLostPetBoardList from 'Pages/PageCommunityManagement/PageCommLostPetBoardList';
+import PageCommLostPetBoardDetail from 'Pages/PageCommunityManagement/PageCommLostPetBoardDetail';
 // admin/assignment
 import PageAssignList from 'Pages/PageAssignManagement/PageAssignList';
 import PageAssignDetail from 'Pages/PageAssignManagement/PageAssignDetail';
@@ -52,10 +59,17 @@ import PageIntroduceMain from 'Pages/PageIntroduce/PageIntroduceMain';
 import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
 // map
-import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
 import Kmap from 'Components/Map/KakaoMap';
 import PageMap from 'Pages/PageMap/PageMap';
+import CyMap from 'Components/Map/Map';
+// FindOwnerBoard
+// LostPetBoard
+import PageLostPetBoardList from 'Pages/PageLostPetBoard/PageLostPetBoardList';
+import PageLostPetBoardForm from 'Pages/PageLostPetBoard/PageLostPetBoardForm';
+import PageLostPetBoardDetail from 'Pages/PageLostPetBoard/PageLostPetBoardDetail';
+import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardDetail';
+import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
 
 function App() {
   const { auth } = useAuth();
@@ -87,7 +101,18 @@ function App() {
           <Route path="/review/cat/" element={<PageReviewIndexCat />} />
 
           {/* findOwnerBoard */}
-          <Route path="/findboard/" element={<PageFindOwnerBoardIndex />} />
+          <Route path="/findboard/" element={<PageFindOwnerBoardList />} />
+          <Route
+            path="/findboard/:findboardId/"
+            element={<PageFindOwnerBoardDetail />}
+          />
+
+          {/* lostPetBoard */}
+          <Route path="/lostpetboard/" element={<PageLostPetBoardList />} />
+          <Route
+            path="/lostpetboard/:lostpetboardId/"
+            element={<PageLostPetBoardDetail />}
+          />
 
           {/* ------------admin------------ */}
           {auth?.isLoggedIn && auth?.is_staff && (
@@ -133,6 +158,16 @@ function App() {
                 element={<PageUserInquiryList />}
               />
 
+              <Route
+                path="/admin/usermanage/:userId/userfindboard/"
+                element={<PageUserFindOwnerBoardList />}
+              />
+
+              <Route
+                path="/admin/usermanage/:userId/userlostpetboard/"
+                element={<PageUserLostPetBoardList />}
+              />
+
               {/* admin/inquiry */}
               <Route
                 path="/admin/inquiry/:inquiryId/edit/"
@@ -143,6 +178,24 @@ function App() {
               <Route
                 path="/admin/notice/:noticeId/edit/"
                 element={<PageNoticeForm />}
+              />
+
+              {/* admin/CommunityManagement */}
+              <Route
+                path="/admin/findboard/"
+                element={<PageCommFindOwnerBoardList />}
+              />
+              <Route
+                path="/admin/findboard/:findboardId/"
+                element={<PageCommFindOwnerBoardDetail />}
+              />
+              <Route
+                path="/admin/lostpetboard/"
+                element={<PageCommLostPetBoardList />}
+              />
+              <Route
+                path="/admin/lostpetboard/:lostpetboardId/"
+                element={<PageCommLostPetBoardDetail />}
               />
             </>
           )}
@@ -197,7 +250,17 @@ function App() {
               />
               <Route
                 path="/findboard/:findBoardId/edit/"
-                element={<PageReviewForm />}
+                element={<PageFindOwnerBoardForm />}
+              />
+
+              {/* LostPetBoard */}
+              <Route
+                path="/lostpetboard/new/"
+                element={<PageLostPetBoardForm />}
+              />
+              <Route
+                path="/lostpetboard/:lostpetboardId/edit/"
+                element={<PageLostPetBoardForm />}
               />
             </>
           )}

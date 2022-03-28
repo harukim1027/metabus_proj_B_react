@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-import { makeAspectCrop } from 'react-image-crop';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
 
