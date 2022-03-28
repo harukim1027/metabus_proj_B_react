@@ -181,7 +181,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
                       </button>
                     )}
 
-                    {(auth.userID === lostpetboard?.user || auth.is_staff) && (
+                    {auth.userID === lostpetboard?.user && (
                       <Link
                         className="ml-3 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
                         to={`/lostpetboard/${lostpetboardId}/edit/`}

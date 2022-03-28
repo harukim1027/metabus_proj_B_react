@@ -179,7 +179,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                       </button>
                     )}
 
-                    {(auth.userID === findboard?.user || auth.is_staff) && (
+                    {auth.userID === findboard?.user && (
                       <Link
                         className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                         to={`/findboard/${findboardId}/edit/`}
