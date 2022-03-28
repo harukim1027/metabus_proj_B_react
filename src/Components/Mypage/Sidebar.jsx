@@ -107,7 +107,7 @@ const Sidebar = () => {
         {isOpen ? (
           <>
             <img
-              src="/sidecloseicon3.png"
+              src="/mypagemenuiconX.png"
               alt="button"
               className=" duration-200 "
             ></img>
@@ -115,7 +115,7 @@ const Sidebar = () => {
         ) : (
           <>
             <img
-              src="/sidemenuicon3.png"
+              src="/mypagemenuicon.png"
               alt="button"
               className="duration-200"
             ></img>
