@@ -1,7 +1,7 @@
 import { useAuth } from 'contexts/AuthContext';
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import styles from './sidebar.css';
+import './sidebar.css';
 
 const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -43,14 +43,14 @@ const Sidebar = () => {
     <>
       <div
         ref={side}
-        className="sidebar absolute"
+        className=" sidebar absolute"
         style={{
           width: '200px',
-          height: '345px',
+          height: '380px',
           transform: `translatex(${-xPosition}px)`,
         }}
       >
-        <div className="mb-5">
+        <div className="">
           <ul>
             <li className="bg-gray-100 py-2 text-2xl text-center ">
               {auth.userID}
@@ -102,12 +102,12 @@ const Sidebar = () => {
             </li>
             <hr />
 
-            <li className="mx-5 my-3">
+            <li className="mx-5 my-3 ">
               <div
                 onClick={() => navigate(`/mypage/myinquiry/`)}
                 className="cursor-pointer hover:bg-yellow-300"
               >
-                <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
+                <span className=" text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
                   내 문의사항
                 </span>
               </div>
