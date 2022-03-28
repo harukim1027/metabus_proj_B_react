@@ -92,6 +92,18 @@ const Sidebar = () => {
 
             <li className="mx-5 my-3">
               <div
+                onClick={() => navigate(`/mypage/mycomments/`)}
+                className="cursor-pointer hover:bg-purple-300"
+              >
+                <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
+                  내 작성 댓글
+                </span>
+              </div>
+            </li>
+            <hr />
+
+            <li className="mx-5 my-3">
+              <div
                 onClick={() => navigate(`/mypage/myinquiry/`)}
                 className="cursor-pointer hover:bg-yellow-300"
               >

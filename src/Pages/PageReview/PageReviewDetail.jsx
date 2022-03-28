@@ -7,7 +7,7 @@ function PageReviewDetail() {
   return (
     <>
       <TopNav />
-      <ReviewDetail reviewId={reviewId} />
+      {reviewId && <ReviewDetail reviewId={reviewId} />}
     </>
   );
 }

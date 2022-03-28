@@ -7,6 +7,9 @@ import { useAuth } from 'contexts/AuthContext';
 import ReactPaginate from 'react-paginate';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+// import './style.css';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -98,6 +101,7 @@ function ReviewList() {
   }, [reviewList]);
 
   //-------------
+  console.log('reviewList', reviewList);
 
   return (
     <>
@@ -105,7 +109,7 @@ function ReviewList() {
         <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
             <span className="mt-7 mb-6 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
-              <span className="relative text-white">" 입양 후기 "</span>
+              <span className="relative text-white">" 입양 다이어리 "</span>
             </span>
           </blockquote>
           <hr />
@@ -169,15 +173,14 @@ function ReviewList() {
 
           <hr className="mb-3" />
 
-          <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
-            {reviewList?.results?.map((review) => (
-              <div
-                key={review.review_no}
-                className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
-              >
-                <ReviewSummary review={review} />
-              </div>
-            ))}
+          <div>
+            <AwesomeSlider className="Container">
+              {reviewList?.results?.map((review) => (
+                <div key={review.review_no}>
+                  <ReviewSummary review={review} />
+                </div>
+              ))}
+            </AwesomeSlider>
           </div>
 
           {auth.isLoggedIn && !auth.is_staff && (

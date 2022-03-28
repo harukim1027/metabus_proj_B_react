@@ -49,6 +49,8 @@ function InquiryForm({ inquiryId, handleDidSave }) {
 
   INIT_FIELD_VALUES.user = auth.userID;
 
+  console.log('inquiryId :', inquiryId);
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     inquiry || INIT_FIELD_VALUES,
   );

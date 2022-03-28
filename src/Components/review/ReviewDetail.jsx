@@ -5,6 +5,7 @@ import { useAuth } from 'contexts/AuthContext';
 import '../../App.css';
 import './Review.css';
 import LoadingIndicator from 'LoadingIndicator';
+import ReviewCommentList from './ReviewCommentList';
 
 function ReviewDetail({ reviewId }) {
   const navigate = useNavigate();
@@ -40,8 +41,6 @@ function ReviewDetail({ reviewId }) {
     refetch();
   }, []);
 
-  // console.log('review', review);
-
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
   // console.log('topLocation: ', topLocation);
@@ -63,13 +62,15 @@ function ReviewDetail({ reviewId }) {
 
   //-------------
 
+  console.log('review:', review);
+
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 review_header rounded-xl shadow-md overflow-hidden pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote class="mt-3 mb-10 font-semibold italic text-center text-slate-900">
             <span class="mt-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl ">
-              <span class="relative text-white">" 입양후기 "</span>
+              <span class="relative text-white">" 입양 다이어리 "</span>
             </span>
           </blockquote>
 
@@ -145,32 +146,12 @@ function ReviewDetail({ reviewId }) {
                   </div>
                   <br />
 
-                  <div className="mb-4 flex justify-center">
-                    {review.image1 && (
-                      <img src={review.image1} alt="" className="w-full" />
-                    )}
-                  </div>
-
-                  <div className="mb-4 flex justify-center">
-                    {review.image2 && (
-                      <img src={review.image2} alt="" className="w-full" />
-                    )}
-                  </div>
-                  <div className="mb-4 flex justify-center">
-                    {review.image3 && (
-                      <img src={review.image3} alt="" className="w-full" />
-                    )}
-                  </div>
-
-                  <div className="mb-4 flex justify-center">
-                    {review.image4 && (
-                      <img src={review.image4} alt="" className="w-full" />
-                    )}
-                  </div>
-                  <div className="mb-4 flex justify-center">
-                    {review.image5 && (
-                      <img src={review.image5} alt="" className="w-full" />
-                    )}
+                  <div>
+                    {review.review_image?.map((review) => (
+                      <div className="h-2/3 overflow-hidden">
+                        <img src={review.image} alt={review.title} />
+                      </div>
+                    ))}
                   </div>
 
                   {/*  */}
@@ -180,6 +161,14 @@ function ReviewDetail({ reviewId }) {
                   </h2>
                   <br />
                   <hr className="mt-3 mb-3" />
+
+                  {/* 댓글 */}
+                  <>
+                    <ReviewCommentList reviewId={reviewId} refetch={refetch} />
+                  </>
+                  <hr className="mt-3 mb-3" />
+
+                  {/*  */}
 
                   <div className="my-5 text-right">
                     {(auth.userID === review.user.userID || auth.is_staff) && (
