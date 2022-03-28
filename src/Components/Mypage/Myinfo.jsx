@@ -3,21 +3,11 @@ import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import Sidebar from 'Components/Mypage/Sidebar';
 import LoadingIndicator from 'LoadingIndicator';
-
-// 초깃값 저장을 위한 오브젝트
-const INIT_FIELD_VALUES = {
-  name: '',
-  userID: '',
-  nickname: '',
-  email: '',
-  phone_number: '',
-  region: '',
-  password_quiz: '',
-  password_quiz_answer: '',
-};
+import { useNavigate } from 'react-router-dom';
 
 function Myinfo() {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
+  const navigate = useNavigate();
 
   //데이터 GET요청 : 조회 목적
   const [{ data: userData, loading, error }, refetch] = useApiAxios(
@@ -54,6 +44,28 @@ function Myinfo() {
   useEffect(() => {
     refetch();
   }, []);
+
+  const [{ loading: deleteLoading, error: deleteError }, deleteUser] =
+    useApiAxios(
+      {
+        url: `/accounts/api/users/${auth.userID}/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  const handleDelete = () => {
+    if (window.confirm('정말 탈퇴 하실 건가요?😭')) {
+      deleteUser().then(() => {
+        navigate('/');
+        window.location.reload();
+        logout();
+      });
+    }
+  };
 
   //-------------
 
@@ -146,7 +158,7 @@ function Myinfo() {
 
             <div className="text-right">
               <a href="/mypage/userinfo/edit/">회원정보 수정&nbsp;</a>
-              <button>회원 탈퇴</button>
+              <button onClick={() => handleDelete()}>회원 탈퇴</button>
             </div>
           </div>
         </div>
