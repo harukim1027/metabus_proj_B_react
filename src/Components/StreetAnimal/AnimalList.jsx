@@ -174,13 +174,13 @@ function AnimalList() {
                   AnimalList.results.map((animal) => (
                     <tr
                       onClick={() =>
-                        navigate(`/admin/animal/${animal.animal_no}/`)
+                        navigate(`/admin/animal/${animal.announce_no}/`)
                       }
                       className="cursor-pointer"
                     >
                       <td className="px-6 py-4">
                         <div className="text-base font-medium text-gray-900">
-                          {animal.animal_no}
+                          {animal.announce_no}
                         </div>
                       </td>
 

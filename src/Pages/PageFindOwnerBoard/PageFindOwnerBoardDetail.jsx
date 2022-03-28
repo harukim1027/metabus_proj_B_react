@@ -1,14 +1,14 @@
+import FindOwnerBoardDetail from 'Components/FindOwnerBoard/FindOwnerBoardDetail';
 import TopNav from 'Components/Main/TopNavi';
-import ReviewDetail from 'Components/review/ReviewDetail';
 import { useParams } from 'react-router-dom';
 
-function PageReviewDetail() {
-  const { reviewId } = useParams();
+function PageFindOwnerBoardDetail() {
+  const { findboardId } = useParams();
   return (
     <>
       <TopNav />
-      <ReviewDetail reviewId={reviewId} />
+      <FindOwnerBoardDetail findboardId={findboardId} />
     </>
   );
 }
-export default PageReviewDetail;
+export default PageFindOwnerBoardDetail;
