@@ -102,7 +102,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="mt-10 header mx-5" id="topLoc">
+    <div className="mt-10 accounts_header mx-5" id="topLoc">
       <h2 className="text-center  xs:text-3xl md:text-4xl py-5 pb-5 font-bold mt-5 mb-3">
         🐹 로그인
       </h2>
