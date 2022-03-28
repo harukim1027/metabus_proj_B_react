@@ -4,6 +4,7 @@ import { useAuth } from 'contexts/AuthContext';
 import Sidebar from 'Components/Mypage/Sidebar';
 import LoadingIndicator from 'LoadingIndicator';
 import { useNavigate } from 'react-router-dom';
+import './Mypage.css';
 
 function Myinfo() {
   const { auth, logout } = useAuth();
@@ -157,8 +158,18 @@ function Myinfo() {
             </table>
 
             <div className="text-right">
-              <a href="/mypage/userinfo/edit/">회원정보 수정&nbsp;</a>
-              <button onClick={() => handleDelete()}>회원 탈퇴</button>
+              <a
+                className="rounded-xl a border p-3"
+                href="/mypage/userinfo/edit/"
+              >
+                &nbsp;회원정보 수정&nbsp;
+              </a>
+              <button
+                className="rounded-xl a border ml-10 p-3"
+                onClick={() => handleDelete()}
+              >
+                &nbsp;회원 탈퇴&nbsp;
+              </button>
             </div>
           </div>
         </div>
