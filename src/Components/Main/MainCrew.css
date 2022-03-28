@@ -52,6 +52,35 @@
   opacity: 1;
 }
 
+.a {
+  display: inline-block;
+  position: relative;
+  font-size: 25px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.a:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 0;
+  height: 10px;
+  border-radius: 10px;
+  background-image: linear-gradient(to left, #83b2ff, #715af5);
+  transition: all 0.3s ease;
+}
+.a.on,
+.a:hover {
+  color: #471eff;
+}
+.a.on:after,
+.a:hover:after {
+  width: 100%;
+}
+
 .h2 .element_style {
   opacity: 1;
   transform: matrix(1, 0, 0, 1, 0, 0);

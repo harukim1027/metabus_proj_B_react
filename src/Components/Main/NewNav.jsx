@@ -86,18 +86,23 @@ function NewNav() {
                 <div className="flex text-xl right-1">
                   <div></div>
                   {!auth.isLoggedIn && (
-                    <div>
+                    <div className="ml-10 mt-10">
                       {/* 로그인  */}
-                      <button className="mb-10">
-                        <a href="/accounts/login/">로그인</a>
-                      </button>
+
+                      <a className="a" href="/accounts/login/">
+                        로그인
+                      </a>
+
                       {/* 회원가입 */}
-                      <button className="mb-10">
-                        <a href="/accounts/checksignup/"> 회원가입 </a>
-                      </button>
+
+                      <a className="a ml-5" href="/accounts/checksignup/">
+                        {' '}
+                        회원가입{' '}
+                      </a>
                     </div>
                   )}
                 </div>
+
                 {auth.isLoggedIn && (
                   <>
                     <div className="relative">
@@ -106,40 +111,26 @@ function NewNav() {
                         &nbsp; &nbsp;
                       </span>
                     </div>
-                    <div className="flex text-xl place-content-between">
+                    <div className="flex text-xl text-left">
                       <div></div>
-                      <div className="flex">
+                      <div className="ml-10 mt-20">
                         {auth.is_staff ? (
                           // 관리자 페이지
-                          <button className="icon_size4">
-                            <NavLink to="/admin/main/">
-                              <img
-                                className="hover:scale-110 duration-200"
-                                src="/manageicon1.png"
-                                alt="manageiconbutton"
-                              ></img>
-                            </NavLink>
-                          </button>
+
+                          <a className="a mr-5" href="/admin/main/">
+                            관리자 페이지
+                          </a>
                         ) : (
                           // 마이페이지
-                          <button className="icon_size4">
-                            <NavLink to="/mypage/userinfo/">
-                              <img
-                                className="mt-5 hover:scale-110 duration-200"
-                                src="/mypageicon1.png"
-                                alt="mypagebutton"
-                              ></img>
-                            </NavLink>
-                          </button>
+
+                          <a className="a" href="/mypage/userinfo/">
+                            마이페이지
+                          </a>
                         )}
 
-                        <button className="icon_size4" onClick={handleLogout}>
-                          <img
-                            className="hover:scale-110 duration-200"
-                            src="/logouticon1.png"
-                            alt="button"
-                          ></img>
-                        </button>
+                        <a className="a ml-5" href="/" onClick={handleLogout}>
+                          로그아웃
+                        </a>
                       </div>
                     </div>
                   </>
