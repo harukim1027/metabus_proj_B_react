@@ -56,7 +56,7 @@ function SignupForm() {
       requestToken({ data: fieldValues }).then(() => {
         // 인증 후, 이동할 주소를 지정합니다.
         navigate('/accounts/login/');
-        toast.success('회원가입 완료! 로그인해주세요.', {
+        toast.success('회원가입 완료! 이메일 인증 후 로그인 할 수 있어요!', {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
@@ -256,6 +256,12 @@ function SignupForm() {
                 <div className="w-full mb-10">
                   <span className="pb-2 after:content-['*'] after:ml-0.5 after:text-red-500 block xl:text-xl lg:text-xl xs:text-base  font-extrabold text-slate-700">
                     이메일
+                  </span>
+                  <span className="pb-2  block lg:text-base xs:text-sm  font-extrabold text-blue-400">
+                    입력하신 이메일 주소로 인증 메일이 발송됩니다!
+                  </span>
+                  <span className="pb-2  block lg:text-base xs:text-sm  font-extrabold text-blue-400">
+                    인증 확인 후 로그인이 가능합니다.
                   </span>
                   <input
                     type="text"

@@ -1,10 +1,14 @@
 import MainScreen from 'Components/Main/MainScreen';
+import NewNav from 'Components/Main/NewNav';
 
 function PageMainScreen() {
   return (
-    <div>
-      <MainScreen />
-    </div>
+    <>
+      <NewNav />
+      <div>
+        <MainScreen />
+      </div>
+    </>
   );
 }
 

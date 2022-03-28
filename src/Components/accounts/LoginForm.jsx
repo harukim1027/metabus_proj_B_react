@@ -36,6 +36,7 @@ function LoginForm() {
 
   // post요청은 하단에 에러메시지가 위치.
   const { login } = useAuth();
+
   const [{ loading, error, errorMessages }, requestToken] = useApiAxios(
     {
       url: `/accounts/api/token/`,
@@ -62,6 +63,7 @@ function LoginForm() {
         region,
         password_quiz,
         password_quiz_answer,
+        is_active,
         is_staff,
       } = response.data;
       // TODO: access/refresh token을 브라우저 어딘가에 저장해야 합니다.
@@ -77,6 +79,7 @@ function LoginForm() {
         region,
         password_quiz,
         password_quiz_answer,
+        is_active,
         is_staff,
       });
 
@@ -95,10 +98,11 @@ function LoginForm() {
       // 인증 후, 이동할 주소를 지정합니다.
       navigate('/');
     });
+    console.log(fieldValues);
   };
 
   return (
-    <div className="header mx-5" id="topLoc">
+    <div className="mt-10 header mx-5" id="topLoc">
       <h2 className="text-center  xs:text-3xl md:text-4xl py-5 pb-5 font-bold mt-5 mb-3">
         🐹 로그인
       </h2>

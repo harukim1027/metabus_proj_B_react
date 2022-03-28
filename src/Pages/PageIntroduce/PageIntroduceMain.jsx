@@ -1,15 +1,17 @@
+import InfoAnimal from 'Components/introduce/adopt';
+import NewNav from 'Components/Main/NewNav';
+
 const {
   default: IntroduceMain,
 } = require('Components/introduce/IntroduceMain');
-const { default: TopNav } = require('Components/Main/TopNavi');
 
 function PageIntroduceMain() {
   return (
     <>
+      <NewNav />
+
       <div>
-        <TopNav />
-      </div>
-      <div>
+        <InfoAnimal />
         <IntroduceMain />
       </div>
     </>

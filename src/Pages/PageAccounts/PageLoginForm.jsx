@@ -1,12 +1,13 @@
 // import Account from 'Components/accounts/Account';
 import LoginForm from 'Components/accounts/LoginForm';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import { ToastContainer, toast } from 'react-toastify';
 
 function PageLoginForm() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
       <ToastContainer />
       <LoginForm />
     </div>

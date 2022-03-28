@@ -1,4 +1,4 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 import NoticeForm from 'Components/Notice/NoticeForm';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ function PageNoticeForm() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
 
       <NoticeForm
         noticeId={noticeId}

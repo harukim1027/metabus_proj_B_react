@@ -1,10 +1,10 @@
 import FindId from 'Components/accounts/FindID';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageFindId() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <FindId />
       </div>

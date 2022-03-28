@@ -1,10 +1,10 @@
 import ChangePassword from 'Components/accounts/ChangePassword';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageChangePassword() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <ChangePassword />
       </div>

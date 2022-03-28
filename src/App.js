@@ -72,14 +72,24 @@ import PageLostPetBoardForm from 'Pages/PageLostPetBoard/PageLostPetBoardForm';
 import PageLostPetBoardDetail from 'Pages/PageLostPetBoard/PageLostPetBoardDetail';
 import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardDetail';
 import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
+import PageTopNav from 'Pages/PageMainMenu';
+import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
 
 function App() {
   const { auth } = useAuth();
   return (
     <>
+      <header className="main_header">
+        <div className="inner">
+          <p>
+            Contact Us <strong>metabusemail@gmail.com</strong>
+          </p>
+        </div>
+      </header>
       <div className="app header">
         <Routes>
           <Route path="/" element={<PageMainScreen />} />
+          <Route path="/menu/" element={<PageTopNav />} />
           {/* accounts */}
           <Route path="/accounts/login/" element={<PageLoginForm />} />
           <Route path="/accounts/signup/" element={<PageSignupForm />} />
@@ -231,6 +241,11 @@ function App() {
 
               {/* mypage */}
               <Route path="/mypage/userinfo/" element={<PageMyinfo />} />
+
+              <Route
+                path="/mypage/userinfo/edit"
+                element={<PageMyinfoForm />}
+              />
               <Route
                 path="/mypage/assigninfo/"
                 element={<PageMyAssignInfo />}
@@ -272,9 +287,6 @@ function App() {
           <Route path="/map/" element={<PageMap />} />
           <Route path="/kmap/" element={<Kmap />} />
         </Routes>
-        <p className="header mt-10 text-center text-gray-500 text-xxs">
-          &copy;2022 METABUS Corp. All rights reserved.
-        </p>
       </div>
     </>
   );

@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import Sidebar from 'Components/Mypage/Sidebar';
 import LoadingIndicator from 'LoadingIndicator';
+import { useNavigate } from 'react-router-dom';
 
 function Myinfo() {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
+  const navigate = useNavigate();
+
+  //데이터 GET요청 : 조회 목적
   const [{ data: userData, loading, error }, refetch] = useApiAxios(
     {
       url: `/accounts/api/users/${auth.userID}/`,
@@ -36,6 +40,32 @@ function Myinfo() {
   useEffect(() => {
     gotoTop();
   }, [userData]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const [{ loading: deleteLoading, error: deleteError }, deleteUser] =
+    useApiAxios(
+      {
+        url: `/accounts/api/users/${auth.userID}/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  const handleDelete = () => {
+    if (window.confirm('정말 탈퇴 하실 건가요?😭')) {
+      deleteUser().then(() => {
+        navigate('/');
+        window.location.reload();
+        logout();
+      });
+    }
+  };
 
   //-------------
 
@@ -125,6 +155,11 @@ function Myinfo() {
                 <td>{userData?.password_quiz_answer}</td>
               </tr>
             </table>
+
+            <div className="text-right">
+              <a href="/mypage/userinfo/edit/">회원정보 수정&nbsp;</a>
+              <button onClick={() => handleDelete()}>회원 탈퇴</button>
+            </div>
           </div>
         </div>
       </div>
