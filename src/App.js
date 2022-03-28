@@ -56,6 +56,7 @@ import CyMap from 'Components/Map/Map';
 import PageFindOwnerBoardIndex from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardIndex';
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
 import PageTopNav from 'Pages/PageMainMenu';
+import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
 
 function App() {
   const { auth } = useAuth();
@@ -184,6 +185,11 @@ function App() {
 
               {/* mypage */}
               <Route path="/mypage/userinfo/" element={<PageMyinfo />} />
+
+              <Route
+                path="/mypage/userinfo/edit"
+                element={<PageMyinfoForm />}
+              />
               <Route
                 path="/mypage/assigninfo/"
                 element={<PageMyAssignInfo />}

@@ -4,8 +4,22 @@ import { useAuth } from 'contexts/AuthContext';
 import Sidebar from 'Components/Mypage/Sidebar';
 import LoadingIndicator from 'LoadingIndicator';
 
+// 초깃값 저장을 위한 오브젝트
+const INIT_FIELD_VALUES = {
+  name: '',
+  userID: '',
+  nickname: '',
+  email: '',
+  phone_number: '',
+  region: '',
+  password_quiz: '',
+  password_quiz_answer: '',
+};
+
 function Myinfo() {
   const { auth } = useAuth();
+
+  //데이터 GET요청 : 조회 목적
   const [{ data: userData, loading, error }, refetch] = useApiAxios(
     {
       url: `/accounts/api/users/${auth.userID}/`,
@@ -36,6 +50,10 @@ function Myinfo() {
   useEffect(() => {
     gotoTop();
   }, [userData]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   //-------------
 
@@ -125,6 +143,11 @@ function Myinfo() {
                 <td>{userData?.password_quiz_answer}</td>
               </tr>
             </table>
+
+            <div className="text-right">
+              <a href="/mypage/userinfo/edit/">회원정보 수정&nbsp;</a>
+              <button>회원 탈퇴</button>
+            </div>
           </div>
         </div>
       </div>

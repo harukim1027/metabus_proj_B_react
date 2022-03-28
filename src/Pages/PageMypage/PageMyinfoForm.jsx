@@ -1,8 +1,8 @@
-import Myinfo from 'Components/Mypage/Myinfo';
 import Sidebar from 'Components/Mypage/Sidebar';
 import NewNav from 'Components/Main/NewNav';
+import MyinfoForm from 'Components/Mypage/MyinfoForm';
 
-function PageMyinfo() {
+function PageMyinfoForm() {
   return (
     <>
       <NewNav />
@@ -12,11 +12,11 @@ function PageMyinfo() {
         </div>
 
         <div>
-          <Myinfo />
+          <MyinfoForm />
         </div>
       </div>
     </>
   );
 }
 
-export default PageMyinfo;
+export default PageMyinfoForm;

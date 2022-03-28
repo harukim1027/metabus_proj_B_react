@@ -1,7 +1,8 @@
 import { useAuth } from 'contexts/AuthContext';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './TopNavi.css';
 
 function NewNav() {
   const [isOpen, setOpen] = useState(false);
@@ -28,6 +29,10 @@ function NewNav() {
       });
       navigate('/accounts/login/');
     }
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -78,6 +83,68 @@ function NewNav() {
                 alt=""
               />
               <div className="inner">
+                <div className="flex text-xl right-1">
+                  <div></div>
+                  {!auth.isLoggedIn && (
+                    <div>
+                      {/* 로그인  */}
+                      <button className="mb-10">
+                        <a href="/accounts/login/">로그인</a>
+                      </button>
+                      {/* 회원가입 */}
+                      <button className="mb-10">
+                        <a href="/accounts/checksignup/"> 회원가입 </a>
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {auth.isLoggedIn && (
+                  <>
+                    <div className="relative">
+                      <span className="rounded-xl bg-white shadow-md border text-center font-bold absolute xs:inset-x-0 sm:inset-x-auto sm:left-10 sm:top-10 sm:text-xl">
+                        &nbsp; &nbsp;오늘도 찾아주셨네요, {auth.nickname} 님 ❕
+                        &nbsp; &nbsp;
+                      </span>
+                    </div>
+                    <div className="flex text-xl place-content-between">
+                      <div></div>
+                      <div className="flex">
+                        {auth.is_staff ? (
+                          // 관리자 페이지
+                          <button className="icon_size4">
+                            <NavLink to="/admin/main/">
+                              <img
+                                className="hover:scale-110 duration-200"
+                                src="/manageicon1.png"
+                                alt="manageiconbutton"
+                              ></img>
+                            </NavLink>
+                          </button>
+                        ) : (
+                          // 마이페이지
+                          <button className="icon_size4">
+                            <NavLink to="/mypage/userinfo/">
+                              <img
+                                className="mt-5 hover:scale-110 duration-200"
+                                src="/mypageicon1.png"
+                                alt="mypagebutton"
+                              ></img>
+                            </NavLink>
+                          </button>
+                        )}
+
+                        <button className="icon_size4" onClick={handleLogout}>
+                          <img
+                            className="hover:scale-110 duration-200"
+                            src="/logouticon1.png"
+                            alt="button"
+                          ></img>
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
+
                 <nav className="menu">
                   <ul>
                     <li>
