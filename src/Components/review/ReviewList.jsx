@@ -7,6 +7,9 @@ import { useAuth } from 'contexts/AuthContext';
 import ReactPaginate from 'react-paginate';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+// import './style.css';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -98,6 +101,7 @@ function ReviewList() {
   }, [reviewList]);
 
   //-------------
+  console.log('reviewList', reviewList);
 
   return (
     <>
@@ -169,15 +173,14 @@ function ReviewList() {
 
           <hr className="mb-3" />
 
-          <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
-            {reviewList?.results?.map((review) => (
-              <div
-                key={review.review_no}
-                className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
-              >
-                <ReviewSummary review={review} />
-              </div>
-            ))}
+          <div>
+            <AwesomeSlider className="Container">
+              {reviewList?.results?.map((review) => (
+                <div key={review.review_no}>
+                  <ReviewSummary review={review} />
+                </div>
+              ))}
+            </AwesomeSlider>
           </div>
 
           {auth.isLoggedIn && !auth.is_staff && (

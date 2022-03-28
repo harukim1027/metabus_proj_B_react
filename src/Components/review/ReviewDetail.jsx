@@ -62,6 +62,8 @@ function ReviewDetail({ reviewId }) {
 
   //-------------
 
+  console.log('review:', review);
+
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
@@ -144,14 +146,12 @@ function ReviewDetail({ reviewId }) {
                   </div>
                   <br />
 
-                  <div className="mb-4 flex justify-center">
-                    {review.review_image.image && (
-                      <img
-                        src={review.review_image.image}
-                        alt=""
-                        className="w-full"
-                      />
-                    )}
+                  <div>
+                    {review.review_image?.map((review) => (
+                      <div className="h-2/3 overflow-hidden">
+                        <img src={review.image} alt={review.title} />
+                      </div>
+                    ))}
                   </div>
 
                   {/*  */}

@@ -14,8 +14,6 @@ function ReviewCommentList({ reviewId }) {
     refetch();
   }, []);
 
-  console.log('review:', review);
-
   return (
     <>
       {review?.comments.map((comment) => (
