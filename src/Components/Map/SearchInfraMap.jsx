@@ -14,7 +14,7 @@ function SearchInfraMap() {
     isLoading: true,
   });
   // 초기값을 의존성 걸어주기 위해 뒤로 이동
-  // const [addr, setAddr] = useState('대전광역시 유성구 관평동');
+  const [addr, setAddr] = useState('대전광역시 유성구 관평동');
   // const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
 
   const { kakao } = window;
@@ -68,7 +68,9 @@ function SearchInfraMap() {
         if (result[i].region_type === 'H') {
           infoDiv.innerHTML = result[i].address_name;
           setAddr(result[i].address_name);
-          break;
+          const initQuery = result[i].address_name + '동물병원';
+          return initQuery;
+          //   break;
         }
       }
     }
@@ -91,36 +93,35 @@ function SearchInfraMap() {
   }, [currentLoc]);
 
   // lazy initial state (초기값을 현위치에 의존해 변경)
-  const [addr, setAddr] = useState(() => {
-    const initialstate = settingINITaddr();
-    return initialstate;
-  });
+  //   const [addr, setAddr] = useState(() => {
+  //     const initialstate = settingINITaddr();
+  //     return initialstate;
+  //   });
   const [query, setQuery] = useState(() => {
     const initialstate = settingINITquery();
     return initialstate;
   }, [addr]);
 
-  function settingINITaddr() {
-    console.log(currentLoc);
-    geocoder.coord2RegionCode(
-      currentLoc.center.lng,
-      currentLoc.center.lat,
-      function (result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          for (var i = 0; i < result.length; i++) {
-            if (result[i].region_type === 'H') {
-              return result[i].address_name;
-            }
-            break;
-          }
-        }
-      },
-    );
-  }
+  //   function settingINITaddr() {
+  //     console.log(currentLoc);
+  //     geocoder.coord2RegionCode(
+  //       currentLoc.center.lng,
+  //       currentLoc.center.lat,
+  //       function (result, status) {
+  //         if (status === kakao.maps.services.Status.OK) {
+  //           for (var i = 0; i < result.length; i++) {
+  //             if (result[i].region_type === 'H') {
+  //               return result[i].address_name;
+  //             }
+  //             break;
+  //           }
+  //         }
+  //       },
+  //     );
+  //   }
 
   function settingINITquery() {
     searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
-    return addr + '동물병원';
   }
 
   useEffect(() => {
