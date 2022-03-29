@@ -62,8 +62,6 @@ import NotFound from 'Components/ErrorPage/NotFound404';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
 // map
 import PageFindOwnerBoardForm from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardForm';
-import Kmap from 'Components/Map/KakaoMap';
-import PageMap from 'Pages/PageMap/PageAllCenterMap';
 // FindOwnerBoard
 // LostPetBoard
 import PageLostPetBoardList from 'Pages/PageLostPetBoard/PageLostPetBoardList';
@@ -74,6 +72,8 @@ import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardL
 import PageTopNav from 'Pages/PageMainMenu';
 import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
+import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
+import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 
 function App() {
   const { auth } = useAuth();
@@ -285,7 +285,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
 
           <Route path="/centermap/" element={<PageAllCenterMap />} />
-          <Route path="/kmap/" element={<Kmap />} />
+          <Route path="/mylocationmap/" element={<PageMyLocationMap />} />
+          <Route path="/searchinframap/" element={<PageSearchInfraMap />} />
         </Routes>
       </div>
     </>
