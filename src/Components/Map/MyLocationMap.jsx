@@ -159,6 +159,7 @@ function MyLocationMap() {
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             })
           }
+          className="mt-10"
         >
           {/* 행정동 위치 표기 */}
           <div

@@ -1,6 +1,43 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, memo } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
+
+const EventMarkerContainer = memo(({ marker_obj }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  console.log(1);
+  return (
+    <>
+      <MapMarker
+        position={marker_obj.center_coords}
+        onClick={() => {
+          setIsVisible(true);
+        }}
+      />
+      {isVisible && (
+        <CustomOverlayMap position={marker_obj.center_coords} clickable={true}>
+          <div className="wrap">
+            <div className="info">
+              <div className="title flex justify-between">
+                <h2 className="">{marker_obj.center_name}</h2>
+                <button
+                  className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
+                  onClick={() => {
+                    setIsVisible(false);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              주소 : {marker_obj.center_address}
+              <br />
+              연락처 : {marker_obj.center_call}
+            </div>
+          </div>
+        </CustomOverlayMap>
+      )}
+    </>
+  );
+});
 
 function AllCenterMap({ centersData }) {
   const [currentLoc, setCurrentLoc] = useState({
@@ -91,44 +128,6 @@ function AllCenterMap({ centersData }) {
   // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
-  const EventMarkerContainer = ({ marker_obj }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    return (
-      <>
-        <MapMarker
-          position={marker_obj.center_coords}
-          onClick={() => {
-            setIsVisible(true);
-          }}
-        />
-        {isVisible && (
-          <CustomOverlayMap
-            position={marker_obj.center_coords}
-            clickable={true}
-          >
-            <div className="wrap">
-              <div className="info">
-                <div className="title flex justify-between">
-                  <h2 className="">{marker_obj.center_name}</h2>
-                  <button
-                    className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
-                    onClick={() => {
-                      setIsVisible(false);
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-                주소 : {marker_obj.center_address}
-                <br />
-                연락처 : {marker_obj.center_call}
-              </div>
-            </div>
-          </CustomOverlayMap>
-        )}
-      </>
-    );
-  };
   //-------------
 
   // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------
@@ -177,9 +176,10 @@ function AllCenterMap({ centersData }) {
 
   // console.log('detailAddr: ', detailAddr, 'position: ', position);
   // console.log('currentLoc: ', currentLoc);
-  useEffect(() => {
-    console.log('myLoc: ', myLoc);
-  }, [myLoc]);
+  // 확인용
+  // useEffect(() => {
+  //   console.log('myLoc: ', myLoc);
+  // }, [myLoc]);
   return (
     <>
       {myLoc.center && (
@@ -194,11 +194,13 @@ function AllCenterMap({ centersData }) {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
             // console.log('map.getCenter: ', map.getCenter());
           }}
-          onDragEnd={(map) =>
+          onDragEnd={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
-            })
-          }
+            });
+            // console.log('dragend');
+          }}
+          className="mt-10"
         >
           {/* 행정동 위치 표기 */}
           <div

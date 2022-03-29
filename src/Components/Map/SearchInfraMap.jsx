@@ -13,8 +13,8 @@ function SearchInfraMap() {
     errMsg: null,
     isLoading: true,
   });
+  const [addr, setAddr] = useState('대전광역시 유성구 관평동');
   const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
-  const [infra, setInfra] = useState('애견미용');
 
   const { kakao } = window;
 
@@ -74,7 +74,8 @@ function SearchInfraMap() {
               lat: data[i].y,
               lng: data[i].x,
             },
-            content: data[i].place_name,
+            name: data[i].place_name,
+            phone: data[i].phone || '등록된 번호 없음',
           });
           // @ts-ignore
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
@@ -97,34 +98,23 @@ function SearchInfraMap() {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
           infoDiv.innerHTML = result[i].address_name;
+          setAddr(`${result[i].address_name}`);
           break;
         }
       }
     }
   }
-  // 인프라 검색 함수
-  function searchInfra(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      for (var i = 0; i < result.length; i++) {
-        // 행정동의 region_type 값은 'H' 이므로
-        if (result[i].region_type === 'H') {
-          setQuery(`${result[i].address_name} ${infra}`);
-          break;
-        }
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (!map) return;
-    searchAddrFromCoords(map.getCenter(), searchInfra);
-  }, [infra]);
 
   // 화면 중앙의 행정동 주소 정보 화면 좌상단에 뿌려주기
   function searchAddrFromCoords(coords, callback) {
     // 좌표로 행정동 주소 정보를 요청합니다
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
   }
+
+  useEffect(() => {
+    if (!map) return;
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+  }, [query]);
 
   return (
     <>
@@ -139,10 +129,11 @@ function SearchInfraMap() {
         }}
         level={3}
         onCreate={setMap}
-        onCenterChanged={(map) => {
+        onDragEnd={(map) => {
           searchAddrFromCoords(map.getCenter(), displayCenterInfo);
           // console.log('map.getCenter: ', map.getCenter());
         }}
+        className="mt-10"
       >
         {/* 행정동 위치 표기 */}
         <div
@@ -180,21 +171,57 @@ function SearchInfraMap() {
             </div>
           </MapMarker>
         )}
+
         {/* 검색한 인프라 마커들 */}
         {markers.map((marker) => (
           <MapMarker
-            key={`marker-${marker.content}-${marker.position.lat},${marker.position.lng}`}
+            key={`marker-${marker.name}-${marker.position.lat},${marker.position.lng}`}
             position={marker.position}
             onClick={() => setInfo(marker)}
           >
-            {info && info.content === marker.content && (
-              <div style={{ color: '#000' }}>{marker.content}</div>
+            {info && info.name === marker.name && (
+              <div className="p-2">
+                <h2>이름: {marker.name}</h2>
+                <h2>전화: {marker.phone}</h2>
+                <button
+                  onClick={() =>
+                    window.open(
+                      `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${marker.name}`,
+                    )
+                  }
+                  className="text-blue-800 hover:text-blue-300"
+                >
+                  초록창 검색
+                </button>
+              </div>
             )}
           </MapMarker>
         ))}
-        <h2>현재 행정주소에서</h2>
-        <button onClick={() => setInfra('동물병원')}>동물 병원 찾기</button>
-        <button onClick={() => setInfra('애견미용')}>애견 미용 찾기</button>
+        <h2>현재 위치에서</h2>
+        <button
+          onClick={() => setQuery(`${addr} 동물병원`)}
+          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
+        >
+          동물 병원 찾기
+        </button>
+        <button
+          onClick={() => setQuery(`${addr} 애견미용`)}
+          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
+        >
+          애견 미용 찾기
+        </button>
+        <button
+          onClick={() => setQuery(`${addr} 애견호텔`)}
+          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
+        >
+          애견 호텔 찾기
+        </button>
+        <button
+          onClick={() => setQuery(`${addr} 펫샵`)}
+          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
+        >
+          애견 용품샵 찾기
+        </button>
       </Map>
     </>
   );
