@@ -73,6 +73,7 @@ import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoar
 import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
 import PageTopNav from 'Pages/PageMainMenu';
 import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
+import Home from 'Components/review/ReviewDiaryList';
 
 function App() {
   const { auth } = useAuth();

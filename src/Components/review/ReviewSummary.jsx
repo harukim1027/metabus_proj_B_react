@@ -1,44 +1,58 @@
 import { Link } from 'react-router-dom';
 import 'react-awesome-slider/dist/styles.css';
-// import './style.css';
+import './SlideStyle.css';
 
 function ReviewSummary({ review }) {
-  // const slider = (
-  //   <AwesomeSlider cssModule={AwesomeSliderStyles}>
-  //     {review.review_image?.map((review) => (
-  //       <div data-src={review.image} alt={review.title} />
-  //     ))}
-  //   </AwesomeSlider>
-  // );
+  console.log('review:', review);
 
-  console.log(review);
+  const pickImage = review.review_image.slice(0, 4);
+  const imagePart1 = pickImage.slice(0, 2);
+  const imagePart2 = pickImage.slice(2, 4);
+
+  console.log('imagePart2', imagePart2);
 
   return (
     <>
       <div>
         <Link to={`/review/${review.review_no}/`}>
-          {/* {review.image1 && (
-            <div className="h-2/3 overflow-hidden">
-              <img src={review.image1} alt={review.title} />
+          <div class="absolute inset-1">
+            <div className="opacity-0 hover:opacity-100 duration-300 absolute inset-0 flex z-0 justify-center items-center text-2xl text-white font-semibold">
+              <h2 className="image__description">
+                {review.title.length > 15
+                  ? review.title.substring(0, 15) + '...'
+                  : review.title}
+              </h2>
             </div>
-          )} */}
-          <div>
-            <h2 className="text-white text-center ItemWrapper">
-              {review.title.length > 7
-                ? review.title.substring(0, 7) + '...'
-                : review.title}
-            </h2>
-            <h3 className="text-white text-center ">
-              by: {review.user.nickname}
-            </h3>
           </div>
-
-          <div className="image__description">
-            {review.review_image?.map((review) => (
-              <div className="image__description">
-                <img src={review.image} alt={review.title} />
-                {review.title}
-              </div>
+          {/* <div class="absolute inset-0">
+            <div className="opacity-0 hover:opacity-100 duration-300 absolute inset-1 flex z-1 justify-center items-center text-md text-white">
+              <h2 className="image__description text-center">
+                {review.content.length > 15
+                  ? review.content.substring(0, 15) + '...'
+                  : review.content}
+              </h2>
+            </div>
+          </div> */}
+          <div className="ItemWrapper">
+            {imagePart1?.map((img) => (
+              <img
+                className="max-w-full max-h-full rounded hover:"
+                src={img.image}
+                alt={img.review_image_no}
+                width={250}
+                height={250}
+              />
+            ))}
+          </div>
+          <div className="ItemWrapper">
+            {imagePart2?.map((img) => (
+              <img
+                className="rounded"
+                src={img.image}
+                alt={img.review_image_no}
+                width={250}
+                height={250}
+              />
             ))}
           </div>
         </Link>

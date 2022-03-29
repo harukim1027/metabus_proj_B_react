@@ -9,7 +9,7 @@ import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-// import './style.css';
+import './SlideStyle.css';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -101,7 +101,6 @@ function ReviewList() {
   }, [reviewList]);
 
   //-------------
-  console.log('reviewList', reviewList);
 
   return (
     <>
@@ -177,7 +176,7 @@ function ReviewList() {
             <AwesomeSlider className="Container">
               {reviewList?.results?.map((review) => (
                 <div key={review.review_no}>
-                  <ReviewSummary review={review} />
+                  <ReviewSummary review={review} className="cursor-pointer" />
                 </div>
               ))}
             </AwesomeSlider>
@@ -194,16 +193,6 @@ function ReviewList() {
               </button>
             </div>
           )}
-          <ReactPaginate
-            previousLabel="<"
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={itemsPerPage}
-            pageCount={pageCount}
-            renderOnZeroPageCount={null}
-            className="pagination_review"
-          />
         </div>
       </div>
     </>

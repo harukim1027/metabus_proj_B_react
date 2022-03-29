@@ -1,0 +1,138 @@
+.Container {
+  --content-background-color: transparent;
+  height: 556px;
+}
+
+.ItemWrapper {
+  display: flex;
+  align-items: center;
+  height: 200%;
+}
+
+.ItemWrapper img:first-of-type {
+  margin-inline-end: 10px;
+}
+
+.image__description {
+  transform: translate3d(0, 0, 0);
+  padding: 15px;
+  opacity: 1;
+  transition: transform 0.45s cubic-bezier(0.15, 0.3, 0.15, 1),
+    opacity 0.35s ease-out;
+  color: #fff;
+  background: rgba(102, 11, 79, 0.6);
+  transform: translateY(100%) translateX(50%);
+}
+
+.slider {
+  height: 100vh;
+}
+.content {
+  display: flex;
+  background: #000;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.content__left {
+  display: flex;
+  max-width: 50%;
+  flex-direction: column;
+  padding: 20px;
+  text-align: start;
+  justify-content: center;
+  align-self: center;
+}
+.content__right {
+  display: flex;
+  max-width: 50%;
+  margin: auto;
+  padding: 20px;
+}
+.content__right .img {
+  width: 40%;
+  height: 500px;
+  margin: auto;
+  object-fit: cover;
+}
+.content2 {
+  height: 100vh;
+  display: flex;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+.content2__center {
+  width: 50%;
+}
+.squares {
+  display: flex;
+  flex-wrap: wrap;
+}
+.square {
+  display: flex;
+  width: 25%;
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: 0.6s;
+}
+.square h3 {
+  text-transform: uppercase;
+}
+.square p {
+  padding: 15px;
+}
+.square:nth-child(1) {
+  background: url(https://cdn.pixabay.com/photo/2015/06/24/13/31/beer-820011_960_720.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.square:nth-child(1):hover {
+  filter: grayscale(100%);
+}
+.square:nth-child(2) {
+  background: white;
+}
+.square:nth-child(3) {
+  background: url(https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_960_720.jpg);
+  color: white;
+  background-size: cover;
+}
+.square:nth-child(3):hover {
+  filter: grayscale(100%);
+}
+.square:nth-child(4) {
+  background: rgb(24, 27, 12);
+  color: white;
+}
+.square:nth-child(5) {
+  background: #333;
+  color: white;
+}
+.square:nth-child(6) {
+  background: url(https://cdn.pixabay.com/photo/2016/03/27/18/47/beers-1283566_960_720.jpg);
+  color: white;
+  background-size: cover;
+}
+.square:nth-child(6):hover {
+  filter: grayscale(100%);
+}
+.square:nth-child(7) {
+  background: rgb(218, 154, 107);
+  width: 50%;
+}
+
+@media (max-width: 800px) {
+  .square {
+    width: 50%;
+  }
+  .square:nth-child(7) {
+    width: 100%;
+  }
+}
