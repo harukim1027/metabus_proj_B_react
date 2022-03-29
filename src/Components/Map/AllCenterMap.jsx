@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
 
-function CyMap({ centersData }) {
+function AllCenterMap({ centersData }) {
   const [openDiv, setOpenDiv] = useState(false);
   const [currentLoc, setCurrentLoc] = useState({
     center: {
@@ -226,7 +226,7 @@ function CyMap({ centersData }) {
             style={{
               position: 'absolute',
               left: '10px',
-              top: '10px',
+              top: '40px',
               borderRadius: '2px',
               background: 'rgba(255, 255, 255, 0.8)',
               zIndex: 1,
@@ -325,4 +325,4 @@ function CyMap({ centersData }) {
   );
 }
 
-export default CyMap;
+export default AllCenterMap;
