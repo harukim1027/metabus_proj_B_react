@@ -7,7 +7,8 @@ function PageMyinfo() {
     <>
       <NewNav />
       <div>
-        <div className="mt-10">
+        <div>
+          <br />
           <Sidebar />
         </div>
 
