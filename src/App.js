@@ -45,8 +45,6 @@ import PageNoticeForm from 'Pages/PageNotice/PageNoticeForm';
 import PageReviewIndex from 'Pages/PageReview/PageReviewIndex';
 import PageReviewDetail from 'Pages/PageReview/PageReviewDetail';
 import PageReviewForm from 'Pages/PageReview/PageReviewForm';
-import PageReviewIndexDog from 'Pages/PageReview/PageReviewIndexDog';
-import PageReviewIndexCat from 'Pages/PageReview/PageReviewIndexCat';
 // mypage
 import PageMyinfo from 'Pages/PageMypage/PageMyinfo';
 import PageMyAssignInfo from 'Pages/PageMypage/PageMyAssignInfo';
@@ -109,9 +107,6 @@ function App() {
           {/* review */}
           <Route path="/review/" element={<PageReviewIndex />} />
           <Route path="/review/:reviewId/" element={<PageReviewDetail />} />
-          <Route path="/review/dog/" element={<PageReviewIndexDog />} />
-          <Route path="/review/cat/" element={<PageReviewIndexCat />} />
-
           {/* findOwnerBoard */}
           <Route path="/findboard/" element={<PageFindOwnerBoardList />} />
           <Route
