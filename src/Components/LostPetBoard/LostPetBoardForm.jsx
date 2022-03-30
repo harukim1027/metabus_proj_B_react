@@ -15,11 +15,14 @@ const INIT_FIELD_VALUES = {
   animal_type: '동물 종류',
   dog_breed: '전체',
   cat_breed: '전체',
+  pet_name: '',
   size: '소형',
   sex: '미상',
   animal_tag: '',
-  find_location: '',
+  lost_location: '',
+  lost_time: '',
   content: '',
+  image: '',
 };
 
 function LostPetBoardForm({ lostpetboardId, handleDidSave }) {

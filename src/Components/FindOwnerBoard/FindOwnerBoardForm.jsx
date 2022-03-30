@@ -141,19 +141,12 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
             </>
           )}
           <br />
-
-          {/*  */}
         </div>
       </div>
 
       {/* FindOwnerBoard 글 폼 */}
-
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 notice_header rounded-md shadow-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          {/* <form
-            onSubmit={handleSubmit}
-            className="review_header rounded-md sm:px-0 md:px-20 pt-6 pb-8"
-          > */}
           {/* 제목 입력 input 박스 */}
           <div className="w-full">
             <form
