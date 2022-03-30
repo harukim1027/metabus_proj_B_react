@@ -30,9 +30,6 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
 
   const [saveImage, setSaveImage] = useState('');
 
-  // 동물종류 선택을 위한 기본설정
-  // const [select, setSelect] = useState(true);
-
   // 조회 (작성 글 수정시 기존 데이터가 남아있도록 하기위함)
   const [{ data: findBoard, loading: getLoading, error: getError }] =
     useApiAxios(
@@ -114,16 +111,6 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
       };
     });
   };
-
-  // // 동물 종류 선택시
-  // const sel = (e) => {
-  //   handleFieldChange(e);
-  //   if (e.target.value === '강아지') {
-  //     setSelect2(true);
-  //   } else if (e.target.value === '고양이') {
-  //     setSelect1(true);
-  //   }
-  // };
 
   //-------------
 
