@@ -101,86 +101,107 @@ function AnimalDetail({ animalId }) {
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      동물 종
+                      공고번호
                     </th>
-                    <td>
-                      {animal.category.name === '강아지' && '강아지'}
-                      {animal.category.name === '고양이' && '고양이'}
-                    </td>
+                    <td>{animal.announce_no}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      등록번호
+                      동물 종류
                     </th>
-                    <td>{animal.animal_reg_num}</td>
+                    <td>{animal.kind_of_animal}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      크기
+                      품종
                     </th>
-                    <td>
-                      {animal.size === '소형' && '소형'}
-                      {animal.size === '중형' && '중형'}
-                      {animal.size === '대형' && '대형'}
-                    </td>
+                    <td>{animal.breed}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      털색
+                    </th>
+                    <td>{animal.color}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
                       성별
                     </th>
-                    <td>{animal.sex === '암컷' ? '암컷' : '수컷'}</td>
+                    <td>{animal.sex}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      나이
+                      중성화여부
                     </th>
-                    <td>{animal.age}</td>
+                    <td>{animal.neutering}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      발견 날짜
-                    </th>
-                    <td>{animal.date_of_discovery}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      발견 장소
-                    </th>
-                    <td>{animal.place_of_discovery}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      동물 정보
+                      특징
                     </th>
                     <td>{animal.info}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      보호 시작날짜
+                      접수 일시
                     </th>
-                    <td>{animal.start_date}</td>
+                    <td>{animal.date_time_of_receipt}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      보호 종료날짜
+                      구조 사유
                     </th>
-                    <td>{animal.end_date}</td>
+                    <td>{animal.reason_for_rescue}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      입양 상태
+                      발생 장소
                     </th>
-                    <td>{animal.protection_status}</td>
+                    <td>{animal.place_of_discovery}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      공고 기간
+                    </th>
+                    <td>{animal.period_of_announcement}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      보호 장소
+                    </th>
+                    <td>{animal.shelter}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      담당자/담당시설
+                    </th>
+                    <td>{animal.person_in_charge}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      특이사항
+                    </th>
+                    <td>{animal.significant}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      관할 보호센터명
+                    </th>
+                    <td>{animal.center_name.center_name}</td>
                   </tr>
                 </table>
               </>
