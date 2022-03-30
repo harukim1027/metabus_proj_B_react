@@ -13,8 +13,9 @@ function SearchInfraMap() {
     errMsg: null,
     isLoading: true,
   });
+  // 초기값을 의존성 걸어주기 위해 뒤로 이동
   const [addr, setAddr] = useState('대전광역시 유성구 관평동');
-  const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
+  // const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
 
   const { kakao } = window;
 
@@ -56,6 +57,73 @@ function SearchInfraMap() {
     //--------------------
   }, []);
 
+  // 함수들
+  // 행정동 주소 표시 함수
+  function displayCenterInfo(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+      var infoDiv = document.getElementById('centerAddr');
+
+      for (var i = 0; i < result.length; i++) {
+        // 행정동의 region_type 값은 'H' 이므로
+        if (result[i].region_type === 'H') {
+          infoDiv.innerHTML = result[i].address_name;
+          setAddr(result[i].address_name);
+          const initQuery = result[i].address_name + '동물병원';
+          return initQuery;
+          //   break;
+        }
+      }
+    }
+  }
+
+  // 화면 중앙의 행정동 주소 정보 화면 좌상단에 뿌려주기
+  function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+  }
+
+  function searchAddrFromCoords2(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.lng, coords.lat, callback);
+  }
+
+  useEffect(() => {
+    if (!map) return;
+    searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
+  }, [currentLoc]);
+
+  // lazy initial state (초기값을 현위치에 의존해 변경)
+  //   const [addr, setAddr] = useState(() => {
+  //     const initialstate = settingINITaddr();
+  //     return initialstate;
+  //   });
+  const [query, setQuery] = useState(() => {
+    const initialstate = settingINITquery();
+    return initialstate;
+  }, [addr]);
+
+  //   function settingINITaddr() {
+  //     console.log(currentLoc);
+  //     geocoder.coord2RegionCode(
+  //       currentLoc.center.lng,
+  //       currentLoc.center.lat,
+  //       function (result, status) {
+  //         if (status === kakao.maps.services.Status.OK) {
+  //           for (var i = 0; i < result.length; i++) {
+  //             if (result[i].region_type === 'H') {
+  //               return result[i].address_name;
+  //             }
+  //             break;
+  //           }
+  //         }
+  //       },
+  //     );
+  //   }
+
+  function settingINITquery() {
+    searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
+  }
+
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
@@ -88,29 +156,6 @@ function SearchInfraMap() {
     });
   }, [map, query]);
 
-  // 함수들
-  // 행정동 주소 표시 함수
-  function displayCenterInfo(result, status) {
-    if (status === kakao.maps.services.Status.OK) {
-      var infoDiv = document.getElementById('centerAddr');
-
-      for (var i = 0; i < result.length; i++) {
-        // 행정동의 region_type 값은 'H' 이므로
-        if (result[i].region_type === 'H') {
-          infoDiv.innerHTML = result[i].address_name;
-          setAddr(`${result[i].address_name}`);
-          break;
-        }
-      }
-    }
-  }
-
-  // 화면 중앙의 행정동 주소 정보 화면 좌상단에 뿌려주기
-  function searchAddrFromCoords(coords, callback) {
-    // 좌표로 행정동 주소 정보를 요청합니다
-    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
-  }
-
   useEffect(() => {
     if (!map) return;
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -119,10 +164,7 @@ function SearchInfraMap() {
   return (
     <>
       <Map // 로드뷰를 표시할 Container
-        center={{
-          lat: 37.566826,
-          lng: 126.9786567,
-        }}
+        center={currentLoc.center}
         style={{
           width: '100%',
           height: '700px',
@@ -189,7 +231,7 @@ function SearchInfraMap() {
                       `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${marker.name}`,
                     )
                   }
-                  className="text-blue-800 hover:text-blue-300"
+                  className="text-green-800 hover:text-green-400 font-semibold"
                 >
                   초록창 검색
                 </button>

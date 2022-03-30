@@ -21,16 +21,8 @@ function MyLocationMap() {
   const [map, setMap] = useState();
   const [info, setInfo] = useState();
 
-  // 지오코딩
   const { kakao } = window;
-  const [locations, setLocations] = useState([
-    {
-      center_name: '대전지식산업센터',
-      center_address: '대전광역시 동구 계족로 151',
-      center_coords: { lat: 36.3276637140944, lng: 127.4438988132827 },
-    },
-  ]);
-
+  // 지오코딩
   const geocoder = useMemo(function () {
     return new kakao.maps.services.Geocoder();
   }, []);

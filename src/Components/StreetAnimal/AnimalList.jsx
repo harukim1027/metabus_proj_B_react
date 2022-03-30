@@ -146,25 +146,25 @@ function AnimalList() {
                     scope="col"
                     className="px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider"
                   >
-                    No
+                    공고번호
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider"
                   >
-                    동물 종
+                    축종
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider"
                   >
-                    등록번호
+                    품종
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider"
                   >
-                    입양 상태
+                    보호 센터명
                   </th>
                 </tr>
               </thead>
@@ -185,20 +185,20 @@ function AnimalList() {
                       </td>
 
                       <td className="px-6 py-4">
-                        <div className="text-base font-medium text-gray-900">
-                          {animal.category.name}
-                        </div>
-                      </td>
-
-                      <td className="px-6 py-4">
                         <span className="text-xl text-gray-900 font-semibold rounded-full bg-red-100">
-                          {animal.animal_reg_num}
+                          {animal.kind_of_animal}
                         </span>
                       </td>
 
                       <td className="px-6 py-4">
                         <div className="text-sm font-medium text-gray-900">
-                          {animal.protection_status}
+                          {animal.breed}
+                        </div>
+                      </td>
+
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {animal.center_name.center_name}
                         </div>
                       </td>
                     </tr>
