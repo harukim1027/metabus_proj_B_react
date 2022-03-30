@@ -231,7 +231,7 @@ function SearchInfraMap() {
                       `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${marker.name}`,
                     )
                   }
-                  className="text-blue-800 hover:text-blue-300"
+                  className="text-green-800 hover:text-green-400 font-semibold"
                 >
                   초록창 검색
                 </button>
