@@ -6,9 +6,8 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
-import './SlideStyle.css';
+import Fame from './HallOfFame';
+import ReactPaginate from 'react-paginate';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -20,7 +19,6 @@ function ReviewList() {
   const [pageCount, setPageCount] = useState(1);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
-
   const navigate = useNavigate();
   const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
     {
@@ -35,7 +33,14 @@ function ReviewList() {
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
   useEffect(() => {}, [fieldValues]);
-
+  const moveCategory = () => {
+    fieldValues.category === '전체' && navigate(`/review/`);
+    fieldValues.category === '강아지' && navigate(`/review/dog/`);
+    fieldValues.category === '고양이' && navigate(`/review/cat/`);
+  };
+  useEffect(() => {
+    moveCategory();
+  }, [fieldValues]);
   const fetchReviews = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
@@ -49,23 +54,18 @@ function ReviewList() {
     },
     [query],
   );
-
   useEffect(() => {
     fetchReviews(1);
   }, []);
-
   const handlePageClick = (event) => {
     fetchReviews(event.selected + 1);
   };
-
   const getQuery = (e) => {
     setQuery(e.target.value);
   };
-
   const handleBTNPress = () => {
     fetchReviews(1, query);
   };
-
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       fetchReviews(1, query);
@@ -95,6 +95,7 @@ function ReviewList() {
 
   return (
     <>
+      <Fame />
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
@@ -117,16 +118,60 @@ function ReviewList() {
             )}
           </div>
 
-          <div>
-            <AwesomeSlider className="Container">
-              {reviewList?.results?.map((review) => (
-                <div key={review.review_no}>
-                  <ReviewSummary review={review} className="cursor-pointer" />
+          {/* 검색 필드 + CSS */}
+          {/* 검색, 카테고리, 글 작성 버튼 위치 고정하기 (xxs랑 sm 범위에서만) */}
+          <div className="mb-6 mt-10">
+            <div>
+              <div className=" xs:flex-none xl:flex xl:justify-between">
+                <div>
+                  <form
+                    onSubmit={() => moveCategory()}
+                    className="flex justify-center"
+                  >
+                    <select
+                      name="category"
+                      value={fieldValues.category}
+                      onChange={handleFieldChange}
+                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      defaultValue="전체"
+                    >
+                      <option value="전체">전체</option>
+                      <option value="강아지">강아지</option>
+                      <option value="고양이">고양이</option>
+                    </select>
+                  </form>
                 </div>
-              ))}
-            </AwesomeSlider>
+                <div className="flex justify-center xs:mt-5 xl:mt-0">
+                  <input
+                    type="text"
+                    name="query"
+                    onChange={getQuery}
+                    onKeyPress={handleKeyPress}
+                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
+                    placeholder="제목, 작성자 ID를 검색하세요."
+                  />
+                  <button
+                    onClick={handleBTNPress}
+                    className="rounded bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
+                    readOnly
+                  >
+                    검색
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-
+          <hr className="mb-3" />
+          <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
+            {reviewList?.results?.map((review) => (
+              <div
+                key={review.review_no}
+                className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
+              >
+                <ReviewSummary review={review} />
+              </div>
+            ))}
+          </div>
           {auth.isLoggedIn && !auth.is_staff && (
             <div className="flex justify-end mr-5">
               <button
@@ -138,6 +183,16 @@ function ReviewList() {
               </button>
             </div>
           )}
+          <ReactPaginate
+            previousLabel="<"
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={itemsPerPage}
+            pageCount={pageCount}
+            renderOnZeroPageCount={null}
+            className="pagination_review"
+          />
         </div>
       </div>
     </>

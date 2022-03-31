@@ -3,6 +3,11 @@
   height: 556px;
 }
 
+.Container2 {
+  --content-background-color: transparent;
+  height: 100px;
+}
+
 .ItemWrapper {
   display: flex;
   align-items: center;
@@ -27,6 +32,7 @@
 .slider {
   height: 100vh;
 }
+
 .content {
   display: flex;
   background: #000;
