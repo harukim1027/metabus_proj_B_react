@@ -1,5 +1,7 @@
+import SignPad from 'Components/Assignment/SignPad';
 import useScrollFadeIn from 'hooks/useScrollFadeIn';
 import React, { useEffect, useState } from 'react';
+import AwesomeSlider from 'react-awesome-slider';
 import '../../App.css';
 import './Introduce.css';
 
@@ -81,7 +83,44 @@ function InfoAnimal() {
       >
         <div className="flex justify-center overflow-hidden md:px-10 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="introduce_header shadow-md flex flex-wrap justify-center w-full">
-            {/* 첫 글 시작 영역 */}
+            <div>
+              <AwesomeSlider className="Container">
+                <button onClick={clickImgIcon}> ▷ </button>
+                {clickImg === 1 ? (
+                  <img
+                    src="/safe_info1.png"
+                    alt="info1"
+                    className="xs:w-3/4  lg:w-3/4  xl:w-full"
+                  />
+                ) : clickImg === 2 ? (
+                  <img
+                    src="/safe_info2.png"
+                    alt="info1"
+                    className="xs:w-3/4  lg:w-3/4  xl:w-full"
+                  />
+                ) : clickImg === 3 ? (
+                  <img
+                    src="/safe_info3.png"
+                    alt="info1"
+                    className="xs:w-3/4  lg:w-3/4  xl:w-full"
+                  />
+                ) : clickImg === 4 ? (
+                  <img
+                    src="/safe_info4.png"
+                    alt="info1"
+                    className="xs:w-3/4  lg:w-3/4  xl:w-full"
+                  />
+                ) : (
+                  <img
+                    src="/safe_info5.png"
+                    alt="info1"
+                    className="xs:w-3/4  lg:w-3/4  xl:w-full"
+                  />
+                )}
+              </AwesomeSlider>
+            </div>
+
+            {/* 첫 글 시작 영역
             <div className="transition duration-500 delay-150 md:delay-0  mt-10 mb-10 flex justify-center ">
               <button onClick={clickImgIcon}> ▷ </button>
               {clickImg === 1 ? (
@@ -115,7 +154,7 @@ function InfoAnimal() {
                   className="xs:w-3/4  lg:w-3/4  xl:w-full"
                 />
               )}
-            </div>
+            </div> */}
 
             <br />
             <br />
@@ -168,6 +207,7 @@ function InfoAnimal() {
           </div>
         </div>
       </div>
+
       <div className="flex justify-center">
         <button
           className="mb-5  hover:animate-bounce rounded-lg text-5xl"

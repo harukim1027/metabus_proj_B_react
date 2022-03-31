@@ -2,8 +2,8 @@ import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = {};
 
@@ -21,6 +21,8 @@ function ReviewCommentForm({
     `/adopt_review/api/comments/${commentID}/`,
     { manual: !commentID },
   );
+
+  console.log('getdata:', getdata);
 
   // 저장
   const [
@@ -52,13 +54,16 @@ function ReviewCommentForm({
     getdata || INIT_FIELD_VALUES,
   );
 
+  console.log('fieldValues', fieldValues);
+  console.log('commentID', commentID);
+
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
       ...prevFieldValues,
     }));
   }, [setFieldValues]);
 
-  const handleSubmit = (e) => {
+  const handleEdit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(fieldValues).forEach(([name, value]) => {
@@ -77,6 +82,18 @@ function ReviewCommentForm({
           .then(() => refetch())
           .then(() => setHidden(!hidden));
       }
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    saveRequest({
+      data: fieldValues,
+    }).then((response) => {
+      const savedPost = response.data;
+
+      if (savedPost) refetch();
     });
   };
 
@@ -114,24 +131,39 @@ function ReviewCommentForm({
                 )}
               </div>
 
-              <button
-                type="submit"
-                className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                onClick={(e) => handleSubmit(e)}
-              >
-                등록
-              </button>
-              {commentID ? (
+              {!commentID ? (
                 <button
-                  type="button"
-                  name="clear"
+                  type="submit"
                   className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={() => {
-                    setHidden(!hidden);
-                  }}
+                  onClick={(e) => handleSubmit(e)}
                 >
-                  취소
+                  등록
                 </button>
+              ) : (
+                hidden
+              )}
+
+              {commentID ? (
+                <div>
+                  <button
+                    type="submit"
+                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
+                    onClick={(e) => handleEdit(e)}
+                  >
+                    수정
+                  </button>
+
+                  <button
+                    type="button"
+                    name="clear"
+                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
+                    onClick={() => {
+                      setHidden(!hidden);
+                    }}
+                  >
+                    취소
+                  </button>
+                </div>
               ) : (
                 hidden
               )}
@@ -142,5 +174,4 @@ function ReviewCommentForm({
     </>
   );
 }
-
 export default ReviewCommentForm;

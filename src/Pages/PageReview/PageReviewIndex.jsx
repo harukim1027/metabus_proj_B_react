@@ -1,10 +1,10 @@
+import NewNav from 'Components/Main/NewNav';
 import ReviewList from 'Components/review/ReviewList';
-import TopNav from 'Components/Main/TopNavi';
 
 function PageReviewIndex() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
       <ReviewList />
     </div>
   );

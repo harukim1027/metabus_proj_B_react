@@ -45,8 +45,6 @@ import PageNoticeForm from 'Pages/PageNotice/PageNoticeForm';
 import PageReviewIndex from 'Pages/PageReview/PageReviewIndex';
 import PageReviewDetail from 'Pages/PageReview/PageReviewDetail';
 import PageReviewForm from 'Pages/PageReview/PageReviewForm';
-import PageReviewIndexDog from 'Pages/PageReview/PageReviewIndexDog';
-import PageReviewIndexCat from 'Pages/PageReview/PageReviewIndexCat';
 // mypage
 import PageMyinfo from 'Pages/PageMypage/PageMyinfo';
 import PageMyAssignInfo from 'Pages/PageMypage/PageMyAssignInfo';
@@ -71,9 +69,13 @@ import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoar
 import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
 import PageTopNav from 'Pages/PageMainMenu';
 import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
+<<<<<<< HEAD
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
+=======
+import Home from 'Components/review/ReviewDiaryList';
+>>>>>>> 74af10cc572c8cf828e6e4b37ee1b2fdd8da0dab
 
 function App() {
   const { auth } = useAuth();
@@ -109,9 +111,6 @@ function App() {
           {/* review */}
           <Route path="/review/" element={<PageReviewIndex />} />
           <Route path="/review/:reviewId/" element={<PageReviewDetail />} />
-          <Route path="/review/dog/" element={<PageReviewIndexDog />} />
-          <Route path="/review/cat/" element={<PageReviewIndexCat />} />
-
           {/* findOwnerBoard */}
           <Route path="/findboard/" element={<PageFindOwnerBoardList />} />
           <Route

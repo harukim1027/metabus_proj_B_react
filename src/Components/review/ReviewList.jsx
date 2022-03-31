@@ -4,12 +4,10 @@ import ReviewSummary from './ReviewSummary';
 import { useNavigate } from 'react-router-dom';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
-import ReactPaginate from 'react-paginate';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
-// import './style.css';
+import Fame from './HallOfFame';
+import ReactPaginate from 'react-paginate';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -21,7 +19,6 @@ function ReviewList() {
   const [pageCount, setPageCount] = useState(1);
   const [page, setPage] = useState(1);
   const itemsPerPage = 5;
-
   const navigate = useNavigate();
   const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
     {
@@ -35,16 +32,15 @@ function ReviewList() {
 
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
+  useEffect(() => {}, [fieldValues]);
   const moveCategory = () => {
     fieldValues.category === '전체' && navigate(`/review/`);
     fieldValues.category === '강아지' && navigate(`/review/dog/`);
     fieldValues.category === '고양이' && navigate(`/review/cat/`);
   };
-
   useEffect(() => {
     moveCategory();
   }, [fieldValues]);
-
   const fetchReviews = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
@@ -58,23 +54,18 @@ function ReviewList() {
     },
     [query],
   );
-
   useEffect(() => {
     fetchReviews(1);
   }, []);
-
   const handlePageClick = (event) => {
     fetchReviews(event.selected + 1);
   };
-
   const getQuery = (e) => {
     setQuery(e.target.value);
   };
-
   const handleBTNPress = () => {
     fetchReviews(1, query);
   };
-
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       fetchReviews(1, query);
@@ -101,10 +92,10 @@ function ReviewList() {
   }, [reviewList]);
 
   //-------------
-  console.log('reviewList', reviewList);
 
   return (
     <>
+      <Fame />
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
@@ -170,19 +161,17 @@ function ReviewList() {
               </div>
             </div>
           </div>
-
           <hr className="mb-3" />
-
-          <div>
-            <AwesomeSlider className="Container">
-              {reviewList?.results?.map((review) => (
-                <div key={review.review_no}>
-                  <ReviewSummary review={review} />
-                </div>
-              ))}
-            </AwesomeSlider>
+          <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
+            {reviewList?.results?.map((review) => (
+              <div
+                key={review.review_no}
+                className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
+              >
+                <ReviewSummary review={review} />
+              </div>
+            ))}
           </div>
-
           {auth.isLoggedIn && !auth.is_staff && (
             <div className="flex justify-end mr-5">
               <button

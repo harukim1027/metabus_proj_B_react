@@ -1,13 +1,14 @@
 import { useApiAxios } from 'api/base';
 import AssignmentForm from 'Components/Assignment/AssignmentForm';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import { useNavigate } from 'react-router-dom';
 
 function PageAssignmentform() {
   const navigate = useNavigate();
   return (
     <>
-      <TopNav />
+      <NewNav />
       <AssignmentForm
         handleDidSave={(savedPost) => {
           navigate(`/assignment/complite/${savedPost.assignment_no}/`);

@@ -1,10 +1,10 @@
 import AssignCheck from 'Components/Assignment/AssignCheck';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageAssignCheck() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <AssignCheck />
       </div>
