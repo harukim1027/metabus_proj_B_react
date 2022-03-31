@@ -259,7 +259,7 @@ function SearchInfraMap() {
           애견 호텔 찾기
         </button>
         <button
-          onClick={() => setQuery(`${addr} 펫샵`)}
+          onClick={() => setQuery(`${addr} 애견용품`)}
           className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
         >
           애견 용품샵 찾기
