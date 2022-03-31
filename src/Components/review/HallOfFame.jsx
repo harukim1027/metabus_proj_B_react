@@ -83,20 +83,34 @@ function Fame() {
               mobileTouch={true}
               organicArrows={true}
             >
-              <h1 className="flex flex-wrap justify-center font-semibold italic xs:w-10">
-                <img src="/rank1.png" alt="rank1" />
-                {getSortedArr(userArr)[0]?.[0]}
-                {/* <br />글 갯수:{getSortedArr(userArr)[0]?.[1]} */}
+              <h1 className="flex flex-wrap justify-center space-x-4">
+                <img src="/rank1.png" alt="rank1" className="w-12 h-12" />
+                <h1 className="font-semibold italic">
+                  <h1 className="underline decoration-wavy decoration-yellow-400 text-center">
+                    {getSortedArr(userArr)[0]?.[0]}
+                  </h1>
+                  <h2>글 작성 수 : {getSortedArr(userArr)[0]?.[1]} 회</h2>
+                </h1>
               </h1>
-              <h1 className="flex flex-wrap justify-center xs:w-10 font-semibold italic">
-                <img src="/rank2.png" alt="rank2" />
-                {getSortedArr(userArr)[1]?.[0]}
-              </h1>
+              <h2 className="flex flex-wrap justify-center space-x-4">
+                <img src="/rank2.png" alt="rank2" className="w-12 h-12" />
+                <h1 className="font-semibold italic">
+                  <h1 className="underline decoration-wavy decoration-gray-400 text-center">
+                    {getSortedArr(userArr)[1]?.[0]}
+                  </h1>
+                  <h2>글 작성 수 : {getSortedArr(userArr)[0]?.[1]} 회</h2>
+                </h1>
+              </h2>
 
-              <h1 className="flex flex-wrap justify-center xs:w-10 font-semibold italic">
-                <img src="/rank3.png" alt="rank3" />
-                {getSortedArr(userArr)[2]?.[0]}
-              </h1>
+              <h3 className="flex flex-wrap justify-center space-x-4">
+                <img src="/rank3.png" alt="rank3" className="w-12 h-12" />
+                <h1 className="font-semibold italic">
+                  <h1 className="underline decoration-wavy decoration-yellow-600 text-center">
+                    {getSortedArr(userArr)[2]?.[0]}
+                  </h1>
+                  <h2>글 작성 수 : {getSortedArr(userArr)[0]?.[1]} 회</h2>
+                </h1>
+              </h3>
             </AwesomeSlider>
           </div>
         </div>
