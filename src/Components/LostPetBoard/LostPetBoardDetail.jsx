@@ -194,9 +194,8 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   {/* <div>
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
-
+                    일단 필터를 개?고양이? and 성별, 날짜, 장소로 해서
                     </div>
-
                   </div> */}
 
                   <div className="my-5 text-right">

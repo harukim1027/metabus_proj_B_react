@@ -88,7 +88,11 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        fileList.forEach((file) => formData.append(name, file));
+        if (fileList.length <= 5) {
+          fileList.forEach((file) => formData.append(name, file));
+        } else {
+          window.alert('첨부파일은 최대 5개 까지 첨부 가능합니다.');
+        }
       } else {
         formData.append(name, value);
       }
