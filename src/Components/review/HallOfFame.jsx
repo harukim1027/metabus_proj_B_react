@@ -98,7 +98,7 @@ function Fame() {
                   <h1 className="underline decoration-wavy decoration-gray-400 text-center">
                     {getSortedArr(userArr)[1]?.[0]}
                   </h1>
-                  <h2>글 작성 수 : {getSortedArr(userArr)[0]?.[1]} 회</h2>
+                  <h2>글 작성 수 : {getSortedArr(userArr)[1]?.[1]} 회</h2>
                 </h1>
               </h2>
 
@@ -108,7 +108,7 @@ function Fame() {
                   <h1 className="underline decoration-wavy decoration-yellow-600 text-center">
                     {getSortedArr(userArr)[2]?.[0]}
                   </h1>
-                  <h2>글 작성 수 : {getSortedArr(userArr)[0]?.[1]} 회</h2>
+                  <h2>글 작성 수 : {getSortedArr(userArr)[2]?.[1]} 회</h2>
                 </h1>
               </h3>
             </AwesomeSlider>
