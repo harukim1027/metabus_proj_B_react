@@ -155,6 +155,26 @@ function FindOwnerBoardDetail({ findboardId }) {
                       <img src={findboard.board_image?.[0]?.image} alt="" />
                     )}
                   </div>
+                  <div className="flex justify-center">
+                    {findboard.board_image && (
+                      <img src={findboard.board_image?.[1]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {findboard.board_image && (
+                      <img src={findboard.board_image?.[2]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {findboard.board_image && (
+                      <img src={findboard.board_image?.[3]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {findboard.board_image && (
+                      <img src={findboard.board_image?.[4]?.image} alt="" />
+                    )}
+                  </div>
 
                   <ul>
                     <li>발견장소: {findboard.find_location}</li>

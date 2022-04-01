@@ -152,6 +152,26 @@ function LostPetBoardDetail({ lostpetboardId }) {
                       <img src={lostpetboard.board_image?.[0]?.image} alt="" />
                     )}
                   </div>
+                  <div className="flex justify-center">
+                    {lostpetboard.board_image && (
+                      <img src={lostpetboard.board_image?.[1]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {lostpetboard.board_image && (
+                      <img src={lostpetboard.board_image?.[2]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {lostpetboard.board_image && (
+                      <img src={lostpetboard.board_image?.[3]?.image} alt="" />
+                    )}
+                  </div>
+                  <div className="flex justify-center">
+                    {lostpetboard.board_image && (
+                      <img src={lostpetboard.board_image?.[4]?.image} alt="" />
+                    )}
+                  </div>
 
                   <ul>
                     <li>유실장소:{lostpetboard.lost_location}</li>
@@ -170,6 +190,13 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     <li>사이즈:{lostpetboard.size}</li>
                     <li>인식표:{lostpetboard.animal_tag}</li>
                   </ul>
+
+                  {/* <div>
+                    <span>혹시 이 아이 아닌가요?</span>
+                    <div>
+                    일단 필터를 개?고양이? and 성별, 날짜, 장소로 해서
+                    </div>
+                  </div> */}
 
                   <div className="my-5 text-right">
                     {(auth.userID === lostpetboard?.user || auth.is_staff) && (
