@@ -18,7 +18,7 @@ function Alert({ userID }) {
   }, []);
 
   const date1 = new Date();
-  date1.setDate(date1.getDate() + 30);
+  date1.setDate(date1.getDate() - 30);
   const date2 = new Date(
     reviewList?.map((inf) => inf?.user?.userID === userID && inf?.created_at),
   );
