@@ -1,26 +1,12 @@
-import { useApiAxios } from 'api/base';
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-function Alert({ userID }) {
-  const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
-    {
-      url: `/adopt_review/api/allreviews/`,
-      method: 'GET',
-    },
-    {
-      manual: true,
-    },
-  );
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
+function Alert({ userID, reviewList }) {
   const date1 = new Date();
-  date1.setDate(date1.getDate() - 30);
+  date1.setDate(date1.getDate() + 30);
   const date2 = new Date(
-    reviewList?.map((inf) => inf?.user?.userID === userID && inf?.created_at),
+    reviewList
+      ?.filter((review) => review.user.userID === userID)
+      .map((inf) => inf.created_at),
   );
 
   if (date1.valueOf() > date2.valueOf()) {
