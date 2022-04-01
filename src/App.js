@@ -69,13 +69,9 @@ import PageFindOwnerBoardDetail from 'Pages/PageFindOwnerBoard/PageFindOwnerBoar
 import PageFindOwnerBoardList from 'Pages/PageFindOwnerBoard/PageFindOwnerBoardList';
 import PageTopNav from 'Pages/PageMainMenu';
 import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
-<<<<<<< HEAD
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
-=======
-import Home from 'Components/review/ReviewDiaryList';
->>>>>>> 74af10cc572c8cf828e6e4b37ee1b2fdd8da0dab
 
 function App() {
   const { auth } = useAuth();

@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'Button';
 import '../../App.css';
 import './Assignment.css';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+import './SlideStyle.css';
 
 function AssignCheck(props) {
   let [all_check, set_all_check] = useState(false);
@@ -90,74 +93,125 @@ function AssignCheck(props) {
               <hr />
               <br />
 
-              <div className="w-full">
-                <span className=" after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold mb-2">
+              <div className="w-full  ">
+                <span className="xs:w-full md:w-5/6 after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold mb-2">
                   입양 절차
                 </span>
-                <div className="flex justify-center w-full">
-                  <div className="xs:w-full lg:w-3/4 xl:w-5/6">
-                    <div className="assign_explanation">
-                      <div className=" xs:justify-center md:flex-none md:grid md:grid-cols-3">
-                        <div className="flex justify-center">
-                          <img
-                            src="/assigncheck1.png"
-                            alt="assigncheck1"
-                            className="xs:w-2/3 md:w-full"
-                          />
-                        </div>
-                        <div className="flex justify-center ">
-                          <img
-                            src="/assigncheck2.png"
-                            alt="assigncheck2"
-                            className="xs:w-2/3 md:w-full"
-                          />
-                        </div>
-                        <div className="flex justify-center">
-                          <img
-                            src="/assigncheck3.png"
-                            alt="assigncheck"
-                            className="xs:w-2/3 md:w-full"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className=" xs:text-base md:text-lg lg:text-xl text-right mb-3 mt-8 font-semibold text-gray-500 mr-5">
-                      <label className="bg-blue-100">
-                        &nbsp;입양 절차를 숙지했습니다&nbsp;
-                        <input
-                          type="checkbox"
-                          checked={contract_check ? 'checked' : null}
-                          onClick={isFirstCheckBoxClicked}
-                          required
-                        />
-                      </label>
-                    </div>
+                <div className="xs:w-full md:w-5/6 ml-20 content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
+                  <AwesomeSlider
+                    className="Container3"
+                    mobileTouch={true}
+                    organicArrows={true}
+                    bullets={false}
+                  >
+                    <span className=" font-semibold italic md:w-5/6 xs:w-3/4">
+                      <img
+                        src="/assigncheck1.png"
+                        alt="assigncheck1"
+                        className="xs:w-full md:w-5/6"
+                      />
+                    </span>
+
+                    <span className="font-semibold italic md:w-5/6 xs:w-3/4">
+                      <img
+                        src="/assigncheck2.png"
+                        alt="assigncheck2"
+                        className="xs:w-full md:w-5/6"
+                      />
+                    </span>
+
+                    <span className="font-semibold italic md:w-5/6 xs:w-3/4">
+                      <img
+                        src="/assigncheck3.png"
+                        alt="assigncheck"
+                        className="xs:w-full md:w-5/6"
+                      />
+                    </span>
+                  </AwesomeSlider>
+                  <div className=" xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500 mr-5">
+                    <label className="bg-blue-100 mb-5">
+                      &nbsp;입양 절차를 숙지했습니다&nbsp;
+                      <input
+                        type="checkbox"
+                        checked={contract_check ? 'checked' : null}
+                        onClick={isFirstCheckBoxClicked}
+                        required
+                      />
+                    </label>
+                    <br />
                   </div>
                 </div>
 
                 <hr className="pb-6 mx-10" />
 
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold mb-2">
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold">
                   입양 전 주의 사항
                 </span>
                 <div className="flex justify-center w-full">
-                  <div className="xs:w-full sm:w-2/3 lg:w-3/4 xl:w-5/6">
-                    <div className=" flex justify-center">
-                      <div className="assign_explanation ">
-                        <img
-                          src="/list.png"
-                          alt="dog crew"
-                          className="w-full"
-                        />
-                      </div>
+                  <div className="xs:w-full md:w-5/6 ">
+                    <div className="xs:w-full">
+                      <AwesomeSlider
+                        className="Container"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                          <img
+                            className="w-full h-full"
+                            src="/safe_info1.png"
+                            alt="save_info1"
+                          />
+
+                          {/* <br />글 갯수:{getSortedArr(userArr)[0]?.[1]} */}
+                        </span>
+
+                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                          <img
+                            className="w-full h-full"
+                            src="/safe_info2.png"
+                            alt="save_info2"
+                          />
+                        </span>
+
+                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full ">
+                          <img
+                            className="w-full h-full"
+                            src="/safe_info3.png"
+                            alt="save_info3"
+                          />
+                        </span>
+
+                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                          <img
+                            className="w-full h-full"
+                            src="/safe_info4.png"
+                            alt="save_info4"
+                          />
+                        </span>
+
+                        <span
+                          id="last"
+                          className="flex flex-wrap justify-center font-semibold italic xs:w-full"
+                        >
+                          <img
+                            className="w-full h-full"
+                            src="/safe_info5.png"
+                            alt="save_info5"
+                          />
+                        </span>
+                      </AwesomeSlider>
                     </div>
+
                     <div className="xs:text-base md:text-lg lg:text-xl text-right pb-5 font-bold text-gray-500 mr-5">
                       <label className="bg-blue-100">
-                        &nbsp;입양 전 주의사항을 숙지했습니다&nbsp;
+                        &nbsp;안전 수칙을 숙지했습니다&nbsp;
                         <input
                           type="checkbox"
                           checked={contract_check ? 'checked' : null}
-                          onClick={isSecondCheckBoxClicked}
+                          onClick={() =>
+                            setSecondCheckBoxActive(!secondCheckBoxActive)
+                          }
                           required
                         />
                       </label>
