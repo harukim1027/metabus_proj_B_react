@@ -99,11 +99,9 @@ function App() {
           />
           {/* introduce */}
           <Route path="/introduce/" element={<PageIntroduceMain />} />
-
           {/* notice */}
           <Route path="/notice/" element={<PageNoticeList />} />
           <Route path="/notice/:noticeId/" element={<PageNoticeDetail />} />
-
           {/* review */}
           <Route path="/review/" element={<PageReviewIndex />} />
           <Route path="/review/:reviewId/" element={<PageReviewDetail />} />
@@ -113,14 +111,12 @@ function App() {
             path="/findboard/:findboardId/"
             element={<PageFindOwnerBoardDetail />}
           />
-
           {/* lostPetBoard */}
           <Route path="/lostpetboard/" element={<PageLostPetBoardList />} />
           <Route
             path="/lostpetboard/:lostpetboardId/"
             element={<PageLostPetBoardDetail />}
           />
-
           {/* ------------admin------------ */}
           {auth?.isLoggedIn && auth?.is_staff && (
             <>
@@ -206,7 +202,6 @@ function App() {
               />
             </>
           )}
-
           {auth?.isLoggedIn && (
             <>
               {/* animalDetail */}
@@ -278,7 +273,6 @@ function App() {
             </>
           )}
           <Route path="*" element={<NotFound />} />
-
           <Route path="/map/" element={<PageMap />} />
           <Route path="/kmap/" element={<Kmap />} />
         </Routes>
