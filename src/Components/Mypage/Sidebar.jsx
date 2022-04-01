@@ -52,7 +52,7 @@ const Sidebar = () => {
       >
         <div className="">
           <ul>
-            <li className="bg-gray-100 py-2 text-2xl text-center ">
+            <li className="bg-gray-100 mt-7 text-2xl text-center ">
               {auth.userID}
             </li>
             <hr />
@@ -115,11 +115,11 @@ const Sidebar = () => {
           </ul>
         </div>
       </div>
-      <button onClick={() => toggleMenu()} className="button">
+      <button onClick={() => toggleMenu()} className="button mt-10">
         {isOpen ? (
           <>
             <img
-              src="/mypagemenuiconX.png"
+              src="/mypage_menu_cat_close.png"
               alt="button"
               className=" duration-200 "
             ></img>
@@ -127,7 +127,7 @@ const Sidebar = () => {
         ) : (
           <>
             <img
-              src="/mypagemenuicon.png"
+              src="/mypage_menu_cat.png"
               alt="button"
               className="duration-200"
             ></img>
