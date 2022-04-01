@@ -80,7 +80,7 @@ function AssignmentForm({ handleDidSave }) {
     queryanimal,
   ] = useApiAxios(
     {
-      url: `/streetanimal/api/animalnotpaging/`,
+      url: `/streetanimal/api/animal/`,
       method: 'GET',
     },
     { manual: true },

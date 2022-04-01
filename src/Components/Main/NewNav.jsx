@@ -159,12 +159,7 @@ function NewNav() {
                     ) : (
                       <li>
                         {' '}
-                        <button
-                          style={{ transition: 'color 0.3s ease' }}
-                          onClick={checkLogin}
-                        >
-                          크루원 신청
-                        </button>
+                        <a onClick={checkLogin}>크루원 신청</a>
                       </li>
                     )}
                     <li>

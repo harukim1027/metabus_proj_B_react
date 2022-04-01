@@ -1,9 +1,45 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, memo } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
 
-function CyMap({ centersData }) {
-  const [openDiv, setOpenDiv] = useState(false);
+const EventMarkerContainer = memo(({ marker_obj }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  console.log(1);
+  return (
+    <>
+      <MapMarker
+        position={marker_obj.center_coords}
+        onClick={() => {
+          setIsVisible(true);
+        }}
+      />
+      {isVisible && (
+        <CustomOverlayMap position={marker_obj.center_coords} clickable={true}>
+          <div className="wrap">
+            <div className="info">
+              <div className="title flex justify-between">
+                <h2 className="">{marker_obj.center_name}</h2>
+                <button
+                  className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
+                  onClick={() => {
+                    setIsVisible(false);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+              주소 : {marker_obj.center_address}
+              <br />
+              연락처 : {marker_obj.center_call}
+            </div>
+          </div>
+        </CustomOverlayMap>
+      )}
+    </>
+  );
+});
+
+function AllCenterMap({ centersData }) {
   const [currentLoc, setCurrentLoc] = useState({
     center: {
       lat: 36.32754333444323,
@@ -14,12 +50,7 @@ function CyMap({ centersData }) {
   });
   // const [clickLoc, setClickLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
-
-  const [position, setPosition] = useState();
-  const [detailAddr, setDetailAddr] = useState({});
-  const [isopen, setIsopen] = useState(true);
   const [map, setMap] = useState();
-  const [info, setInfo] = useState();
 
   // 지오코딩
   const { kakao } = window;
@@ -97,44 +128,6 @@ function CyMap({ centersData }) {
   // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
-  const EventMarkerContainer = ({ marker_obj }) => {
-    const [isVisible, setIsVisible] = useState(false);
-    return (
-      <>
-        <MapMarker
-          position={marker_obj.center_coords}
-          onClick={() => {
-            setIsVisible(true);
-          }}
-        />
-        {isVisible && (
-          <CustomOverlayMap
-            position={marker_obj.center_coords}
-            clickable={true}
-          >
-            <div className="wrap">
-              <div className="info">
-                <div className="title flex justify-between">
-                  <h2 className="">{marker_obj.center_name}</h2>
-                  <button
-                    className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
-                    onClick={() => {
-                      setIsVisible(false);
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-                주소 : {marker_obj.center_address}
-                <br />
-                연락처 : {marker_obj.center_call}
-              </div>
-            </div>
-          </CustomOverlayMap>
-        )}
-      </>
-    );
-  };
   //-------------
 
   // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------
@@ -165,68 +158,56 @@ function CyMap({ centersData }) {
   }
   // displayAddressInfo
 
-  // 클릭한 마커 위치(위,경도)를 주소로 변환하기
-  useEffect(() => {
-    position &&
-      searchDetailAddrFromCoords(position.center, function (result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          result[0].road_address
-            ? setDetailAddr({
-                road_addr: result[0].road_address.address_name,
-                addr: result[0].address.address_name,
-              })
-            : setDetailAddr({ addr: result[0].address.address_name });
-        } else {
-        }
-      });
-  }, [position]);
+  // // 클릭한 마커 위치(위,경도)를 주소로 변환하기
+  // useEffect(() => {
+  //   position &&
+  //     searchDetailAddrFromCoords(position.center, function (result, status) {
+  //       if (status === kakao.maps.services.Status.OK) {
+  //         result[0].road_address
+  //           ? setDetailAddr({
+  //               road_addr: result[0].road_address.address_name,
+  //               addr: result[0].address.address_name,
+  //             })
+  //           : setDetailAddr({ addr: result[0].address.address_name });
+  //       } else {
+  //       }
+  //     });
+  // }, [position]);
 
   // console.log('detailAddr: ', detailAddr, 'position: ', position);
   // console.log('currentLoc: ', currentLoc);
-  useEffect(() => {
-    console.log('myLoc: ', myLoc);
-  }, [myLoc]);
+  // 확인용
+  // useEffect(() => {
+  //   console.log('myLoc: ', myLoc);
+  // }, [myLoc]);
   return (
     <>
       {myLoc.center && (
         <Map
           center={myLoc.center}
+          isPanto={myLoc.isPanto}
           style={{ width: '100%', height: '700px' }}
           level="9"
-          onClick={(_t, mouseEvent) => {
-            // console.log('mouseEvent: ', mouseEvent);
-            setPosition({
-              center: {
-                lat: mouseEvent.latLng.getLat(),
-                lng: mouseEvent.latLng.getLng(),
-              },
-            });
-            // setClickLoc({
-            //   center: {
-            //     lat: mouseEvent.latLng.getLat(),
-            //     lng: mouseEvent.latLng.getLng(),
-            //   },
-            // });
-            setIsopen(true);
-          }}
           onCreate={(map) => setMap(map)}
           // 지도 중심의 행정동 표시를 위해 함수 사용
           onCenterChanged={(map) => {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
             // console.log('map.getCenter: ', map.getCenter());
           }}
-          onDragEnd={(map) =>
+          onDragEnd={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
-            })
-          }
+            });
+            // console.log('dragend');
+          }}
+          className="mt-10"
         >
           {/* 행정동 위치 표기 */}
           <div
             style={{
               position: 'absolute',
               left: '10px',
-              top: '10px',
+              top: '40px',
               borderRadius: '2px',
               background: 'rgba(255, 255, 255, 0.8)',
               zIndex: 1,
@@ -250,33 +231,7 @@ function CyMap({ centersData }) {
             );
           })}
 
-          {/* 클릭한 위치 마커 표시 */}
-          {isopen && position && (
-            <>
-              <MapMarker position={position.center} />
-              <CustomOverlayMap position={position.center}>
-                <div className="wrap">
-                  <div className="info">
-                    <div className="title flex justify-between">
-                      <h2 className="">법정동 주소정보</h2>
-                      <button
-                        className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
-                        onClick={() => {
-                          setIsopen(false);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
-                    도로명 주소 :{' '}
-                    {detailAddr.road_addr ? detailAddr.road_addr : '없음'}
-                    <br />
-                    지번 주소 : {detailAddr?.addr}
-                  </div>
-                </div>
-              </CustomOverlayMap>
-            </>
-          )}
+          {/* 클릭한 위치 마커 표시는 여기서 필요 없을것 같아서 제거함 */}
 
           {/* 현위치 마커 */}
           {!currentLoc.isLoading && (
@@ -305,24 +260,22 @@ function CyMap({ centersData }) {
           >
             <button
               className="p-2 bg-green-300 rounded-lg"
-              onClick={() => setMyLoc(currentLoc)}
+              onClick={() =>
+                setMyLoc((prev) => ({
+                  ...prev,
+                  center: currentLoc.center,
+                  isLoading: false,
+                  isPanto: true,
+                }))
+              }
             >
               내 위치
             </button>
           </div>
         </Map>
       )}
-      {position && (
-        <p>
-          {'클릭한 위치의 위도는 ' +
-            position.center.lat +
-            ' 이고, 경도는 ' +
-            position.center.lng +
-            ' 입니다'}
-        </p>
-      )}
     </>
   );
 }
 
-export default CyMap;
+export default AllCenterMap;

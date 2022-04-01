@@ -1,9 +1,9 @@
 import { useApiAxios } from 'api/base';
-import CyMap from 'Components/Map/Map';
+import AllCenterMap from 'Components/Map/AllCenterMap';
 import LoadingIndicator from 'LoadingIndicator';
 import { useEffect } from 'react';
 
-function PageMap() {
+function PageAllCenterMap() {
   // API로 센터 데이터 받기
   const [
     { data: centersData, loading: getCenterLoading, error: getCenterError },
@@ -27,8 +27,8 @@ function PageMap() {
   return (
     <>
       {getCenterLoading && <LoadingIndicator />}
-      <CyMap centersData={centersData} />
+      <AllCenterMap centersData={centersData} />
     </>
   );
 }
-export default PageMap;
+export default PageAllCenterMap;
