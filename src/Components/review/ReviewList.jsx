@@ -6,7 +6,6 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
-import Fame from './HallOfFame';
 import ReactPaginate from 'react-paginate';
 
 const INIT_FIELD_VALUES = { category: '전체' };
@@ -91,11 +90,12 @@ function ReviewList() {
     gotoTop();
   }, [reviewList]);
 
+  // console.log('created_at', reviewList);
+
   //-------------
 
   return (
     <>
-      <Fame />
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
