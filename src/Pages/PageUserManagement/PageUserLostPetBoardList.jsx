@@ -1,4 +1,5 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import UserLostPetBoardList from 'Components/UserManagement/UserLostPetBoardList';
 import UserManageSidebar from 'Components/UserManagement/UserManageSidebar';
 import { useParams } from 'react-router-dom';
@@ -8,7 +9,7 @@ function PageUserLostPetBoardList() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div className="flex">
         <div className="flex-none">
           <UserManageSidebar userId={userId} />

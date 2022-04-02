@@ -1,10 +1,11 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import UserManagementIndex from 'Components/UserManagement/UserManagementIndex';
 
 function PageUserManagementIndex() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
       <UserManagementIndex />
     </div>
   );
