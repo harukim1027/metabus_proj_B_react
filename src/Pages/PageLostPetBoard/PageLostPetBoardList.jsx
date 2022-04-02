@@ -1,10 +1,12 @@
 import LostPetBoardList from 'Components/LostPetBoard/LostPetBoardList';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+import CommunitySidebar from 'Components/review/CommunimySidebar';
 
 function PageLostPetBoardList() {
   return (
     <>
-      <TopNav />
+      <NewNav />
+      <CommunitySidebar />
       <LostPetBoardList />
     </>
   );

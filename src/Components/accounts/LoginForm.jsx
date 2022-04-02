@@ -3,12 +3,10 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 // import DebugStates from 'DebugStates';
-import { toast } from 'react-toastify';
 import Button from 'Button';
 import '../../App.css';
 import { useEffect, useState } from 'react';
 import LoadingIndicator from 'LoadingIndicator';
-import Alert from 'Components/review/Alert';
 
 const INITIAL_FIELD_VALUES = { userID: '', password: '' };
 
@@ -100,7 +98,6 @@ function LoginForm() {
       // 인증 후, 이동할 주소를 지정합니다.
       navigate('/');
     });
-    // .then(() => <Alert userID={fieldValues.userID} />);
     console.log(fieldValues);
   };
 
@@ -116,7 +113,7 @@ function LoginForm() {
             className="bg-white shadow-md rounded-xl px-20 pt-6 pb-8 mb-4"
             onSubmit={handleSubmit}
           >
-            <Alert userID={fieldValues.userID} />
+            {/* <Alert userID={fieldValues.userID} /> */}
             <div className="mt-10 mb-4">
               <label className=" block text-gray-700 text-2xl font-bold mb-2">
                 ID
