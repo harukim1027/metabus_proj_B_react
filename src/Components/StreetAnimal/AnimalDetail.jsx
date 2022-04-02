@@ -90,9 +90,9 @@ function AnimalDetail({ animalId }) {
             {animal && (
               <>
                 <div className="flex justify-center">
-                  {animal.image && (
+                  {animal.image_url && (
                     <img
-                      src={animal.image}
+                      src={animal.image_url}
                       alt="동물 이미지가 없습니다."
                       className="h-96"
                     />
@@ -133,6 +133,31 @@ function AnimalDetail({ animalId }) {
                     </th>
                     <td>{animal.sex}</td>
                   </tr>
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      나이
+                    </th>
+                    <td>{animal.age}</td>
+                  </tr>
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      몸무게
+                    </th>
+                    <td>{animal.weight} kg</td>
+                  </tr>
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      발생 장소
+                    </th>
+                    <td>{animal.place_of_discovery}</td>
+                  </tr>
+
+                  <tr>
+                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                      접수 일시
+                    </th>
+                    <td>{animal.date_time_of_receipt}</td>
+                  </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
@@ -150,51 +175,16 @@ function AnimalDetail({ animalId }) {
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      접수 일시
+                      관할 지역
                     </th>
-                    <td>{animal.date_time_of_receipt}</td>
+                    <td>{animal.competent_organization}</td>
                   </tr>
 
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      구조 사유
+                      보호상태
                     </th>
-                    <td>{animal.reason_for_rescue}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      발생 장소
-                    </th>
-                    <td>{animal.place_of_discovery}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      공고 기간
-                    </th>
-                    <td>{animal.period_of_announcement}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      보호 장소
-                    </th>
-                    <td>{animal.shelter}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      담당자/담당시설
-                    </th>
-                    <td>{animal.person_in_charge}</td>
-                  </tr>
-
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      특이사항
-                    </th>
-                    <td>{animal.significant}</td>
+                    <td>{animal.protect_status}</td>
                   </tr>
 
                   <tr>
