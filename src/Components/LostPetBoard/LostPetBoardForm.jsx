@@ -91,7 +91,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
         if (fileList.length <= 5) {
           fileList.forEach((file) => formData.append(name, file));
         } else {
-          window.alert('첨부파일은 최대 5개 까지 첨부 가능합니다.');
+          window.alert('첨부파일은 최대 5개까지 첨부 가능합니다.');
         }
       } else {
         formData.append(name, value);
@@ -222,7 +222,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                     defaultValue="동물 종류"
                   >
                     <option value="동물 종류">동물 종류</option>
-                    <option value="강아지">강아지</option>
+                    <option value="개">개</option>
                     <option value="고양이">고양이</option>
                   </select>
 
@@ -244,7 +244,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
               </div>
 
               {/* 강아지 품종 */}
-              {fieldValues.animal_type === '강아지' && (
+              {fieldValues.animal_type === '개' && (
                 <div className="mb-3 w-full">
                   <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
                     강아지 품종 선택

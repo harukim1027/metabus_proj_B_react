@@ -1,7 +1,7 @@
 import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import LostPetBoardStatus from './LostPetBoardStatus';
 import './LostPetBoard.css';
 import '../../App.css';
@@ -20,6 +20,25 @@ function LostPetBoardDetail({ lostpetboardId }) {
     },
     { manual: true },
   );
+
+  // 등록된 동물 조회
+  const [{ data: AnimalList, loading: getLoading, error: getError }, refetch2] =
+    useApiAxios(
+      {
+        url: `/streetanimal/api/animalnotpaging/`,
+        method: `GET`,
+        params: {
+          kind: lostpetboard?.animal_type,
+          sex: lostpetboard?.sex,
+          breed:
+            lostpetboard?.dog_breed === '전체'
+              ? lostpetboard?.cat_breed
+              : lostpetboard?.dog_breed,
+        },
+      },
+      { manual: true },
+    );
+  console.log('AnimalList: ', AnimalList);
 
   // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteLostPetboard] =
@@ -70,6 +89,10 @@ function LostPetBoardDetail({ lostpetboardId }) {
   useEffect(() => {
     refetch();
   }, []);
+
+  useEffect(() => {
+    refetch2();
+  }, [lostpetboard]);
 
   //-------------
 
@@ -179,7 +202,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     <li>동물종류:{lostpetboard.animal_type}</li>
                     <li>
                       품종:{' '}
-                      {lostpetboard.animal_type === '강아지'
+                      {lostpetboard.animal_type === '개'
                         ? lostpetboard.dog_breed
                         : lostpetboard.cat_breed}
                     </li>
@@ -191,12 +214,22 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     <li>인식표:{lostpetboard.animal_tag}</li>
                   </ul>
 
-                  {/* <div>
+                  {getLoading && (
+                    <LoadingIndicator>
+                      로딩 중... 시간이 조금 걸립니다..
+                    </LoadingIndicator>
+                  )}
+                  {getError && `로딩 중 에러가 발생했습니다.`}
+                  <div>
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
-                    일단 필터를 개?고양이? and 성별, 날짜, 장소로 해서
+                      {AnimalList?.map((animal) => {
+                        return animal.announce_image.map((image) => (
+                          <img src={image.image} alt="" />
+                        ));
+                      })}
                     </div>
-                  </div> */}
+                  </div>
 
                   <div className="my-5 text-right">
                     {(auth.userID === lostpetboard?.user || auth.is_staff) && (

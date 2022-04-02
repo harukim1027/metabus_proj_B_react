@@ -151,7 +151,7 @@ function LostPetBoardList() {
                       defaultValue="동물 종류"
                     >
                       <option value="">동물 종류</option>
-                      <option value="강아지">강아지</option>
+                      <option value="개">개</option>
                       <option value="고양이">고양이</option>
                     </select>
                   </form>
