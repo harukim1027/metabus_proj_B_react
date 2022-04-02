@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import InquiryList from 'Components/inquiry/InquiryList';
-import TopNav from 'Components/Main/TopNavi';
+
 import { useAuth } from 'contexts/AuthContext';
+import NewNav from 'Components/Main/NewNav';
 
 function PageInquiryIndex() {
   const { auth } = useAuth();
@@ -10,7 +11,7 @@ function PageInquiryIndex() {
 
   return (
     <div className="header">
-      <TopNav />
+      <NewNav />
       <InquiryList />
     </div>
   );

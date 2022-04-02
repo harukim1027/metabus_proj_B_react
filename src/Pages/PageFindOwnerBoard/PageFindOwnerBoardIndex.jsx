@@ -1,10 +1,10 @@
 import FindOwnerBoardList from 'Components/FindOwnerBoard/FindOwnerBoardList';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageFindOwnerBoardIndex() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
       <FindOwnerBoardList />
     </div>
   );

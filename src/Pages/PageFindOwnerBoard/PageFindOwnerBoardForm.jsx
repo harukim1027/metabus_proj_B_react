@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import TopNav from 'Components/Main/TopNavi';
+
 import { useApiAxios } from 'api/base';
 import FindOwnerBoardForm from 'Components/FindOwnerBoard/FindOwnerBoardForm';
+import NewNav from 'Components/Main/NewNav';
 
 function PageFindOwnerBoardForm() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function PageFindOwnerBoardForm() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <FindOwnerBoardForm
         findBoard={findBoard}
         findBoardId={findBoardId}

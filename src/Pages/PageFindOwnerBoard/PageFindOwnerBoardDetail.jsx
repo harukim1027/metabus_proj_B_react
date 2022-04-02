@@ -1,12 +1,13 @@
 import FindOwnerBoardDetail from 'Components/FindOwnerBoard/FindOwnerBoardDetail';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import { useParams } from 'react-router-dom';
 
 function PageFindOwnerBoardDetail() {
   const { findboardId } = useParams();
   return (
     <>
-      <TopNav />
+      <NewNav />
       <FindOwnerBoardDetail findboardId={findboardId} />
     </>
   );
