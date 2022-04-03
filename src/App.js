@@ -74,6 +74,7 @@ import PageMyinfoForm from 'Pages/PageMypage/PageMyinfoForm';
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
+import CentersAnimals from 'Components/Assignment/CentersAnimals';
 
 function App() {
   const { auth } = useAuth();
@@ -221,6 +222,7 @@ function App() {
               />
               {/* Assignment */}
               <Route path="/assignment/check/" element={<PageAssignCheck />} />
+              <Route path="/assignment/:centerId/centersanimals/" element={<CentersAnimals />} />
               <Route path="/assignment/new/" element={<PageAssignmentform />} />
               <Route
                 path="/assignment/complite/:assignId/"

@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo, memo } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useNavigate } from 'react-router-dom';
 import './Map.css';
 
 const EventMarkerContainer = memo(({ marker_obj }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
   console.log(1);
   return (
     <>
@@ -31,6 +33,17 @@ const EventMarkerContainer = memo(({ marker_obj }) => {
               주소 : {marker_obj.center_address}
               <br />
               연락처 : {marker_obj.center_call}
+              <br />
+              <button
+                className="text-blue-700 hover:text-blue-300"
+                onClick={() =>
+                  navigate(
+                    `/assignment/${marker_obj.center_name}/centersanimals/`,
+                  )
+                }
+              >
+                보호중인 동물들
+              </button>
             </div>
           </div>
         </CustomOverlayMap>
@@ -51,6 +64,7 @@ function AllCenterMap({ centersData }) {
   // const [clickLoc, setClickLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
   const [map, setMap] = useState();
+  const navigate = useNavigate();
 
   // 지오코딩
   const { kakao } = window;
