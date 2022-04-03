@@ -193,7 +193,9 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                   >
                     <option value="">상태 선택</option>
                     <option value="찾는중">찾는중</option>
-                    <option value="찾았어요">찾았어요</option>
+                    {fieldValues.status === '찾는중' && (
+                      <option value="찾았어요">찾았어요</option>
+                    )}
                   </select>
 
                   <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
