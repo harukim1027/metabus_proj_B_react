@@ -3,6 +3,9 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import LoadingIndicator from 'LoadingIndicator';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+import './SlideStyle.css';
 
 function AnimalDetail({ animalId }) {
   const { auth } = useAuth();
@@ -89,29 +92,97 @@ function AnimalDetail({ animalId }) {
           <div className="my-5 overflow-hidden">
             {animal && (
               <>
-                <div className="flex justify-center">
-                  {animal.image_url1 && (
-                    <img
-                      src={animal.image_url1}
-                      alt="동물 이미지"
-                      className="h-96"
-                    />
-                  )}
-                  {animal.image_url2 && (
-                    <img
-                      src={animal.image_url2}
-                      alt="동물 이미지"
-                      className="h-96"
-                    />
-                  )}
-                  {animal.image_url3 && (
-                    <img
-                      src={animal.image_url3}
-                      alt="동물 이미지"
-                      className="h-96"
-                    />
-                  )}
+                <div className="flex justify-evenly ">
+                  <>
+                    {animal.image_url3 &&
+                    animal.image_url2 &&
+                    animal.image_url1 ? (
+                      <AwesomeSlider
+                        className="Container"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span>
+                          {animal.image_url1 && (
+                            <img
+                              src={animal.image_url1}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {animal.image_url2 && (
+                            <img
+                              src={animal.image_url2}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {animal.image_url3 && (
+                            <img
+                              src={animal.image_url3}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                      </AwesomeSlider>
+                    ) : (
+                      <>
+                        {animal.image_url1 && animal.image_url2 ? (
+                          <AwesomeSlider
+                            className="Container"
+                            mobileTouch={true}
+                            organicArrows={true}
+                            bullets={false}
+                          >
+                            <span>
+                              {animal.image_url1 && (
+                                <img
+                                  src={animal.image_url1}
+                                  alt="동물 이미지"
+                                  className="h-full w-full"
+                                />
+                              )}
+                            </span>
+                            <span>
+                              {animal.image_url2 && (
+                                <img
+                                  src={animal.image_url2}
+                                  alt="동물 이미지"
+                                  className="h-full w-full"
+                                />
+                              )}
+                            </span>
+                          </AwesomeSlider>
+                        ) : (
+                          <>
+                            {animal.image_url1 && (
+                              <span>
+                                {animal.image_url1 && (
+                                  <img
+                                    src={animal.image_url1}
+                                    alt="동물 이미지"
+                                    className="h-full w-full"
+                                  />
+                                )}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
                 </div>
+              </>
+            )}
+
+            {animal && (
+              <>
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
                   <tr>
                     <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
