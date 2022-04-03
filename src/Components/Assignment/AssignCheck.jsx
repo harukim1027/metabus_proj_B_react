@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 // import Axios from 'axios';
 import Button from 'Button';
 import '../../App.css';
@@ -9,6 +9,7 @@ import 'react-awesome-slider/dist/styles.css';
 import './SlideStyle.css';
 
 function AssignCheck(props) {
+  const { animalId } = useParams();
   let [all_check, set_all_check] = useState(false);
   let [contract_check, set_contract_check] = useState(false);
 
@@ -241,7 +242,7 @@ function AssignCheck(props) {
                 <div className="text-center my-3 text-2xl">
                   {all_check && (
                     <button
-                      onClick={() => navigate('/assignment/new/')}
+                      onClick={() => navigate(`/assignment/new/${animalId}/`)}
                       className="hover:bg-blue-500 py-2 rounded-lg shadow-lg bg-blue-700 font-extrabold xs:text-xl md:text-3xl text-white"
                     >
                       &nbsp;&nbsp;신청&nbsp;&nbsp;
