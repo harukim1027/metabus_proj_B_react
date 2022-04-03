@@ -90,10 +90,24 @@ function AnimalDetail({ animalId }) {
             {animal && (
               <>
                 <div className="flex justify-center">
-                  {animal.image_url && (
+                  {animal.image_url1 && (
                     <img
-                      src={animal.image_url}
-                      alt="동물 이미지가 없습니다."
+                      src={animal.image_url1}
+                      alt="동물 이미지"
+                      className="h-96"
+                    />
+                  )}
+                  {animal.image_url2 && (
+                    <img
+                      src={animal.image_url2}
+                      alt="동물 이미지"
+                      className="h-96"
+                    />
+                  )}
+                  {animal.image_url3 && (
+                    <img
+                      src={animal.image_url3}
+                      alt="동물 이미지"
                       className="h-96"
                     />
                   )}

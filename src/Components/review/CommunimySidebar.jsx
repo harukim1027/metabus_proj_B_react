@@ -96,7 +96,7 @@ const CommunitySidebar = () => {
         {isOpen ? (
           <>
             <img
-              src="/mypagemenuiconX.png"
+              src="/mypage_menu_cat_close.png"
               alt="button"
               className=" duration-200 "
             ></img>
