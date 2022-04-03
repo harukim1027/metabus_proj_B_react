@@ -95,7 +95,7 @@ function AssignCheck(props) {
               <br />
 
               <div className="w-full  ">
-                <span className="xs:w-full md:w-5/6 after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold mb-2">
+                <span className="xs:w-full md:w-5/6 after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold ">
                   입양 절차
                 </span>
                 <div className="xs:w-full md:w-5/6 ml-20 content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
@@ -139,98 +139,102 @@ function AssignCheck(props) {
                         required
                       />
                     </label>
-                    <br />
                   </div>
+                  <br />
                 </div>
 
-                <hr className="pb-6 mx-10" />
+                {firstCheckBoxActive && (
+                  <>
+                    <hr className="pb-6 mx-10" />
 
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold">
-                  입양 전 주의 사항
-                </span>
-                <div className="flex justify-center w-full">
-                  <div className="xs:w-full md:w-5/6 ">
-                    <div className="xs:w-full">
-                      <AwesomeSlider
-                        className="Container"
-                        mobileTouch={true}
-                        organicArrows={true}
-                        bullets={false}
-                      >
-                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
-                          <img
-                            className="w-full h-full"
-                            src="/safe_info1.png"
-                            alt="save_info1"
-                          />
+                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold">
+                      입양 전 주의 사항
+                    </span>
+                    <div className="flex justify-center w-full">
+                      <div className="xs:w-full md:w-5/6 ">
+                        <div className="xs:w-full">
+                          <AwesomeSlider
+                            className="Container"
+                            mobileTouch={true}
+                            organicArrows={true}
+                            bullets={false}
+                          >
+                            <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                              <img
+                                className="w-full h-full"
+                                src="/safe_info1.png"
+                                alt="save_info1"
+                              />
 
-                          {/* <br />글 갯수:{getSortedArr(userArr)[0]?.[1]} */}
-                        </span>
+                              {/* <br />글 갯수:{getSortedArr(userArr)[0]?.[1]} */}
+                            </span>
 
-                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
-                          <img
-                            className="w-full h-full"
-                            src="/safe_info2.png"
-                            alt="save_info2"
-                          />
-                        </span>
+                            <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                              <img
+                                className="w-full h-full"
+                                src="/safe_info2.png"
+                                alt="save_info2"
+                              />
+                            </span>
 
-                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full ">
-                          <img
-                            className="w-full h-full"
-                            src="/safe_info3.png"
-                            alt="save_info3"
-                          />
-                        </span>
+                            <span className="flex flex-wrap justify-center font-semibold italic xs:w-full ">
+                              <img
+                                className="w-full h-full"
+                                src="/safe_info3.png"
+                                alt="save_info3"
+                              />
+                            </span>
 
-                        <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
-                          <img
-                            className="w-full h-full"
-                            src="/safe_info4.png"
-                            alt="save_info4"
-                          />
-                        </span>
+                            <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
+                              <img
+                                className="w-full h-full"
+                                src="/safe_info4.png"
+                                alt="save_info4"
+                              />
+                            </span>
 
-                        <span
-                          id="last"
-                          className="flex flex-wrap justify-center font-semibold italic xs:w-full"
-                        >
-                          <img
-                            className="w-full h-full"
-                            src="/safe_info5.png"
-                            alt="save_info5"
-                          />
-                        </span>
-                      </AwesomeSlider>
+                            <span
+                              id="last"
+                              className="flex flex-wrap justify-center font-semibold italic xs:w-full"
+                            >
+                              <img
+                                className="w-full h-full"
+                                src="/safe_info5.png"
+                                alt="save_info5"
+                              />
+                            </span>
+                          </AwesomeSlider>
+                        </div>
+
+                        <div className="xs:text-base md:text-lg lg:text-xl text-right pb-5 font-bold text-gray-500 mr-5">
+                          <label className="bg-blue-100">
+                            &nbsp;안전 수칙을 숙지했습니다&nbsp;
+                            <input
+                              type="checkbox"
+                              checked={contract_check ? 'checked' : null}
+                              onClick={() =>
+                                setSecondCheckBoxActive(!secondCheckBoxActive)
+                              }
+                              required
+                            />
+                          </label>
+                        </div>
+                        <div className="pb-3 text-right">
+                          <label className=" xs:text-base md:text-lg lg:text-xl bg-yellow-100 font-bold mr-5">
+                            &nbsp;모두 동의합니다&nbsp;
+                            <input
+                              checked={all_check ? 'checked' : null}
+                              type="checkbox"
+                              onClick={() => {
+                                set_all_check(!all_check);
+                              }}
+                            />
+                          </label>
+                        </div>
+                      </div>
                     </div>
-
-                    <div className="xs:text-base md:text-lg lg:text-xl text-right pb-5 font-bold text-gray-500 mr-5">
-                      <label className="bg-blue-100">
-                        &nbsp;안전 수칙을 숙지했습니다&nbsp;
-                        <input
-                          type="checkbox"
-                          checked={contract_check ? 'checked' : null}
-                          onClick={() =>
-                            setSecondCheckBoxActive(!secondCheckBoxActive)
-                          }
-                          required
-                        />
-                      </label>
-                    </div>
-                    <div className="pb-3 text-right">
-                      <label className=" xs:text-base md:text-lg lg:text-xl bg-yellow-100 font-bold mr-5">
-                        &nbsp;모두 동의합니다&nbsp;
-                        <input
-                          checked={all_check ? 'checked' : null}
-                          type="checkbox"
-                          onClick={() => {
-                            set_all_check(!all_check);
-                          }}
-                        />
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                  </>
+                )}
 
                 <div className="flex justify-end xs:w-5/6 lg:w-11/12"></div>
 
