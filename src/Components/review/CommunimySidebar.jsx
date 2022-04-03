@@ -1,9 +1,9 @@
 import { useAuth } from 'contexts/AuthContext';
 import React, { useEffect, useRef, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-import './sidebar.css';
+import { useNavigate } from 'react-router-dom';
+import './CommunitySidebar.css';
 
-const Sidebar = () => {
+const CommunitySidebar = () => {
   const [isOpen, setOpen] = useState(false);
   const [xPosition, setX] = useState(200);
   const side = useRef();
@@ -50,72 +50,49 @@ const Sidebar = () => {
           transform: `translatex(${-xPosition}px)`,
         }}
       >
-        <div className="">
+        <div className="flex justify-center">
           <ul>
-            <li className="bg-gray-100 mt-7 text-2xl text-center ">
+            <li className="bg-gray-100 py-2 text-2xl text-center ">
               {auth.userID}
             </li>
             <hr />
             <li className="mx-5 my-3 ">
               <div
-                onClick={() => navigate(`/mypage/userinfo/`)}
-                className="cursor-pointer hover:bg-blue-800"
+                onClick={() => navigate(`/review/`)}
+                className="cursor-pointer hover:bg-purple-500"
               >
                 <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
-                  내 정보
+                  입양 다이어리
                 </span>
               </div>
             </li>
             <hr />
             <li className="mx-5 my-3">
               <div
-                onClick={() => navigate(`/mypage/assigninfo/`)}
-                className="cursor-pointer hover:bg-blue-400"
+                onClick={() => navigate(`/lostpetboard/`)}
+                className="cursor-pointer hover:bg-red-500"
               >
                 <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
-                  내 입양신청
+                  잃어버렸어요!
                 </span>
               </div>
             </li>
             <hr />
             <li className="mx-5 my-3">
               <div
-                onClick={() => navigate(`/mypage/myposts/`)}
-                className="cursor-pointer hover:bg-purple-300"
+                onClick={() => navigate(`/findboard/`)}
+                className="cursor-pointer hover:bg-blue-900"
               >
                 <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
-                  내 작성글
+                  주인 찾습니다!
                 </span>
               </div>
             </li>
             <hr />
-
-            <li className="mx-5 my-3">
-              <div
-                onClick={() => navigate(`/mypage/mycomments/`)}
-                className="cursor-pointer hover:bg-purple-300"
-              >
-                <span className="text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
-                  내 작성 댓글
-                </span>
-              </div>
-            </li>
-            <hr />
-
-            <li className="mx-5 my-3 ">
-              <div
-                onClick={() => navigate(`/mypage/myinquiry/`)}
-                className="cursor-pointer hover:bg-yellow-300"
-              >
-                <span className=" text-black hover:text-white xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm font-bold">
-                  내 문의사항
-                </span>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
-      <button onClick={() => toggleMenu()} className="button mt-10">
+      <button onClick={() => toggleMenu()} className="button">
         {isOpen ? (
           <>
             <img
@@ -127,7 +104,7 @@ const Sidebar = () => {
         ) : (
           <>
             <img
-              src="/mypage_menu_cat.png"
+              src="/menu_cat.png"
               alt="button"
               className="duration-200"
             ></img>
@@ -138,4 +115,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default CommunitySidebar;

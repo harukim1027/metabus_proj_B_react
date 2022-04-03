@@ -1,45 +1,26 @@
 import { Link } from 'react-router-dom';
-import 'react-awesome-slider/dist/styles.css';
-// import './style.css';
 
 function ReviewSummary({ review }) {
-  // const slider = (
-  //   <AwesomeSlider cssModule={AwesomeSliderStyles}>
-  //     {review.review_image?.map((review) => (
-  //       <div data-src={review.image} alt={review.title} />
-  //     ))}
-  //   </AwesomeSlider>
-  // );
-
-  console.log(review);
+  // console.log('review:', review);
 
   return (
     <>
-      <div>
+      <div className="review_header h-full">
         <Link to={`/review/${review.review_no}/`}>
-          {/* {review.image1 && (
+          {review.review_image && (
             <div className="h-2/3 overflow-hidden">
-              <img src={review.image1} alt={review.title} />
+              <img src={review.review_image?.[0]?.image} alt={review.title} />
             </div>
-          )} */}
-          <div>
-            <h2 className="text-white text-center ItemWrapper">
+          )}
+          <div className="px-6 py-4">
+            <h2 className="font-bold text-base mb-2">
               {review.title.length > 7
                 ? review.title.substring(0, 7) + '...'
                 : review.title}
             </h2>
-            <h3 className="text-white text-center ">
+            <h3 className="text-gray-700 text-base">
               by: {review.user.nickname}
             </h3>
-          </div>
-
-          <div className="image__description">
-            {review.review_image?.map((review) => (
-              <div className="image__description">
-                <img src={review.image} alt={review.title} />
-                {review.title}
-              </div>
-            ))}
           </div>
         </Link>
       </div>

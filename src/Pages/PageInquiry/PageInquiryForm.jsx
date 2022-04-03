@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import TopNav from 'Components/Main/TopNavi';
 import InquiryForm from 'Components/inquiry/InquiryForm';
+import NewNav from 'Components/Main/NewNav';
 
 function PageInquiryForm() {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ function PageInquiryForm() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <InquiryForm
         inquiryId={inquiryId}
         handleDidSave={(savedPost) =>

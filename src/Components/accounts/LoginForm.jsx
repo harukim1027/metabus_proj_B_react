@@ -113,6 +113,7 @@ function LoginForm() {
             className="bg-white shadow-md rounded-xl px-20 pt-6 pb-8 mb-4"
             onSubmit={handleSubmit}
           >
+            {/* <Alert userID={fieldValues.userID} /> */}
             <div className="mt-10 mb-4">
               <label className=" block text-gray-700 text-2xl font-bold mb-2">
                 ID
@@ -160,7 +161,6 @@ function LoginForm() {
                 )}
               </div>
             </div>
-
             <div className="text-center mb-5 border:bg-pink-200">
               {/* 아이디 찾기 링크 이동 */}
               <a
@@ -177,7 +177,6 @@ function LoginForm() {
                 &nbsp;비밀번호 찾기&nbsp;
               </a>
             </div>
-
             <hr />
             {/* 회원가입 링크 이동 */}
             <p className="bg-yellow-100 xs:text-xxs xs:text-xxs md:text-base text-center mt-5  mb-2 text-red-300 font-semibold">

@@ -1,10 +1,10 @@
+import NewNav from 'Components/Main/NewNav';
 import AnimalList from 'Components/StreetAnimal/AnimalList';
-import TopNav from 'Components/Main/TopNavi';
 
 function PageAnimalList() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
       <AnimalList />
     </div>
   );

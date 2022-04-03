@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import ReviewForm from 'Components/review/ReviewForm';
-import TopNav from 'Components/Main/TopNavi';
 import { useApiAxios } from 'api/base';
+import NewNav from 'Components/Main/NewNav';
 
 function PageReviewForm() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function PageReviewForm() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <ReviewForm
         review={review}
         reviewId={reviewId}

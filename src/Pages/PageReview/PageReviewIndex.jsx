@@ -1,10 +1,18 @@
+import NewNav from 'Components/Main/NewNav';
+import Alert from 'Components/review/Alert';
+import CommunitySidebar from 'Components/review/CommunimySidebar';
+import Fame from 'Components/review/HallOfFame';
 import ReviewList from 'Components/review/ReviewList';
-import TopNav from 'Components/Main/TopNavi';
 
 function PageReviewIndex() {
   return (
     <div>
-      <TopNav />
+      <NewNav />
+      <CommunitySidebar />
+
+      <Fame />
+
+      <Alert />
       <ReviewList />
     </div>
   );

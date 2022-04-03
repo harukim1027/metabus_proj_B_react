@@ -1,34 +1,16 @@
-import TopNav from './TopNavi';
 import '../../App.css';
 import './MainCrew.css';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
-import useScrollFadeIn from 'hooks/useScrollFadeIn';
-import AnimalList from 'Components/StreetAnimal/AnimalList';
+import { toast } from 'react-toastify';
+import Alert from 'Components/review/Alert';
 
 function MainScreen() {
-  const navigate = useNavigate();
-  const [isOpen, setOpen] = useState(false);
-  const [xPosition, setX] = useState(200);
-
-  // 좌표를 위한 상탯값
-  const [ScrollY, setScrollY] = useState(0);
-
   const [activeCount, setActiveCount] = useState(1);
   console.log(activeCount);
 
-  // 스크롤 기능
   const { auth, logout } = useAuth();
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   function wheel(event) {
     // event.preventDefault();
@@ -46,52 +28,9 @@ function MainScreen() {
     }
   }
 
-  const handleFollow = () => {
-    setScrollY(window.pageYOffset);
-  };
-
-  // button 클릭 시 토글
-  const toggleMenu = () => {
-    if (xPosition > 0) {
-      setX(0);
-      setOpen(true);
-    } else {
-      setX(200);
-      setOpen(false);
-    }
-  };
-
-  const handleClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const checkLogin = () => {
-    if (auth.isLoggedIn) {
-      navigate('/assignment/check/');
-    } else {
-      toast.info('크루원 신청을 위해서는 로그인이 필요합니다! 😓 ', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        bodyClassName: 'font-bold text-2xl p-5',
-      });
-      navigate('/accounts/login/');
-    }
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, []);
-
-  useEffect(() => {
-    console.log('ScrollY is ', ScrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
-  }, [ScrollY]);
-
   //-------------
+
+  console.log('auth', auth);
 
   return (
     <>
@@ -128,6 +67,7 @@ function MainScreen() {
                   <span className="scrollGuide">Scroll Down ▽ </span>
                 </div>
               </div>
+
               <div className="innerCont maskLayer">
                 <div className="inner">
                   <h2>

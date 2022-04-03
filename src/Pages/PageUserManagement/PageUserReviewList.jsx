@@ -1,4 +1,4 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 import UserManageSidebar from 'Components/UserManagement/UserManageSidebar';
 import UserReviewList from 'Components/UserManagement/UserReviwList';
 import { useParams } from 'react-router-dom';
@@ -8,7 +8,7 @@ function PageUserReviewList() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div className="flex">
         <div className="flex-none">
           <UserManageSidebar userId={userId} />

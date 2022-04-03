@@ -1,15 +1,15 @@
-import TopNav from 'Components/Main/TopNavi';
 import Sidebar from 'Components/Mypage/Sidebar';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import InquiryList from 'Components/inquiry/InquiryList';
+import NewNav from 'Components/Main/NewNav';
 
 function PageMyInquiry() {
   const { auth } = useAuth();
   const navigate = useNavigate();
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <Sidebar />
         <div>
