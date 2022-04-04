@@ -1,10 +1,10 @@
 import AssignList from 'Components/AssignManagement/AssignList';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 
 function PageAssignList() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <AssignList />
     </>
   );

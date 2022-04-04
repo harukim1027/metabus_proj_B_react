@@ -11,9 +11,9 @@ function AssignComp({ assignId, assignData }) {
   // patch  요청
   const [{ loading, error }, changeAPS] = useApiAxios(
     {
-      url: `/streetanimal/api/animal/${assignData?.animal.animal_no}/`,
+      url: `/streetanimal/api/animal/${assignData?.animal.announce_no}/`,
       method: 'PATCH',
-      data: { protection_status: '입양 매칭 중' },
+      data: { protect_status: '입양 매칭 중' },
     },
     { manual: true },
   );
@@ -21,7 +21,7 @@ function AssignComp({ assignId, assignData }) {
   // get요청
   const [{ data: adaniData }, refetch] = useApiAxios(
     {
-      url: `/streetanimal/api/animal/${assignData?.animal.animal_no}/`,
+      url: `/streetanimal/api/animal/${assignData?.animal.announce_no}/`,
       method: 'GET',
     },
     { manual: true },
@@ -78,16 +78,16 @@ function AssignComp({ assignId, assignData }) {
           )}
 
           <h2 className="text-center text-xl">
-            등록번호 : {adaniData?.animal_reg_num}
+            공고번호 : {adaniData?.announce_no}
           </h2>
           <div className="flex justify-center my-3">
-            <img src={adaniData?.image} alt="" className="h-80" />
+            <img src={adaniData?.image_url1} alt="" className="h-80" />
           </div>
           <div className="flex justify-center my-3">
             <ul className=" w-1/3 font-semibold text-lg">
               <li className="flex justify-center text-xl">
                 <h2 className="bg-blue-100 rounded-xl px-1">
-                  {adaniData?.category.name}
+                  {adaniData?.kind_of_animal} &gt; {adaniData?.breed}
                 </h2>
               </li>
               <hr className="border-2 my-1" />
@@ -97,13 +97,18 @@ function AssignComp({ assignId, assignData }) {
               </li>
               <hr className="border-2 my-1" />
               <li className="flex justify-between">
-                <h2 className="mx-2">크기</h2>
-                <h2 className="mx-2">{adaniData?.size}</h2>
+                <h2 className="mx-2">나이</h2>
+                <h2 className="mx-2">{adaniData?.age}</h2>
               </li>
               <hr className="border-2 my-1" />
               <li className="flex justify-between">
-                <h2 className="mx-2">나이</h2>
-                <h2 className="mx-2">{adaniData?.age}살</h2>
+                <h2 className="mx-2">중성화</h2>
+                <h2 className="mx-2">{adaniData?.neutering}</h2>
+              </li>
+              <hr className="border-2 my-1" />
+              <li className="flex justify-between">
+                <h2 className="mx-2">보호센터</h2>
+                <h2 className="mx-2">{adaniData?.center_name.center_name}</h2>
               </li>
               <hr className="border-2 my-1" />
             </ul>

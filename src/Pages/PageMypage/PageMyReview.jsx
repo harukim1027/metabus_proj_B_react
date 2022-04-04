@@ -1,11 +1,12 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
+
 import MyReview from 'Components/Mypage/MyReview';
 import Sidebar from 'Components/Mypage/Sidebar';
 
 function PageMyPageReview() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <Sidebar />
         <div>

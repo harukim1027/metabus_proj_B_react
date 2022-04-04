@@ -1,10 +1,11 @@
 import { useApiAxios } from 'api/base';
 import AssignDetail from 'Components/AssignManagement/AssignDetail';
-import TopNav from 'Components/Main/TopNavi';
+
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
+import NewNav from 'Components/Main/NewNav';
 
 function PageAssignDetail() {
   const { assignId } = useParams();
@@ -25,7 +26,7 @@ function PageAssignDetail() {
     <>
       {assignData?.user.userID === auth.userID || auth.is_staff ? (
         <>
-          <TopNav />
+          <NewNav />
           {assignId && <AssignDetail assignId={assignId} />}
         </>
       ) : (

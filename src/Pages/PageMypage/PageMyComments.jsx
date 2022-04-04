@@ -1,11 +1,11 @@
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 import MyComments from 'Components/Mypage/MyComments';
 import Sidebar from 'Components/Mypage/Sidebar';
 
 function PageMyComments() {
   return (
     <>
-      <TopNav />
+      <NewNav />
       <div>
         <Sidebar />
         <div>
