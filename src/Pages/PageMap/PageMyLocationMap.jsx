@@ -3,10 +3,10 @@ import MyLocationMap from 'Components/Map/MyLocationMap';
 import LoadingIndicator from 'LoadingIndicator';
 import { useEffect } from 'react';
 
-function PageMyLocationMap() {
+function PageMyLocationMap({ setInputAddr, setShowMap }) {
   return (
     <>
-      <MyLocationMap />
+      <MyLocationMap setInputAddr={setInputAddr} setShowMap={setShowMap} />
     </>
   );
 }
