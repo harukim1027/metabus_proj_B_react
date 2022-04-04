@@ -8,7 +8,8 @@ import produce from 'immer';
 import LoadingIndicator from 'LoadingIndicator';
 import './FindOwnerBoard.css';
 import '../../App.css';
-import { isLabelWithInternallyDisabledControl } from '@testing-library/user-event/dist/utils';
+import Modal from 'react-modal/lib/components/Modal';
+import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
 
 const INIT_FIELD_VALUES = {
   title: '',
@@ -28,7 +29,8 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState('');
-  const [deletingImages, setDeletingImages] = useState([]);
+  const [showMap, setShowMap] = useState(false);
+  const [inputAddr, setInputAddr] = useState();
 
   // 조회 (작성 글 수정시 기존 데이터가 남아있도록 하기위함)
   const [{ data: findBoard, loading: getLoading, error: getError }, refetch] =
@@ -105,11 +107,12 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     findBoard || INIT_FIELD_VALUES,
   );
 
+  // 마커 위치의 주소 input에 넣기
   useEffect(() => {
-    setFieldValues((prevFieldValues) => ({
-      ...prevFieldValues,
-    }));
-  }, [findBoard]);
+    setFieldValues((prev) => {
+      return { ...prev, find_location: inputAddr };
+    });
+  }, [inputAddr]);
 
   useEffect(() => {
     setFieldValues(
@@ -294,7 +297,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                     defaultValue="동물 종류"
                   >
                     <option value="동물 종류">동물 종류</option>
-                    <option value="강아지">강아지</option>
+                    <option value="개">개</option>
                     <option value="고양이">고양이</option>
                   </select>
 
@@ -316,10 +319,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
               </div>
 
               {/* 강아지 품종 */}
-              {fieldValues.animal_type === '강아지' && (
+              {fieldValues.animal_type === '개' && (
                 <div className="mb-3 w-full">
                   <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
-                    강아지 품종 선택
+                    개 품종 선택
                   </span>
                   <div className="relative">
                     <select
@@ -540,15 +543,64 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 ))}
               </div>
 
-              {/* 발견장소 input 박스 */}
+              {/* 발견장소 지도로 선택하여 input박스에 입력되는 기능 */}
               <div className="mb-3 w-full">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
                   발견 장소
                 </span>
+                <button
+                  className="bg-blue-800 hover:bg-blue-300 text-white hover:text-black rounded-lg p-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMap(true);
+                  }}
+                >
+                  지도에서 선택하기
+                </button>
+                <Modal
+                  isOpen={showMap}
+                  onRequestClose={() => setShowMap(false)}
+                  style={{
+                    overlay: {
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                    },
+                    content: {
+                      position: 'absolute',
+                      top: '140px',
+                      left: '40px',
+                      right: '40px',
+                      bottom: '140px',
+                      border: '1px solid #ccc',
+                      background: '#fff',
+                      overflow: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                      borderRadius: '10px',
+                      outline: 'none',
+                      padding: '20px',
+                    },
+                  }}
+                >
+                  <button
+                    className="p-2 bg-green-300 rounded-lg right-0"
+                    onClick={() => setShowMap(false)}
+                  >
+                    지도 닫기
+                  </button>
+                  <PageMyLocationMap
+                    setInputAddr={setInputAddr}
+                    setShowMap={setShowMap}
+                  />
+                </Modal>
                 <input
                   name="find_location"
-                  value={fieldValues.find_location}
-                  onChange={handleFieldChange}
+                  value={inputAddr || fieldValues.find_location}
+                  readOnly={true}
+                  onChange={(e) => handleFieldChange(e)}
                   placeholder="발견 장소를 입력해주세요."
                   className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
                 />
@@ -764,6 +816,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                   </div>
                 </div>
               )}
+              <h2>
+                ※글 작성 시 동물 주인과의 연락을 위해 회원정보에 저장된
+                전화번호가 자동으로 저장됩니다.
+              </h2>
 
               {/* 저장, 취소 버튼 */}
               <div className="text-center">

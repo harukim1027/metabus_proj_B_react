@@ -2,8 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import './Map.css';
 
-function MyLocationMap({ setInputAddr, setShowMap }) {
-  const [openDiv, setOpenDiv] = useState(false);
+function MarkLocationMap({ location }) {
   const [currentLoc, setCurrentLoc] = useState({
     center: {
       lat: 36.32754333444323,
@@ -14,10 +13,8 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
   });
   // const [clickLoc, setClickLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
-
-  const [position, setPosition] = useState();
-  const [detailAddr, setDetailAddr] = useState({});
-  const [isopen, setIsopen] = useState(true);
+  const [markedLoc, setMarkedLoc] = useState({});
+  const [mapCenter, setMapCenter] = useState(1);
   const [map, setMap] = useState();
 
   const { kakao } = window;
@@ -27,6 +24,20 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
   }, []);
 
   useEffect(() => {
+    geocoder.addressSearch(location, function (result, status) {
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        // console.log('coords: ', coords);
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        // map.setCenter(coords);
+        setMarkedLoc({
+          location: location,
+          center: { lat: coords.Ma, lng: coords.La },
+          isPanto: true,
+        });
+      }
+    });
     // geolocaion으로 현위치 표시
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
@@ -39,6 +50,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
               lng: position.coords.longitude, // 경도
             },
             isLoading: false,
+            isPanto: true,
           }));
         },
         (err) => {
@@ -58,7 +70,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
       }));
     }
     //--------------------
-  }, []);
+  }, [location]);
   // 지도 중심좌표 설정
   useEffect(() => {
     setMyLoc(currentLoc);
@@ -93,52 +105,18 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
       }
     }
   }
-  // displayAddressInfo
 
-  // 클릭한 마커 위치(위,경도)를 주소로 변환하기
-  useEffect(() => {
-    position &&
-      searchDetailAddrFromCoords(position.center, function (result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-          result[0].road_address
-            ? setDetailAddr({
-                road_addr: result[0].road_address.address_name,
-                addr: result[0].address.address_name,
-              })
-            : setDetailAddr({ addr: result[0].address.address_name });
-        } else {
-        }
-      });
-  }, [position]);
-
-  console.log('detailAddr: ', detailAddr, 'position: ', position);
-  // console.log('currentLoc: ', currentLoc);
   useEffect(() => {
     console.log('myLoc: ', myLoc);
   }, [myLoc]);
   return (
-    <div className="">
-      {myLoc.center && (
+    <div>
+      {myLoc.center && markedLoc.center && (
         <Map
-          center={myLoc.center}
+          center={mapCenter === 1 ? markedLoc.center : myLoc.center}
+          isPanto={mapCenter === 1 ? markedLoc.isPanto : myLoc.isPanto}
           style={{ width: '100%', height: '350px' }}
-          level="3"
-          onClick={(_t, mouseEvent) => {
-            // console.log('mouseEvent: ', mouseEvent);
-            setPosition({
-              center: {
-                lat: mouseEvent.latLng.getLat(),
-                lng: mouseEvent.latLng.getLng(),
-              },
-            });
-            // setClickLoc({
-            //   center: {
-            //     lat: mouseEvent.latLng.getLat(),
-            //     lng: mouseEvent.latLng.getLng(),
-            //   },
-            // });
-            setIsopen(true);
-          }}
+          level="6"
           onCreate={(map) => setMap(map)}
           // 지도 중심의 행정동 표시를 위해 함수 사용
           onDragEnd={(map) => {
@@ -149,52 +127,6 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
           }}
           className="mt-10"
         >
-          {/* 행정동 위치 표기 */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '20px',
-              top: '100px',
-              borderRadius: '2px',
-              background: 'rgba(255, 255, 255, 0.8)',
-              zIndex: 1,
-              padding: '5px',
-            }}
-          >
-            <span className=" font-semibold">지도중심기준 행정동 주소정보</span>
-            <br />
-            <span id="centerAddr"></span>
-          </div>
-          {/* ---------- */}
-
-          {/* 클릭한 위치 마커 표시 */}
-          {isopen && position && (
-            <>
-              <MapMarker position={position.center} />
-              <CustomOverlayMap position={position.center}>
-                <div className="wrap">
-                  <div className="info">
-                    <div className="title flex justify-between">
-                      <h2 className="">법정동 주소정보</h2>
-                      <button
-                        className="bg-blue-400 hover:bg-black rounded-full px-2 mr-2 text-center text-sm justify-center hover:text-white duration-300"
-                        onClick={() => {
-                          setIsopen(false);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
-                    도로명 주소 :{' '}
-                    {detailAddr.road_addr ? detailAddr.road_addr : '없음'}
-                    <br />
-                    지번 주소 : {detailAddr?.addr}
-                  </div>
-                </div>
-              </CustomOverlayMap>
-            </>
-          )}
-
           {/* 현위치 마커 */}
           {!currentLoc.isLoading && (
             <MapMarker
@@ -214,6 +146,13 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
               </div>
             </MapMarker>
           )}
+
+          {/* 발견위치 마커 */}
+          {!currentLoc.isLoading && (
+            <MapMarker position={markedLoc.center}>
+              <div>여기에요!</div>
+            </MapMarker>
+          )}
           <div
             style={{
               display: 'flex',
@@ -221,19 +160,21 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
             }}
           >
             <button
-              className="p-2 bg-green-300 rounded-lg"
-              onClick={() => setMyLoc(currentLoc)}
-            >
-              현재 내 위치 바로가기
-            </button>
-            {/* 지도에서 선택한 위치 주소 입력 */}
-            <button
+              className="p-2 bg-green-300 rounded-lg mr-4"
               onClick={() => {
-                setInputAddr(detailAddr.addr);
-                setShowMap(false);
+                setMyLoc(currentLoc);
+                setMapCenter(2);
               }}
             >
-              선택한 주소 입력하기
+              현위치 보기
+            </button>
+            <button
+              className="p-2 bg-green-300 rounded-lg mr-4"
+              onClick={() => {
+                setMapCenter(1);
+              }}
+            >
+              발견 위치 보기
             </button>
           </div>
         </Map>
@@ -251,4 +192,4 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
   );
 }
 
-export default MyLocationMap;
+export default MarkLocationMap;

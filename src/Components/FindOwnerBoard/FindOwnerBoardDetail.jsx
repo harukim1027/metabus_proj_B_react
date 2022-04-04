@@ -1,16 +1,21 @@
 import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import FindBoardStatus from './FindBoardStatus';
 import './FindOwnerBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
+import useFieldValues from 'hooks/useFieldValues';
+import MarkLocationMap from 'Components/Map/MarkLocationMap';
+
+const INIT_FIELD_VALUES = {
+  status: '',
+};
 
 function FindOwnerBoardDetail({ findboardId }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
-  const [clicked, setClicked] = useState(false);
 
   // get 요청
   const [{ data: findboard }, refetch] = useApiAxios(
@@ -20,6 +25,10 @@ function FindOwnerBoardDetail({ findboardId }) {
     },
     { manual: true },
   );
+
+  useEffect(() => {
+    refetch();
+  }, [findboardId]);
 
   // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteFindboard] =
@@ -34,22 +43,13 @@ function FindOwnerBoardDetail({ findboardId }) {
       { manual: true },
     );
 
-  // patch 요청
-  const [{ loading, error }, changeAPS] = useApiAxios(
-    {
-      url: `/find_owner_board/api/board/${findboard?.findboardId}/`,
-      method: 'PATCH',
-      data: { status: '찾는중' },
-    },
-    { manual: true },
-  );
-
+  // status patch 요청
   const [
     { loading: changeStatusLoading, error: changeStatusError },
     patchFindboardStatus,
   ] = useApiAxios(
     {
-      url: `/find_owner_board/api/board/${findboard?.findboardId}/`,
+      url: `/find_owner_board/api/board/${findboardId}/`,
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${auth.access}`,
@@ -62,14 +62,26 @@ function FindOwnerBoardDetail({ findboardId }) {
     if (window.confirm('정말 삭제 할까요?')) {
       deleteFindboard().then(() => {
         navigate('/findboard/');
-        window.location.reload();
       });
     }
   };
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  INIT_FIELD_VALUES.status = findboard?.status;
+  const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
+  // console.log(fieldValues);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      formData.append(name, value);
+    });
+    patchFindboardStatus({
+      data: formData,
+    }).then(() => {
+      refetch();
+    });
+  };
 
   //-------------
 
@@ -86,12 +98,12 @@ function FindOwnerBoardDetail({ findboardId }) {
           </blockquote>
 
           {/* 로딩 에러 */}
-          {loading && (
+          {changeStatusLoading && (
             <>
               <p className="text-blue-400">&nbsp;&nbsp;로딩 중...</p>
             </>
           )}
-          {error && (
+          {changeStatusError && (
             <>
               <p className="text-red-400">
                 &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !
@@ -113,38 +125,31 @@ function FindOwnerBoardDetail({ findboardId }) {
                     {findboard.title}
                   </h1>
 
-                  <div className="my-5 text-right">
-                    <span className=" font-bold">상태: </span>
-                    <span
-                      className=" font-bold"
-                      onClick={() => {
-                        auth.is_staff && setClicked(!clicked);
-                      }}
-                    >
-                      {findboard.status}
-                      {auth.is_staff && <span>(수정하려면 클릭)</span>}
-                    </span>
-                  </div>
+                  {findboard && (
+                    <div className="my-5 text-right">
+                      <span className=" font-bold">상태: </span>
+                      {auth.userID === findboard.user.userID ||
+                      auth.is_staff ? (
+                        <form onSubmit={handleSubmit} className="inline">
+                          <select
+                            name="status"
+                            value={fieldValues.status}
+                            onChange={handleFieldChange}
+                            className="rounded px-5 py-2"
+                            defaultValue={findboard.status}
+                          >
+                            <option value="">상태 변경</option>
+                            <option value="찾는중">찾는중</option>
+                            <option value="찾았어요">찾았어요</option>
+                          </select>
 
-                  {clicked && findboard && (
-                    <div className="flex justify-center">
-                      <FindBoardStatus
-                        findboardId={findboardId}
-                        findboard={findboard}
-                        handleDidSave={(savedPost) => {
-                          savedPost && window.location.reload();
-                          savedPost && setClicked(0);
-                          if (savedPost?.status === '찾는중') {
-                            patchFindboardStatus({
-                              data: { status: '찾는중' },
-                            });
-                          } else {
-                            patchFindboardStatus({
-                              data: { status: '찾았어요' },
-                            });
-                          }
-                        }}
-                      />
+                          <button className="bg-gray-300 hover:bg-gray-800 hover:text-white rounded-md px-2 py-1 ml-3">
+                            저장
+                          </button>
+                        </form>
+                      ) : (
+                        <span className=" font-bold">{findboard.status}</span>
+                      )}
                     </div>
                   )}
 
@@ -177,20 +182,25 @@ function FindOwnerBoardDetail({ findboardId }) {
                   </div>
 
                   <ul>
-                    <li>발견장소: {findboard.find_location}</li>
                     <li>동물종류: {findboard.animal_type}</li>
                     <li>
                       품종:{' '}
-                      {findboard.animal_type === '강아지'
+                      {findboard.animal_type === '개'
                         ? findboard.dog_breed
                         : findboard.cat_breed}
                     </li>
                     <li>사이즈: {findboard.size}</li>
                     <li>인식표: {findboard.animal_tag}</li>
+                    <li>발견자 연락처 : {findboard.user.phone_number}</li>
+                    <li>발견장소: {findboard.find_location}</li>
                   </ul>
+                  <div>
+                    <MarkLocationMap location={findboard.find_location} />
+                  </div>
 
                   <div className="my-5 text-right">
-                    {(auth.userID === findboard?.user || auth.is_staff) && (
+                    {(auth.userID === findboard?.user.userID ||
+                      auth.is_staff) && (
                       <button
                         className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                         onClick={() => handleDelete()}
@@ -199,7 +209,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                       </button>
                     )}
 
-                    {auth.userID === findboard?.user && (
+                    {auth.userID === findboard?.user.userID && (
                       <Link
                         className="ml-3 flex-shrink-0 bg-gray-700 hover:bg-black border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
                         to={`/findboard/${findboardId}/edit/`}
