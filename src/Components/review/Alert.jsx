@@ -6,11 +6,11 @@ function Alert({ userID, reviewList }) {
   const date2 = new Date(
     reviewList
       ?.filter((review) => review.user.userID === userID)
-      .map((inf) => inf.created_at),
+      .map((info) => info.created_at),
   );
 
   if (date1.valueOf() > date2.valueOf()) {
-    toast.success('다이어리를 적은 지 30일이 지났어요! 작성해주세요!', {
+    toast.warning('다이어리를 적은 지 30일이 지났어요! 작성해주세요!', {
       position: 'top-center',
       autoClose: 5000,
       hideProgressBar: false,

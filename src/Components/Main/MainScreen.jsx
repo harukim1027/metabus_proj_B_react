@@ -1,14 +1,10 @@
 import '../../App.css';
 import './MainCrew.css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
-import { toast } from 'react-toastify';
-import Alert from 'Components/review/Alert';
 
 function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
-  console.log(activeCount);
 
   const { auth, logout } = useAuth();
 
@@ -29,7 +25,7 @@ function MainScreen() {
   }
 
   //-------------
-
+  console.log(activeCount);
   console.log('auth', auth);
 
   return (

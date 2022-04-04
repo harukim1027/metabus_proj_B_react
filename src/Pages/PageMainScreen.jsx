@@ -12,7 +12,6 @@ function PageMainScreen() {
   const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
     {
       url: `/adopt_review/api/allreviews/`,
-      method: 'GET',
     },
     {
       manual: true,
