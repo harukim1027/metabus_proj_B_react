@@ -149,7 +149,7 @@ function FindOwnerBoardList() {
                       defaultValue="동물 종류"
                     >
                       <option value="">동물 종류</option>
-                      <option value="강아지">강아지</option>
+                      <option value="개">개</option>
                       <option value="고양이">고양이</option>
                     </select>
                   </form>
@@ -202,7 +202,7 @@ function FindOwnerBoardList() {
             <div className="flex justify-end mr-5">
               <button
                 onClick={() => navigate('/findboard/new/')}
-                className="hover:scale-110 xs:w-5 xs:w-10 sm:w-14"
+                className="hover:scale-110 xs:w-10 sm:w-14"
                 readOnly
               >
                 <img src="/pen2.png" alt="button"></img>
