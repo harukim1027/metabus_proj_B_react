@@ -109,7 +109,7 @@ function ReviewDetail({ reviewId }) {
                       <div className="sm:flex sm:justify-center">
                         <div className="overflow-hidden">
                           <img
-                            src={review.adoptassignment.animal.image}
+                            src={review.adoptassignment.animal.image_url1}
                             alt=""
                             className="assign_photo w-full h-full"
                           />
@@ -118,10 +118,11 @@ function ReviewDetail({ reviewId }) {
                         <div className="flex justify-center">
                           <ul className="assign_table_bg border-gray-200 w-60">
                             <li className="pl-1 pr-1 py-1 flex items-center justify-between text-sm border-t-2">
-                              품종 : {review.adoptassignment.animal.category}
+                              동물 종류 :{' '}
+                              {review.adoptassignment.animal.kind_of_animal}
                             </li>
                             <li className="pl-1 pr-1 py-1 flex items-center justify-between text-sm border-t-2">
-                              사이즈 : {review.adoptassignment.animal.size}
+                              품종 : {review.adoptassignment.animal.breed}
                             </li>
                             <li className="pl-1 pr-1 py-1  flex items-center justify-between text-sm border-t-2">
                               성별 : {review.adoptassignment.animal.sex}
@@ -137,7 +138,7 @@ function ReviewDetail({ reviewId }) {
                             </li>
                             <li className="pl-1 pr-1 py-1  flex items-center justify-between text-sm border-t-2">
                               등록 번호 :
-                              {review.adoptassignment.animal.animal_reg_num}
+                              {review.adoptassignment.animal.announce_no}
                             </li>
                           </ul>
                         </div>

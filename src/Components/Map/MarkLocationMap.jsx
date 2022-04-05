@@ -174,7 +174,7 @@ function MarkLocationMap({ location }) {
                 setMapCenter(1);
               }}
             >
-              발견 위치 보기
+              등록 위치 보기
             </button>
           </div>
         </Map>

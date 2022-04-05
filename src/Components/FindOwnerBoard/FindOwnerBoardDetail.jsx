@@ -2,7 +2,6 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import FindBoardStatus from './FindBoardStatus';
 import './FindOwnerBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
@@ -189,7 +188,6 @@ function FindOwnerBoardDetail({ findboardId }) {
                         ? findboard.dog_breed
                         : findboard.cat_breed}
                     </li>
-                    <li>사이즈: {findboard.size}</li>
                     <li>인식표: {findboard.animal_tag}</li>
                     <li>발견자 연락처 : {findboard.user.phone_number}</li>
                     <li>발견장소: {findboard.find_location}</li>

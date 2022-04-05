@@ -57,6 +57,12 @@ function AssignAnimalCheck() {
             <h2 className="">특징 : {animal.info}</h2>
             <h2 className="">관할 : {animal.competent_organization}</h2>
             <h2 className="">보호 상태 : {animal.protect_status}</h2>
+            <h2 className="">
+              보호 중인 센터 : {animal.center_name.center_name}
+            </h2>
+            <h2 className="">
+              센터 전화 번호 : {animal.center_name.center_call}
+            </h2>
           </div>
         )}
       </div>

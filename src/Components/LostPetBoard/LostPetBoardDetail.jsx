@@ -2,10 +2,15 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
-import LostPetBoardStatus from './LostPetBoardStatus';
 import './LostPetBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
+import MarkLocationMap from 'Components/Map/MarkLocationMap';
+import useFieldValues from 'hooks/useFieldValues';
+
+const INIT_FIELD_VALUES = {
+  status: '',
+};
 
 function LostPetBoardDetail({ lostpetboardId }) {
   const { auth } = useAuth();
@@ -21,27 +26,37 @@ function LostPetBoardDetail({ lostpetboardId }) {
     { manual: true },
   );
 
-  // 등록된 동물 조회
-  const [{ data: AnimalList, loading: getLoading, error: getError }, refetch2] =
-    useApiAxios(
-      {
-        url: `/streetanimal/api/animalnotpaging/`,
-        method: `GET`,
-        params: {
-          kind: lostpetboard?.animal_type,
-          sex: lostpetboard?.sex,
-          breed:
-            lostpetboard?.dog_breed === '전체'
-              ? lostpetboard?.cat_breed
-              : lostpetboard?.dog_breed,
-        },
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  // 등록된 동물 정보를 보호센터 등록 동물 중 조회
+  const [
+    { data: AnimalList, loading: getLoading, error: getError },
+    refetchSimilar,
+  ] = useApiAxios(
+    {
+      url: `/streetanimal/api/animalnotpaging/`,
+      method: `GET`,
+      params: {
+        kind: lostpetboard?.animal_type,
+        sex: lostpetboard?.sex,
+        breed:
+          lostpetboard?.dog_breed === '전체'
+            ? lostpetboard?.cat_breed
+            : lostpetboard?.dog_breed,
       },
-      { manual: true },
-    );
+    },
+    { manual: true },
+  );
+
+  useEffect(() => {
+    refetchSimilar();
+  }, [lostpetboard]);
   console.log('AnimalList: ', AnimalList);
 
   // delete 요청
-  const [{ loading: deleteLoading, error: deleteError }, deleteLostPetboard] =
+  const [{ loading: deleteLoading, error: deleteError }, deleteLostboard] =
     useApiAxios(
       {
         url: `/lost_pet_board/api/board/${lostpetboardId}/`,
@@ -53,22 +68,13 @@ function LostPetBoardDetail({ lostpetboardId }) {
       { manual: true },
     );
 
-  // patch 요청
-  const [{ loading, error }, changeAPS] = useApiAxios(
-    {
-      url: `/lost_pet_board/api/board/${lostpetboard?.lostpetboardId}/`,
-      method: 'PATCH',
-      data: { status: '찾는중' },
-    },
-    { manual: true },
-  );
-
+  // status patch 요청
   const [
     { loading: changeStatusLoading, error: changeStatusError },
-    patchLostPetboardStatus,
+    patchLostboardStatus,
   ] = useApiAxios(
     {
-      url: `/lost_pet_board/api/board/${lostpetboard?.lostpetboardId}/`,
+      url: `/lost_pet_board/api/board/${lostpetboard?.lost_board_no}/`,
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${auth.access}`,
@@ -79,20 +85,28 @@ function LostPetBoardDetail({ lostpetboardId }) {
 
   const handleDelete = () => {
     if (window.confirm('정말 삭제 할까요?')) {
-      deleteLostPetboard().then(() => {
+      deleteLostboard().then(() => {
         navigate('/lostpetboard/');
         window.location.reload();
       });
     }
   };
 
-  useEffect(() => {
-    refetch();
-  }, []);
+  INIT_FIELD_VALUES.status = lostpetboard?.status;
+  const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
-  useEffect(() => {
-    refetch2();
-  }, [lostpetboard]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      formData.append(name, value);
+    });
+    patchLostboardStatus({
+      data: formData,
+    }).then(() => {
+      refetch();
+    });
+  };
 
   //-------------
 
@@ -106,13 +120,13 @@ function LostPetBoardDetail({ lostpetboardId }) {
             </span>
           </blockquote>
 
-          {/* 로딩 에러 */}
-          {loading && (
+          {/* patch status 로딩, 에러 */}
+          {changeStatusLoading && (
             <>
               <p className="text-blue-400">&nbsp;&nbsp;로딩 중...</p>
             </>
           )}
-          {error && (
+          {changeStatusError && (
             <>
               <p className="text-red-400">
                 &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !
@@ -133,38 +147,33 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     {lostpetboard.title}
                   </h1>
 
-                  <div className="my-5 text-right">
-                    <span className=" font-bold">상태: </span>
-                    <span
-                      className=" font-bold"
-                      onClick={() => {
-                        auth.is_staff && setClicked(!clicked);
-                      }}
-                    >
-                      {lostpetboard.status}
-                      {auth.is_staff && <span>(수정하려면 클릭)</span>}
-                    </span>
-                  </div>
+                  {lostpetboard && (
+                    <div className="my-5 text-right">
+                      <span className=" font-bold">상태: </span>
+                      {auth.userID === lostpetboard.user.userID ||
+                      auth.is_staff ? (
+                        <form onSubmit={handleSubmit} className="inline">
+                          <select
+                            name="status"
+                            value={fieldValues.status}
+                            onChange={handleFieldChange}
+                            className="rounded px-5 py-2"
+                            defaultValue={lostpetboard.status}
+                          >
+                            <option value="">상태 변경</option>
+                            <option value="찾는중">찾는중</option>
+                            <option value="찾았어요">찾았어요</option>
+                          </select>
 
-                  {clicked && lostpetboard && (
-                    <div className="flex justify-center">
-                      <LostPetBoardStatus
-                        lostpetboardId={lostpetboardId}
-                        lostpetboard={lostpetboard}
-                        handleDidSave={(savedPost) => {
-                          savedPost && window.location.reload();
-                          savedPost && setClicked(0);
-                          if (savedPost?.status === '찾는중') {
-                            patchLostPetboardStatus({
-                              data: { status: '찾는중' },
-                            });
-                          } else {
-                            patchLostPetboardStatus({
-                              data: { status: '찾았어요' },
-                            });
-                          }
-                        }}
-                      />
+                          <button className="bg-gray-300 hover:bg-gray-800 hover:text-white rounded-md px-2 py-1 ml-3">
+                            저장
+                          </button>
+                        </form>
+                      ) : (
+                        <span className=" font-bold">
+                          {lostpetboard.status}
+                        </span>
+                      )}
                     </div>
                   )}
 
@@ -197,22 +206,26 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   </div>
 
                   <ul>
-                    <li>유실장소:{lostpetboard.lost_location}</li>
-                    <li>동물이름:{lostpetboard.pet_name}</li>
-                    <li>동물종류:{lostpetboard.animal_type}</li>
+                    <li>동물이름 : {lostpetboard?.pet_name}</li>
+                    <li>동물종류 : {lostpetboard?.animal_type}</li>
                     <li>
-                      품종:{' '}
-                      {lostpetboard.animal_type === '개'
-                        ? lostpetboard.dog_breed
-                        : lostpetboard.cat_breed}
+                      품종 :{' '}
+                      {lostpetboard?.animal_type === '개'
+                        ? lostpetboard?.dog_breed
+                        : lostpetboard?.cat_breed}
                     </li>
                     <li>
-                      성별:{''}
-                      {lostpetboard.sex === '암컷' ? '암컷' : '수컷'}
+                      성별 : {''}
+                      {lostpetboard?.sex}
                     </li>
-                    <li>사이즈:{lostpetboard.size}</li>
-                    <li>인식표:{lostpetboard.animal_tag}</li>
+                    <li>인식표 : {lostpetboard?.animal_tag}</li>
+                    <li>주인 연락처 : {lostpetboard?.user.phone_number}</li>
+                    <li>유실장소 : {lostpetboard?.lost_location}</li>
                   </ul>
+
+                  <div>
+                    <MarkLocationMap location={lostpetboard?.lost_location} />
+                  </div>
 
                   {getLoading && (
                     <LoadingIndicator>
@@ -223,16 +236,40 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   <div>
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
-                      {AnimalList?.map((animal) => {
-                        return animal.announce_image.map((image) => (
-                          <img src={image.image} alt="" />
-                        ));
-                      })}
+                      {AnimalList?.length !== 0 ? (
+                        AnimalList?.map((animal) => (
+                          <div
+                            className=" w-52 h-60 inline-block m-2 hover:scale-110 duration-150 cursor-pointer"
+                            onClick={() =>
+                              navigate(
+                                `/assignment/checkanimal/${animal.announce_no}/`,
+                              )
+                            }
+                          >
+                            <div className=" shadow-lg rounded-lg h-full overflow-hidden">
+                              <div className=" flex justify-center h-2/3 overflow-hidden">
+                                <img
+                                  src={animal.image_url1}
+                                  alt=""
+                                  className="object-cover"
+                                />
+                              </div>
+                              <div>
+                                <h2>{animal.announce_no}</h2>
+                                <h2>{animal.breed}</h2>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <h2>검색된 정보가 없네요..</h2>
+                      )}
                     </div>
                   </div>
 
                   <div className="my-5 text-right">
-                    {(auth.userID === lostpetboard?.user || auth.is_staff) && (
+                    {(auth.userID === lostpetboard?.user.userID ||
+                      auth.is_staff) && (
                       <button
                         className="ml-3 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
                         onClick={() => handleDelete()}
@@ -241,7 +278,8 @@ function LostPetBoardDetail({ lostpetboardId }) {
                       </button>
                     )}
 
-                    {auth.userID === lostpetboard?.user && (
+                    {(auth.userID === lostpetboard?.user.userID ||
+                      auth.is_staff) && (
                       <Link
                         className="ml-3 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
                         to={`/lostpetboard/${lostpetboardId}/edit/`}
