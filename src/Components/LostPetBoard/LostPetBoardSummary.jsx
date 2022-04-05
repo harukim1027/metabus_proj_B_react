@@ -23,12 +23,12 @@ function LostPetBoardSummary({ lostpetboard }) {
               </li>
               <li className="text-gray-700 text-xs">
                 동물종류:{lostpetboard.animal_type},
-                {lostpetboard.animal_type === '강아지'
+                {lostpetboard.animal_type === '개'
                   ? lostpetboard.dog_breed
                   : lostpetboard.cat_breed}
               </li>
               <li className="text-gray-700 text-xs">
-                작성자:{lostpetboard.user}
+                작성자:{lostpetboard.user.userID}
               </li>
             </ul>
           </div>

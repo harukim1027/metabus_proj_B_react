@@ -2,7 +2,6 @@ import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import FindBoardStatus from './FindBoardStatus';
 import './FindOwnerBoard.css';
 import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';

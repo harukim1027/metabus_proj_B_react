@@ -21,11 +21,6 @@ import PageUserReviewList from 'Pages/PageUserManagement/PageUserReviewList';
 import PageUserInquiryList from 'Pages/PageUserManagement/PageUserInquiryList';
 import PageUserFindOwnerBoardList from 'Pages/PageUserManagement/PageUserFindOwnerBoardList';
 import PageUserLostPetBoardList from 'Pages/PageUserManagement/PageUserLostPetBoardList';
-// admin/CommunityManagement
-import PageCommFindOwnerBoardList from 'Pages/PageCommunityManagement/PageCommFindOwnerBoardList';
-import PageCommFindOwnerBoardDetail from 'Pages/PageCommunityManagement/PageCommFindOwnerBoardDetail';
-import PageCommLostPetBoardList from 'Pages/PageCommunityManagement/PageCommLostPetBoardList';
-import PageCommLostPetBoardDetail from 'Pages/PageCommunityManagement/PageCommLostPetBoardDetail';
 // admin/assignment
 import PageAssignList from 'Pages/PageAssignManagement/PageAssignList';
 import PageAssignDetail from 'Pages/PageAssignManagement/PageAssignDetail';
@@ -184,24 +179,6 @@ function App() {
                 path="/admin/notice/:noticeId/edit/"
                 element={<PageNoticeForm />}
               />
-
-              {/* admin/CommunityManagement */}
-              <Route
-                path="/admin/findboard/"
-                element={<PageCommFindOwnerBoardList />}
-              />
-              <Route
-                path="/admin/findboard/:findboardId/"
-                element={<PageCommFindOwnerBoardDetail />}
-              />
-              <Route
-                path="/admin/lostpetboard/"
-                element={<PageCommLostPetBoardList />}
-              />
-              <Route
-                path="/admin/lostpetboard/:lostpetboardId/"
-                element={<PageCommLostPetBoardDetail />}
-              />
             </>
           )}
           {auth?.isLoggedIn && (
@@ -212,10 +189,22 @@ function App() {
                 element={<PageAnimalDetail />}
               />
               {/* Assignment */}
-              <Route path="/assignment/:centerId/centersanimals/" element={<CentersAnimals />} />
-              <Route path="/assignment/checkanimal/:animalId/" element={<AssignAnimalCheck />} />
-              <Route path="/assignment/check/:animalId/" element={<PageAssignCheck />} />
-              <Route path="/assignment/new/:animalId/" element={<PageAssignmentform />} />
+              <Route
+                path="/assignment/:centerId/centersanimals/"
+                element={<CentersAnimals />}
+              />
+              <Route
+                path="/assignment/checkanimal/:animalId/"
+                element={<AssignAnimalCheck />}
+              />
+              <Route
+                path="/assignment/check/:animalId/"
+                element={<PageAssignCheck />}
+              />
+              <Route
+                path="/assignment/new/:animalId/"
+                element={<PageAssignmentform />}
+              />
               <Route
                 path="/assignment/complite/:assignId/"
                 element={<PageAssignComp />}
