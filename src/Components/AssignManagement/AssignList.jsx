@@ -153,7 +153,7 @@ function AssignList() {
                         scope="col"
                         className="py-3 text-center text-lg font-bold text-gray-500 tracking-wider"
                       >
-                        신청한 동물 번호
+                        공고 번호
                       </th>
                       <th
                         scope="col"
@@ -194,7 +194,7 @@ function AssignList() {
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm font-medium text-gray-900">
                             <span className="px-2 inline-flex text-xl leading-5 font-semibold rounded-full bg-blue-100">
-                              {assign.animal.animal_reg_num}
+                              {assign.animal.announce_no}
                             </span>
                           </div>
                         </td>

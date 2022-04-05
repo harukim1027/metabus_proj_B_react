@@ -1,9 +1,12 @@
 import { useApiAxios } from 'api/base';
+import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function AssignAnimalCheck() {
   const { animalId } = useParams();
+  const { auth } = useAuth();
   const navigate = useNavigate();
 
   const [{ data: animal, loading, error }, refetch] = useApiAxios(
@@ -17,6 +20,25 @@ function AssignAnimalCheck() {
   useEffect(() => {
     refetch();
   }, []);
+
+  const checkLogin = () => {
+    if (auth.isLoggedIn) {
+      navigate(`/assignment/check/${animal?.announce_no}/`);
+    } else {
+      toast.info('크루원 신청을 위해서는 로그인이 필요합니다! 😓 ', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        bodyClassName: 'font-bold text-2xl p-5',
+      });
+      navigate('/accounts/login/');
+    }
+  };
+
   return (
     <>
       <div className="m-5 rounded-lg shadow-lg mt-20 w-fit p-10">
@@ -73,7 +95,7 @@ function AssignAnimalCheck() {
         돌아가기
       </button>
       <button
-        onClick={() => navigate(`/assignment/check/${animal?.announce_no}/`)}
+        onClick={() => checkLogin()}
         className="bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg ml-4"
       >
         입양 신청하기

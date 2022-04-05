@@ -190,14 +190,6 @@ function App() {
               />
               {/* Assignment */}
               <Route
-                path="/assignment/:centerId/centersanimals/"
-                element={<CentersAnimals />}
-              />
-              <Route
-                path="/assignment/checkanimal/:animalId/"
-                element={<AssignAnimalCheck />}
-              />
-              <Route
                 path="/assignment/check/:animalId/"
                 element={<PageAssignCheck />}
               />
@@ -265,6 +257,14 @@ function App() {
               />
             </>
           )}
+          <Route
+            path="/assignment/:centerId/centersanimals/"
+            element={<CentersAnimals />}
+          />
+          <Route
+            path="/assignment/checkanimal/:animalId/"
+            element={<AssignAnimalCheck />}
+          />
           <Route path="*" element={<NotFound />} />
 
           <Route path="/centermap/" element={<PageAllCenterMap />} />

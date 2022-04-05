@@ -159,7 +159,12 @@ function NewNav() {
                     ) : (
                       <li>
                         {' '}
-                        <a onClick={checkLogin}>크루원 신청</a>
+                        <a
+                          onClick={() => checkLogin()}
+                          className="cursor-pointer"
+                        >
+                          크루원 신청
+                        </a>
                       </li>
                     )}
                     <li>
@@ -192,7 +197,7 @@ function NewNav() {
                 <button
                   type="button"
                   onClick={() => handleClick()}
-                  class="btn-close-gnb"
+                  className="btn-close-gnb"
                 >
                   <img
                     className="hover:scale-110 duration-200"
