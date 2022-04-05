@@ -18,11 +18,7 @@ const INIT_FIELD_VALUES = {
 function ReviewForm({ review, reviewId, handleDidSave }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
-  const [image1, setImage1] = useState('');
-  const [image2, setImage2] = useState('');
-  const [image3, setImage3] = useState('');
-  const [image4, setImage4] = useState('');
-  const [image5, setImage5] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
   const [filtAssign, setFiltAssign] = useState([]);
   const [clicked, setClicked] = useState(0);
 
@@ -31,7 +27,10 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
   const [selectanimalAssign, setSelectanimalAssign] = useState('');
   console.log('selectanimalAssign: ', selectanimalAssign);
 
-  const [{ data: assignmentList, loading, error }] = useApiAxios(
+  const [
+    { data: assignmentList, loading: getLoading, error: getError },
+    refetch,
+  ] = useApiAxios(
     {
       url: `/adopt_assignment/api/assignmentnotpaging/`,
       method: 'GET',
@@ -62,6 +61,44 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
     { manual: true },
   );
 
+  const [{ loading: addImageLoading, error: addImageError }, addImageRequest] =
+    useApiAxios(
+      {
+        url: `/adopt_review/api/images/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  // 이미지 삭제 API요청
+  const [imageNo, setImageNo] = useState();
+  const [{ loading: deleteLoading, error: deleteError }, deleteImage] =
+    useApiAxios(
+      {
+        url: `/adopt_review/api/images/${imageNo}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  const [{ loading: changeLoading, error: changeError }, changeImage] =
+    useApiAxios(
+      {
+        url: `/adopt_review/api/images/${imageNo}`,
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     review || INIT_FIELD_VALUES,
   );
@@ -76,11 +113,6 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.image1 = '';
-        draft.image2 = '';
-        draft.image3 = '';
-        draft.image4 = '';
-        draft.image5 = '';
         draft.user = auth.userID;
         draft.adoptassignment = selectanimalAssign;
       }),
@@ -93,7 +125,18 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        fileList.forEach((file) => formData.append(name, file));
+        if (
+          review
+            ? fileList.length + review?.board_image?.length > 0 &&
+              fileList.length + review?.board_image?.length <= 5
+            : fileList.length > 0 && fileList.length <= 5
+        ) {
+          fileList.forEach((file) => formData.append(name, file));
+        } else {
+          window.alert(
+            '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
+          );
+        }
       } else {
         formData.append(name, value);
       }
@@ -106,62 +149,41 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
     });
   };
 
-  // 사진 등록시
-  const imgpreview1 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage1(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
+  // 이미지 추가 (수정시)
+  const handleAddImage = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        if (name === 'image') {
+          if (fileList.length + review.board_image.length <= 5) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+              formData.append('find_board_no', review.find_board_no);
+            });
+          } else {
+            window.alert(
+              '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
+            );
+          }
+        }
+      }
+    });
+    addImageRequest({
+      data: formData,
+    }).then(() => {
+      refetch();
     });
   };
 
   // 사진 등록시
-  const imgpreview2 = (e, fileData) => {
+  const imgpreview = (e, fileData) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImage2(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-  // 사진 등록시
-  const imgpreview3 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage3(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-  // 사진 등록시
-  const imgpreview4 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage4(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-  // 사진 등록시
-  const imgpreview5 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage5(reader.result);
+        setPreviewImage(reader.result);
         resolve();
         handleFieldChange(e);
       };
@@ -226,10 +248,10 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
           </blockquote>
 
           {/* 로딩 에러 */}
-          {loading && (
+          {getLoading && (
             <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
           )}
-          {error && (
+          {getError && (
             <>
               <p className="text-red-400 text-center">
                 &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !
@@ -496,239 +518,170 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                 ))}
 
                 {/* 이미지 첨부 인풋박스 */}
-                <div className="my-5 w-full">
-                  <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
-                    이미지 첨부
-                  </span>
-                  <h2 className="text-gray-500 text-xxs text-">
-                    ( 최대 5개까지 이미지를 등록할 수 있습니다. )
-                  </h2>
-
-                  <div className="bg-white py-5">
-                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
-                    <ul>
-                      {/* 개별 이미지 input 박스 1*/}
-                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg, .jfif"
-                          name="image1"
-                          className="xs:text-sm md:text-base"
-                          onChange={(e) => {
-                            imgpreview1(e, e.target.files[0]);
-                          }}
-                        />
-                        {!image1 && (
-                          <div>
-                            <img src={review?.image1} alt="" className="h-44" />
-                          </div>
-                        )}
-
+                {review && (
+                  <>
+                    <h2>첨부 이미지들</h2>
+                    {review.board_image.map((image) => (
+                      <>
+                        <img src={image.image} alt="" className="inline w-44" />
                         <div>
-                          <img src={image1} alt="" className="h-44" />
+                          <button
+                            onMouseOver={() => setImageNo(image.find_image_no)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (review.board_image.length > 1) {
+                                deleteImage().then(() => refetch());
+                              } else {
+                                window.alert(
+                                  '이미지는 최소 한장 이상 존재해야합니다.',
+                                );
+                              }
+                            }}
+                          >
+                            삭제
+                          </button>
                         </div>
+                      </>
+                    ))}
+                  </>
+                )}
 
-                        <button
-                          className="rounded-full px-2 py-1 bg-sky-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImage1('');
-                            setFieldValues((prevFieldValues) => {
-                              return {
-                                ...prevFieldValues,
-                                image1: '',
-                              };
-                            });
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                      {saveErrorMessages.image1?.map((message, index) => (
-                        <p key={index} className="text-xxs text-red-400">
-                          이미지 첨부가 필요합니다!
-                        </p>
-                      ))}
+                {/* 이미지 등록 박스 */}
+                {!review ? (
+                  <div className="my-5 w-full">
+                    <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
+                      이미지 첨부
+                    </span>
+                    <h2 className="text-gray-500 text-xxs text-">
+                      ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                      등록할 수 있습니다. )
+                    </h2>
 
-                      {/* 이미지2 첨부 인풋박스 */}
+                    <div className="bg-white py-5">
+                      {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                      <ul>
+                        {/* 개별 이미지 input 박스 1*/}
+                        <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
+                          <input
+                            type="file"
+                            accept=".png, .jpg, .jpeg, .jfif"
+                            name="image1"
+                            className="xs:text-sm md:text-base"
+                            onChange={(e) => {
+                              imgpreview(e, e.target.files[0]);
+                            }}
+                          />
+                          {!previewImage && (
+                            <div>
+                              <img
+                                src={review?.image1}
+                                alt=""
+                                className="h-44"
+                              />
+                            </div>
+                          )}
 
-                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg, .jfif"
-                          name="image2"
-                          className="xs:text-sm md:text-base"
-                          onChange={(e) => {
-                            imgpreview2(e, e.target.files[0]);
-                          }}
-                        />
-                        {!image2 && (
                           <div>
-                            <img src={review?.image2} alt="" className="h-44" />
+                            <img src={previewImage} alt="" className="h-44" />
                           </div>
+
+                          <button
+                            className="rounded-full px-2 py-1 bg-sky-300"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setPreviewImage('');
+                              setFieldValues((prevFieldValues) => {
+                                return {
+                                  ...prevFieldValues,
+                                  review_image: [],
+                                };
+                              });
+                            }}
+                          >
+                            X
+                          </button>
+                        </li>
+                        {saveErrorMessages.review_image?.map(
+                          (message, index) => (
+                            <p key={index} className="text-xxs text-red-400">
+                              이미지 첨부가 필요합니다!
+                            </p>
+                          ),
                         )}
-
-                        <div>
-                          <img src={image2} alt="" className="h-44" />
-                        </div>
-
-                        <button
-                          className="rounded-full px-2 py-1 bg-sky-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImage2('');
-                            setFieldValues((prevFieldValues) => {
-                              return {
-                                ...prevFieldValues,
-                                image2: '',
-                              };
-                            });
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                      {saveErrorMessages.image2?.map((message, index) => (
-                        <p key={index} className="text-xxs text-red-400">
-                          이미지 첨부가 필요합니다!
-                        </p>
-                      ))}
-
-                      {/* 이미지3 첨부 인풋박스 */}
-
-                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg, .jfif"
-                          name="image3"
-                          className="xs:text-sm md:text-base"
-                          onChange={(e) => {
-                            imgpreview3(e, e.target.files[0]);
-                          }}
-                        />
-                        {!image3 && (
-                          <div>
-                            <img src={review?.image3} alt="" className="h-44" />
-                          </div>
-                        )}
-
-                        <div>
-                          <img src={image3} alt="" className="h-44" />
-                        </div>
-
-                        <button
-                          className="rounded-full px-2 py-1 bg-sky-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImage3('');
-                            setFieldValues((prevFieldValues) => {
-                              return {
-                                ...prevFieldValues,
-                                image3: '',
-                              };
-                            });
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                      {saveErrorMessages.image3?.map((message, index) => (
-                        <p key={index} className="text-xxs text-red-400">
-                          이미지 첨부가 필요합니다!
-                        </p>
-                      ))}
-
-                      {/* 이미지4 첨부 인풋박스 */}
-
-                      {/* 개별 이미지 input 박스 1*/}
-                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg, .jfif"
-                          name="image4"
-                          className="xs:text-sm md:text-base"
-                          onChange={(e) => {
-                            imgpreview4(e, e.target.files[0]);
-                          }}
-                        />
-                        {!image4 && (
-                          <div>
-                            <img src={review?.image4} alt="" className="h-44" />
-                          </div>
-                        )}
-
-                        <div>
-                          <img src={image4} alt="" className="h-44" />
-                        </div>
-
-                        <button
-                          className="rounded-full px-2 py-1 bg-sky-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImage4('');
-                            setFieldValues((prevFieldValues) => {
-                              return {
-                                ...prevFieldValues,
-                                image4: '',
-                              };
-                            });
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                      {saveErrorMessages.image4?.map((message, index) => (
-                        <p key={index} className="text-xxs text-red-400">
-                          이미지 첨부가 필요합니다!
-                        </p>
-                      ))}
-
-                      {/* 이미지5 첨부 인풋박스 */}
-
-                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg, .jfif"
-                          name="image5"
-                          className="xs:text-sm md:text-base"
-                          onChange={(e) => {
-                            imgpreview5(e, e.target.files[0]);
-                          }}
-                        />
-                        {!image5 && (
-                          <div>
-                            <img src={review?.image5} alt="" className="h-44" />
-                          </div>
-                        )}
-
-                        <div>
-                          <img src={image5} alt="" className="h-44" />
-                        </div>
-
-                        <button
-                          className="rounded-full px-2 py-1 bg-sky-300"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImage5('');
-                            setFieldValues((prevFieldValues) => {
-                              return {
-                                ...prevFieldValues,
-                                image5: '',
-                              };
-                            });
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                      {saveErrorMessages.image5?.map((message, index) => (
-                        <p key={index} className="text-xxs text-red-400">
-                          이미지 첨부가 필요합니다!
-                        </p>
-                      ))}
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="my-5 w-full">
+                    {/* 수정시 */}
+                    <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
+                      이미지 추가
+                    </span>
+                    <h2 className="text-gray-500 text-xxs text-">
+                      ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                      등록할 수 있습니다. )
+                    </h2>
+
+                    <div className="bg-white py-5">
+                      {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                      <ul>
+                        {/* 개별 이미지 input 박스 1*/}
+                        <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
+                          <input
+                            type="file"
+                            // multiple={true}
+                            // max={5}
+                            accept=".png, .jpg, .jpeg, .jfif"
+                            name="image"
+                            className="xs:text-sm md:text-base"
+                            onChange={(e) => {
+                              imgpreview(e, e.target.files[0]);
+                            }}
+                          />
+                          {!previewImage && (
+                            <div>
+                              <img
+                                src={review?.image}
+                                alt=""
+                                className="h-44"
+                              />
+                            </div>
+                          )}
+
+                          <div>
+                            <img src={previewImage} alt="" className="h-44" />
+                          </div>
+
+                          <button
+                            className="rounded-full px-2 py-1 bg-sky-300"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setPreviewImage('');
+                              setFieldValues((prevFieldValues) => {
+                                return {
+                                  ...prevFieldValues,
+                                  board_image: [],
+                                };
+                              });
+                            }}
+                          >
+                            X
+                          </button>
+                        </li>
+                        {saveErrorMessages.board_image?.map(
+                          (message, index) => (
+                            <p key={index} className="text-xxs text-red-400">
+                              이미지 첨부가 필요합니다!
+                            </p>
+                          ),
+                        )}
+                      </ul>
+                      <button onClick={(e) => handleAddImage(e)}>
+                        사진 추가하기
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 <div className="text-center">
                   <button
@@ -770,8 +723,8 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
 
       <DebugStates
         review={review}
-        // getLoading={getLoading}
-        // getError={getError}
+        getLoading={getLoading}
+        getError={getError}
         fieldValues={fieldValues}
       />
     </>
