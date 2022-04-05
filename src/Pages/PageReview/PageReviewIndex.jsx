@@ -12,7 +12,6 @@ function PageReviewIndex() {
 
       <Fame />
 
-      <Alert />
       <ReviewList />
     </div>
   );

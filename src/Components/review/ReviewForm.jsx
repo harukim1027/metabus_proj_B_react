@@ -294,7 +294,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                           >
                             <div className="flex justify-center overflow-hidden">
                               <img
-                                src={ani.animal.image}
+                                src={ani.animal.image_url1}
                                 alt="이미지"
                                 className="assign_photo object-cover"
                               />
@@ -303,21 +303,21 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                                 <ul className="mt-6 assign_table_bg border-gray-200 w-70">
                                   <li className="pl-3 pr-5 py-2 flex items-center justify-between text-sm  border-t-1">
                                     <span className="bg-blue-100 font-bold">
-                                      동물 종
+                                      동물 분류
                                     </span>
-                                    <span>{ani.animal.category.name}</span>
+                                    <span>{ani.animal.breed}</span>
                                   </li>
                                   <li className="pl-3 pr-5 py-3 flex items-center justify-between text-sm  border-t-2">
                                     <span className="bg-blue-100 font-bold">
                                       등록 번호
                                     </span>
-                                    <span>{ani.animal.animal_reg_num}</span>
+                                    <span>{ani.animal.announce_no}</span>
                                   </li>
                                   <li className="pl-3 pr-5 py-3 flex items-center justify-between text-sm  border-t-2">
                                     <span className="bg-blue-100 font-bold">
-                                      사이즈
+                                      종
                                     </span>
-                                    <span>{ani.animal.size}</span>
+                                    <span>{ani.animal.breed}</span>
                                   </li>
                                   <li className="pl-3 pr-5 py-3 flex items-center justify-between text-sm  border-t-2">
                                     <span className="bg-blue-100 font-bold">
@@ -356,18 +356,18 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
             .map((a) => (
               <div className="flex flex-wrap justify-center" id="filtAssignDiv">
                 <div className="flex-none place-items-center">
-                  <img src={a.animal.image} alt="" className="w-72" />
+                  <img src={a.animal.image_url1} alt="" className="w-72" />
                 </div>
                 <div className="flex-none mx-4 justify-items-center">
                   <div className="flex justify-center">
                     <ul className="w-72">
                       <li className="flex justify-between mt-2">
-                        <span className="bg-blue-100 font-bold">동물 종</span>
-                        <span>{a.animal.category.name}</span>
+                        <span className="bg-blue-100 font-bold">동물 분류</span>
+                        <span>{a.animal.kind_of_animal}</span>
                       </li>
                       <li className="flex justify-between mt-2">
-                        <span className="bg-blue-100 font-bold">사이즈</span>
-                        <span>{a.animal.size}</span>
+                        <span className="bg-blue-100 font-bold">종</span>
+                        <span>{a.animal.breed}</span>
                       </li>
                       <li className="flex justify-between mt-2">
                         <span className="bg-blue-100 font-bold">성별</span>
@@ -379,7 +379,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                       </li>
                       <li className="flex items-center justify-between mt-2">
                         <span className="bg-blue-100 font-bold">등록번호</span>
-                        <span>{a.animal.animal_reg_num}</span>
+                        <span>{a.animal.announce_no}</span>
                       </li>
                       <li className="flex items-center justify-between mt-2">
                         <span className="bg-blue-100 font-bold">발견 장소</span>
@@ -395,8 +395,8 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
             <div className="flex flex-wrap justify-center">
               <div className="flex-none place-items-center">
                 <img
-                  src={review?.adoptassignment.animal.image}
-                  alt=""
+                  src={review?.adoptassignment.animal.image_url1}
+                  alt="image_url1"
                   className="w-72"
                 />
               </div>
@@ -404,12 +404,14 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                 <div className="flex justify-center">
                   <ul className="w-72">
                     <li className="flex justify-between mt-2">
-                      <span className="bg-blue-100 font-bold">동물 종</span>
-                      <span>{review.adoptassignment.animal.category.name}</span>
+                      <span className="bg-blue-100 font-bold">동물 분류</span>
+                      <span>
+                        {review.adoptassignment.animal.kind_of_animal}
+                      </span>
                     </li>
                     <li className="flex justify-between mt-2">
-                      <span className="bg-blue-100 font-bold">사이즈</span>
-                      <span>{review.adoptassignment.animal.size}</span>
+                      <span className="bg-blue-100 font-bold">종</span>
+                      <span>{review.adoptassignment.animal.breed}</span>
                     </li>
                     <li className="flex justify-between mt-2">
                       <span className="bg-blue-100 font-bold">성별</span>
@@ -421,9 +423,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                     </li>
                     <li className="flex items-center justify-between mt-2">
                       <span className="bg-blue-100 font-bold">등록번호</span>
-                      <span>
-                        {review.adoptassignment.animal.animal_reg_num}
-                      </span>
+                      <span>{review.adoptassignment.animal.announce_no}</span>
                     </li>
                     <li className="flex items-center justify-between mt-2">
                       <span className="bg-blue-100 font-bold">발견 장소</span>
