@@ -10,9 +10,9 @@ function PageReviewIndex() {
       <NewNav />
       <CommunitySidebar />
 
-      <Fame />
+      {/* <Fame />
 
-      <Alert />
+      <Alert /> */}
       <ReviewList />
     </div>
   );

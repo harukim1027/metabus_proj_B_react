@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { toast } from 'react-toastify';
 import Alert from 'Components/review/Alert';
+import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 
 function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
@@ -17,7 +18,7 @@ function MainScreen() {
 
     if (event.deltaY > 0) {
       //
-      if (activeCount < 3) {
+      if (activeCount < 4) {
         setActiveCount((prevActiveCount) => prevActiveCount + 1);
       }
     } else {
@@ -170,6 +171,8 @@ function MainScreen() {
                     목록 보기
                   </a>
                 </div>
+                <br />
+
                 <div className="campaigns">
                   <div className="campaign01">
                     <strong>
@@ -206,6 +209,19 @@ function MainScreen() {
                       <span>유실동물들을 찾을 수 있는 소통 플랫폼</span>
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className={
+                activeCount === 4
+                  ? 'page section04 active_scene'
+                  : 'page section04 preEle'
+              }
+            >
+              <div className="innerCont bgLayer">
+                <div className="top">
+                  <PageAllCenterMap />
                 </div>
               </div>
             </div>

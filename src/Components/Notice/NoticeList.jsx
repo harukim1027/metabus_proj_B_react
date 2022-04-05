@@ -69,14 +69,49 @@ function NoticeList() {
   //-------------
   return (
     <>
+      <div id="container">
+        <div id="contents">
+          <div className="sub_content">
+            <div className="pageTop">
+              <div class="tit">
+                <h2
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  공지사항
+                </h2>
+                <p
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  NOTICE
+                </p>
+              </div>
+              {/* 첫번재 영역 */}
+              <div
+                className="leftBar"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              ></div>
+
+              {/* 두번째 영역 */}
+              <div
+                className="rightBar"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
+                <img
+                  src="/pet-hand-orange1.png"
+                  alt=""
+                  style={{ opacity: 1 }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="board_top_info :before">
+            <div className="info_desc"></div>
+          </div>
+        </div>
+      </div>
+
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 mb-3 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-green-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
-              <span class="relative text-white">" 공지사항 "</span>
-            </span>
-          </blockquote>
-          <hr />
+        <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="mb-6 mt-10">
             <div className="  xs:flex-none xl:flex xl:justify-between">
               <div></div>
