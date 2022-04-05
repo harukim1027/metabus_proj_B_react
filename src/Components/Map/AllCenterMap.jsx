@@ -52,7 +52,7 @@ const EventMarkerContainer = memo(({ marker_obj }) => {
   );
 });
 
-function AllCenterMap({ centersData }) {
+function AllCenterMap({ centersData, ismain }) {
   const [currentLoc, setCurrentLoc] = useState({
     center: {
       lat: 36.32754333444323,
@@ -64,7 +64,6 @@ function AllCenterMap({ centersData }) {
   // const [clickLoc, setClickLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
   const [map, setMap] = useState();
-  const navigate = useNavigate();
 
   // 지오코딩
   const { kakao } = window;
@@ -289,12 +288,14 @@ function AllCenterMap({ centersData }) {
         >
           내 위치
         </button>
-        <button
-          className="p-2 bg-green-300 rounded-lg"
-          onClick={() => window.history.back()}
-        >
-          돌아가기
-        </button>
+        {!ismain && (
+          <button
+            className="p-2 bg-green-300 rounded-lg"
+            onClick={() => window.history.back()}
+          >
+            돌아가기
+          </button>
+        )}
       </div>
     </div>
   );

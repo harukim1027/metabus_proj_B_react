@@ -3,7 +3,7 @@ import AllCenterMap from 'Components/Map/AllCenterMap';
 import LoadingIndicator from 'LoadingIndicator';
 import { useEffect } from 'react';
 
-function PageAllCenterMap() {
+function PageAllCenterMap({ ismain }) {
   // API로 센터 데이터 받기
   const [
     { data: centersData, loading: getCenterLoading, error: getCenterError },
@@ -27,7 +27,7 @@ function PageAllCenterMap() {
   return (
     <>
       {getCenterLoading && <LoadingIndicator />}
-      <AllCenterMap centersData={centersData} />
+      <AllCenterMap centersData={centersData} ismain={ismain} />
     </>
   );
 }
