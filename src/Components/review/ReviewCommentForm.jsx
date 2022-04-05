@@ -74,17 +74,16 @@ function ReviewCommentForm({
         formData.append(name, value);
       }
     });
-    saveRequest({
-      data: formData,
-    }).then(() => {
-      if (window.confirm('댓글을 정말 수정 할까요?')) {
+    if (window.confirm('댓글을 정말 수정 할까요?')) {
+      saveRequest({
+        data: formData,
+      }).then(() => {
         commentRefetch()
           .then(() => refetch())
           .then(() => setHidden(!hidden));
-      }
-    });
+      });
+    }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
