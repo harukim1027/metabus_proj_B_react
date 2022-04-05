@@ -189,7 +189,6 @@ function FindOwnerBoardDetail({ findboardId }) {
                         ? findboard.dog_breed
                         : findboard.cat_breed}
                     </li>
-                    <li>사이즈: {findboard.size}</li>
                     <li>인식표: {findboard.animal_tag}</li>
                     <li>발견자 연락처 : {findboard.user.phone_number}</li>
                     <li>발견장소: {findboard.find_location}</li>

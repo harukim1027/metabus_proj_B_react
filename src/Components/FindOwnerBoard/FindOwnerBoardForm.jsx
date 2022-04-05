@@ -17,7 +17,6 @@ const INIT_FIELD_VALUES = {
   animal_type: '동물 종류',
   dog_breed: '전체',
   cat_breed: '전체',
-  size: '소형',
   sex: '미상',
   animal_tag: '',
   find_location: '',
@@ -82,20 +81,8 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
   const [{ loading: deleteLoading, error: deleteError }, deleteImage] =
     useApiAxios(
       {
-        url: `/find_owner_board/api/images/${imageNo}`,
+        url: `/find_owner_board/api/images/${imageNo}/`,
         method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${auth.access}`,
-        },
-      },
-      { manual: true },
-    );
-
-  const [{ loading: changeLoading, error: changeError }, changeImage] =
-    useApiAxios(
-      {
-        url: `/find_owner_board/api/images/${imageNo}`,
-        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${auth.access}`,
         },
@@ -253,35 +240,6 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 ))}
               </div>
               <br />
-
-              {/* 상태 선택 */}
-              <div className={findBoard ? 'mb-3 w-full' : 'mb-3 w-full hidden'}>
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
-                  상태 선택
-                </span>
-                <div className="relative">
-                  <select
-                    name="status"
-                    value={fieldValues.status}
-                    onChange={handleFieldChange}
-                    className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
-                    defaultValue="찾는중"
-                  >
-                    <option value="찾는중">찾는중</option>
-                    <option value="찾았어요">찾았어요</option>
-                  </select>
-
-                  <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
-                    <svg
-                      className="fill-current h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
 
               {/* 동물 종류 선택 */}
               <div className="mb-3 w-full">
@@ -454,41 +412,6 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 </div>
               )}
 
-              {/* 사이즈 선택 */}
-              <div className="mb-3 w-full">
-                <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
-                  사이즈 선택
-                </span>
-                <div className="relative">
-                  <select
-                    name="size"
-                    value={fieldValues.size}
-                    onChange={handleFieldChange}
-                    className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
-                    defaultValue="소형"
-                  >
-                    <option value="소형">소형</option>
-                    <option value="중형">중형</option>
-                    <option value="대형">대형</option>
-                  </select>
-
-                  <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
-                    <svg
-                      className="fill-current h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                  {saveErrorMessages.size?.map((message, index) => (
-                    <p key={index} className="text-base text-red-400">
-                      사이즈를 선택해주세요.
-                    </p>
-                  ))}
-                </div>
-              </div>
-
               {/* 성별 선택 */}
               <div className="mb-3 w-full">
                 <span className=" tracking-wide text-gray-700 text-base font-bold mb-2">
@@ -652,7 +575,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 </p>
               ))}
 
-              {/* 이미지 첨부 인풋박스 */}
+              {/* 첨부 이미지 삭제 */}
               {findBoard && (
                 <>
                   <h2>첨부 이미지들</h2>
