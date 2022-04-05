@@ -153,32 +153,6 @@ function ReviewDetail({ reviewId }) {
                         <img src={review.image} alt={review.title} />
                       </div>
                     ))}
-
-                    <div className="flex justify-center">
-                      {review.review_image && (
-                        <img src={review.review_image?.[0]?.image} alt="" />
-                      )}
-                    </div>
-                    <div className="flex justify-center">
-                      {review.review_image && (
-                        <img src={review.review_image?.[1]?.image} alt="" />
-                      )}
-                    </div>
-                    <div className="flex justify-center">
-                      {review.review_image && (
-                        <img src={review.review_image?.[2]?.image} alt="" />
-                      )}
-                    </div>
-                    <div className="flex justify-center">
-                      {review.review_image && (
-                        <img src={review.review_image?.[3]?.image} alt="" />
-                      )}
-                    </div>
-                    <div className="flex justify-center">
-                      {review.review_image && (
-                        <img src={review.review_image?.[4]?.image} alt="" />
-                      )}
-                    </div>
                   </div>
 
                   {/*  */}

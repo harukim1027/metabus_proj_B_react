@@ -13,9 +13,10 @@ import { useNavigate } from 'react-router-dom';
 const INIT_FIELD_VALUES = {
   title: '',
   content: '',
+  review_image: [],
 };
 
-function ReviewForm({ review, reviewId, handleDidSave }) {
+function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState('');
@@ -27,19 +28,17 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
   const [selectanimalAssign, setSelectanimalAssign] = useState('');
   console.log('selectanimalAssign: ', selectanimalAssign);
 
-  const [
-    { data: assignmentList, loading: getLoading, error: getError },
-    refetch,
-  ] = useApiAxios(
-    {
-      url: `/adopt_assignment/api/assignmentnotpaging/`,
-      method: 'GET',
-      data: { user: auth.userID },
-    },
-    {
-      manual: false,
-    },
-  );
+  const [{ data: assignmentList, loading: getLoading, error: getError }] =
+    useApiAxios(
+      {
+        url: `/adopt_assignment/api/assignmentnotpaging/`,
+        method: 'GET',
+        data: { user: auth.userID },
+      },
+      {
+        manual: false,
+      },
+    );
 
   const [
     {
@@ -127,8 +126,8 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
         const fileList = value;
         if (
           review
-            ? fileList.length + review?.board_image?.length > 0 &&
-              fileList.length + review?.board_image?.length <= 5
+            ? fileList.length + review?.review_image?.length > 0 &&
+              fileList.length + review?.review_image?.length <= 5
             : fileList.length > 0 && fileList.length <= 5
         ) {
           fileList.forEach((file) => formData.append(name, file));
@@ -157,10 +156,10 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
       if (Array.isArray(value)) {
         const fileList = value;
         if (name === 'image') {
-          if (fileList.length + review.board_image.length <= 5) {
+          if (fileList.length + review.review_image.length <= 5) {
             fileList.forEach((file) => {
               formData.append(name, file);
-              formData.append('find_board_no', review.find_board_no);
+              formData.append('review_no', review.review_no);
             });
           } else {
             window.alert(
@@ -173,7 +172,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
     addImageRequest({
       data: formData,
     }).then(() => {
-      refetch();
+      refetchReview();
     });
   };
 
@@ -521,16 +520,18 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                 {review && (
                   <>
                     <h2>첨부 이미지들</h2>
-                    {review.board_image.map((image) => (
+                    {review.review_image.map((image) => (
                       <>
                         <img src={image.image} alt="" className="inline w-44" />
                         <div>
                           <button
-                            onMouseOver={() => setImageNo(image.find_image_no)}
+                            onMouseOver={() =>
+                              setImageNo(image.review_image_no)
+                            }
                             onClick={(e) => {
                               e.preventDefault();
-                              if (review.board_image.length > 1) {
-                                deleteImage().then(() => refetch());
+                              if (review.review_image.length > 1) {
+                                deleteImage().then(() => refetchReview());
                               } else {
                                 window.alert(
                                   '이미지는 최소 한장 이상 존재해야합니다.',
@@ -564,8 +565,10 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                         <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
                           <input
                             type="file"
+                            multiple={true}
+                            max={5}
                             accept=".png, .jpg, .jpeg, .jfif"
-                            name="image1"
+                            name="review_image"
                             className="xs:text-sm md:text-base"
                             onChange={(e) => {
                               imgpreview(e, e.target.files[0]);
@@ -574,7 +577,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                           {!previewImage && (
                             <div>
                               <img
-                                src={review?.image1}
+                                src={review?.image}
                                 alt=""
                                 className="h-44"
                               />
@@ -660,7 +663,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                               setFieldValues((prevFieldValues) => {
                                 return {
                                   ...prevFieldValues,
-                                  board_image: [],
+                                  review_image: [],
                                 };
                               });
                             }}
@@ -668,7 +671,7 @@ function ReviewForm({ review, reviewId, handleDidSave }) {
                             X
                           </button>
                         </li>
-                        {saveErrorMessages.board_image?.map(
+                        {saveErrorMessages.review_image?.map(
                           (message, index) => (
                             <p key={index} className="text-xxs text-red-400">
                               이미지 첨부가 필요합니다!
