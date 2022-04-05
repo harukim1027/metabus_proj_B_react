@@ -186,13 +186,6 @@ function AssignDetail({ assignId }) {
 
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  만남 희망 장소
-                </th>
-                <td>{assignData?.place_to_meet}</td>
-              </tr>
-
-              <tr>
-                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
                   만남 희망일
                 </th>
                 <td>{assignData?.date_to_meet}</td>
@@ -310,23 +303,19 @@ function AssignDetail({ assignId }) {
             <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  등록번호
+                  공고번호
                 </th>
-                <td>{assignData?.animal.animal_reg_num}</td>
+                <td>{assignData?.animal.announce_no}</td>
               </tr>
 
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  종류
+                  품종
                 </th>
-                <td>{assignData?.animal.category.name}</td>
-              </tr>
-
-              <tr>
-                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  사이즈
-                </th>
-                <td>{assignData?.animal.size}</td>
+                <td>
+                  {assignData?.animal.kind_of_animal} &gt;{' '}
+                  {assignData?.animal.breed}
+                </td>
               </tr>
 
               <tr>
@@ -345,6 +334,13 @@ function AssignDetail({ assignId }) {
 
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  무게
+                </th>
+                <td>{assignData?.animal.weight}kg</td>
+              </tr>
+
+              <tr>
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
                   특징
                 </th>
                 <td>{assignData?.animal.info}</td>
@@ -352,20 +348,22 @@ function AssignDetail({ assignId }) {
 
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  보호 시작일
+                  관할 기관
                 </th>
-                <td>{assignData?.animal.start_date}</td>
+                <td>{assignData?.animal.competent_organization}</td>
               </tr>
 
               <tr>
                 <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                  보호 종료일
+                  보호 상태
                 </th>
-                <td>{assignData?.animal.end_date}</td>
+                <td>{assignData?.animal.protect_status}</td>
               </tr>
             </table>
             <div className="flex justify-center">
-              <img src={assignData?.animal.image} alt="" />
+              <img src={assignData?.animal.image_url1} alt="" />
+              <img src={assignData?.animal.image_url2} alt="" />
+              <img src={assignData?.animal.image_url3} alt="" />
             </div>
           </div>
 
