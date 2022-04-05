@@ -22,22 +22,24 @@ function LostPetBoardDetail({ lostpetboardId }) {
   );
 
   // 등록된 동물 조회
-  const [{ data: AnimalList, loading: getLoading, error: getError }, refetch2] =
-    useApiAxios(
-      {
-        url: `/streetanimal/api/animalnotpaging/`,
-        method: `GET`,
-        params: {
-          kind: lostpetboard?.animal_type,
-          sex: lostpetboard?.sex,
-          breed:
-            lostpetboard?.dog_breed === '전체'
-              ? lostpetboard?.cat_breed
-              : lostpetboard?.dog_breed,
-        },
+  const [
+    { data: AnimalList, loading: getLoading, error: getError },
+    refetchSimilar,
+  ] = useApiAxios(
+    {
+      url: `/streetanimal/api/animalnotpaging/`,
+      method: `GET`,
+      params: {
+        kind: lostpetboard?.animal_type,
+        sex: lostpetboard?.sex,
+        breed:
+          lostpetboard?.dog_breed === '전체'
+            ? lostpetboard?.cat_breed
+            : lostpetboard?.dog_breed,
       },
-      { manual: true },
-    );
+    },
+    { manual: true },
+  );
   console.log('AnimalList: ', AnimalList);
 
   // delete 요청
@@ -91,7 +93,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
   }, []);
 
   useEffect(() => {
-    refetch2();
+    refetchSimilar();
   }, [lostpetboard]);
 
   //-------------
@@ -223,11 +225,30 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   <div>
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
-                      {AnimalList?.map((animal) => {
-                        return animal.announce_image.map((image) => (
-                          <img src={image.image} alt="" />
-                        ));
-                      })}
+                      {AnimalList?.map((animal) => (
+                        <div
+                          className=" w-52 h-60 inline-block m-2 hover:scale-110 duration-150 cursor-pointer"
+                          onClick={() =>
+                            navigate(
+                              `/assignment/checkanimal/${animal.announce_no}/`,
+                            )
+                          }
+                        >
+                          <div className=" shadow-lg rounded-lg h-full overflow-hidden">
+                            <div className=" flex justify-center h-2/3 overflow-hidden">
+                              <img
+                                src={animal.image_url1}
+                                alt=""
+                                className="object-cover"
+                              />
+                            </div>
+                            <div>
+                              <h2>{animal.announce_no}</h2>
+                              <h2>{animal.breed}</h2>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 

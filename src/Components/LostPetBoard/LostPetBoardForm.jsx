@@ -8,16 +8,17 @@ import produce from 'immer';
 import LoadingIndicator from 'LoadingIndicator';
 import './LostPetBoard.css';
 import '../../App.css';
+import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
+import Modal from 'react-modal/lib/components/Modal';
 
 const INIT_FIELD_VALUES = {
   title: '',
-  status: '상태 선택',
+  status: '찾는중',
   animal_type: '동물 종류',
   dog_breed: '전체',
   cat_breed: '전체',
   pet_name: '',
-  size: '소형',
-  sex: '미상',
+  sex: '암컷',
   animal_tag: '',
   lost_location: '',
   lost_time: '',
@@ -28,22 +29,25 @@ const INIT_FIELD_VALUES = {
 function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   const { auth } = useAuth();
   const navigate = useNavigate();
-  const [image, setImage] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
+  const [showMap, setShowMap] = useState(false);
+  const [inputAddr, setInputAddr] = useState();
 
-  const [saveImage, setSaveImage] = useState('');
+  const [
+    { data: lostpetBoard, loading: getLoading, error: getError },
+    refetch,
+  ] = useApiAxios(
+    {
+      url: `/lost_pet_board/api/board/${lostpetboardId}/`,
+      method: 'GET',
+      // data: { user: auth.userID },
+    },
+    {
+      manual: !lostpetboardId,
+    },
+  );
 
-  const [{ data: lostpetBoard, loading: getLoading, error: getError }] =
-    useApiAxios(
-      {
-        url: `/lost_pet_board/api/board/${lostpetboardId}/`,
-        method: 'GET',
-        // data: { user: auth.userID },
-      },
-      {
-        manual: !lostpetboardId,
-      },
-    );
-
+  // 게시글 저장 API 요청
   const [
     {
       loading: saveLoading,
@@ -64,15 +68,44 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     { manual: true },
   );
 
+  const [{ loading: addImageLoading, error: addImageError }, addImageRequest] =
+    useApiAxios(
+      {
+        url: `/lost_pet_board/api/images/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  // 이미지 삭제 API 요청
+  const [imageNo, setImageNo] = useState();
+  const [{ loading: deleteLoading, error: deleteError }, deleteImage] =
+    useApiAxios(
+      {
+        url: `/lost_pet_board/api/images/${imageNo}/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      {
+        manual: true,
+      },
+    );
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     lostpetBoard || INIT_FIELD_VALUES,
   );
 
+  // 마커 위치의 주소 input에 넣기
   useEffect(() => {
-    setFieldValues((prevFieldValues) => ({
-      ...prevFieldValues,
-    }));
-  }, [lostpetBoard]);
+    setFieldValues((prev) => {
+      return { ...prev, lost_location: inputAddr };
+    });
+  }, [inputAddr]);
 
   useEffect(() => {
     setFieldValues(
@@ -88,10 +121,17 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        if (fileList.length <= 5) {
+        if (
+          lostpetBoard
+            ? fileList.length + lostpetBoard?.board_image?.length > 0 &&
+              fileList.length + lostpetBoard?.board_image?.length <= 5
+            : fileList.length > 0 && fileList.length <= 5
+        ) {
           fileList.forEach((file) => formData.append(name, file));
         } else {
-          window.alert('첨부파일은 최대 5개까지 첨부 가능합니다.');
+          window.alert(
+            '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
+          );
         }
       } else {
         formData.append(name, value);
@@ -105,13 +145,41 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     });
   };
 
-  // 사진 등록시
+  // 이미지 추가 (수정시)
+  const handleAddImage = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        if (name === 'image') {
+          if (fileList.length + lostpetBoard.board_image.length <= 5) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+              formData.append('lost_board_no', lostpetBoard.lost_board_no);
+            });
+          } else {
+            window.alert(
+              '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
+            );
+          }
+        }
+      }
+    });
+    addImageRequest({
+      data: formData,
+    }).then(() => {
+      refetch();
+    });
+  };
+
+  // 사진 등록시 미리보기
   const imgpreview = (e, fileData) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImage(reader.result);
+        setPreviewImage(reader.result);
         resolve();
         handleFieldChange(e);
       };
@@ -177,38 +245,6 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 ))}
               </div>
               <br />
-
-              {/* 상태 선택 */}
-              <div className="mb-3 w-full">
-                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
-                  상태 선택
-                </span>
-                <div className="relative">
-                  <select
-                    name="status"
-                    value={fieldValues.status}
-                    onChange={handleFieldChange}
-                    className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
-                    defaultValue="상태 선택"
-                  >
-                    <option value="">상태 선택</option>
-                    <option value="찾는중">찾는중</option>
-                    {fieldValues.status === '찾는중' && (
-                      <option value="찾았어요">찾았어요</option>
-                    )}
-                  </select>
-
-                  <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
-                    <svg
-                      className="fill-current h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
 
               {/* 동물 종류 선택 */}
               <div className="mb-3 w-full">
@@ -400,41 +436,6 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 ))}
               </div>
 
-              {/* 사이즈 선택 */}
-              <div className="mb-3 w-full">
-                <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
-                  사이즈 선택
-                </span>
-                <div className="relative">
-                  <select
-                    name="size"
-                    value={fieldValues.size}
-                    onChange={handleFieldChange}
-                    className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
-                    defaultValue="소형"
-                  >
-                    <option value="소형">소형</option>
-                    <option value="중형">중형</option>
-                    <option value="대형">대형</option>
-                  </select>
-
-                  <div className="pointer-events-none absolute top-4 right-3 flex items-center px-2 text-gray-700">
-                    <svg
-                      className="fill-current h-5 w-5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
-                  {saveErrorMessages.size?.map((message, index) => (
-                    <p key={index} className="text-base text-red-400">
-                      사이즈를 선택해주세요.
-                    </p>
-                  ))}
-                </div>
-              </div>
-
               {/* 성별 선택 */}
               <div className="mb-3 w-full">
                 <span className=" tracking-wide text-gray-700 text-base font-bold mb-2">
@@ -446,9 +447,8 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                     value={fieldValues.sex}
                     onChange={handleFieldChange}
                     className="rounded-md text-lg bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6 appearance-none"
-                    defaultValue="미상"
+                    defaultValue="암컷"
                   >
-                    <option value="미상">미상</option>
                     <option value="암컷">암컷</option>
                     <option value="수컷">수컷</option>
                   </select>
@@ -489,15 +489,64 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 ))}
               </div>
 
-              {/* 유실장소 input 박스 */}
+              {/* 발견장소 지도로 선택하여 input박스에 입력되는 기능 */}
               <div className="mb-3 w-full">
                 <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 text-base font-bold mb-2">
                   유실 장소
                 </span>
+                <button
+                  className="bg-blue-800 hover:bg-blue-300 text-white hover:text-black rounded-lg p-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowMap(true);
+                  }}
+                >
+                  지도에서 선택하기
+                </button>
+                <Modal
+                  isOpen={showMap}
+                  onRequestClose={() => setShowMap(false)}
+                  style={{
+                    overlay: {
+                      position: 'fixed',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+                    },
+                    content: {
+                      position: 'absolute',
+                      top: '140px',
+                      left: '40px',
+                      right: '40px',
+                      bottom: '140px',
+                      border: '1px solid #ccc',
+                      background: '#fff',
+                      overflow: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                      borderRadius: '10px',
+                      outline: 'none',
+                      padding: '20px',
+                    },
+                  }}
+                >
+                  <button
+                    className="p-2 bg-green-300 rounded-lg right-0"
+                    onClick={() => setShowMap(false)}
+                  >
+                    지도 닫기
+                  </button>
+                  <PageMyLocationMap
+                    setInputAddr={setInputAddr}
+                    setShowMap={setShowMap}
+                  />
+                </Modal>
                 <input
                   name="lost_location"
-                  value={fieldValues.lost_location}
-                  onChange={handleFieldChange}
+                  value={inputAddr || fieldValues.lost_location}
+                  readOnly={true}
+                  onChange={(e) => handleFieldChange(e)}
                   placeholder="유실 장소를 입력해주세요."
                   className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
                 />
@@ -549,69 +598,169 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 </p>
               ))}
 
-              {/* 이미지 첨부 인풋박스 */}
-              <div className="my-5 w-full">
-                <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
-                  이미지 첨부
-                </span>
-                <h2 className="text-gray-500 text-xxs text-">
-                  ( 최대 5개까지 이미지를 등록할 수 있습니다. )
-                </h2>
-
-                <div className="bg-white py-5">
-                  {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
-                  <ul>
-                    {/* 개별 이미지 input 박스 1*/}
-                    <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
-                      <input
-                        type="file"
-                        multiple={true}
-                        max={5}
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="board_image"
-                        className="xs:text-sm md:text-base"
-                        onChange={(e) => {
-                          imgpreview(e, e.target.files[0]);
-                        }}
-                      />
-                      {!image && (
-                        <div>
-                          <img
-                            src={lostpetBoard?.image}
-                            alt=""
-                            className="h-44"
-                          />
-                        </div>
-                      )}
-
+              {lostpetBoard && (
+                <>
+                  <h2>첨부 이미지들</h2>
+                  {lostpetBoard.board_image.map((image) => (
+                    <>
+                      <img src={image.image} alt="" className="inline w-44" />
                       <div>
-                        <img src={image} alt="" className="h-44" />
+                        <button
+                          onMouseOver={() => setImageNo(image.lost_image_no)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (lostpetBoard.board_image.length > 1) {
+                              deleteImage().then(() => refetch());
+                            } else {
+                              window.alert(
+                                '이미지는 최소 한장 이상 존재해야합니다.',
+                              );
+                            }
+                          }}
+                        >
+                          삭제
+                        </button>
                       </div>
+                    </>
+                  ))}
+                </>
+              )}
 
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        이미지 첨부가 필요합니다!
-                      </p>
-                    ))}
-                  </ul>
+              {/* 이미지 등록 부분 */}
+              {!lostpetBoard ? (
+                <div className="my-5 w-full">
+                  {/* 등록시 */}
+                  <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
+                    이미지 첨부
+                  </span>
+                  <h2 className="text-gray-500 text-xxs text-">
+                    ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                    등록할 수 있습니다. )
+                  </h2>
+
+                  <div className="bg-white py-5">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 이미지 input 박스 1*/}
+                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
+                        <input
+                          type="file"
+                          multiple={true}
+                          max={5}
+                          accept=".png, .jpg, .jpeg, .jfif"
+                          name="board_image"
+                          className="xs:text-sm md:text-base"
+                          onChange={(e) => {
+                            imgpreview(e, e.target.files[0]);
+                          }}
+                        />
+                        {!previewImage && (
+                          <div>
+                            <img
+                              src={lostpetBoard?.image}
+                              alt=""
+                              className="h-44"
+                            />
+                          </div>
+                        )}
+
+                        <div>
+                          <img src={previewImage} alt="" className="h-44" />
+                        </div>
+
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPreviewImage('');
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                board_image: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                      {saveErrorMessages.board_image?.map((message, index) => (
+                        <p key={index} className="text-xxs text-red-400">
+                          이미지 첨부가 필요합니다!
+                        </p>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="my-5 w-full">
+                  {/* 수정시 */}
+                  <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
+                    이미지 추가
+                  </span>
+                  <h2 className="text-gray-500 text-xxs text-">
+                    ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                    등록할 수 있습니다. )
+                  </h2>
+
+                  <div className="bg-white py-5">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 이미지 input 박스 1*/}
+                      <li className="mx-5 flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mr-5 sm:mr-0">
+                        <input
+                          type="file"
+                          // multiple={true}
+                          // max={5}
+                          accept=".png, .jpg, .jpeg, .jfif"
+                          name="image"
+                          className="xs:text-sm md:text-base"
+                          onChange={(e) => {
+                            imgpreview(e, e.target.files[0]);
+                          }}
+                        />
+                        {!previewImage && (
+                          <div>
+                            <img
+                              src={lostpetBoard?.image}
+                              alt=""
+                              className="h-44"
+                            />
+                          </div>
+                        )}
+
+                        <div>
+                          <img src={previewImage} alt="" className="h-44" />
+                        </div>
+
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPreviewImage('');
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                board_image: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                      {saveErrorMessages.board_image?.map((message, index) => (
+                        <p key={index} className="text-xxs text-red-400">
+                          이미지 첨부가 필요합니다!
+                        </p>
+                      ))}
+                    </ul>
+                    <button onClick={(e) => handleAddImage(e)}>
+                      사진 추가하기
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <div className="text-center">
                 <button
