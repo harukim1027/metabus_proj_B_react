@@ -39,7 +39,7 @@ function Fame() {
         return second[1] - first[1];
       })
       .slice(0, 2);
-    console.log('result', result);
+    // console.log('result', result);
     return result;
   }
 
