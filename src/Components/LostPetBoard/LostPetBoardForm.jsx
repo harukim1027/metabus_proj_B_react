@@ -761,6 +761,10 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                   </div>
                 </div>
               )}
+              <h2>
+                ※글 작성 시 발견자와의 연락을 위해 회원정보에 저장된 전화번호가
+                자동으로 저장됩니다.
+              </h2>
 
               <div className="text-center">
                 <button
