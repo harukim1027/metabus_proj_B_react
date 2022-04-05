@@ -442,7 +442,7 @@
   width: 100%;
 }
 .section01 .bgLayer {
-  color: #fff;
+  color: rgb(201, 232, 255);
 }
 .section01 .bgLayer .cover {
   position: absolute;
@@ -454,7 +454,7 @@
   opacity: 0.8;
 }
 .section01 .maskLayer {
-  color: #f1faff;
+  color: #aedef8;
   transform: translateZ();
   transition: inherit;
   -webkit-clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));

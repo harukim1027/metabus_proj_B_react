@@ -50,7 +50,7 @@ function MainScreen() {
             >
               <img
                 className="xs:w-5/6 xl:w-3/5"
-                src="/main_icon_dog.png"
+                src="/main_dog_blue.png"
                 alt=""
               />
               <div className="innerCont bgLayer">
@@ -138,19 +138,6 @@ function MainScreen() {
                   </div>
                 </div>
               )}
-            </div>
-            <div
-              className={
-                activeCount === 4
-                  ? 'page section04 active_scene'
-                  : 'page section04 preEle'
-              }
-            >
-              <div className="innerCont bgLayer">
-                <div className="top">
-                  <PageAllCenterMap />
-                </div>
-              </div>
             </div>
 
             {/* <!-- 메인 bottom --> */}

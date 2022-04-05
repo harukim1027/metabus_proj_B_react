@@ -64,7 +64,7 @@
 
 /* 메인 상단 */
 .section01 {
-  background: #ffffff;
+  background: #a0cbf4;
 }
 .section01 .innerCont {
   display: flex;
@@ -88,7 +88,7 @@
   width: 100%;
 }
 .section01 .bgLayer {
-  color: #fff;
+  color: rgb(27, 98, 121);
 }
 .section01 .bgLayer .cover {
   position: absolute;
@@ -100,7 +100,7 @@
   opacity: 0.8;
 }
 .section01 .maskLayer {
-  color: #f1faff;
+  color: #176690;
   transform: translateZ();
   transition: inherit;
   -webkit-clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));
@@ -153,7 +153,7 @@
   padding: 0 50px;
 }
 .section02 .bgLayer {
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 .section02 .bgLayer .cover {
   position: absolute;
