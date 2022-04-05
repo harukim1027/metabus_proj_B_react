@@ -7,6 +7,8 @@ import { useAuth } from 'contexts/AuthContext';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
 import ReactPaginate from 'react-paginate';
+import './Review.css';
+import Fame from './HallOfFame';
 
 const INIT_FIELD_VALUES = { category: '전체' };
 
@@ -114,20 +116,20 @@ function ReviewList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar"
+                className="leftBar2"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar"
+                className="rightBar2"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
               </div>
             </div>
           </div>
-          <div className="board_top_info :before">
+          <div className="board_top_info2 :before">
             <div className="info_desc">
               <p className="text-right">
                 메타버스는 <br />
@@ -139,8 +141,7 @@ function ReviewList() {
       </div>
 
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <hr />
+        <div className="mx-5 notice_header rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -153,8 +154,10 @@ function ReviewList() {
                 </p>
               </>
             )}
-          </div>
-
+          </div>{' '}
+          <div className="review_list xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+          <br />
+          <br />
           {/* 검색 필드 + CSS */}
           {/* 검색, 카테고리, 글 작성 버튼 위치 고정하기 (xxs랑 sm 범위에서만) */}
           <div className="mb-6 mt-10">
@@ -232,6 +235,7 @@ function ReviewList() {
           />
         </div>
       </div>
+      <div className="review_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
     </>
   );
 }

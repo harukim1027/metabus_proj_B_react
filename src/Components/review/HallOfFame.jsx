@@ -53,7 +53,7 @@ function Fame() {
   return (
     <>
       <div className="header flex flex-wrap justify-center mt-10">
-        <div className="mx-1 review_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-10 pb-10 my-1 w-2/3 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-1 review_header rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-10 pb-10 my-1 w-2/3 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
             <span className="mt-7 mb-6 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
               <span className="relative text-white">" 명예의 전당 "</span>
