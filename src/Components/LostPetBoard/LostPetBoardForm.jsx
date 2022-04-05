@@ -281,11 +281,11 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 </div>
               </div>
 
-              {/* 강아지 품종 */}
+              {/* 개 품종 */}
               {fieldValues.animal_type === '개' && (
                 <div className="mb-3 w-full">
                   <span className="tracking-wide text-gray-700 text-base font-bold mb-2">
-                    강아지 품종 선택
+                    개 품종 선택
                   </span>
                   <div className="relative">
                     <select
@@ -355,7 +355,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                     </div>
                     {saveErrorMessages.dog_breed?.map((message, index) => (
                       <p key={index} className="text-base text-red-400">
-                        강아지 품종을 선택해주세요.
+                        개 품종을 선택해주세요.
                       </p>
                     ))}
                   </div>
