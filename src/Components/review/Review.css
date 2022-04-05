@@ -166,7 +166,7 @@
   position: absolute;
   left: calc((100vw - 1200px) / 2 * -1);
   width: calc((100vw - 1200px) / 2 + 1200px);
-  height: 60px;
+  height: 30px;
   border-top-right-radius: 150px; 
   border-bottom-right-radius: 150px; 
   background-image: linear-gradient(to left, #7eb2e4, #C1D3E4);
@@ -180,7 +180,7 @@
   position: absolute;
   right: calc((100vw - 1200px) / 2 * -1);
   width: calc((100vw - 1200px) / 2 + 1200px);
-  height: 60px;
+  height: 40px;
   border-top-left-radius: 150px; 
   border-bottom-left-radius: 150px; 
   background-image: linear-gradient(to right, #7eb2e4, #C1D3E4);

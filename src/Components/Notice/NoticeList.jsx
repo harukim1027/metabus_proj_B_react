@@ -72,7 +72,7 @@ function NoticeList() {
       <div id="container">
         <div id="contents">
           <div className="sub_content">
-            <div className="pageTop">
+            <div className="pageTop2">
               <div class="tit">
                 <h2
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
@@ -96,19 +96,13 @@ function NoticeList() {
                 className="rightBar"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
-                <img
-                  src="/pet-hand-orange1.png"
-                  alt=""
-                  style={{ opacity: 1 }}
-                />
+                <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
               </div>
             </div>
           </div>
-          <div className="board_top_info :before">
-            <div className="info_desc"></div>
-          </div>
         </div>
       </div>
+      <div className="review_list3 xs:w-3/4 md:w-5/6 xl:w-7/8"></div>
 
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
