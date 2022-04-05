@@ -190,12 +190,37 @@ function AllCenterMap({ centersData }) {
   //   console.log('myLoc: ', myLoc);
   // }, [myLoc]);
   return (
-    <>
+    <div className="mt-10">
+      <h2 className="text-center text-2xl font-bold">
+        입양 신청할 보호소를 선택하세요.
+      </h2>
+      {/* 행정동 위치 표기 */}
+      <div
+        style={{
+          position: 'relative',
+          left: '0px',
+          top: '105px',
+          borderRadius: '2px',
+          background: 'rgba(255, 255, 255, 0.8)',
+          zIndex: 3,
+          padding: '5px',
+          width: 'fit-content',
+        }}
+      >
+        <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
+        <br />
+        <span id="centerAddr" className="text-lg"></span>
+      </div>
+      {/* ---------- */}
       {myLoc.center && (
         <Map
           center={myLoc.center}
           isPanto={myLoc.isPanto}
-          style={{ width: '100%', height: '700px' }}
+          style={{
+            width: '100%',
+            height: '600px',
+            position: 'relative',
+          }}
           level="9"
           onCreate={(map) => setMap(map)}
           // 지도 중심의 행정동 표시를 위해 함수 사용
@@ -211,24 +236,6 @@ function AllCenterMap({ centersData }) {
           }}
           className="mt-10"
         >
-          {/* 행정동 위치 표기 */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '10px',
-              top: '40px',
-              borderRadius: '2px',
-              background: 'rgba(255, 255, 255, 0.8)',
-              zIndex: 1,
-              padding: '5px',
-            }}
-          >
-            <span class=" font-semibold">지도중심기준 행정동 주소정보</span>
-            <br />
-            <span id="centerAddr"></span>
-          </div>
-          {/* ---------- */}
-
           {/* 전체 보호센터 위치 마커 */}
           {locations.map((marker_obj, index) => {
             return (
@@ -261,29 +268,35 @@ function AllCenterMap({ centersData }) {
               </div>
             </MapMarker>
           )}
-          <div
-            style={{
-              display: 'flex',
-              gap: '10px',
-            }}
-          >
-            <button
-              className="p-2 bg-green-300 rounded-lg"
-              onClick={() =>
-                setMyLoc((prev) => ({
-                  ...prev,
-                  center: currentLoc.center,
-                  isLoading: false,
-                  isPanto: true,
-                }))
-              }
-            >
-              내 위치
-            </button>
-          </div>
         </Map>
       )}
-    </>
+      <div
+        style={{
+          display: 'flex',
+          gap: '10px',
+        }}
+      >
+        <button
+          className="p-2 bg-green-300 rounded-lg "
+          onClick={() =>
+            setMyLoc((prev) => ({
+              ...prev,
+              center: currentLoc.center,
+              isLoading: false,
+              isPanto: true,
+            }))
+          }
+        >
+          내 위치
+        </button>
+        <button
+          className="p-2 bg-green-300 rounded-lg"
+          onClick={() => window.history.back()}
+        >
+          돌아가기
+        </button>
+      </div>
+    </div>
   );
 }
 
