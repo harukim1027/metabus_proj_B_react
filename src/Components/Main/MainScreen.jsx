@@ -10,8 +10,6 @@ function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
   // console.log(activeCount);
 
-  const { auth, logout } = useAuth();
-
   function wheel(event) {
     // event.preventDefault();
 
@@ -129,15 +127,17 @@ function MainScreen() {
                   : 'page section03 preEle'
               }
             >
-              <div className="flex justify-center">
-                <div className="w-11/12 h-48 rounded-lg p-10">
-                  <PageAllCenterMap />
+              {activeCount === 10 && (
+                <div className="flex justify-center">
+                  <div className="w-11/12 h-48 rounded-lg p-10">
+                    <PageAllCenterMap />
 
-                  <button onClick={() => setActiveCount(1)} className="z-10">
-                    TOP▲
-                  </button>
+                    <button onClick={() => setActiveCount(1)} className="z-10">
+                      TOP▲
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* <!-- 메인 bottom --> */}
