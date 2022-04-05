@@ -5,10 +5,11 @@ import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { toast } from 'react-toastify';
 import Alert from 'Components/review/Alert';
+import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 
 function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
-  console.log(activeCount);
+  // console.log(activeCount);
 
   const { auth, logout } = useAuth();
 
@@ -17,7 +18,7 @@ function MainScreen() {
 
     if (event.deltaY > 0) {
       //
-      if (activeCount < 3) {
+      if (activeCount < 10) {
         setActiveCount((prevActiveCount) => prevActiveCount + 1);
       }
     } else {
@@ -30,23 +31,25 @@ function MainScreen() {
 
   //-------------
 
-  console.log('auth', auth);
+  // console.log('auth', auth);
+  // console.log('activecount: ', activeCount);
 
   return (
     <>
       <div></div>
       {/* 본문 시작 */}
-      <div id="header_warp" onWheel={(e) => wheel(e)}>
+      <div id="header_warp">
         {/* <!-- //header_warp --> */}
         {/* <!-- 메인 --> */}
         <div className="main">
           <div className="mainContents">
             <div
               className={
-                activeCount === 1
+                activeCount >= 1 && activeCount < 5
                   ? 'page section01 active_scene'
                   : 'page section01 preEle'
               }
+              onWheel={(e) => wheel(e)}
             >
               <img
                 className="xs:w-5/6 xl:w-3/5"
@@ -87,10 +90,11 @@ function MainScreen() {
 
             <div
               className={
-                activeCount === 2
+                activeCount >= 5 && activeCount < 10
                   ? 'page section02 active_scene'
                   : 'page section02 preEle'
               }
+              onWheel={(e) => wheel(e)}
             >
               <div className="innerCont bgLayer">
                 <div className="cover"></div>
@@ -121,91 +125,18 @@ function MainScreen() {
 
             <div
               className={
-                activeCount === 3
+                activeCount === 10
                   ? 'page section03 active_scene'
                   : 'page section03 preEle'
               }
             >
-              <div className="innerCont bgLayer">
-                <div className="top">
-                  <p className="main-tit-txt">
-                    메타버스에서는 <br />
-                    어떤 일들을 하나요?
-                  </p>
-                  <a href="" className="main-link">
-                    목록 보기
-                  </a>
-                </div>
-                <div className="campaigns">
-                  <div className="campaign01">
-                    <strong>
-                      유기동물
-                      <br />
-                      입양 플랫폼
-                    </strong>
-                  </div>
-                  <div className="campaign02">
-                    <strong>
-                      유기동물
-                      <br />
-                      찾기 커뮤니티
-                    </strong>
-                  </div>
-                  <div className="campaign03">
-                    <strong>
-                      유기동물
-                      <br />
-                      잃어버렸어요 커뮤니티
-                    </strong>
-                  </div>
-                </div>
-              </div>
-              <div className="innerCont maskLayer">
-                <div className="top">
-                  <p className="main-tit-txt">
-                    메타버스에서는 <br />
-                    어떤 일들을 하나요?
-                  </p>
-                  <a href="" className="main-link">
-                    목록 보기
-                  </a>
-                </div>
-                <div className="campaigns">
-                  <div className="campaign01">
-                    <strong>
-                      유기동물
-                      <br />
-                      입양 플랫폼
-                    </strong>
-                    <p>
-                      <span>전국 보호소의 유기동물을</span>
-                      <br />
-                      <span>입양할 수 있는 플랫폼</span>
-                    </p>
-                  </div>
-                  <div className="campaign02">
-                    <strong>
-                      유기동물
-                      <br />
-                      찾기 커뮤니티
-                    </strong>
-                    <p>
-                      <span>동네에서 발견된 유실동물들의 </span>
-                      <br />
-                      <span>주인을 찾는 소통 플랫폼</span>
-                    </p>
-                  </div>
-                  <div className="campaign03">
-                    <strong>
-                      유기동물 <br />
-                      잃어버렸어요 커뮤니티
-                    </strong>
-                    <p>
-                      <span>잃어버린 </span>
-                      <br />
-                      <span>유실동물들을 찾을 수 있는 소통 플랫폼</span>
-                    </p>
-                  </div>
+              <div className="flex justify-center">
+                <div className="w-11/12 h-48 rounded-lg p-10">
+                  <PageAllCenterMap />
+
+                  <button onClick={() => setActiveCount(1)} className="z-10">
+                    TOP▲
+                  </button>
                 </div>
               </div>
             </div>
@@ -228,19 +159,14 @@ function MainScreen() {
               </ul>
             </div>
 
-            {/* <!-- goto top --> */}
-            <a href="#" className="main_gotoTop">
-              TOP
-            </a>
-
             {/* <!-- main scrollbar --> */}
             <div className="mainScrollBar">
               <span
                 className="thumb"
                 style={
-                  activeCount === 1
+                  activeCount >= 1 && activeCount < 5
                     ? { top: '0%' }
-                    : activeCount === 2
+                    : activeCount >= 5 && activeCount < 10
                     ? { top: '35%' }
                     : { top: '83%' }
                 }

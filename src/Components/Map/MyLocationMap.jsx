@@ -141,6 +141,10 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
           }}
           onCreate={(map) => setMap(map)}
           // 지도 중심의 행정동 표시를 위해 함수 사용
+          onCenterChanged={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('map.getCenter: ', map.getCenter());
+          }}
           onDragEnd={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
