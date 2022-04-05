@@ -143,18 +143,18 @@ function NoticeDetail({ noticeId }) {
                             />
                           </svg>
 
-                          {notice.file1 && (
+                          {notice.notice_file && (
                             <>
                               <a
-                                href={notice.file1}
+                                href={notice.notice_file?.file}
                                 className="ml-2 flex-1 w-0 truncate"
                               >
-                                {notice.get_file_name1}
+                                {notice.notice_file?.file}
                               </a>
 
                               <div className="ml-4 flex-shrink-0">
                                 <a
-                                  href={notice.file1}
+                                  href={notice.notice_file?.file}
                                   className="font-medium text-indigo-600 hover:text-indigo-500"
                                 >
                                   Download
