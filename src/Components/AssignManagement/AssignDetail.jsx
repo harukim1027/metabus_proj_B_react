@@ -233,7 +233,7 @@ function AssignDetail({ assignId }) {
           </div>
 
           <div className="flex justify-center content-center">
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2">
+            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
               <h2>거주지 사진1</h2>
               <hr className="border-2 border-gray-300" />
               <img
@@ -244,7 +244,7 @@ function AssignDetail({ assignId }) {
               />
             </div>
 
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2">
+            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
               <h2>거주지 사진2</h2>
               <hr className="border-2 border-gray-300" />
               <img
@@ -254,7 +254,7 @@ function AssignDetail({ assignId }) {
                 className="w-full cursor-pointer my-auto"
               />
             </div>
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2">
+            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
               <h2>거주지 사진3</h2>
               <hr className="border-2 border-gray-300" />
               <img
@@ -291,7 +291,7 @@ function AssignDetail({ assignId }) {
             <div
               className="flex justify-center"
               onClick={() =>
-                navigate(`/admin/animal/${assignData?.animal.animal_no}/`)
+                navigate(`/admin/animal/${assignData?.animal.announce_no}/`)
               }
             >
               <button className="bg-red-400 p-2 rounded-lg text-white">
@@ -360,10 +360,45 @@ function AssignDetail({ assignId }) {
                 <td>{assignData?.animal.protect_status}</td>
               </tr>
             </table>
-            <div className="flex justify-center">
-              <img src={assignData?.animal.image_url1} alt="" />
-              <img src={assignData?.animal.image_url2} alt="" />
-              <img src={assignData?.animal.image_url3} alt="" />
+            <div className="flex justify-center content-center">
+              <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
+                <h2>동물 사진1</h2>
+                <hr className="border-2 border-gray-300" />
+                <img
+                  src={assignData?.animal.image_url1}
+                  alt=""
+                  onClick={() => window.open(assignData?.picture_of_residence1)}
+                  className="w-full cursor-pointer my-auto"
+                />
+              </div>
+              {assignData?.animal.image_url2 && (
+                <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
+                  <h2>동물 사진2</h2>
+                  <hr className="border-2 border-gray-300" />
+                  <img
+                    src={assignData?.animal.image_url2}
+                    alt=""
+                    onClick={() =>
+                      window.open(assignData?.picture_of_residence2)
+                    }
+                    className="w-full cursor-pointer my-auto"
+                  />
+                </div>
+              )}
+              {assignData?.animal.image_url3 && (
+                <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
+                  <h2>동물 사진3</h2>
+                  <hr className="border-2 border-gray-300" />
+                  <img
+                    src={assignData?.animal.image_url3}
+                    alt=""
+                    onClick={() =>
+                      window.open(assignData?.picture_of_residence3)
+                    }
+                    className="w-full cursor-pointer my-auto"
+                  />
+                </div>
+              )}
             </div>
           </div>
 
