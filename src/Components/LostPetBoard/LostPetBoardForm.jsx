@@ -96,6 +96,10 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
       },
     );
 
+  // 시간 기본값 추가
+  const offset = new Date().getTimezoneOffset() * 60000;
+  const today = new Date(Date.now() - offset);
+  INIT_FIELD_VALUES.lost_time = today.toISOString().slice(0, 16);
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     lostpetBoard || INIT_FIELD_VALUES,
   );
@@ -107,6 +111,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     });
   }, [inputAddr]);
 
+  // location undefined 문제 해결
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
@@ -115,6 +120,19 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
       }),
     );
   }, [lostpetBoard, auth]);
+
+  // 개/고양이 한쪽 품종 선택 후 다른걸로 바꿀 경우 전자 초기화
+  useEffect(() => {
+    if (fieldValues.animal_type === '개') {
+      setFieldValues((prev) => {
+        return { ...prev, cat_breed: '전체' };
+      });
+    } else {
+      setFieldValues((prev) => {
+        return { ...prev, dog_breed: '전체' };
+      });
+    }
+  }, [fieldValues.animal_type]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -575,6 +593,9 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                   placeholder="유실 시각을 입력해주세요."
                   className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
                 />
+                {lostpetBoard && (
+                  <h2>등록되어 있는 시각 : {lostpetBoard.lost_time}</h2>
+                )}
                 {saveErrorMessages.lost_time?.map((message, index) => (
                   <p key={index} className="text-base text-red-400">
                     유실 시각을 입력해주세요.

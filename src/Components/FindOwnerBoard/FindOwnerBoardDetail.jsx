@@ -191,6 +191,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                     </li>
                     <li>인식표: {findboard.animal_tag}</li>
                     <li>발견자 연락처 : {findboard.user.phone_number}</li>
+                    <li>발견 시각 : {findboard.find_time}</li>
                     <li>발견장소: {findboard.find_location}</li>
                   </ul>
                   <div>
