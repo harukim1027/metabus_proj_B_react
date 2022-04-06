@@ -79,7 +79,7 @@ function NewNav() {
             >
               <img
                 className="xs:w-3/4 xl:w-3/5"
-                src="/main_dog_gray.png"
+                src="/main_dog_gray1.png"
                 alt=""
               />
               <div className="inner">
