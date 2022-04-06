@@ -91,6 +91,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
       { manual: true },
     );
 
+  // 시간 기본값 추가
+  const offset = new Date().getTimezoneOffset() * 60000;
+  const today = new Date(Date.now() - offset);
+  INIT_FIELD_VALUES.find_time = today.toISOString().slice(0, 16);
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     findBoard || INIT_FIELD_VALUES,
   );
@@ -553,6 +557,9 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                   placeholder="발견 시각을 입력해주세요."
                   className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
                 />
+                {findBoard && (
+                  <h2>등록되어 있는 시각 : {findBoard.find_time}</h2>
+                )}
                 {saveErrorMessages.find_time?.map((message, index) => (
                   <p key={index} className="text-base text-red-400">
                     발견 시각을 입력해주세요.
