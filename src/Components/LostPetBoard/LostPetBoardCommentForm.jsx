@@ -3,16 +3,15 @@ import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = {
   comment_content: '',
 };
 
-function FindOwnerBoardCommentForm({
+function LostPetBoardCommentForm({
   refetch,
   commentID,
-  findboardId,
+  lostpetboardId,
   hidden,
   setHidden,
 }) {
@@ -20,14 +19,14 @@ function FindOwnerBoardCommentForm({
   const navigate = useNavigate();
 
   const [{ data: getdata, loading, error }, commentRefetch] = useApiAxios(
-    `/find_owner_board/api/comments/${commentID}/`,
+    `/lost_pet_board/api/comments/${commentID}/`,
     { manual: !commentID },
   );
 
   // 저장
   const [
     {
-      data: findBoard,
+      data: lostBoard,
       loading: saveLoading,
       error: saveError,
       errorMessages: saveErrorMessages,
@@ -36,8 +35,8 @@ function FindOwnerBoardCommentForm({
   ] = useApiAxios(
     {
       url: !commentID
-        ? `/find_owner_board/api/comments/`
-        : `/find_owner_board/api/comments/${commentID}/`,
+        ? `/lost_pet_board/api/comments/`
+        : `/lost_pet_board/api/comments/${commentID}/`,
       method: !commentID ? 'POST' : 'PUT',
       headers: {
         Authorization: `Bearer ${auth.access}`,
@@ -47,7 +46,7 @@ function FindOwnerBoardCommentForm({
   );
 
   INIT_FIELD_VALUES.user = auth.userID;
-  INIT_FIELD_VALUES.find_board_no = findboardId;
+  INIT_FIELD_VALUES.lost_board_no = lostpetboardId;
   // INIT_FIELD_VALUES.comment_content = review?.comments.comment_content;
 
   const { fieldValues, setFieldValues, handleFieldChange, clearFieldValues } =
@@ -178,4 +177,4 @@ function FindOwnerBoardCommentForm({
     </>
   );
 }
-export default FindOwnerBoardCommentForm;
+export default LostPetBoardCommentForm;
