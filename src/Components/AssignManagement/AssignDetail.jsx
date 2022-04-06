@@ -238,7 +238,9 @@ function AssignDetail({ assignId }) {
           {/* 거주지 사진 부분 */}
           <div className="flex justify-center content-center">
             <div className=" overflow-hidden">
-              <h2>거주지 사진</h2>
+              <h2 className="text-center font-bold">
+                {assignData?.adopter_name}님의 거주지 사진
+              </h2>
               <div className="content-center overflow-hidden">
                 {assignData && (
                   <>
@@ -251,7 +253,7 @@ function AssignDetail({ assignId }) {
                         organicArrows={true}
                         bullets={false}
                       >
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.picture_of_residence1 && (
                             <img
                               src={assignData.picture_of_residence1}
@@ -263,7 +265,7 @@ function AssignDetail({ assignId }) {
                             />
                           )}
                         </span>
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.picture_of_residence2 && (
                             <img
                               src={assignData.picture_of_residence2}
@@ -275,7 +277,7 @@ function AssignDetail({ assignId }) {
                             />
                           )}
                         </span>
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.picture_of_residence3 && (
                             <img
                               src={assignData.picture_of_residence3}
@@ -298,7 +300,7 @@ function AssignDetail({ assignId }) {
                             organicArrows={true}
                             bullets={false}
                           >
-                            <span>
+                            <span className="h-full w-full">
                               {assignData.picture_of_residence1 && (
                                 <img
                                   src={assignData.picture_of_residence1}
@@ -312,7 +314,7 @@ function AssignDetail({ assignId }) {
                                 />
                               )}
                             </span>
-                            <span>
+                            <span className="h-full w-full">
                               {assignData.picture_of_residence2 && (
                                 <img
                                   src={assignData.picture_of_residence2}
@@ -330,7 +332,7 @@ function AssignDetail({ assignId }) {
                         ) : (
                           <>
                             {assignData.picture_of_residence1 && (
-                              <span>
+                              <span className="h-full w-full">
                                 {assignData.picture_of_residence1 && (
                                   <img
                                     src={assignData.picture_of_residence1}
@@ -358,16 +360,21 @@ function AssignDetail({ assignId }) {
       </div>
 
       <div className="flex flex-wrap justify-center">
-        <div className="mx-5 bg-white rounded-xl shadow-md overflow-hidden lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 bg-white rounded-xl  overflow-hidden lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <span className="font-bold text-xl flex justify-center">
+            {assignData?.adopter_name} 님의 신청 상태 ✔
+            <br />
+          </span>
           <div className="flex justify-center py-6 mb-3">
-            <h2>
+            <br />
+            <span className="bg-yellow-100">
               💕입양 {assignData?.status === '입양 완료' ? '완료!' : '신청 중'}
               💕
-            </h2>
+            </span>
           </div>
         </div>
       </div>
-
+      <hr />
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 assignmanagement_header rounded-xl md:px-20 sm:px-0 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           {/* <div className=" pt-6 mb-3"> */}
@@ -453,7 +460,6 @@ function AssignDetail({ assignId }) {
           {/* 동물 사진 부분  */}
           <div className="flex justify-center content-center">
             <div className=" overflow-hidden">
-              <h2>거주지 사진</h2>
               <div className="content-center overflow-hidden">
                 {assignData && (
                   <>
@@ -466,7 +472,7 @@ function AssignDetail({ assignId }) {
                         organicArrows={true}
                         bullets={false}
                       >
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.animal.image_url1 && (
                             <img
                               src={assignData.animal.image_url1}
@@ -475,7 +481,7 @@ function AssignDetail({ assignId }) {
                             />
                           )}
                         </span>
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.animal.image_url2 && (
                             <img
                               src={assignData.animal.image_url2}
@@ -484,7 +490,7 @@ function AssignDetail({ assignId }) {
                             />
                           )}
                         </span>
-                        <span>
+                        <span className="h-full w-full">
                           {assignData.animal.image_url3 && (
                             <img
                               src={assignData.animal.image_url3}
@@ -504,7 +510,7 @@ function AssignDetail({ assignId }) {
                             organicArrows={true}
                             bullets={false}
                           >
-                            <span>
+                            <span className="h-full w-full">
                               {assignData.animal.image_url1 && (
                                 <img
                                   src={assignData.animal.image_url1}
@@ -513,7 +519,7 @@ function AssignDetail({ assignId }) {
                                 />
                               )}
                             </span>
-                            <span>
+                            <span className="h-full w-full">
                               {assignData.animal.image_url2 && (
                                 <img
                                   src={assignData.animal.image_url2}
@@ -526,7 +532,7 @@ function AssignDetail({ assignId }) {
                         ) : (
                           <>
                             {assignData.animal.image_url1 && (
-                              <span>
+                              <span className="h-full w-full">
                                 {assignData.animal.image_url1 && (
                                   <img
                                     src={assignData.animal.image_url1}
