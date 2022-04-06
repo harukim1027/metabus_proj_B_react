@@ -5,10 +5,14 @@ import { useAuth } from 'contexts/AuthContext';
 import { toast } from 'react-toastify';
 import Alert from 'Components/review/Alert';
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
+import 'react-awesome-slider/dist/styles.css';
+import '../review/SlideStyle.css';
 
 import ReviewSummaryMain from 'Components/review/ReviewSummaryMain';
 import { useApiAxios } from 'api/base';
 import ReviewSummary from 'Components/review/ReviewSummary';
+import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
+import AwesomeSlider from 'react-awesome-slider';
 
 function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
@@ -140,15 +144,34 @@ function MainScreen() {
               }
             >
               {activeCount === 10 && (
-                <div className="flex justify-center">
-                  <div className="w-11/12 h-48 rounded-lg p-10">
-                    <PageAllCenterMap ismain={ismain} />
-
-                    <button onClick={() => setActiveCount(1)} className="z-10">
-                      TOP▲
-                    </button>
+                <>
+                  <div className="flex justify-center my-8">
+                    <AwesomeSlider
+                      className="Container w-11/12 h-full"
+                      mobileTouch={true}
+                      organicArrows={true}
+                      bullets={false}
+                    >
+                      <span className="w-5/6">
+                        <div className="flex justify-center w-full my-auto">
+                          <div className="w-11/12 h-full rounded-lg">
+                            <PageAllCenterMap ismain={ismain} />
+                          </div>
+                        </div>
+                      </span>
+                      <span className="w-5/6">
+                        <div className="flex justify-center w-full my-auto">
+                          <div className="w-11/12 h-full rounded-lg">
+                            <PageSearchInfraMap />
+                          </div>
+                        </div>
+                      </span>
+                    </AwesomeSlider>
                   </div>
-                </div>
+                  <button onClick={() => setActiveCount(1)} className="z-10">
+                    TOP▲
+                  </button>
+                </>
               )}
             </div>
 

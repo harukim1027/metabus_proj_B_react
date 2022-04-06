@@ -164,32 +164,9 @@ function AllCenterMap({ centersData, ismain }) {
       }
     }
   }
-  // displayAddressInfo
 
-  // // 클릭한 마커 위치(위,경도)를 주소로 변환하기
-  // useEffect(() => {
-  //   position &&
-  //     searchDetailAddrFromCoords(position.center, function (result, status) {
-  //       if (status === kakao.maps.services.Status.OK) {
-  //         result[0].road_address
-  //           ? setDetailAddr({
-  //               road_addr: result[0].road_address.address_name,
-  //               addr: result[0].address.address_name,
-  //             })
-  //           : setDetailAddr({ addr: result[0].address.address_name });
-  //       } else {
-  //       }
-  //     });
-  // }, [position]);
-
-  // console.log('detailAddr: ', detailAddr, 'position: ', position);
-  // console.log('currentLoc: ', currentLoc);
-  // 확인용
-  // useEffect(() => {
-  //   console.log('myLoc: ', myLoc);
-  // }, [myLoc]);
   return (
-    <div className="mt-10">
+    <div>
       <h2 className="text-center text-2xl font-bold">
         입양 신청할 보호소를 선택하세요.
       </h2>
@@ -198,7 +175,7 @@ function AllCenterMap({ centersData, ismain }) {
         style={{
           position: 'relative',
           left: '0px',
-          top: '105px',
+          top: '65px',
           borderRadius: '2px',
           background: 'rgba(255, 255, 255, 0.8)',
           zIndex: 3,
@@ -217,8 +194,9 @@ function AllCenterMap({ centersData, ismain }) {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: '600px',
+            height: '400px',
             position: 'relative',
+            bottom: '0px',
           }}
           level="9"
           onCreate={(map) => setMap(map)}
@@ -233,7 +211,6 @@ function AllCenterMap({ centersData, ismain }) {
             });
             // console.log('dragend');
           }}
-          className="mt-10"
         >
           {/* 전체 보호센터 위치 마커 */}
           {locations.map((marker_obj, index) => {
@@ -269,14 +246,9 @@ function AllCenterMap({ centersData, ismain }) {
           )}
         </Map>
       )}
-      <div
-        style={{
-          display: 'flex',
-          gap: '10px',
-        }}
-      >
+      <div>
         <button
-          className="p-2 bg-green-300 rounded-lg "
+          className="p-2"
           onClick={() =>
             setMyLoc((prev) => ({
               ...prev,

@@ -13,8 +13,9 @@ function SearchInfraMap() {
     errMsg: null,
     isLoading: true,
   });
+  const [myLoc, setMyLoc] = useState({});
   // 초기값을 의존성 걸어주기 위해 뒤로 이동
-  const [addr, setAddr] = useState('대전광역시 유성구 관평동');
+  const [addr, setAddr] = useState('');
   // const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
 
   const { kakao } = window;
@@ -56,6 +57,10 @@ function SearchInfraMap() {
     }
     //--------------------
   }, []);
+  // 지도 중심좌표 설정
+  useEffect(() => {
+    setMyLoc(currentLoc);
+  }, [currentLoc]);
 
   // 함수들
   // 행정동 주소 표시 함수
@@ -68,9 +73,7 @@ function SearchInfraMap() {
         if (result[i].region_type === 'H') {
           infoDiv.innerHTML = result[i].address_name;
           setAddr(result[i].address_name);
-          const initQuery = result[i].address_name + '동물병원';
-          return initQuery;
-          //   break;
+          break;
         }
       }
     }
@@ -92,38 +95,12 @@ function SearchInfraMap() {
     searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
   }, [currentLoc]);
 
-  // lazy initial state (초기값을 현위치에 의존해 변경)
-  //   const [addr, setAddr] = useState(() => {
-  //     const initialstate = settingINITaddr();
-  //     return initialstate;
-  //   });
-  const [query, setQuery] = useState(() => {
-    const initialstate = settingINITquery();
-    return initialstate;
-  }, [addr]);
+  const [query, setQuery] = useState('대흥동 동물병원');
+  // useEffect(() => {
+  //   setQuery(addr + '동물병원');
+  // }, [myLoc]);
 
-  //   function settingINITaddr() {
-  //     console.log(currentLoc);
-  //     geocoder.coord2RegionCode(
-  //       currentLoc.center.lng,
-  //       currentLoc.center.lat,
-  //       function (result, status) {
-  //         if (status === kakao.maps.services.Status.OK) {
-  //           for (var i = 0; i < result.length; i++) {
-  //             if (result[i].region_type === 'H') {
-  //               return result[i].address_name;
-  //             }
-  //             break;
-  //           }
-  //         }
-  //       },
-  //     );
-  //   }
-
-  function settingINITquery() {
-    searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
-  }
-
+  // 키워드 검색기능
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
@@ -162,110 +139,135 @@ function SearchInfraMap() {
   }, [query]);
 
   return (
-    <>
-      <Map // 로드뷰를 표시할 Container
-        center={currentLoc.center}
+    <div>
+      <h2 className="text-center text-2xl font-bold">
+        지도에서 반려동물 관련 인프라를 확인하세요.
+      </h2>
+      {/* 행정동 위치 표기 */}
+      <div
         style={{
-          width: '100%',
-          height: '700px',
+          position: 'relative',
+          left: '0px',
+          top: '65px',
+          borderRadius: '2px',
+          background: 'rgba(255, 255, 255, 0.8)',
+          zIndex: 3,
+          padding: '5px',
+          width: 'fit-content',
         }}
-        level={3}
-        onCreate={setMap}
-        onDragEnd={(map) => {
-          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-          // console.log('map.getCenter: ', map.getCenter());
-        }}
-        className="mt-10"
       >
-        {/* 행정동 위치 표기 */}
-        <div
+        <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
+        <br />
+        <span id="centerAddr" className="text-lg"></span>
+      </div>
+      {myLoc.center && (
+        <Map // 로드뷰를 표시할 Container
+          center={myLoc.center}
+          isPanto={myLoc.isPanto}
           style={{
-            position: 'absolute',
-            left: '10px',
-            top: '40px',
-            borderRadius: '2px',
-            background: 'rgba(255, 255, 255, 0.8)',
-            zIndex: 1,
-            padding: '5px',
+            width: '100%',
+            height: '400px',
+            position: 'relative',
+            bottom: '0px',
+          }}
+          level={3}
+          onCreate={setMap}
+          onCenterChanged={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('map.getCenter: ', map.getCenter());
+          }}
+          onDragEnd={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('map.getCenter: ', map.getCenter());
           }}
         >
-          <span class=" font-semibold">지도중심기준 행정동 주소정보</span>
-          <br />
-          <span id="centerAddr"></span>
-        </div>
-        {/* ---------- */}
-        {/* 현위치 마커 */}
-        {!currentLoc.isLoading && (
-          <MapMarker
-            position={currentLoc.center}
-            image={{
-              src: '/curlocationmarker.png',
-              size: {
-                width: 40,
-                height: 44,
-              },
-            }}
-          >
-            <div style={{ padding: '5px', color: '#000' }}>
-              {currentLoc.errMsg
-                ? currentLoc.errMsg
-                : '현위치 (PC로 접속 시 오차가 있을 수 있습니다.)'}
-            </div>
-          </MapMarker>
-        )}
-
-        {/* 검색한 인프라 마커들 */}
-        {markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.name}-${marker.position.lat},${marker.position.lng}`}
-            position={marker.position}
-            onClick={() => setInfo(marker)}
-          >
-            {info && info.name === marker.name && (
-              <div className="p-2">
-                <h2>이름: {marker.name}</h2>
-                <h2>전화: {marker.phone}</h2>
-                <button
-                  onClick={() =>
-                    window.open(
-                      `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${marker.name}`,
-                    )
-                  }
-                  className="text-green-800 hover:text-green-400 font-semibold"
-                >
-                  초록창 검색
-                </button>
+          {/* ---------- */}
+          {/* 현위치 마커 */}
+          {!currentLoc.isLoading && (
+            <MapMarker
+              position={currentLoc.center}
+              image={{
+                src: '/curlocationmarker.png',
+                size: {
+                  width: 40,
+                  height: 44,
+                },
+              }}
+            >
+              <div style={{ padding: '5px', color: '#000' }}>
+                {currentLoc.errMsg
+                  ? currentLoc.errMsg
+                  : '현위치 (PC로 접속 시 오차가 있을 수 있습니다.)'}
               </div>
-            )}
-          </MapMarker>
-        ))}
-        <h2>현재 위치에서</h2>
-        <button
-          onClick={() => setQuery(`${addr} 동물병원`)}
-          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
-        >
-          동물 병원 찾기
-        </button>
-        <button
-          onClick={() => setQuery(`${addr} 애견미용`)}
-          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
-        >
-          애견 미용 찾기
-        </button>
-        <button
-          onClick={() => setQuery(`${addr} 애견호텔`)}
-          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
-        >
-          애견 호텔 찾기
-        </button>
-        <button
-          onClick={() => setQuery(`${addr} 애견용품`)}
-          className="text-lg bg-green-300 hover:bg-green-800 hover:text-white p-2 rounded-lg m-2"
-        >
-          애견 용품샵 찾기
-        </button>
-      </Map>
-    </>
+            </MapMarker>
+          )}
+
+          {/* 검색한 인프라 마커들 */}
+          {markers.map((marker) => (
+            <MapMarker
+              key={`marker-${marker.name}-${marker.position.lat},${marker.position.lng}`}
+              position={marker.position}
+              onClick={() => setInfo(marker)}
+            >
+              {info && info.name === marker.name && (
+                <div className="p-2 text-left">
+                  <h2>이름: {marker.name}</h2>
+                  <h2>전화: {marker.phone}</h2>
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${marker.name}`,
+                      )
+                    }
+                    className="text-green-800 hover:text-green-400 font-semibold"
+                  >
+                    초록창 검색
+                  </button>
+                </div>
+              )}
+            </MapMarker>
+          ))}
+          <h2>현재 위치에서</h2>
+          <button
+            className="p-2"
+            onClick={() =>
+              setMyLoc((prev) => ({
+                ...prev,
+                center: currentLoc.center,
+                isLoading: false,
+                isPanto: true,
+              }))
+            }
+          >
+            내 위치
+          </button>
+          <button
+            onClick={() => setQuery(`${addr} 동물병원`)}
+            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+          >
+            동물 병원 찾기
+          </button>
+          <button
+            onClick={() => setQuery(`${addr} 애견미용`)}
+            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+          >
+            애견 미용 찾기
+          </button>
+          <button
+            onClick={() => setQuery(`${addr} 애견호텔`)}
+            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+          >
+            애견 호텔 찾기
+          </button>
+          <button
+            onClick={() => setQuery(`${addr} 애견용품`)}
+            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+          >
+            애견 용품샵 찾기
+          </button>
+        </Map>
+      )}
+    </div>
   );
 }
 
