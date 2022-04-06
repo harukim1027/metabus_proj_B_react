@@ -111,6 +111,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
     setFieldValues(
       produce((draft) => {
         draft.user = auth.userID;
+        draft.lost_location = lostpetBoard?.lost_location;
       }),
     );
   }, [lostpetBoard, auth]);
@@ -544,7 +545,11 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                 </Modal>
                 <input
                   name="lost_location"
-                  value={inputAddr || fieldValues.lost_location}
+                  value={
+                    inputAddr === undefined
+                      ? fieldValues.lost_location
+                      : inputAddr
+                  }
                   readOnly={true}
                   onChange={(e) => handleFieldChange(e)}
                   placeholder="유실 장소를 입력해주세요."

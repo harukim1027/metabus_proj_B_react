@@ -39,6 +39,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
       url: `/streetanimal/api/animalnotpaging/`,
       method: `GET`,
       params: {
+        query: lostpetboard?.lost_location.slice(0, 2),
         kind: lostpetboard?.animal_type,
         sex: lostpetboard?.sex,
         breed:
@@ -50,6 +51,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
     { manual: true },
   );
 
+  console.log(lostpetboard?.lost_location.slice(0, 2));
   useEffect(() => {
     refetchSimilar();
   }, [lostpetboard]);
@@ -220,7 +222,8 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     </li>
                     <li>인식표 : {lostpetboard?.animal_tag}</li>
                     <li>주인 연락처 : {lostpetboard?.user.phone_number}</li>
-                    <li>유실장소 : {lostpetboard?.lost_location}</li>
+                    <li>유실 시각 : {lostpetboard?.lost_time}</li>
+                    <li>유실 장소 : {lostpetboard?.lost_location}</li>
                   </ul>
 
                   <div>
