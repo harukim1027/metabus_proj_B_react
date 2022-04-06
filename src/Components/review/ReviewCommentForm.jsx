@@ -5,7 +5,9 @@ import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const INIT_FIELD_VALUES = {};
+const INIT_FIELD_VALUES = {
+  comment_content: '',
+};
 
 function ReviewCommentForm({
   refetch,
