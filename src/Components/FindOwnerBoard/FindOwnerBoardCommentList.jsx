@@ -2,7 +2,6 @@ import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import FindOwnerBoardCommentForm from './FindOwnerBoardCommentForm';
 import FindOwnerBoardCommentDetail from './FindOwnerBoardCommentDetail';
-import './Comment.css';
 
 function FindOwnerBoardCommentList({ findboardId }) {
   const [{ data: findBoardList, loading, error }, refetch] = useApiAxios(

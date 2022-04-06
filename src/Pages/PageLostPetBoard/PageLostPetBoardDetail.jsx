@@ -1,5 +1,5 @@
 import LostPetBoardDetail from 'Components/LostPetBoard/LostPetBoardDetail';
-import TopNav from 'Components/Main/TopNavi';
+import NewNav from 'Components/Main/NewNav';
 import { useParams } from 'react-router-dom';
 
 function PageLostPetBoardDetail() {
@@ -7,7 +7,7 @@ function PageLostPetBoardDetail() {
 
   return (
     <>
-      <TopNav />
+      <NewNav />
       <LostPetBoardDetail lostpetboardId={lostpetboardId} />
     </>
   );
