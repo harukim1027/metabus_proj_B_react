@@ -7,10 +7,10 @@ import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = {};
 
-function ReviewCommentForm({
+function FindOwnerBoardCommentForm({
   refetch,
   commentID,
-  reviewId,
+  findboardId,
   hidden,
   setHidden,
 }) {
@@ -18,11 +18,9 @@ function ReviewCommentForm({
   const navigate = useNavigate();
 
   const [{ data: getdata, loading, error }, commentRefetch] = useApiAxios(
-    `/adopt_review/api/comments/${commentID}/`,
+    `/find_owner_board/api/comments/${commentID}/`,
     { manual: !commentID },
   );
-
-  console.log('getdata:', getdata);
 
   // 저장
   const [
@@ -36,8 +34,8 @@ function ReviewCommentForm({
   ] = useApiAxios(
     {
       url: !commentID
-        ? `/adopt_review/api/comments/`
-        : `/adopt_review/api/comments/${commentID}/`,
+        ? `/find_owner_board/api/comments/`
+        : `/find_owner_board/api/comments/${commentID}/`,
       method: !commentID ? 'POST' : 'PUT',
       headers: {
         Authorization: `Bearer ${auth.access}`,
@@ -47,7 +45,7 @@ function ReviewCommentForm({
   );
 
   INIT_FIELD_VALUES.user = auth.userID;
-  INIT_FIELD_VALUES.review = reviewId;
+  INIT_FIELD_VALUES.find_board_no = findboardId;
   // INIT_FIELD_VALUES.comment_content = review?.comments.comment_content;
 
   const { fieldValues, setFieldValues, handleFieldChange } = useFieldValues(
@@ -84,6 +82,7 @@ function ReviewCommentForm({
       });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -173,4 +172,4 @@ function ReviewCommentForm({
     </>
   );
 }
-export default ReviewCommentForm;
+export default FindOwnerBoardCommentForm;

@@ -7,6 +7,7 @@ import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 import MarkLocationMap from 'Components/Map/MarkLocationMap';
+import FindOwnerBoardCommentList from './FindOwnerBoardCommentList';
 
 const INIT_FIELD_VALUES = {
   status: '',
@@ -195,6 +196,17 @@ function FindOwnerBoardDetail({ findboardId }) {
                   <div>
                     <MarkLocationMap location={findboard.find_location} />
                   </div>
+
+                  {/* 댓글 */}
+                  <>
+                    <FindOwnerBoardCommentList
+                      findboardId={findboardId}
+                      refetch={refetch}
+                    />
+                  </>
+                  <hr className="mt-3 mb-3" />
+
+                  {/*  */}
 
                   <div className="my-5 text-right">
                     {(auth.userID === findboard?.user.userID ||
