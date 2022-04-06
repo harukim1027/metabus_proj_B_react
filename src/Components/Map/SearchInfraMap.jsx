@@ -14,9 +14,8 @@ function SearchInfraMap() {
     isLoading: true,
   });
   const [myLoc, setMyLoc] = useState({});
-  // 초기값을 의존성 걸어주기 위해 뒤로 이동
   const [addr, setAddr] = useState('');
-  // const [query, setQuery] = useState('대전광역시 유성구 관평동 애견미용');
+  const [keyword, setKeyword] = useState('동물병원');
 
   const { kakao } = window;
 
@@ -66,12 +65,12 @@ function SearchInfraMap() {
   // 행정동 주소 표시 함수
   function displayCenterInfo(result, status) {
     if (status === kakao.maps.services.Status.OK) {
-      var infoDiv = document.getElementById('centerAddr');
+      // var infoDiv = document.getElementById('centerAddr');
 
       for (var i = 0; i < result.length; i++) {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
-          infoDiv.innerHTML = result[i].address_name;
+          // infoDiv.innerHTML = result[i].address_name;
           setAddr(result[i].address_name);
           break;
         }
@@ -85,52 +84,46 @@ function SearchInfraMap() {
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
   }
 
-  function searchAddrFromCoords2(coords, callback) {
-    // 좌표로 행정동 주소 정보를 요청합니다
-    geocoder.coord2RegionCode(coords.lng, coords.lat, callback);
-  }
+  const [query, setQuery] = useState('대전 유성구 관평동 동물병원');
 
   useEffect(() => {
-    if (!map) return;
-    searchAddrFromCoords2(currentLoc.center, displayCenterInfo);
+    addr !== '' && setQuery(addr + ' 동물병원');
   }, [currentLoc]);
 
-  const [query, setQuery] = useState('대흥동 동물병원');
-  // useEffect(() => {
-  //   setQuery(addr + '동물병원');
-  // }, [myLoc]);
+  console.log('addr: ', addr);
+  console.log('query: ', query);
 
   // 키워드 검색기능
   useEffect(() => {
     if (!map) return;
     const ps = new kakao.maps.services.Places();
+    query !== undefined &&
+      ps.keywordSearch(query, (data, status, _pagination) => {
+        if (status === kakao.maps.services.Status.OK) {
+          // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+          // LatLngBounds 객체에 좌표를 추가합니다
+          const bounds = new kakao.maps.LatLngBounds();
+          let markers = [];
 
-    ps.keywordSearch(query, (data, status, _pagination) => {
-      if (status === kakao.maps.services.Status.OK) {
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-        // LatLngBounds 객체에 좌표를 추가합니다
-        const bounds = new kakao.maps.LatLngBounds();
-        let markers = [];
+          for (var i = 0; i < data.length; i++) {
+            // @ts-ignore
+            markers.push({
+              position: {
+                lat: data[i].y,
+                lng: data[i].x,
+              },
+              name: data[i].place_name,
+              phone: data[i].phone || '등록된 번호 없음',
+            });
+            // @ts-ignore
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          }
+          setMarkers(markers);
 
-        for (var i = 0; i < data.length; i++) {
-          // @ts-ignore
-          markers.push({
-            position: {
-              lat: data[i].y,
-              lng: data[i].x,
-            },
-            name: data[i].place_name,
-            phone: data[i].phone || '등록된 번호 없음',
-          });
-          // @ts-ignore
-          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+          map.setBounds(bounds);
         }
-        setMarkers(markers);
-
-        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-        map.setBounds(bounds);
-      }
-    });
+      });
   }, [map, query]);
 
   useEffect(() => {
@@ -158,7 +151,9 @@ function SearchInfraMap() {
       >
         <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
         <br />
-        <span id="centerAddr" className="text-lg"></span>
+        <span id="centerAddr" className="text-lg">
+          {addr}
+        </span>
       </div>
       {myLoc.center && (
         <Map // 로드뷰를 표시할 Container
@@ -166,19 +161,25 @@ function SearchInfraMap() {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: '400px',
+            height: '500px',
             position: 'relative',
             bottom: '0px',
           }}
           level={3}
-          onCreate={setMap}
-          onCenterChanged={(map) => {
+          onCreate={(map) => {
+            setMap(map);
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('map.getCenter: ', map.getCenter());
           }}
-          onDragEnd={(map) => {
+          onTileLoaded={(map) => {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('map.getCenter: ', map.getCenter());
+            // console.log('dragend');
+          }}
+          onIdle={(map) => {
+            setMyLoc({
+              center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
+            });
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('dragend');
           }}
         >
           {/* ---------- */}
@@ -227,9 +228,15 @@ function SearchInfraMap() {
               )}
             </MapMarker>
           ))}
-          <h2>현재 위치에서</h2>
+          <h2>
+            현재 위치 주소에서{' '}
+            <h2 className="text-xl text-purple-800 font-bold inline mx-2">
+              {keyword}
+            </h2>{' '}
+            키워드로 검색한 정보입니다.
+          </h2>
           <button
-            className="p-2"
+            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
             onClick={() =>
               setMyLoc((prev) => ({
                 ...prev,
@@ -239,28 +246,40 @@ function SearchInfraMap() {
               }))
             }
           >
-            내 위치
+            내 위치 가기
           </button>
           <button
-            onClick={() => setQuery(`${addr} 동물병원`)}
+            onClick={() => {
+              setQuery(`${addr} 동물병원`);
+              setKeyword('동물병원');
+            }}
             className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
           >
             동물 병원 찾기
           </button>
           <button
-            onClick={() => setQuery(`${addr} 애견미용`)}
+            onClick={() => {
+              setQuery(`${addr} 애견미용`);
+              setKeyword('애견미용');
+            }}
             className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
           >
             애견 미용 찾기
           </button>
           <button
-            onClick={() => setQuery(`${addr} 애견호텔`)}
+            onClick={() => {
+              setQuery(`${addr} 애견호텔`);
+              setKeyword('애견호텔');
+            }}
             className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
           >
             애견 호텔 찾기
           </button>
           <button
-            onClick={() => setQuery(`${addr} 애견용품`)}
+            onClick={() => {
+              setQuery(`${addr} 애견용품`);
+              setKeyword('애견용품');
+            }}
             className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
           >
             애견 용품샵 찾기

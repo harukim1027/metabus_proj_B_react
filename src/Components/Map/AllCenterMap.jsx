@@ -12,7 +12,7 @@ const EventMarkerContainer = memo(({ marker_obj }) => {
       <MapMarker
         position={marker_obj.center_coords}
         onClick={() => {
-          setIsVisible(true);
+          setIsVisible(!isVisible);
         }}
       />
       {isVisible && (
@@ -64,6 +64,7 @@ function AllCenterMap({ centersData, ismain }) {
   // const [clickLoc, setClickLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
   const [map, setMap] = useState();
+  const [addr, setAddr] = useState('');
 
   // 지오코딩
   const { kakao } = window;
@@ -153,12 +154,13 @@ function AllCenterMap({ centersData, ismain }) {
   // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
   function displayCenterInfo(result, status) {
     if (status === kakao.maps.services.Status.OK) {
-      var infoDiv = document.getElementById('centerAddr');
+      // var infoDiv = document.getElementById('centerAddr');
 
       for (var i = 0; i < result.length; i++) {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
-          infoDiv.innerHTML = result[i].address_name;
+          // infoDiv.innerHTML = result[i].address_name;
+          setAddr(result[i].address_name);
           break;
         }
       }
@@ -185,7 +187,7 @@ function AllCenterMap({ centersData, ismain }) {
       >
         <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
         <br />
-        <span id="centerAddr" className="text-lg"></span>
+        <span className="text-lg">{addr}</span>
       </div>
       {/* ---------- */}
       {myLoc.center && (
@@ -194,21 +196,23 @@ function AllCenterMap({ centersData, ismain }) {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: '400px',
+            height: '500px',
             position: 'relative',
             bottom: '0px',
           }}
           level="9"
-          onCreate={(map) => setMap(map)}
-          // 지도 중심의 행정동 표시를 위해 함수 사용
-          onCenterChanged={(map) => {
-            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('map.getCenter: ', map.getCenter());
+          onCreate={(map) => {
+            setMap(map);
           }}
-          onDragEnd={(map) => {
+          onTileLoaded={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            // console.log('dragend');
+          }}
+          onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             });
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
             // console.log('dragend');
           }}
         >
@@ -244,31 +248,28 @@ function AllCenterMap({ centersData, ismain }) {
               </div>
             </MapMarker>
           )}
+          <div>
+            <button
+              className="p-2"
+              onClick={() =>
+                setMyLoc((prev) => ({
+                  ...prev,
+                  center: currentLoc.center,
+                  isLoading: false,
+                  isPanto: true,
+                }))
+              }
+            >
+              내 위치
+            </button>
+            {!ismain && (
+              <button className="p-2" onClick={() => window.history.back()}>
+                돌아가기
+              </button>
+            )}
+          </div>
         </Map>
       )}
-      <div>
-        <button
-          className="p-2"
-          onClick={() =>
-            setMyLoc((prev) => ({
-              ...prev,
-              center: currentLoc.center,
-              isLoading: false,
-              isPanto: true,
-            }))
-          }
-        >
-          내 위치
-        </button>
-        {!ismain && (
-          <button
-            className="p-2 bg-green-300 rounded-lg"
-            onClick={() => window.history.back()}
-          >
-            돌아가기
-          </button>
-        )}
-      </div>
     </div>
   );
 }

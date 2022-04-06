@@ -145,32 +145,37 @@ function MainScreen() {
             >
               {activeCount === 10 && (
                 <>
-                  <div className="flex justify-center my-8">
-                    <AwesomeSlider
-                      className="Container w-11/12 h-full"
-                      mobileTouch={true}
-                      organicArrows={true}
-                      bullets={false}
+                  <div className="h-full">
+                    <div className="flex justify-center h-full">
+                      <AwesomeSlider
+                        className="Container w-11/12 h-5/6"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span className="w-5/6 h-5/6 mt-10">
+                          <div className="flex justify-center w-full">
+                            <div className="w-11/12 h-full rounded-lg">
+                              <PageAllCenterMap ismain={ismain} />
+                            </div>
+                          </div>
+                        </span>
+                        <span className="w-5/6 h-5/6 mt-10">
+                          <div className="flex justify-center w-full">
+                            <div className="w-11/12 h-full rounded-lg">
+                              <PageSearchInfraMap />
+                            </div>
+                          </div>
+                        </span>
+                      </AwesomeSlider>
+                    </div>
+                    <button
+                      onClick={() => setActiveCount(1)}
+                      className="z-10 absolute bottom-20"
                     >
-                      <span className="w-5/6">
-                        <div className="flex justify-center w-full my-auto">
-                          <div className="w-11/12 h-full rounded-lg">
-                            <PageAllCenterMap ismain={ismain} />
-                          </div>
-                        </div>
-                      </span>
-                      <span className="w-5/6">
-                        <div className="flex justify-center w-full my-auto">
-                          <div className="w-11/12 h-full rounded-lg">
-                            <PageSearchInfraMap />
-                          </div>
-                        </div>
-                      </span>
-                    </AwesomeSlider>
+                      TOP▲
+                    </button>
                   </div>
-                  <button onClick={() => setActiveCount(1)} className="z-10">
-                    TOP▲
-                  </button>
                 </>
               )}
             </div>
