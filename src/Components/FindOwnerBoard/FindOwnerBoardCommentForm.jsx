@@ -4,6 +4,7 @@ import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import './Comment.css';
 
 const INIT_FIELD_VALUES = {
   comment_content: '',
@@ -109,7 +110,7 @@ function FindOwnerBoardCommentForm({
       <div>
         <h1>
           <div className="max-w-lg shadow-md">
-            <form className="w-full p-4">
+            <form className="w-full p-5">
               <div className="mb-2">
                 <label form="comment" class="text-lg text-gray-600">
                   댓글 달기
