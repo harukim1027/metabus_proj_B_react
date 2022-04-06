@@ -5,7 +5,9 @@ import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const INIT_FIELD_VALUES = {};
+const INIT_FIELD_VALUES = {
+  comment_content: '',
+};
 
 function FindOwnerBoardCommentForm({
   refetch,
@@ -48,9 +50,8 @@ function FindOwnerBoardCommentForm({
   INIT_FIELD_VALUES.find_board_no = findboardId;
   // INIT_FIELD_VALUES.comment_content = review?.comments.comment_content;
 
-  const { fieldValues, setFieldValues, handleFieldChange } = useFieldValues(
-    getdata || INIT_FIELD_VALUES,
-  );
+  const { fieldValues, setFieldValues, handleFieldChange, clearFieldValues } =
+    useFieldValues(getdata || INIT_FIELD_VALUES);
 
   console.log('fieldValues', fieldValues);
   console.log('commentID', commentID);
@@ -83,15 +84,17 @@ function FindOwnerBoardCommentForm({
     }
   };
 
+  //   function clearTextArea() {
+  //     document.getElementById('comments').value = '';
+  //   }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     saveRequest({
       data: fieldValues,
-    }).then((response) => {
-      const savedPost = response.data;
-
-      if (savedPost) refetch();
+    }).then(() => {
+      clearFieldValues();
+      refetch();
     });
   };
 
@@ -113,6 +116,7 @@ function FindOwnerBoardCommentForm({
                 </label>
                 {auth.isLoggedIn ? (
                   <textarea
+                    id="comments"
                     className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
                     name="comment_content"
                     placeholder="댓글을 입력해주세요."
@@ -133,7 +137,9 @@ function FindOwnerBoardCommentForm({
                 <button
                   type="submit"
                   className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={(e) => handleSubmit(e)}
+                  onClick={(e) => {
+                    handleSubmit(e);
+                  }}
                 >
                   등록
                 </button>
