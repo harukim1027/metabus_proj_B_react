@@ -20,7 +20,6 @@ function PageLostPetBoardForm() {
     );
   return (
     <>
-      <TopNav />
       <LostPetBoardForm
         lostpetboard={lostpetboard}
         lostpetboardId={lostpetboardId}

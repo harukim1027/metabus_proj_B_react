@@ -7,6 +7,7 @@ import '../../App.css';
 import LoadingIndicator from 'LoadingIndicator';
 import MarkLocationMap from 'Components/Map/MarkLocationMap';
 import useFieldValues from 'hooks/useFieldValues';
+import LostPetBoardCommentList from './LostPetBoardCommentList';
 
 const INIT_FIELD_VALUES = {
   status: '',
@@ -269,6 +270,15 @@ function LostPetBoardDetail({ lostpetboardId }) {
                       )}
                     </div>
                   </div>
+
+                  {/* 댓글 */}
+                  <>
+                    <LostPetBoardCommentList
+                      lostpetboardId={lostpetboardId}
+                      refetch={refetch}
+                    />
+                  </>
+                  <hr className="mt-3 mb-3" />
 
                   <div className="my-5 text-right">
                     {(auth.userID === lostpetboard?.user.userID ||
