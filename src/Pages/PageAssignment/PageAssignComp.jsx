@@ -1,10 +1,10 @@
 import { useApiAxios } from 'api/base';
 import AssignComp from 'Components/Assignment/AssignComp';
-import TopNav from 'Components/Main/TopNavi';
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
+import NewNav from 'Components/Main/NewNav';
 
 function PageAssignComp() {
   const { assignId } = useParams();
@@ -25,7 +25,7 @@ function PageAssignComp() {
     <>
       {assignData?.user.userID === auth.userID ? (
         <>
-          <TopNav />
+          <NewNav />
           <AssignComp assginId={assignId} assignData={assignData} />
         </>
       ) : (

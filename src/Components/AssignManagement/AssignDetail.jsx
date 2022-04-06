@@ -7,6 +7,9 @@ import AssignStatus from './AssignStatus';
 import '../../App.css';
 import './AssignManagement.css';
 import LoadingIndicator from 'LoadingIndicator';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+import '../review/SlideStyle.css';
 
 function AssignDetail({ assignId }) {
   const { auth } = useAuth();
@@ -98,7 +101,7 @@ function AssignDetail({ assignId }) {
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 assignmanagement_header rounded-xl shadow-md overflow-hidden md:px-20 sm:px-0 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 assignmanagement_header rounded-xl  overflow-hidden md:px-20 sm:px-0 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote class="mt-5 text-6xl font-semibold italic text-center text-slate-900">
             <span class="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
               <span class="relative text-white">" 신청자 정보 "</span>
@@ -232,43 +235,129 @@ function AssignDetail({ assignId }) {
             )}
           </div>
 
+          {/* 거주지 사진 부분 */}
           <div className="flex justify-center content-center">
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-              <h2>거주지 사진1</h2>
-              <hr className="border-2 border-gray-300" />
-              <img
-                src={assignData?.picture_of_residence1}
-                alt=""
-                onClick={() => window.open(assignData?.picture_of_residence1)}
-                className="w-full cursor-pointer my-auto"
-              />
-            </div>
-
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-              <h2>거주지 사진2</h2>
-              <hr className="border-2 border-gray-300" />
-              <img
-                src={assignData?.picture_of_residence2}
-                alt=""
-                onClick={() => window.open(assignData?.picture_of_residence2)}
-                className="w-full cursor-pointer my-auto"
-              />
-            </div>
-            <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-              <h2>거주지 사진3</h2>
-              <hr className="border-2 border-gray-300" />
-              <img
-                src={assignData?.picture_of_residence3}
-                alt=""
-                onClick={() => window.open(assignData?.picture_of_residence3)}
-                className="w-full cursor-pointer my-auto"
-              />
+            <div className=" overflow-hidden">
+              <h2>거주지 사진</h2>
+              <div className="content-center overflow-hidden">
+                {assignData && (
+                  <>
+                    {assignData.picture_of_residence3 &&
+                    assignData.picture_of_residence2 &&
+                    assignData.picture_of_residence1 ? (
+                      <AwesomeSlider
+                        className="Container"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span>
+                          {assignData.picture_of_residence1 && (
+                            <img
+                              src={assignData.picture_of_residence1}
+                              alt="거주지 이미지"
+                              className="cursor-pointer my-auto h-full w-full"
+                              onClick={() =>
+                                window.open(assignData?.picture_of_residence1)
+                              }
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {assignData.picture_of_residence2 && (
+                            <img
+                              src={assignData.picture_of_residence2}
+                              alt="거주지 이미지"
+                              className="cursor-pointer my-auto h-full w-full"
+                              onClick={() =>
+                                window.open(assignData?.picture_of_residence1)
+                              }
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {assignData.picture_of_residence3 && (
+                            <img
+                              src={assignData.picture_of_residence3}
+                              alt="거주지 이미지"
+                              className="cursor-pointer my-auto h-full w-full"
+                              onClick={() =>
+                                window.open(assignData?.picture_of_residence1)
+                              }
+                            />
+                          )}
+                        </span>
+                      </AwesomeSlider>
+                    ) : (
+                      <>
+                        {assignData.picture_of_residence1 &&
+                        assignData.picture_of_residence2 ? (
+                          <AwesomeSlider
+                            className="Container"
+                            mobileTouch={true}
+                            organicArrows={true}
+                            bullets={false}
+                          >
+                            <span>
+                              {assignData.picture_of_residence1 && (
+                                <img
+                                  src={assignData.picture_of_residence1}
+                                  alt="거주지 이미지"
+                                  className="cursor-pointer my-auto h-full w-full"
+                                  onClick={() =>
+                                    window.open(
+                                      assignData?.picture_of_residence1,
+                                    )
+                                  }
+                                />
+                              )}
+                            </span>
+                            <span>
+                              {assignData.picture_of_residence2 && (
+                                <img
+                                  src={assignData.picture_of_residence2}
+                                  alt="거주지이미지"
+                                  className="cursor-pointer my-auto h-full w-full"
+                                  onClick={() =>
+                                    window.open(
+                                      assignData?.picture_of_residence1,
+                                    )
+                                  }
+                                />
+                              )}
+                            </span>
+                          </AwesomeSlider>
+                        ) : (
+                          <>
+                            {assignData.picture_of_residence1 && (
+                              <span>
+                                {assignData.picture_of_residence1 && (
+                                  <img
+                                    src={assignData.picture_of_residence1}
+                                    alt="거주지 이미지"
+                                    className="cursor-pointer my-auto h-full w-full"
+                                    onClick={() =>
+                                      window.open(
+                                        assignData?.picture_of_residence1,
+                                      )
+                                    }
+                                  />
+                                )}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="header flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center">
         <div className="mx-5 bg-white rounded-xl shadow-md overflow-hidden lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex justify-center py-6 mb-3">
             <h2>
@@ -280,7 +369,7 @@ function AssignDetail({ assignId }) {
       </div>
 
       <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 assignmanagement_header rounded-xl shadow-md md:px-20 sm:px-0 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 assignmanagement_header rounded-xl md:px-20 sm:px-0 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           {/* <div className=" pt-6 mb-3"> */}
           <blockquote className="mt-5 text-6xl font-semibold italic text-center text-slate-900">
             <span className="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
@@ -360,45 +449,100 @@ function AssignDetail({ assignId }) {
                 <td>{assignData?.animal.protect_status}</td>
               </tr>
             </table>
-            <div className="flex justify-center content-center">
-              <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-                <h2>동물 사진1</h2>
-                <hr className="border-2 border-gray-300" />
-                <img
-                  src={assignData?.animal.image_url1}
-                  alt=""
-                  onClick={() => window.open(assignData?.picture_of_residence1)}
-                  className="w-full cursor-pointer my-auto"
-                />
+          </div>
+          {/* 동물 사진 부분  */}
+          <div className="flex justify-center content-center">
+            <div className=" overflow-hidden">
+              <h2>거주지 사진</h2>
+              <div className="content-center overflow-hidden">
+                {assignData && (
+                  <>
+                    {assignData.animal.image_url3 &&
+                    assignData.animal.image_url2 &&
+                    assignData.animal.image_url1 ? (
+                      <AwesomeSlider
+                        className="Container"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span>
+                          {assignData.animal.image_url1 && (
+                            <img
+                              src={assignData.animal.image_url1}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {assignData.animal.image_url2 && (
+                            <img
+                              src={assignData.animal.image_url2}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                        <span>
+                          {assignData.animal.image_url3 && (
+                            <img
+                              src={assignData.animal.image_url3}
+                              alt="동물 이미지"
+                              className="h-full w-full"
+                            />
+                          )}
+                        </span>
+                      </AwesomeSlider>
+                    ) : (
+                      <>
+                        {assignData.animal.image_url1 &&
+                        assignData.animal.image_url2 ? (
+                          <AwesomeSlider
+                            className="Container"
+                            mobileTouch={true}
+                            organicArrows={true}
+                            bullets={false}
+                          >
+                            <span>
+                              {assignData.animal.image_url1 && (
+                                <img
+                                  src={assignData.animal.image_url1}
+                                  alt="동물 이미지"
+                                  className="h-full w-full"
+                                />
+                              )}
+                            </span>
+                            <span>
+                              {assignData.animal.image_url2 && (
+                                <img
+                                  src={assignData.animal.image_url2}
+                                  alt="동물 이미지"
+                                  className="h-full w-full"
+                                />
+                              )}
+                            </span>
+                          </AwesomeSlider>
+                        ) : (
+                          <>
+                            {assignData.animal.image_url1 && (
+                              <span>
+                                {assignData.animal.image_url1 && (
+                                  <img
+                                    src={assignData.animal.image_url1}
+                                    alt="동물 이미지"
+                                    className="h-full w-full"
+                                  />
+                                )}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
               </div>
-              {assignData?.animal.image_url2 && (
-                <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-                  <h2>동물 사진2</h2>
-                  <hr className="border-2 border-gray-300" />
-                  <img
-                    src={assignData?.animal.image_url2}
-                    alt=""
-                    onClick={() =>
-                      window.open(assignData?.picture_of_residence2)
-                    }
-                    className="w-full cursor-pointer my-auto"
-                  />
-                </div>
-              )}
-              {assignData?.animal.image_url3 && (
-                <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-lg w-1/4 mx-2 overflow-hidden">
-                  <h2>동물 사진3</h2>
-                  <hr className="border-2 border-gray-300" />
-                  <img
-                    src={assignData?.animal.image_url3}
-                    alt=""
-                    onClick={() =>
-                      window.open(assignData?.picture_of_residence3)
-                    }
-                    className="w-full cursor-pointer my-auto"
-                  />
-                </div>
-              )}
             </div>
           </div>
 

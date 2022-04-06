@@ -418,7 +418,7 @@
 }
 /* 메인 상단 */
 .section01 {
-  background: #ffffff;
+  background: #a0cbf4;
 }
 .section01 .innerCont {
   display: flex;
@@ -442,7 +442,7 @@
   width: 100%;
 }
 .section01 .bgLayer {
-  color: rgb(201, 232, 255);
+  color: rgb(27, 98, 121);
 }
 .section01 .bgLayer .cover {
   position: absolute;
@@ -450,11 +450,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(241deg, #b8d6f8, #709ff5);
+  background-image: linear-gradient(241deg, #ffffff, #ffffff);
   opacity: 0.8;
 }
 .section01 .maskLayer {
-  color: #aedef8;
+  color: #176690;
   transform: translateZ();
   transition: inherit;
   -webkit-clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));
@@ -469,19 +469,11 @@
   height: 400px;
   transform: translateY(-50%);
 }
-.section01 .scrollGuide {
-  transform: rotate(90deg) translate(100%, -50%);
-  font-weight: 700;
-}
-.section01 .scrollGuide img {
-  margin-left: 5px;
-  vertical-align: middle;
-  margin-bottom: auto;
-}
+
 
 /* 메인 두번째 섹션 */
 .section02 {
-  background-color: #b6b1f8;
+  background-color: #a0cbf4;
 }
 .section02 .innerCont {
   display: flex;
@@ -524,17 +516,17 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(241deg, #f77706, #f5c45a);
+  background-image: linear-gradient(241deg, #ffffff, #ffffff);
   opacity: 0.8;
 }
 .section02 .maskLayer {
-  color: #c09ff6;
+  color: #aadbfd;
   -webkit-clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));
   -moz-clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));
   clip-path: circle(var(--mask-size) at var(--mask-x) var(--mask-y));
 }
 .section02 .maskLayer .main-link {
-  background: #d2abff;
+  background: #abdbff;
 }
 .section02 .hoverLayer {
   position: absolute;
@@ -547,7 +539,7 @@
 
 /* 메인 입양후기 */
 .section03 {
-  background: #f2dfc0;
+  background: #c9eaff;
 }
 .section03 .innerCont {
   display: flex;
