@@ -19,6 +19,7 @@ const INIT_FIELD_VALUES = {
   cat_breed: '전체',
   sex: '미상',
   animal_tag: '',
+  find_time: '',
   find_location: '',
   content: '',
   board_image: [],
@@ -105,6 +106,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     setFieldValues(
       produce((draft) => {
         draft.user = auth.userID;
+        draft.find_location = findBoard?.find_location;
       }),
     );
   }, [findBoard, auth]);
@@ -521,7 +523,11 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 </Modal>
                 <input
                   name="find_location"
-                  value={inputAddr || fieldValues.find_location}
+                  value={
+                    inputAddr === undefined
+                      ? fieldValues.find_location
+                      : inputAddr
+                  }
                   readOnly={true}
                   onChange={(e) => handleFieldChange(e)}
                   placeholder="발견 장소를 입력해주세요."
