@@ -7,6 +7,7 @@ import '../../App.css';
 import './Notice.css';
 import 'css/pagination_notice.css';
 import LoadingIndicator from 'LoadingIndicator';
+
 function NoticeList() {
   const [query, setQuery] = useState(null);
   const { auth } = useAuth();
@@ -75,6 +76,7 @@ function NoticeList() {
             <div className="pageTop2">
               <div className="tit">
                 <h2
+                  className="bar_left"
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
                 >
                   공지사항
@@ -87,80 +89,104 @@ function NoticeList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar"
+                className="leftBar bar_left"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar"
+                className="rightBar bar_right"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
               </div>
             </div>
           </div>
+          <div className="board_top_info3 :before">
+            <div className="info_desc">
+              <p className="text-right">
+                메타버스는 <br />
+                사지 않고 가족이 되는 문화를 만듭니다.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="review_list3 xs:w-3/4 md:w-5/6 xl:w-7/8"></div>
+      <div className="notice_list"></div>
+      <div className="header flex flex-wrap justify-center" id="topLoc">
+        <div className="mx-5 notice_header rounded-xl shadow-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <div className="flex xl:justify-end xs:justify-center">
+            {loading && (
+              <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
+            )}
+            {error && (
+              <>
+                <p className="text-red-400 mt-1">
+                  &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !{' '}
+                </p>
+              </>
+            )}
+          </div>
 
-      <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <br />
+          <br />
+
+          {/* 검색 필드 */}
           <div className="mb-6 mt-10">
             <div className="xs:flex-none xl:flex xl:justify-between">
               <div></div>
               <div className="xs:mt-5 xl:mt-0">
                 <div className="flex justify-center">
-                  {/* <span className="h-7 w-7 mt-3">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      className="line-icon"
-                    >
-                      <path
-                        d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z"
-                        fill="#333d4b"
-                      ></path>
-                    </svg>
-                  </span> */}
-
                   <input
                     type="text"
                     name="query"
                     onChange={getQuery}
                     onKeyPress={handleKeyPress}
-                    className="focus:outline-none px-3 py-2 mx-4 border-b-2 xs:w-full sm:w-72 xs:text-xxs sm:text-base"
+                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
                     placeholder="제목을 검색하세요."
                   />
                   <button
                     onClick={handleBTNPress}
-                    className="rounded bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-white px-3 py-2 border-2 w-24 xs:text-sm sm:text-xl mr-2"
+                    className="rounded bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
                     readOnly
                   >
                     검색
                   </button>
                 </div>
-                <div className="flex justify-center">
-                  {loading && <LoadingIndicator>로딩 중 ...</LoadingIndicator>}
-                  {error && (
-                    <>
-                      <p className="text-red-400 mt-1">
-                        &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. ! (조회된
-                        정보가 없습니다.)
-                      </p>
-                    </>
-                  )}
-                </div>
               </div>
             </div>
           </div>
+          <hr className="mb-3" />
+
           <div className="mb-5">
-            <table className="mb-5 mt-16 text-center w-full">
-              <tbody className="bg-white">
+            <table className="mb-5 border text-center divide-y divide-gray-200 w-full">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-3 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                  >
+                    No
+                  </th>
+                  <th
+                    scope="col"
+                    className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider"
+                  >
+                    제목
+                  </th>
+                  <th
+                    scope="col"
+                    className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                  >
+                    작성일
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {noticeList?.results?.map((notice) => (
                   <tr
                     onClick={() => navigate(`/notice/${notice.notice_no}/`)}
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                   >
                     <td className="py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs ">
                       <div className="text-sm font-medium text-gray-900">
@@ -169,13 +195,16 @@ function NoticeList() {
                     </td>
 
                     <td className="py-4">
-                      <div className="font-medium text-gray-900 hover:bg-gray-200 rounded">
-                        <span className="inline-flex xs:text-sm md:text-md lg:text-lg leading-5 font-semibold text-gray-500">
+                      <div className="px-20 py-4 font-semibold lg:text-xl md:text-md xs:text-sm">
+                        <span className="bg-yellow-100 rounded-full">
                           {notice.title.length > 20
                             ? notice.title.substring(0, 20) + '...'
                             : notice.title}
                         </span>
                       </div>
+                    </td>
+                    <td className="py-4 xs:text-sm sm:text-base">
+                      {notice.created_at}
                     </td>
                   </tr>
                 ))}
@@ -205,6 +234,7 @@ function NoticeList() {
           />
         </div>
       </div>
+      <div className="notice_list2 mb-10"></div>
     </>
   );
 }

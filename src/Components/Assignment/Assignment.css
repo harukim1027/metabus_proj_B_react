@@ -42,3 +42,10 @@
 .assign_table_bg {
   background-color: #ffffff;
 }
+
+.box_assign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
