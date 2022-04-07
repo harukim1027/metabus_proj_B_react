@@ -66,24 +66,24 @@ function InquiryList() {
     }
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [inquiryList]);
+  // // 스크롤 기능
+  // const [topLocation, setTopLocation] = useState(0);
+  // // console.log('topLocation: ', topLocation);
+  // useEffect(() => {
+  //   setTopLocation(document.querySelector('#topLoc').offsetTop);
+  // }, [inquiryList]);
 
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
+  // const gotoTop = () => {
+  //   // 클릭하면 스크롤이 위로 올라가는 함수
+  //   window.scrollTo({
+  //     top: topLocation,
+  //     behavior: 'smooth',
+  //   });
+  // };
 
-  useEffect(() => {
-    gotoTop();
-  }, [inquiryList]);
+  // useEffect(() => {
+  //   gotoTop();
+  // }, [inquiryList]);
 
   //-------------
 
@@ -95,8 +95,10 @@ function InquiryList() {
             <div className="pageTop">
               <div className="tit">
                 <h2
+                  className="bar_left"
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
                 >
+                  {/* <h2 className="transition translate-x-40 duration-500 ease-in-out"> */}
                   1:1 문의
                 </h2>
                 <p
@@ -107,13 +109,13 @@ function InquiryList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar2"
+                className="leftBar2 bar_left"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar2"
+                className="rightBar2 bar_right"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
