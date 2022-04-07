@@ -1,4 +1,5 @@
 import { useApiAxios } from 'api/base';
+import NewNav from 'Components/Main/NewNav';
 import AllCenterMap from 'Components/Map/AllCenterMap';
 import LoadingIndicator from 'LoadingIndicator';
 import { useEffect } from 'react';

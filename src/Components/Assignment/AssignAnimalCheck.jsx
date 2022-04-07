@@ -1,6 +1,7 @@
 import { useApiAxios } from 'api/base';
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
+import AwesomeSlider from 'react-awesome-slider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -41,64 +42,245 @@ function AssignAnimalCheck() {
 
   return (
     <>
-      <div className="m-5 rounded-lg shadow-lg mt-20 w-fit p-10">
-        <h2 className="text-center text-2xl">
-          동물의 상세 정보를 확인하시고 입양 의사를 결정해주세요.
-        </h2>
+      <div className="m-5 rounded-lg shadow-md mt-20 w-fit p-10">
+        <div className="text-base text-blue-900 my-auto">
+          <br />
+
+          <h2 className="text-center font-semibold">
+            {' '}
+            🐶&nbsp; 동물의 상세 정보를 확인하시고 입양 의사를
+            결정해주세요.&nbsp; 🐱{' '}
+          </h2>
+          <br />
+        </div>
+
         {animal && (
           <div>
-            <img
-              src={animal.image_url1}
-              alt=""
-              className="w-52 inline cursor-pointer"
-              onClick={() => window.open(animal.image_url1)}
-            />
-            <img
-              src={animal.image_url2}
-              alt=""
-              className="w-52 inline cursor-pointer"
-              onClick={() => window.open(animal.image_url2)}
-            />
-            <img
-              src={animal.image_url3}
-              alt=""
-              className="w-52 inline cursor-pointer"
-              onClick={() => window.open(animal.image_url3)}
-            />
-            <h2 className="">공고번호 : {animal.announce_no}</h2>
-            <h2 className="">
-              품종 : {animal.kind_of_animal} &gt; {animal.breed}
-            </h2>
-            <h2 className="">털색 : {animal.color}</h2>
-            <h2 className="">성별 : {animal.sex}</h2>
-            <h2 className="">나이 : {animal.age}</h2>
-            <h2 className="">체중 : {animal.weight} kg</h2>
-            <h2 className="">발견 장소 : {animal.place_of_discovery}</h2>
-            <h2 className="">접수 일자 : {animal.date_time_of_receipt}</h2>
-            <h2 className="">중성화 여부 : {animal.neutering}</h2>
-            <h2 className="">특징 : {animal.info}</h2>
-            <h2 className="">관할 : {animal.competent_organization}</h2>
-            <h2 className="">보호 상태 : {animal.protect_status}</h2>
-            <h2 className="">
-              보호 중인 센터 : {animal.center_name.center_name}
-            </h2>
-            <h2 className="">
-              센터 전화 번호 : {animal.center_name.center_call}
-            </h2>
+            <>
+              {animal && (
+                <>
+                  {animal.image_url3 &&
+                  animal.image_url2 &&
+                  animal.image_url1 ? (
+                    <AwesomeSlider
+                      className="Container"
+                      mobileTouch={true}
+                      organicArrows={true}
+                      bullets={false}
+                    >
+                      <span className="content-center h-full w-full">
+                        {animal.image_url1 && (
+                          <img
+                            src={animal.image_url1}
+                            alt="동물 이미지1"
+                            className="content-center xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                            onClick={() => window.open(animal.image_url1)}
+                          />
+                        )}
+                      </span>
+                      <span className="content-center h-full w-full">
+                        {animal.image_url2 && (
+                          <img
+                            src={animal.image_url2}
+                            alt="동물 이미지2"
+                            className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                            onClick={() => window.open(animal.image_url2)}
+                          />
+                        )}
+                      </span>
+                      <span className="content-center h-full w-full">
+                        {animal.image_url3 && (
+                          <img
+                            src={animal.image_url3}
+                            alt="동물 이미지3"
+                            className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                            onClick={() => window.open(animal.image_url3)}
+                          />
+                        )}
+                      </span>
+                    </AwesomeSlider>
+                  ) : (
+                    <>
+                      {animal.image_url1 && animal.image_url2 ? (
+                        <AwesomeSlider
+                          className="Container"
+                          mobileTouch={true}
+                          organicArrows={true}
+                          bullets={false}
+                        >
+                          <span className="content-center h-full w-full">
+                            {animal.image_url1 && (
+                              <img
+                                src={animal.image_url1}
+                                alt="동물 이미지1"
+                                className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                onClick={() => window.open(animal.image_url1)}
+                              />
+                            )}
+                          </span>
+                          <span className="content-center h-full w-full">
+                            {animal.image_url2 && (
+                              <img
+                                src={animal.image_url2}
+                                alt="동물 이미지2"
+                                className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                onClick={() => window.open(animal.image_url2)}
+                              />
+                            )}
+                          </span>
+                        </AwesomeSlider>
+                      ) : (
+                        <>
+                          {animal.image_url1 && (
+                            <span className="h-full w-full">
+                              {animal.image_url1 && (
+                                <img
+                                  src={animal.image_url1}
+                                  alt="동물 이미지1"
+                                  className="content-center  md:mx-20  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                  onClick={() => window.open(animal.image_url3)}
+                                />
+                              )}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </>
+
+            <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  공고번호
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.announce_no}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  축종
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.kind_of_animal}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  품종
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.breed}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  털색
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.color}</td>
+              </tr>
+
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  성별
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.sex}</td>
+              </tr>
+
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  나이
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.age}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  체중
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.weight} kg</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  발견 장소
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.place_of_discovery}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  접수 일자
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.date_time_of_receipt}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  중성화 여부
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.neutering}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  중성화 여부
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.neutering}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  특징
+                </th>
+                <td className="text-left">&nbsp;&nbsp;{animal.info}</td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  관할 지역
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.competent_organization}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  보호 상태
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.protect_status}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  보호중 센터
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.center_name.center_name}
+                </td>
+              </tr>
+              <tr className="sm:w-full">
+                <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                  보호 센터 전화번호
+                </th>
+                <td className="text-left">
+                  &nbsp;&nbsp;{animal.center_name.center_call}
+                </td>
+              </tr>
+            </table>
           </div>
         )}
+        <div className="text-right">
+          <button
+            onClick={() => checkLogin()}
+            className="text-xl font-bold text-white  hover:bg-blue-300 bg-blue-900 hover:text-white p-2 rounded-lg "
+          >
+            입양 신청하기
+          </button>
+        </div>
       </div>
       <button
-        onClick={() => window.history.back()}
-        className="bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg ml-4"
+        onClick={() => navigate('/')}
+        className="font-bold bg-green-300 hover:bg-green-900 text-white p-2 rounded-lg ml-4 mb-5"
       >
-        돌아가기
-      </button>
-      <button
-        onClick={() => checkLogin()}
-        className="bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg ml-4"
-      >
-        입양 신청하기
+        Home
       </button>
     </>
   );
