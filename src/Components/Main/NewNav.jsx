@@ -111,8 +111,7 @@ function NewNav() {
                         &nbsp; &nbsp;
                       </span>
                     </div>
-                    <div className="flex text-xl text-left">
-                      <div></div>
+                    <div className="xs:mt-5 md:mt-0 flex text-xl text-left">
                       <div className="ml-10 mt-20">
                         {auth.is_staff ? (
                           // 관리자 페이지

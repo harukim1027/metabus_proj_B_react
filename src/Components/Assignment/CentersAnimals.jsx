@@ -3,6 +3,7 @@ import LoadingIndicator from 'LoadingIndicator';
 import { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import NewNav from 'Components/Main/NewNav';
 
 function CentersAnimals() {
   const { centerId } = useParams();
@@ -45,34 +46,81 @@ function CentersAnimals() {
 
   return (
     <div>
-      <div className=" mt-20">
-        <h2>
-          <h2 className=" text-2xl text-blue-500 inline ml-10">{centerId}</h2>
-          에서 보호중인 동물들
+      <NewNav />
+      <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
+        <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
+          <span class="relative text-white">"크루원 신청하기"</span>
+        </span>
+      </blockquote>
+      <div className="mt-20">
+        <h2 className="mb-4 text-4xl text-black flex justify-center font-bold ">
+          🏠
         </h2>
+        <h2>
+          <h2 className=" text-2xl text-black flex justify-center font-bold ">
+            {centerId}
+          </h2>
+          <h2 className=" text-base text-black flex justify-center ">
+            &nbsp; 에서 보호중인 동물들
+          </h2>
+        </h2>
+
+        <hr className="mt-5" />
+        <div className="text-base text-blue-900 my-auto">
+          <br />
+          <h2 className="text-center font-semibold">
+            {' '}
+            🐶&nbsp; 입양 신청하실 아이를 선택해주세요&nbsp; 🐱{' '}
+          </h2>
+        </div>
         {loading && <LoadingIndicator />}
         {centersAnimals?.results.map((animal) => (
           <div
-            className="flex justify-between shadow-lg rounded-lg ml-10 my-4 overflow-hidden w-3/4 hover:scale-110 hover:translate-x-7 duration-150 h-32 cursor-pointer"
+            className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer"
             onClick={() => {
               navigate(`/assignment/checkanimal/${animal.announce_no}/`);
             }}
           >
             <img
               src={animal.image_url1}
-              alt=""
-              className="inline w-32 h-fit flex-none my-auto"
+              alt="동물 이미지"
+              className="w-36 h-40 mx-5"
             />
-            <div className="ml-4 flex-1 my-auto">
-              <h2>
-                품종 : {animal.kind_of_animal} &gt; {animal.breed}
-              </h2>
-              <h2>성별 : {animal.sex}</h2>
-              <h2>나이 : {animal.age}</h2>
-              <h2>특징 : {animal.info}</h2>
-            </div>
-            <div className="text-xl text-blue-400 my-auto">
-              <h2 className="">입양신청하러 가기(클릭!)</h2>
+            <div className="py-5 flex-1">
+              <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
+                <tr className="sm:w-full">
+                  <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                    축종
+                  </th>
+                  <td className="">{animal.kind_of_animal}</td>
+                </tr>
+                <tr className="sm:w-full">
+                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                    품종
+                  </th>
+                  <td>{animal.breed}</td>
+                </tr>
+
+                <tr className="sm:w-full">
+                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                    성별
+                  </th>
+                  <td>{animal.sex}</td>
+                </tr>
+                <tr className="sm:w-full">
+                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                    나이
+                  </th>
+                  <td>{animal.age}</td>
+                </tr>
+
+                <tr className="sm:w-full">
+                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                    특징
+                  </th>
+                  <td>{animal.info}</td>
+                </tr>
+              </table>
             </div>
           </div>
         ))}
@@ -87,11 +135,12 @@ function CentersAnimals() {
         renderOnZeroPageCount={null}
         className="pagination_animal"
       />
+
       <button
-        onClick={() => window.history.back()}
-        className="bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg"
+        onClick={() => navigate('/')}
+        className="font-bold ml-10 mt-10 mb-10 bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg"
       >
-        돌아가기
+        Home
       </button>
     </div>
   );
