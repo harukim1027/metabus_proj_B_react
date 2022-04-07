@@ -3,6 +3,7 @@ import TimeAgo from 'Components/review/TimeAgo';
 import { useEffect } from 'react';
 import LostPetBoardCommentDetail from './LostPetBoardCommentDetail';
 import LostPetBoardCommentForm from './LostPetBoardCommentForm';
+import 'css/Comment.css';
 
 function LostPetBoardCommentList({ lostpetboardId }) {
   const [{ data: lostBoardList, loading, error }, refetch] = useApiAxios(

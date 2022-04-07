@@ -32,6 +32,7 @@ function FindOwnerBoardCommentDetail({ comment, findboardId, refetch }) {
     <>
       {(auth.userID === comment?.user || auth.is_staff) && (
         <button
+          className="sm:w-9 text-gray-400"
           onMouseOver={() => setDelComment(comment?.find_comment_no)}
           onClick={() => commentDelete()}
         >
@@ -41,6 +42,7 @@ function FindOwnerBoardCommentDetail({ comment, findboardId, refetch }) {
 
       {(auth.userID === comment?.user || auth.is_staff) && (
         <button
+          className="sm:w-7 text-gray-400"
           onMouseOver={() => setCommentID(comment?.find_comment_no)}
           onClick={() => {
             setHidden(!hidden);
