@@ -90,12 +90,15 @@ function FindOwnerBoardCommentForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveRequest({
-      data: fieldValues,
-    }).then(() => {
-      clearFieldValues();
-      refetch();
-    });
+    if (fieldValues === '') {
+      window.confirm('댓글 내용을 입력해주세요.');
+    } else
+      saveRequest({
+        data: fieldValues,
+      }).then(() => {
+        clearFieldValues();
+        refetch();
+      });
   };
 
   const didYouLog = () => {
@@ -108,16 +111,16 @@ function FindOwnerBoardCommentForm({
     <>
       <div>
         <h1>
-          <div className="max-w-lg shadow-md">
+          <div className="shadow-md">
             <form className="w-full p-5">
-              <div className="mb-2">
+              <div className="mb-2 mt-0">
                 <label form="comment" class="text-lg text-gray-600">
-                  댓글 달기
+                  댓글
                 </label>
                 {auth.isLoggedIn ? (
                   <textarea
                     id="comments"
-                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1 mt-3"
                     name="comment_content"
                     placeholder="댓글을 입력해주세요."
                     value={fieldValues?.comment_content}
@@ -125,52 +128,52 @@ function FindOwnerBoardCommentForm({
                   ></textarea>
                 ) : (
                   <textarea
-                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                    className="w-full h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1 mt-3"
                     name="content"
                     placeholder="댓글을 입력하려면 로그인해주세요."
                     onClick={didYouLog}
                   ></textarea>
                 )}
               </div>
-
-              {!commentID ? (
-                <button
-                  type="submit"
-                  className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={(e) => {
-                    handleSubmit(e);
-                  }}
-                >
-                  등록
-                </button>
-              ) : (
-                hidden
-              )}
-
-              {commentID ? (
-                <div>
+              <div className="text-right">
+                {!commentID ? (
                   <button
                     type="submit"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={(e) => handleEdit(e)}
-                  >
-                    수정
-                  </button>
-
-                  <button
-                    type="button"
-                    name="clear"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={() => {
-                      setHidden(!hidden);
+                    className=" px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                    onClick={(e) => {
+                      handleSubmit(e);
                     }}
                   >
-                    취소
+                    등록
                   </button>
-                </div>
-              ) : (
-                hidden
-              )}
+                ) : (
+                  hidden
+                )}
+
+                {commentID ? (
+                  <div className="flex justify-end gap-2 ">
+                    <button
+                      type="submit"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={(e) => handleEdit(e)}
+                    >
+                      수정
+                    </button>
+                    <button
+                      type="button"
+                      name="clear"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={() => {
+                        setHidden(!hidden);
+                      }}
+                    >
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  hidden
+                )}
+              </div>
             </form>
           </div>
         </h1>

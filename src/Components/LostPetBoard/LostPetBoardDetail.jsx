@@ -272,12 +272,12 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   </div>
 
                   {/* 댓글 */}
-                  <>
+                  <div className="mt-10">
                     <LostPetBoardCommentList
                       lostpetboardId={lostpetboardId}
                       refetch={refetch}
                     />
-                  </>
+                  </div>
                   <hr className="mt-3 mb-3" />
 
                   <div className="my-5 text-right">
