@@ -168,7 +168,7 @@ function AllCenterMap({ centersData, ismain }) {
   }
 
   return (
-    <div>
+    <div className="mt-10">
       <h2 className="text-center text-2xl font-bold">
         입양 신청할 보호소를 선택하세요.
       </h2>

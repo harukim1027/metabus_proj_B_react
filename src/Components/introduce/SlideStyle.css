@@ -8,6 +8,13 @@
   height: 100px;
 }
 
+.Container3 {
+  --content-background-color: transparent;
+  height: auto;
+  width: auto;
+}
+
+
 .ItemWrapper {
   display: flex;
   align-items: center;

@@ -84,11 +84,11 @@ function SearchInfraMap() {
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
   }
 
-  const [query, setQuery] = useState('대전 유성구 관평동 동물병원');
+  const [query, setQuery] = useState();
 
   useEffect(() => {
-    addr !== '' && setQuery(addr + ' 동물병원');
-  }, [currentLoc]);
+    setQuery(addr + ' 동물병원');
+  }, [currentLoc, addr === '']);
 
   console.log('addr: ', addr);
   console.log('query: ', query);
@@ -132,7 +132,7 @@ function SearchInfraMap() {
   }, [query]);
 
   return (
-    <div>
+    <div className="mt-10">
       <h2 className="text-center text-2xl font-bold">
         지도에서 반려동물 관련 인프라를 확인하세요.
       </h2>
