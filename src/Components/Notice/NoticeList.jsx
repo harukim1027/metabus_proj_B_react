@@ -112,9 +112,9 @@ function NoticeList() {
           </div>
         </div>
       </div>
-
+      <div className="notice_list"></div>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 notice_header rounded-xl shadow-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -127,7 +127,7 @@ function NoticeList() {
               </>
             )}
           </div>
-          <div className="notice_list xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+
           <br />
           <br />
 
@@ -234,7 +234,7 @@ function NoticeList() {
           />
         </div>
       </div>
-      <div className="notice_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+      <div className="notice_list2 mb-10"></div>
     </>
   );
 }

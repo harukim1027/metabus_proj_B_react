@@ -169,8 +169,8 @@
   content: '';
   display: block;
   position: absolute;
-  right: calc((100vw - 1200px) / 2 * -1);
-  width: calc((100vw - 1200px) / 2 + 1200px);
+  /* right: calc((100vw - 1200px) / 2 * -1); */
+  width: calc((100vw - 1200px) / 2 + 60vw);
   height: 40px;
   border-top-left-radius: 150px;
   border-bottom-left-radius: 150px;
@@ -218,8 +218,8 @@
   content: '';
   display: block;
   position: absolute;
-  left: calc((100vw - 1200px) / 2 * -1);
-  width: calc((100vw - 1200px) / 2 + 1200px);
+  /* left: calc((100vw - 1200px) / 2 * -1); */
+  width: calc((100vw - 1200px) / 2 + 60vw);
   height: 30px;
   border-top-right-radius: 150px;
   border-bottom-right-radius: 150px;
