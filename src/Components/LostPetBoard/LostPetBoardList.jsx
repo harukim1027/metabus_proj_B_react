@@ -81,16 +81,51 @@ function LostPetBoardList() {
 
   return (
     <>
-      <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
-            <span className="mt-7 mb-6 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl">
-              <span className="relative text-white">
-                " 우리 아이 찾아요😭 "
-              </span>
-            </span>
-          </blockquote>
+      <div id="container">
+        <div id="contents">
+          <div className="sub_content">
+            <div className="pageTop2">
+              <div className="tit">
+                <h2
+                  className="bar_left"
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  우리 아이 찾아요😭
+                </h2>
+                <p
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  Lost My Pet
+                </p>
+              </div>
+              {/* 첫번재 영역 */}
+              <div
+                className="leftBar bar_left"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              ></div>
 
+              {/* 두번째 영역 */}
+              <div
+                className="rightBar bar_right"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
+                <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
+              </div>
+            </div>
+          </div>
+          <div className="board_top_info3 :before">
+            <div className="info_desc">
+              <p className="text-right">
+                메타버스는 <br />
+                사지 않고 가족이 되는 문화를 만듭니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="lost_list"></div>
+      <div className="header flex flex-wrap justify-center">
+        <div className="lost_header mx-5 rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -205,7 +240,7 @@ function LostPetBoardList() {
             <div className="flex justify-end mr-5">
               <button
                 onClick={() => navigate('/lostpetboard/new/')}
-                className="hover:scale-110 xs:w-5 xs:w-10 sm:w-14"
+                className="hover:scale-110 xs:w-10 sm:w-14"
                 readOnly
               >
                 <img src="/pen2.png" alt="button"></img>
@@ -224,6 +259,7 @@ function LostPetBoardList() {
           />
         </div>
       </div>
+      <div className="lost_list2 mb-10"></div>
     </>
   );
 }

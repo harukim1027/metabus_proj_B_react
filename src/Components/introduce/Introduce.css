@@ -197,17 +197,3 @@
   background-image: linear-gradient(270deg, #f77706, #f5c45a);
 }
 
-
-
-.review_list {
-  left: 0;
-  content: "";
-  display: block;
-  position: absolute;
-  left: calc((100vw - 1200px) / 2 * -1);
-  width: calc((100vw - 1200px) / 2 + 1200px);
-  height: 60px;
-  border-top-right-radius: 150px; 
-  border-bottom-right-radius: 150px; 
-  background-image: linear-gradient(to left, #7eb2e4, #C1D3E4);
-}
