@@ -132,7 +132,7 @@ function SearchInfraMap() {
   }, [query]);
 
   return (
-    <div>
+    <div className="mt-10">
       <h2 className="text-center text-2xl font-bold">
         지도에서 반려동물 관련 인프라를 확인하세요.
       </h2>
