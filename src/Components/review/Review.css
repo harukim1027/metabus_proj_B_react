@@ -161,30 +161,64 @@
 
 .review_list {
   left: 0;
-  content: "";
+  content: '';
   display: block;
   position: absolute;
-  left: calc((100vw - 1200px) / 2 * -1);
-  width: calc((100vw - 1200px) / 2 + 1200px);
+  /* left: calc((100vw - 1200px) / 2 * -1); */
+  width: calc((100vw - 1200px) / 2 + 60vw);
   height: 30px;
-  border-top-right-radius: 150px; 
-  border-bottom-right-radius: 150px; 
+  border-top-right-radius: 150px;
+  border-bottom-right-radius: 150px;
   background-image: linear-gradient(to left, #7eb2e4, #C1D3E4);
 }
 
 
 .review_list2 {
   right: 0;
-  content: "";
+  content: '';
   display: block;
   position: absolute;
-  right: calc((100vw - 1200px) / 2 * -1);
-  width: calc((100vw - 1200px) / 2 + 1200px);
+  /* right: calc((100vw - 1200px) / 2 * -1); */
+  width: calc((100vw - 1200px) / 2 + 60vw);
   height: 40px;
-  border-top-left-radius: 150px; 
-  border-bottom-left-radius: 150px; 
+  border-top-left-radius: 150px;
+  border-bottom-left-radius: 150px;
   background-image: linear-gradient(to right, #7eb2e4, #C1D3E4);
 }
 
+.bar_right {
+  animation-name: bar_ani;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
 
+@keyframes bar_ani {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translateZ(0);
+  }
+}
+
+.bar_left {
+  animation-name: barL_ani;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes barL_ani {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translateZ(0);
+  }
+}
 
