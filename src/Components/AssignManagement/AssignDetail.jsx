@@ -341,7 +341,7 @@ function AssignDetail({ assignId }) {
             <div className="">
               <div className="mx-5 bg-white rounded-xl  overflow-hidden sm:w-full xs:w-full">
                 <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
-                  <span class="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
+                  <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
                     <span class="relative text-white">
                       "{assignData?.adopter_name} 님의 신청 상태"
                     </span>
@@ -473,7 +473,7 @@ function AssignDetail({ assignId }) {
                         ? navigate(`/admin/assignmanage/`)
                         : navigate(`/mypage/assigninfo/`);
                     }}
-                    className="ml-3 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
+                    className="ml-3 mb-10 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
                   >
                     목록
                   </button>
