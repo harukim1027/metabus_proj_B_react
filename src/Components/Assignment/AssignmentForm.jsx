@@ -210,7 +210,7 @@ function AssignmentForm({ handleDidSave }) {
       {/* 신청하는 폼 */}
 
       <div className="header flex flex-wrap justify-center">
-        <div className="assignments_header rounded-xl shadow-md overflow-hidden  sm:w-full sm:mx-5 xs:w-full xs:mx-5 md:w-5/6 md:px-20 lg:w-2/3 pb-10 my-10">
+        <div className="assignments_header rounded-xl overflow-hidden  sm:w-full sm:mx-5 xs:w-full xs:mx-5 md:w-5/6 md:px-20 lg:w-2/3 pb-10 my-10">
           <form
             className="assignments_header sm:px-20 md:px-0 py-10"
             onSubmit={handleSubmit}

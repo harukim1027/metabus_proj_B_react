@@ -1,10 +1,18 @@
 import '../../App.css';
 import './MainCrew.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { toast } from 'react-toastify';
 import Alert from 'Components/review/Alert';
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
+import 'react-awesome-slider/dist/styles.css';
+import '../review/SlideStyle.css';
+
+import ReviewSummaryMain from 'Components/review/ReviewSummaryMain';
+import { useApiAxios } from 'api/base';
+import ReviewSummary from 'Components/review/ReviewSummary';
+import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
+import AwesomeSlider from 'react-awesome-slider';
 
 function MainScreen() {
   const [activeCount, setActiveCount] = useState(1);
@@ -27,6 +35,21 @@ function MainScreen() {
     }
   }
 
+  const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
+    {
+      url: `/adopt_review/api/allreviews/`,
+      method: 'GET',
+    },
+    {
+      manual: true,
+    },
+  );
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  console.log(reviewList);
   //-------------
 
   // console.log('auth', auth);
@@ -96,28 +119,20 @@ function MainScreen() {
             >
               <div className="innerCont bgLayer">
                 <div className="cover"></div>
-                <div className="inner">
-                  <p>
-                    메타버스는{' '}
-                    <span>
-                      <strong className="aniCount">68,724</strong>마리의
-                    </span>
-                    유기동물이 가족을 찾도록 돕고 있습니다.
-                  </p>
-                  <span className="scrollGuide">Scroll Down ▽ </span>
+                <div className="inner review-summary-list-wrapper">
+                  {JSON.stringify(reviewList)}
+                  {reviewList?.map((review) => (
+                    <div
+                      key={review.review_no}
+                      className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
+                    >
+                      <ReviewSummary review={review} />
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="innerCont maskLayer">
-                <div className="inner">
-                  <p>
-                    메타버스는{' '}
-                    <span>
-                      <strong className="aniCount">68,724</strong>마리의
-                    </span>
-                    유기동물이 가족을 찾도록 돕고 있습니다.
-                  </p>
-                  <span className="scrollGuide">Scroll Down ▽ </span>
-                </div>
+                <div className="inner">{/* 여기부분 */}</div>
               </div>
             </div>
 
@@ -129,15 +144,39 @@ function MainScreen() {
               }
             >
               {activeCount === 10 && (
-                <div className="flex justify-center">
-                  <div className="w-11/12 h-48 rounded-lg p-10">
-                    <PageAllCenterMap ismain={ismain} />
-
-                    <button onClick={() => setActiveCount(1)} className="z-10">
+                <>
+                  <div className="h-full">
+                    <div className="flex justify-center h-full">
+                      <AwesomeSlider
+                        className="Container w-11/12 h-5/6"
+                        mobileTouch={true}
+                        organicArrows={true}
+                        bullets={false}
+                      >
+                        <span className="w-5/6 h-5/6 mt-10">
+                          <div className="flex justify-center w-full">
+                            <div className="w-11/12 h-full rounded-lg">
+                              <PageAllCenterMap ismain={ismain} />
+                            </div>
+                          </div>
+                        </span>
+                        <span className="w-5/6 h-5/6 mt-10">
+                          <div className="flex justify-center w-full">
+                            <div className="w-11/12 h-full rounded-lg">
+                              <PageSearchInfraMap />
+                            </div>
+                          </div>
+                        </span>
+                      </AwesomeSlider>
+                    </div>
+                    <button
+                      onClick={() => setActiveCount(1)}
+                      className="z-10 absolute bottom-20"
+                    >
                       TOP▲
                     </button>
                   </div>
-                </div>
+                </>
               )}
             </div>
 
