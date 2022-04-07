@@ -111,6 +111,19 @@ function NoticeList() {
               <div></div>
               <div className="xs:mt-5 xl:mt-0">
                 <div className="flex justify-center">
+                  {/* <span className="h-7 w-7 mt-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      className="line-icon"
+                    >
+                      <path
+                        d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z"
+                        fill="#333d4b"
+                      ></path>
+                    </svg>
+                  </span> */}
+
                   <input
                     type="text"
                     name="query"
