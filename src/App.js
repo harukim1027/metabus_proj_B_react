@@ -77,7 +77,7 @@ function App() {
       <header className="main_header">
         <div className="inner">
           <p>
-            Contact Us <strong>metabusemail@gmail.com</strong>
+            Contact Us <strong>✉ metabusemail@gmail.com</strong>
           </p>
         </div>
       </header>

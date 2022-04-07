@@ -78,7 +78,7 @@ function NewNav() {
               }}
             >
               <img
-                className="xs:mt-40 xs:w-3/4 xl:w-3/5"
+                className="xs:mt-40 md:mt-1 xs:w-3/4 xl:w-3/5"
                 src="/main_dog_gray1.png"
                 alt=""
               />
@@ -106,7 +106,7 @@ function NewNav() {
                 {auth.isLoggedIn && (
                   <>
                     <div className="relative">
-                      <span className="xs:mt-5 rounded-xl bg-white shadow-md border text-center font-bold absolute xs:inset-x-0 sm:inset-x-auto sm:left-10 sm:top-10 sm:text-xl">
+                      <span className="xs:mt-5 md:mt-1 rounded-xl bg-white shadow-md border text-center font-bold absolute xs:inset-x-0 sm:inset-x-auto sm:left-10 sm:top-10 sm:text-xl">
                         &nbsp; &nbsp;오늘도 찾아주셨네요, {auth.nickname} 님 ❕
                         &nbsp; &nbsp;
                       </span>
