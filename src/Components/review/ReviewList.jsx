@@ -2,15 +2,11 @@ import { useApiAxios } from 'api/base';
 import { useState, useEffect, useCallback } from 'react';
 import ReviewSummary from './ReviewSummary';
 import { useNavigate } from 'react-router-dom';
-import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import 'css/pagination_review.css';
 import LoadingIndicator from 'LoadingIndicator';
 import ReactPaginate from 'react-paginate';
 import './Review.css';
-import Fame from './HallOfFame';
-
-const INIT_FIELD_VALUES = { category: '전체' };
 
 function ReviewList() {
   const { auth } = useAuth();
@@ -31,17 +27,6 @@ function ReviewList() {
     },
   );
 
-  const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
-
-  useEffect(() => {}, [fieldValues]);
-  const moveCategory = () => {
-    fieldValues.category === '전체' && navigate(`/review/`);
-    fieldValues.category === '강아지' && navigate(`/review/dog/`);
-    fieldValues.category === '고양이' && navigate(`/review/cat/`);
-  };
-  useEffect(() => {
-    moveCategory();
-  }, [fieldValues]);
   const fetchReviews = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
@@ -55,9 +40,11 @@ function ReviewList() {
     },
     [query],
   );
+
   useEffect(() => {
     fetchReviews(1);
   }, []);
+
   const handlePageClick = (event) => {
     fetchReviews(event.selected + 1);
   };
@@ -72,27 +59,6 @@ function ReviewList() {
       fetchReviews(1, query);
     }
   };
-
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [reviewList]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [reviewList]);
-
-  // console.log('created_at', reviewList);
 
   //-------------
 
@@ -116,13 +82,13 @@ function ReviewList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar2"
+                className="leftBar2 bar_left"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar2"
+                className="rightBar2 bar_right"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
@@ -155,7 +121,7 @@ function ReviewList() {
               </>
             )}
           </div>{' '}
-          <div className="review_list xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+          <div className="review_list"></div>
           <br />
           <br />
           {/* 검색 필드 + CSS */}
@@ -163,24 +129,6 @@ function ReviewList() {
           <div className="mb-6 mt-10">
             <div>
               <div className=" xs:flex-none xl:flex xl:justify-between">
-                <div>
-                  <form
-                    onSubmit={() => moveCategory()}
-                    className="flex justify-center"
-                  >
-                    <select
-                      name="category"
-                      value={fieldValues.category}
-                      onChange={handleFieldChange}
-                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
-                      defaultValue="전체"
-                    >
-                      <option value="전체">전체</option>
-                      <option value="강아지">강아지</option>
-                      <option value="고양이">고양이</option>
-                    </select>
-                  </form>
-                </div>
                 <div className="flex justify-center xs:mt-5 xl:mt-0">
                   <input
                     type="text"
@@ -216,7 +164,7 @@ function ReviewList() {
             <div className="flex justify-end mr-5">
               <button
                 onClick={() => navigate('/review/new/')}
-                className="hover:scale-110 xs:w-5 xs:w-10 sm:w-14"
+                className="hover:scale-110 xs:w-10 sm:w-14"
                 readOnly
               >
                 <img src="/pen2.png" alt="button"></img>
@@ -235,7 +183,7 @@ function ReviewList() {
           />
         </div>
       </div>
-      <div className="review_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+      <div className="review_list2"></div>
     </>
   );
 }
