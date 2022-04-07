@@ -235,7 +235,7 @@ function ReviewList() {
           />
         </div>
       </div>
-      <div className="review_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+      <div className="review_list2 mb-10"></div>
     </>
   );
 }
