@@ -7,6 +7,7 @@ import '../../App.css';
 import './Notice.css';
 import 'css/pagination_notice.css';
 import LoadingIndicator from 'LoadingIndicator';
+
 function NoticeList() {
   const [query, setQuery] = useState(null);
   const { auth } = useAuth();
@@ -51,21 +52,21 @@ function NoticeList() {
     }
   };
   // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [noticeList]);
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-  useEffect(() => {
-    gotoTop();
-  }, [noticeList]);
+  // const [topLocation, setTopLocation] = useState(0);
+  // // console.log('topLocation: ', topLocation);
+  // useEffect(() => {
+  //   setTopLocation(document.querySelector('#topLoc').offsetTop);
+  // }, [noticeList]);
+  // const gotoTop = () => {
+  //   // 클릭하면 스크롤이 위로 올라가는 함수
+  //   window.scrollTo({
+  //     top: topLocation,
+  //     behavior: 'smooth',
+  //   });
+  // };
+  // useEffect(() => {
+  //   gotoTop();
+  // }, [noticeList]);
   //-------------
   return (
     <>
@@ -73,8 +74,9 @@ function NoticeList() {
         <div id="contents">
           <div className="sub_content">
             <div className="pageTop2">
-              <div class="tit">
+              <div className="tit">
                 <h2
+                  className="bar_left"
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
                 >
                   공지사항
@@ -87,27 +89,51 @@ function NoticeList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar"
+                className="leftBar bar_left"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar"
+                className="rightBar bar_right"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
               </div>
             </div>
           </div>
+          <div className="board_top_info3 :before">
+            <div className="info_desc">
+              <p className="text-right">
+                메타버스는 <br />
+                사지 않고 가족이 되는 문화를 만듭니다.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="review_list3 xs:w-3/4 md:w-5/6 xl:w-7/8"></div>
-
+      <div className="notice_list"></div>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 notice_header rounded-xl shadow-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <div className="flex xl:justify-end xs:justify-center">
+            {loading && (
+              <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
+            )}
+            {error && (
+              <>
+                <p className="text-red-400 mt-1">
+                  &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !{' '}
+                </p>
+              </>
+            )}
+          </div>
+
+          <br />
+          <br />
+
+          {/* 검색 필드 */}
           <div className="mb-6 mt-10">
-            <div className="  xs:flex-none xl:flex xl:justify-between">
+            <div className="xs:flex-none xl:flex xl:justify-between">
               <div></div>
               <div className="xs:mt-5 xl:mt-0">
                 <div className="flex justify-center">
@@ -116,31 +142,22 @@ function NoticeList() {
                     name="query"
                     onChange={getQuery}
                     onKeyPress={handleKeyPress}
-                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 px-3 py-2 mx-4 border-2 xs:w-full sm:w-72 xs:text-xxs sm:text-base"
+                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
                     placeholder="제목을 검색하세요."
                   />
                   <button
                     onClick={handleBTNPress}
-                    className="rounded bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-white px-3 py-2 border-2 w-24 xs:text-sm sm:text-xl mr-2"
+                    className="rounded bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
                     readOnly
                   >
                     검색
                   </button>
                 </div>
-                <div className="flex justify-center">
-                  {loading && <LoadingIndicator>로딩 중 ...</LoadingIndicator>}
-                  {error && (
-                    <>
-                      <p className="text-red-400 mt-1">
-                        &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. ! (조회된
-                        정보가 없습니다.)
-                      </p>
-                    </>
-                  )}
-                </div>
               </div>
             </div>
           </div>
+          <hr className="mb-3" />
+
           <div className="mb-5">
             <table className="mb-5 border text-center divide-y divide-gray-200 w-full">
               <thead className="bg-gray-50">
@@ -169,23 +186,24 @@ function NoticeList() {
                 {noticeList?.results?.map((notice) => (
                   <tr
                     onClick={() => navigate(`/notice/${notice.notice_no}/`)}
-                    className=" cursor-pointer"
+                    className="cursor-pointer"
                   >
                     <td className="py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs ">
                       <div className="text-sm font-medium text-gray-900">
                         {notice.notice_no}
                       </div>
                     </td>
+
                     <td className="py-4">
-                      <div className="font-medium text-gray-900">
-                        <span className="inline-flex xs:text-sm md:text-md lg:text-lg leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <div className="px-20 py-4 font-semibold lg:text-xl md:text-md xs:text-sm">
+                        <span className="bg-yellow-100 rounded-full">
                           {notice.title.length > 20
                             ? notice.title.substring(0, 20) + '...'
                             : notice.title}
                         </span>
                       </div>
                     </td>
-                    <td className="py-4 sm:text-sm xs:text-xxs">
+                    <td className="py-4 xs:text-sm sm:text-base">
                       {notice.created_at}
                     </td>
                   </tr>
@@ -216,6 +234,7 @@ function NoticeList() {
           />
         </div>
       </div>
+      <div className="notice_list2 mb-10"></div>
     </>
   );
 }

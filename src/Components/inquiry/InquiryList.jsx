@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import 'css/pagination_inquiry.css';
 import LoadingIndicator from 'LoadingIndicator';
+import './Inquiry.css';
 
 function InquiryList() {
   const { auth } = useAuth();
@@ -65,38 +66,92 @@ function InquiryList() {
     }
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [inquiryList]);
+  // // 스크롤 기능
+  // const [topLocation, setTopLocation] = useState(0);
+  // // console.log('topLocation: ', topLocation);
+  // useEffect(() => {
+  //   setTopLocation(document.querySelector('#topLoc').offsetTop);
+  // }, [inquiryList]);
 
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
+  // const gotoTop = () => {
+  //   // 클릭하면 스크롤이 위로 올라가는 함수
+  //   window.scrollTo({
+  //     top: topLocation,
+  //     behavior: 'smooth',
+  //   });
+  // };
 
-  useEffect(() => {
-    gotoTop();
-  }, [inquiryList]);
+  // useEffect(() => {
+  //   gotoTop();
+  // }, [inquiryList]);
 
   //-------------
 
   return (
     <>
-      <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-300 relative inline-block xs:text-2xl sm:text-4xl lg:text-6xl">
-              <span class="relative text-white">" 1:1 문의 "</span>
-            </span>
-          </blockquote>
-          <hr />
+      <div id="container">
+        <div id="contents">
+          <div className="sub_content">
+            <div className="pageTop">
+              <div className="tit">
+                <h2
+                  className="bar_left"
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  {/* <h2 className="transition translate-x-40 duration-500 ease-in-out"> */}
+                  1:1 문의
+                </h2>
+                <p
+                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                >
+                  Inquiry
+                </p>
+              </div>
+              {/* 첫번재 영역 */}
+              <div
+                className="leftBar2 bar_left"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              ></div>
 
+              {/* 두번째 영역 */}
+              <div
+                className="rightBar2 bar_right"
+                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
+                <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
+              </div>
+            </div>
+          </div>
+          <div className="board_top_info2 :before">
+            <div className="info_desc">
+              <p className="text-right">
+                메타버스는 <br />
+                사지 않고 가족이 되는 문화를 만듭니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="header flex flex-wrap justify-center" id="topLoc">
+        <div className="mx-5 inquiry_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <div className="flex xl:justify-end xs:justify-center">
+            {loading && (
+              <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
+            )}
+            {error && (
+              <>
+                <p className="text-red-400 mt-1">
+                  &nbsp;&nbsp; ! 로딩 중 에러가 발생했습니다. !{' '}
+                </p>
+              </>
+            )}
+          </div>
+          <div className="inquiry_list xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+          <br />
+          <br />
+
+          {/* 검색 필드 */}
           <div className="mb-6 mt-10">
             <p className="xs:text-center xs:text-xxs md:text-base md:text-center xl:text-right md:mb-3 text-gray-500 ">
               "번호, 등록번호, 신청자명, ID, 닉네임 중 검색"
@@ -121,11 +176,10 @@ function InquiryList() {
                     검색
                   </button>
                 </div>
-                {loading && <LoadingIndicator>검색 중 ...</LoadingIndicator>}
-                {error && <h2 className="">검색된 정보가 없습니다.</h2>}
               </div>
             </div>
           </div>
+          <hr className="mb-3" />
 
           <div className="mb-5">
             <table className="mb-5 border text-center min-w-full divide-y divide-gray-200">
@@ -241,6 +295,7 @@ function InquiryList() {
           />
         </div>
       </div>
+      <div className="inquiry_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
     </>
   );
 }
