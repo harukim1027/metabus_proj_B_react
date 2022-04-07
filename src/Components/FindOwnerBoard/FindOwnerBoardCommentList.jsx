@@ -2,6 +2,7 @@ import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 import FindOwnerBoardCommentForm from './FindOwnerBoardCommentForm';
 import FindOwnerBoardCommentDetail from './FindOwnerBoardCommentDetail';
+import 'css/Comment.css';
 
 function FindOwnerBoardCommentList({ findboardId }) {
   const [{ data: findBoardList, loading, error }, refetch] = useApiAxios(
@@ -15,12 +16,6 @@ function FindOwnerBoardCommentList({ findboardId }) {
 
   return (
     <>
-      <FindOwnerBoardCommentForm
-        refetch={refetch}
-        findBoardList={findBoardList}
-        findboardId={findboardId}
-      />
-
       {findBoardList?.comments.map((comment) => (
         <>
           <div className="">
@@ -34,6 +29,11 @@ function FindOwnerBoardCommentList({ findboardId }) {
           </div>
         </>
       ))}
+      <FindOwnerBoardCommentForm
+        refetch={refetch}
+        findBoardList={findBoardList}
+        findboardId={findboardId}
+      />
     </>
   );
 }

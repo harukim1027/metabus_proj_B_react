@@ -33,7 +33,7 @@ function ReviewCommentDetail({ comment, reviewId, refetch }) {
     <>
       {(auth.userID === comment?.user || auth.is_staff) && (
         <button
-          className="sm:w-10 text-gray-400"
+          className="sm:w-9 text-gray-400"
           onMouseOver={() => setCommentID(comment?.review_comment_no)}
           onClick={() => {
             setHidden(!hidden);
@@ -44,7 +44,7 @@ function ReviewCommentDetail({ comment, reviewId, refetch }) {
       )}
       {(auth.userID === comment?.user || auth.is_staff) && (
         <button
-          className="sm:w-10 text-gray-400"
+          className="sm:w-7 text-gray-400"
           onMouseOver={() => setDelComment(comment?.review_comment_no)}
           onClick={() => commentDelete()}
         >

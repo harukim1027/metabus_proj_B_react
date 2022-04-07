@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import ReviewCommentDetail from './ReviewCommentDetail';
 import ReviewCommentForm from './ReviewCommentForm';
-import './Comment.css';
+import 'css/Comment.css';
 import TimeAgo from './TimeAgo';
 
 function ReviewCommentList({ reviewId }) {
@@ -28,6 +28,7 @@ function ReviewCommentList({ reviewId }) {
                     <strong>{comment.user}</strong>
                   </span>
                   <span class="tweet-time">
+                    {' '}
                     - <TimeAgo comment={comment.updated_at} />{' '}
                     <ReviewCommentDetail
                       comment={comment}
@@ -37,11 +38,7 @@ function ReviewCommentList({ reviewId }) {
                   </span>
                 </div>
                 <div>
-                  <img
-                    class="tweet-card-avatar"
-                    src="https://pbs.twimg.com/profile_images/679974972278849537/bzzb-6H4_bigger.jpg"
-                    alt=""
-                  />
+                  <img class="tweet-card-avatar" src="/logo.jpg" alt="logo" />
                 </div>
                 <div class="tweet-text">
                   <p data-aria-label-part="0">
