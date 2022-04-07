@@ -84,11 +84,11 @@ function SearchInfraMap() {
     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
   }
 
-  const [query, setQuery] = useState('대전 유성구 관평동 동물병원');
+  const [query, setQuery] = useState();
 
   useEffect(() => {
-    addr !== '' && setQuery(addr + ' 동물병원');
-  }, [currentLoc]);
+    setQuery(addr + ' 동물병원');
+  }, [currentLoc, addr === '']);
 
   console.log('addr: ', addr);
   console.log('query: ', query);
