@@ -90,12 +90,15 @@ function FindOwnerBoardCommentForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveRequest({
-      data: fieldValues,
-    }).then(() => {
-      clearFieldValues();
-      refetch();
-    });
+    if (fieldValues === '') {
+      window.confirm('댓글 내용을 입력해주세요.');
+    } else
+      saveRequest({
+        data: fieldValues,
+      }).then(() => {
+        clearFieldValues();
+        refetch();
+      });
   };
 
   const didYouLog = () => {
@@ -112,7 +115,7 @@ function FindOwnerBoardCommentForm({
             <form className="w-full p-5">
               <div className="mb-2 mt-0">
                 <label form="comment" class="text-lg text-gray-600">
-                  댓글 달기
+                  댓글
                 </label>
                 {auth.isLoggedIn ? (
                   <textarea
@@ -132,45 +135,45 @@ function FindOwnerBoardCommentForm({
                   ></textarea>
                 )}
               </div>
-
-              {!commentID ? (
-                <button
-                  type="submit"
-                  className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={(e) => {
-                    handleSubmit(e);
-                  }}
-                >
-                  등록
-                </button>
-              ) : (
-                hidden
-              )}
-
-              {commentID ? (
-                <div>
+              <div className="text-right">
+                {!commentID ? (
                   <button
                     type="submit"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={(e) => handleEdit(e)}
-                  >
-                    수정
-                  </button>
-
-                  <button
-                    type="button"
-                    name="clear"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={() => {
-                      setHidden(!hidden);
+                    className=" px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                    onClick={(e) => {
+                      handleSubmit(e);
                     }}
                   >
-                    취소
+                    등록
                   </button>
-                </div>
-              ) : (
-                hidden
-              )}
+                ) : (
+                  hidden
+                )}
+
+                {commentID ? (
+                  <div className="flex justify-end gap-2 ">
+                    <button
+                      type="submit"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={(e) => handleEdit(e)}
+                    >
+                      수정
+                    </button>
+                    <button
+                      type="button"
+                      name="clear"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={() => {
+                        setHidden(!hidden);
+                      }}
+                    >
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  hidden
+                )}
+              </div>
             </form>
           </div>
         </h1>

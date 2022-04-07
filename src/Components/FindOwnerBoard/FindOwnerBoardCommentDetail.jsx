@@ -32,16 +32,6 @@ function FindOwnerBoardCommentDetail({ comment, findboardId, refetch }) {
     <>
       {(auth.userID === comment?.user || auth.is_staff) && (
         <button
-          className="sm:w-9 text-gray-400"
-          onMouseOver={() => setDelComment(comment?.find_comment_no)}
-          onClick={() => commentDelete()}
-        >
-          삭제
-        </button>
-      )}
-
-      {(auth.userID === comment?.user || auth.is_staff) && (
-        <button
           className="sm:w-7 text-gray-400"
           onMouseOver={() => setCommentID(comment?.find_comment_no)}
           onClick={() => {
@@ -51,6 +41,17 @@ function FindOwnerBoardCommentDetail({ comment, findboardId, refetch }) {
           수정
         </button>
       )}
+
+      {(auth.userID === comment?.user || auth.is_staff) && (
+        <button
+          className="sm:w-9 text-gray-400"
+          onMouseOver={() => setDelComment(comment?.find_comment_no)}
+          onClick={() => commentDelete()}
+        >
+          삭제
+        </button>
+      )}
+
       {!hidden && (
         <FindOwnerBoardCommentForm
           comment={comment}

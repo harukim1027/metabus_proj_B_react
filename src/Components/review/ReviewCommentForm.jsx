@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 const INIT_FIELD_VALUES = {
   comment_content: '',
@@ -132,42 +131,44 @@ function ReviewCommentForm({
                 )}
               </div>
 
-              {!commentID ? (
-                <button
-                  type="submit"
-                  className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={(e) => handleSubmit(e)}
-                >
-                  등록
-                </button>
-              ) : (
-                hidden
-              )}
-
-              {commentID ? (
-                <div>
+              <div className="text-right">
+                {!commentID ? (
                   <button
                     type="submit"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={(e) => handleEdit(e)}
+                    className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                    onClick={(e) => handleSubmit(e)}
                   >
-                    수정
+                    등록
                   </button>
+                ) : (
+                  hidden
+                )}
 
-                  <button
-                    type="button"
-                    name="clear"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={() => {
-                      setHidden(!hidden);
-                    }}
-                  >
-                    취소
-                  </button>
-                </div>
-              ) : (
-                hidden
-              )}
+                {commentID ? (
+                  <div className="flex justify-end gap-2 ">
+                    <button
+                      type="submit"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={(e) => handleEdit(e)}
+                    >
+                      수정
+                    </button>
+
+                    <button
+                      type="button"
+                      name="clear"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={() => {
+                        setHidden(!hidden);
+                      }}
+                    >
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  hidden
+                )}
+              </div>
             </form>
           </div>
         </h1>

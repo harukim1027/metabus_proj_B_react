@@ -131,45 +131,45 @@ function LostPetBoardCommentForm({
                   ></textarea>
                 )}
               </div>
-
-              {!commentID ? (
-                <button
-                  type="submit"
-                  className=" px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                  onClick={(e) => {
-                    handleSubmit(e);
-                  }}
-                >
-                  등록
-                </button>
-              ) : (
-                hidden
-              )}
-
-              {commentID ? (
-                <div>
+              <div className="text-right">
+                {!commentID ? (
                   <button
                     type="submit"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={(e) => handleEdit(e)}
-                  >
-                    수정
-                  </button>
-
-                  <button
-                    type="button"
-                    name="clear"
-                    className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded"
-                    onClick={() => {
-                      setHidden(!hidden);
+                    className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                    onClick={(e) => {
+                      handleSubmit(e);
                     }}
                   >
-                    취소
+                    등록
                   </button>
-                </div>
-              ) : (
-                hidden
-              )}
+                ) : (
+                  hidden
+                )}
+                {commentID ? (
+                  <div className="flex justify-end gap-2 ">
+                    <button
+                      type="submit"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={(e) => handleEdit(e)}
+                    >
+                      수정
+                    </button>
+
+                    <button
+                      type="button"
+                      name="clear"
+                      className="px-3 py-2 text-sm text-blue-100 bg-blue-500 rounded"
+                      onClick={() => {
+                        setHidden(!hidden);
+                      }}
+                    >
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  hidden
+                )}{' '}
+              </div>
             </form>
           </div>
         </h1>
