@@ -51,21 +51,21 @@ function NoticeList() {
     }
   };
   // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [noticeList]);
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-  useEffect(() => {
-    gotoTop();
-  }, [noticeList]);
+  // const [topLocation, setTopLocation] = useState(0);
+  // // console.log('topLocation: ', topLocation);
+  // useEffect(() => {
+  //   setTopLocation(document.querySelector('#topLoc').offsetTop);
+  // }, [noticeList]);
+  // const gotoTop = () => {
+  //   // 클릭하면 스크롤이 위로 올라가는 함수
+  //   window.scrollTo({
+  //     top: topLocation,
+  //     behavior: 'smooth',
+  //   });
+  // };
+  // useEffect(() => {
+  //   gotoTop();
+  // }, [noticeList]);
   //-------------
   return (
     <>
@@ -73,7 +73,7 @@ function NoticeList() {
         <div id="contents">
           <div className="sub_content">
             <div className="pageTop2">
-              <div class="tit">
+              <div className="tit">
                 <h2
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
                 >
@@ -104,19 +104,32 @@ function NoticeList() {
       </div>
       <div className="review_list3 xs:w-3/4 md:w-5/6 xl:w-7/8"></div>
 
-      <div className="header flex flex-wrap justify-center" id="topLoc">
+      <div className="header flex flex-wrap justify-center">
         <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="mb-6 mt-10">
-            <div className="  xs:flex-none xl:flex xl:justify-between">
+            <div className="xs:flex-none xl:flex xl:justify-between">
               <div></div>
               <div className="xs:mt-5 xl:mt-0">
                 <div className="flex justify-center">
+                  {/* <span className="h-7 w-7 mt-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      className="line-icon"
+                    >
+                      <path
+                        d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z"
+                        fill="#333d4b"
+                      ></path>
+                    </svg>
+                  </span> */}
+
                   <input
                     type="text"
                     name="query"
                     onChange={getQuery}
                     onKeyPress={handleKeyPress}
-                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 px-3 py-2 mx-4 border-2 xs:w-full sm:w-72 xs:text-xxs sm:text-base"
+                    className="focus:outline-none px-3 py-2 mx-4 border-b-2 xs:w-full sm:w-72 xs:text-xxs sm:text-base"
                     placeholder="제목을 검색하세요."
                   />
                   <button
@@ -142,30 +155,8 @@ function NoticeList() {
             </div>
           </div>
           <div className="mb-5">
-            <table className="mb-5 border text-center divide-y divide-gray-200 w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-3 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap"
-                  >
-                    No
-                  </th>
-                  <th
-                    scope="col"
-                    className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider"
-                  >
-                    제목
-                  </th>
-                  <th
-                    scope="col"
-                    className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap"
-                  >
-                    작성일
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+            <table className="mb-5 mt-16 text-center w-full">
+              <tbody className="bg-white">
                 {noticeList?.results?.map((notice) => (
                   <tr
                     onClick={() => navigate(`/notice/${notice.notice_no}/`)}
@@ -176,17 +167,15 @@ function NoticeList() {
                         {notice.notice_no}
                       </div>
                     </td>
+
                     <td className="py-4">
-                      <div className="font-medium text-gray-900">
-                        <span className="inline-flex xs:text-sm md:text-md lg:text-lg leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <div className="font-medium text-gray-900 hover:bg-gray-200 rounded">
+                        <span className="inline-flex xs:text-sm md:text-md lg:text-lg leading-5 font-semibold text-gray-500">
                           {notice.title.length > 20
                             ? notice.title.substring(0, 20) + '...'
                             : notice.title}
                         </span>
                       </div>
-                    </td>
-                    <td className="py-4 sm:text-sm xs:text-xxs">
-                      {notice.created_at}
                     </td>
                   </tr>
                 ))}
