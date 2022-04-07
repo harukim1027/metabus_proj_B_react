@@ -29,7 +29,8 @@ function MyAssignInfo() {
   const fetchAssign = useCallback(async (newPage, newQuery = query) => {
     const params = {
       page: newPage,
-      query: auth.userID,
+      query: newQuery,
+      author: auth.userID,
     };
     const { data } = await refetch({ params });
     setPage(newPage);
