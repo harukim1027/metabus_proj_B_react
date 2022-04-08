@@ -40,7 +40,7 @@ function NewNav() {
       {/* 본문 시작 */}
       <div id="header_warp">
         {/* <!-- 헤더 : 공통 --> */}
-        <header className="main_header">
+        <header className="fixed right-10 z-50 w-28">
           {/* <h1 className="logo">
             <img src="metabusBnormal.png" alt="" />
           </h1> */}
@@ -190,17 +190,19 @@ function NewNav() {
                     <p>&copy;METABUS B Team all right reserved.</p>
                   </div>
                 </footer>
-                <button
-                  type="button"
-                  onClick={() => handleClick()}
-                  className="btn-close-gnb"
-                >
-                  <img
-                    className="hover:scale-110 duration-200"
-                    src="/sidecloseicon3.png"
-                    alt="button"
-                  ></img>
-                </button>
+                <div className="right-10">
+                  <button
+                    type="button"
+                    onClick={() => handleClick()}
+                    className="btn-close-gnb"
+                  >
+                    <img
+                      className="hover:scale-110 duration-200"
+                      src="/sidecloseicon3.png"
+                      alt="button"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </>
