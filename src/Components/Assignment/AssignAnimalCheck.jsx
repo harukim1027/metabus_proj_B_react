@@ -67,7 +67,7 @@ function AssignAnimalCheck() {
                           organicArrows={true}
                           bullets={false}
                         >
-                          <span className="content-center h-full w-full">
+                          <span className="flex justify-center h-full w-full">
                             {animal.image_url1 && (
                               <img
                                 src={animal.image_url1}
@@ -77,7 +77,7 @@ function AssignAnimalCheck() {
                               />
                             )}
                           </span>
-                          <span className="content-center h-full w-full">
+                          <span className="flex justify-center h-full w-full">
                             {animal.image_url2 && (
                               <img
                                 src={animal.image_url2}
@@ -87,7 +87,7 @@ function AssignAnimalCheck() {
                               />
                             )}
                           </span>
-                          <span className="content-center h-full w-full">
+                          <span className="flex justify-center h-full w-full">
                             {animal.image_url3 && (
                               <img
                                 src={animal.image_url3}
