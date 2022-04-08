@@ -534,7 +534,7 @@
 
 /* 메인 입양후기 */
 .section03 {
-  background: #c9eaff;
+  background: #ecf5fd;
 }
 .section03 .innerCont {
   display: flex;
@@ -580,7 +580,7 @@
   display: none;
 }
 .section03 .bgLayer {
-  background: #f2dfc0;
+  color: rgb(27, 98, 121);
 }
 .section03 .maskLayer {
   background: #f6e9d3;
