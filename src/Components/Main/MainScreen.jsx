@@ -13,9 +13,9 @@ import { useApiAxios } from 'api/base';
 import ReviewSummary from 'Components/review/ReviewSummary';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import AwesomeSlider from 'react-awesome-slider';
+import Fame from 'Components/review/HallOfFame';
 
-function MainScreen() {
-  const [activeCount, setActiveCount] = useState(1);
+function MainScreen({ activeCount, setActiveCount }) {
   // console.log(activeCount);
   const ismain = 1;
 
@@ -49,7 +49,7 @@ function MainScreen() {
     refetch();
   }, []);
 
-  console.log(reviewList);
+  // console.log(reviewList);
   //-------------
 
   // console.log('auth', auth);
@@ -62,7 +62,7 @@ function MainScreen() {
       <div id="header_warp">
         {/* <!-- //header_warp --> */}
         {/* <!-- 메인 --> */}
-        <div className="">
+        <div>
           <div className="mainContents">
             <div
               className={
@@ -117,22 +117,10 @@ function MainScreen() {
               }
               onWheel={(e) => wheel(e)}
             >
-              <div className="innerCont bgLayer">
-                <div className="cover"></div>
-                <div className="inner review-summary-list-wrapper">
-                  {JSON.stringify(reviewList)}
-                  {reviewList?.map((review) => (
-                    <div
-                      key={review.review_no}
-                      className="transition-transform hover:-translate-y-5 duration-300 my-5 rounded-xl mx-5 mb-3 w-44 h-60 overflow-hidden shadow-lg inline"
-                    >
-                      <ReviewSummary review={review} />
-                    </div>
-                  ))}
+              <div className="flex justify-center mt-40 ">
+                <div className="w-2/3">
+                  <Fame />
                 </div>
-              </div>
-              <div className="innerCont maskLayer">
-                <div className="inner">{/* 여기부분 */}</div>
               </div>
             </div>
 
@@ -218,7 +206,7 @@ function MainScreen() {
 
           {/* <!-- loading --> */}
 
-          <div id="footer">
+          <div className="footer">
             <div className="foot_list">
               <ul>
                 <li>

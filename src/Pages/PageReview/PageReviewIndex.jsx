@@ -12,7 +12,7 @@ function PageReviewIndex() {
 
       <Alert />
       <ReviewList />
-      <Fame />
+      {/* <Fame /> */}
     </div>
   );
 }
