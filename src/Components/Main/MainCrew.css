@@ -222,11 +222,6 @@
 }
 
 /* 메인 콘텐츠 */
-.main {
-  position: relative;
-  height: 100vh;
-  background: #99dfff;
-}
 .mainContents {
   position: absolute;
   top: 0;

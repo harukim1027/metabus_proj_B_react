@@ -74,14 +74,12 @@ function App() {
   const { auth } = useAuth();
   return (
     <>
-      <header className="main_header">
-        <div className="inner">
+      <div className="app header">
+        <div className="mainscreen_header">
           <p>
             Contact Us <strong>✉ metabusemail@gmail.com</strong>
           </p>
         </div>
-      </header>
-      <div className="app header">
         <Routes>
           <Route path="/" element={<PageMainScreen />} />
           <Route path="/menu/" element={<PageTopNav />} />
