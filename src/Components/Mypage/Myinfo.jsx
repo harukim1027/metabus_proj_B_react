@@ -165,7 +165,7 @@ function Myinfo() {
                 &nbsp;회원정보 수정&nbsp;
               </a>
               <button
-                className="rounded-xl a border ml-10 p-3"
+                className="rounded-xl a border ml-10 p-3 mr-5"
                 onClick={() => handleDelete()}
               >
                 &nbsp;회원 탈퇴&nbsp;
