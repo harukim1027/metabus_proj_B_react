@@ -168,7 +168,7 @@
   opacity: 0.73;
 }
 
-.main_header .btn-open-gnb {
+.btn-open-gnb {
   position: absolute;
   top: 70px;
   right: 20px;
@@ -183,7 +183,7 @@
   transition: 0.3s ease;
 }
 
-.main_header .btn-open-gnb:hover {
+.btn-open-gnb:hover {
   transform: rotate(0deg);
 }
 
@@ -760,13 +760,13 @@
   width: 100%;
   height: 100%;
   z-index: 2000;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
-.menuLayer .btn-close-gnb {
+.btn-close-gnb {
   position: absolute;
-  top: 70px;
-  right: 20px;
+  top: 130px;
+  right: 60px;
   width: 100px;
   height: 100px;
   color: #fff;
@@ -774,7 +774,14 @@
   font-family: 'gilroy';
   font-weight: 700;
   text-align: center;
+  transform: rotate(30deg);
+  transition: 0.3s ease;
 }
+
+.btn-close-gnb:hover {
+  transform: rotate(0deg);
+}
+
 .menuLayer .menu {
   position: absolute;
   top: 14.2222vh;

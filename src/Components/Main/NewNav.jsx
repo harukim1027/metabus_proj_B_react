@@ -190,17 +190,19 @@ function NewNav() {
                     <p>&copy;METABUS B Team all right reserved.</p>
                   </div>
                 </footer>
-                <button
-                  type="button"
-                  onClick={() => handleClick()}
-                  className="btn-close-gnb"
-                >
-                  <img
-                    className="hover:scale-110 duration-200"
-                    src="/sidecloseicon3.png"
-                    alt="button"
-                  ></img>
-                </button>
+                <div className="right-10">
+                  <button
+                    type="button"
+                    onClick={() => handleClick()}
+                    className="btn-close-gnb"
+                  >
+                    <img
+                      className="hover:scale-110 duration-200"
+                      src="/sidecloseicon3.png"
+                      alt="button"
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           </>
