@@ -43,7 +43,7 @@ const CommunitySidebar = () => {
     <>
       <div
         ref={side}
-        className=" sidebar absolute"
+        className=" sidebar fixed"
         style={{
           width: '200px',
           height: '380px',
