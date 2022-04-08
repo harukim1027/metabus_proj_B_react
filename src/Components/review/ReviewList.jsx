@@ -68,10 +68,16 @@ function ReviewList() {
         <div className="sub_content">
           <div className="pageTop">
             <div className="tit">
-              <h2 style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+              <h2
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
                 입양후기
               </h2>
-              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+              <p
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
                 ADOPT REVIEW
               </p>
             </div>
