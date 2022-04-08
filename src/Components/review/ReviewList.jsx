@@ -64,44 +64,38 @@ function ReviewList() {
 
   return (
     <>
-      <div id="container">
-        <div id="contents">
-          <div className="sub_content">
-            <div className="pageTop">
-              <div class="tit">
-                <h2
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  입양후기
-                </h2>
-                <p
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  ADOPT REVIEW
-                </p>
-              </div>
-              {/* 첫번재 영역 */}
-              <div
-                className="leftBar2 bar_left"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              ></div>
-
-              {/* 두번째 영역 */}
-              <div
-                className="rightBar2 bar_right"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
-                <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
-              </div>
-            </div>
-          </div>
-          <div className="board_top_info2 :before">
-            <div className="info_desc">
-              <p className="text-right">
-                메타버스는 <br />
-                사지 않고 가족이 되는 문화를 만듭니다.
+      <div>
+        <div className="sub_content">
+          <div className="pageTop">
+            <div className="tit">
+              <h2 style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+                입양후기
+              </h2>
+              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+                ADOPT REVIEW
               </p>
             </div>
+            {/* 첫번재 영역 */}
+            <div
+              className="leftBar2 bar_left"
+              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+            ></div>
+
+            {/* 두번째 영역 */}
+            <div
+              className="rightBar2 bar_right"
+              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+            >
+              <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
+            </div>
+          </div>
+        </div>
+        <div className="board_top_info2 :before">
+          <div className="info_desc">
+            <p className="text-right">
+              메타버스는 <br />
+              사지 않고 가족이 되는 문화를 만듭니다.
+            </p>
           </div>
         </div>
       </div>

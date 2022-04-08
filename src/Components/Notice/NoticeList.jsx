@@ -70,48 +70,45 @@ function NoticeList() {
   //-------------
   return (
     <>
-      <div id="container">
-        <div id="contents">
-          <div className="sub_content">
-            <div className="pageTop2">
-              <div className="tit">
-                <h2
-                  className="bar_left"
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  공지사항
-                </h2>
-                <p
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  NOTICE
-                </p>
-              </div>
-              {/* 첫번재 영역 */}
-              <div
-                className="leftBar bar_left"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              ></div>
-
-              {/* 두번째 영역 */}
-              <div
-                className="rightBar bar_right"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+      <div>
+        <div className="sub_content">
+          <div className="pageTop2">
+            <div className="tit">
+              <h2
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
-                <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
-              </div>
-            </div>
-          </div>
-          <div className="board_top_info3 :before">
-            <div className="info_desc">
-              <p className="text-right">
-                메타버스는 <br />
-                사지 않고 가족이 되는 문화를 만듭니다.
+                공지사항
+              </h2>
+              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+                NOTICE
               </p>
+            </div>
+            {/* 첫번재 영역 */}
+            <div
+              className="leftBar bar_left"
+              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+            ></div>
+
+            {/* 두번째 영역 */}
+            <div
+              className="rightBar bar_right"
+              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+            >
+              <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
         </div>
+        <div className="board_top_info3 :before">
+          <div className="info_desc">
+            <p className="text-right">
+              메타버스는 <br />
+              사지 않고 가족이 되는 문화를 만듭니다.
+            </p>
+          </div>
+        </div>
       </div>
+
       <div className="notice_list"></div>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl shadow-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">

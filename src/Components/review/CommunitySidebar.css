@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Hahmlet&display=swap');
 
 .container {
-  background-color: #e3ecf1;
+  background-color: #ffffff;
 }
 
 .sidebar {
@@ -20,7 +20,7 @@
   padding-top: 80px;
 }
 .button {
-  position: relative;
+  position: fixed;
   left: 68px;
   top: 100px;
   width: 60px;

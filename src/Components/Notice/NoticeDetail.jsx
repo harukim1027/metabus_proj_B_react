@@ -152,14 +152,16 @@ function NoticeDetail({ noticeId }) {
                                 {/* {notice.notice_file?.[0]?.file} */}
                               </a>
 
-                              <div className="ml-4 flex-shrink-0">
-                                <a
-                                  href={notice.notice_file?.file}
-                                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                  Download
-                                </a>
-                              </div>
+                              {notice.notice_file?.[0]?.file && (
+                                <div className="ml-4 flex-shrink-0">
+                                  <a
+                                    href={notice.notice_file?.[0]?.file}
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Download
+                                  </a>
+                                </div>
+                              )}
                             </>
                           )}
                         </div>
@@ -179,20 +181,22 @@ function NoticeDetail({ noticeId }) {
                               clip-rule="evenodd"
                             />
                           </svg>
-                          {notice.file2 && (
+                          {notice.notice_file && (
                             <>
                               <span className="ml-2 flex-1 w-0 truncate">
-                                첨부파일2
+                                {/* {notice.notice_file?.[1]?.file} */}
                               </span>
 
-                              <div className="ml-4 flex-shrink-0">
-                                <a
-                                  href={notice.file2}
-                                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                  Download
-                                </a>
-                              </div>
+                              {notice.notice_file?.[1]?.file && (
+                                <div className="ml-4 flex-shrink-0">
+                                  <a
+                                    href={notice.notice_file?.[1]?.file}
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Download
+                                  </a>
+                                </div>
+                              )}
                             </>
                           )}
                         </div>
@@ -212,20 +216,22 @@ function NoticeDetail({ noticeId }) {
                               clip-rule="evenodd"
                             />
                           </svg>
-                          {notice.file3 && (
+                          {notice.notice_file && (
                             <>
                               <span className="ml-2 flex-1 w-0 truncate">
-                                첨부파일3
+                                {/* {notice.notice_file?.[2]?.file} */}
                               </span>
 
-                              <div className="ml-4 flex-shrink-0">
-                                <a
-                                  href={notice.file3}
-                                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                  Download
-                                </a>
-                              </div>
+                              {notice.notice_file?.[2]?.file && (
+                                <div className="ml-4 flex-shrink-0">
+                                  <a
+                                    href={notice.notice_file?.[2]?.file}
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Download
+                                  </a>
+                                </div>
+                              )}
                             </>
                           )}
                         </div>
