@@ -47,9 +47,9 @@ function AssignDetail({ assignId }) {
   // patch 요청
   const [{ loading, error }, changeAPS] = useApiAxios(
     {
-      url: `/streetanimal/api/animal/${assignData?.animal.animal_no}/`,
+      url: `/streetanimal/api/animal/${assignData?.animal.announce_no}/`,
       method: 'PATCH',
-      data: { protection_status: '입양 대기' },
+      data: { protect_status: '보호중' },
     },
     { manual: true },
   );
@@ -59,7 +59,7 @@ function AssignDetail({ assignId }) {
     patchAnimalStatus,
   ] = useApiAxios(
     {
-      url: `/streetanimal/api/animal/${assignData?.animal.animal_no}/`,
+      url: `/streetanimal/api/animal/${assignData?.animal.announce_no}/`,
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${auth.access}`,
@@ -73,7 +73,7 @@ function AssignDetail({ assignId }) {
       deleteAssign().then(() => {
         changeAPS().then(() => {
           navigate('/admin/assignmanage/');
-          window.location.reload();
+          refetch();
         });
       });
     }
@@ -218,25 +218,25 @@ function AssignDetail({ assignId }) {
                     </td>
                   </tr>
                 </table>
-                {clicked && assignData && (
-                  <div className="">
+                {clicked === true && assignData && (
+                  <div>
                     <AssignStatus
                       assignId={assignId}
                       assignData={assignData}
                       handleDidSave={(savedPost) => {
-                        savedPost && window.location.reload();
+                        savedPost && refetch();
                         savedPost && setClicked(0);
                         if (savedPost?.status === '입양 완료') {
                           patchAnimalStatus({
-                            data: { protection_status: '입양 완료!' },
+                            data: { protect_status: '입양 완료!' },
                           });
                         } else if (savedPost?.status === '거절') {
                           patchAnimalStatus({
-                            data: { protection_status: '입양 대기' },
+                            data: { protect_status: '보호중' },
                           });
                         } else {
                           patchAnimalStatus({
-                            data: { protection_status: '입양 매칭 중' },
+                            data: { protect_status: '입양 매칭 중' },
                           });
                         }
                       }}
