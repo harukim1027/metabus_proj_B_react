@@ -80,7 +80,10 @@ function NoticeList() {
               >
                 공지사항
               </h2>
-              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+              <p
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
                 NOTICE
               </p>
             </div>
