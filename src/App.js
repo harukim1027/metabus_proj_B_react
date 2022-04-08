@@ -69,6 +69,7 @@ import PageMyLocationMap from 'Pages/PageMap/PageMyLocationMap';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import CentersAnimals from 'Components/Assignment/CentersAnimals';
 import AssignAnimalCheck from 'Components/Assignment/AssignAnimalCheck';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { auth } = useAuth();

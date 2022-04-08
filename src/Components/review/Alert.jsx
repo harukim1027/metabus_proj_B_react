@@ -9,21 +9,18 @@ function Alert({ userID, reviewList }) {
       .map((date) => date.created_at)[0],
   );
 
-  if (date1.valueOf() > date2.valueOf()) {
-    toast.warning('다이어리를 적은 지 30일이 지났어요! 작성해주세요!', {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
   console.log('date1', date1);
   console.log('date2', date2);
 
-  return <></>;
+  return (
+    <>
+      {date1.valueOf() > date2.valueOf() && (
+        <h2 className="ml-10 text-xl mt-10">
+          다이어리를 적은 지 30일이 지났어요! 작성해주세요!
+        </h2>
+      )}
+    </>
+  );
 }
 
 export default Alert;

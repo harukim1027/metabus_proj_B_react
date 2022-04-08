@@ -1,10 +1,11 @@
+import Alert from 'Components/review/Alert';
 import { useAuth } from 'contexts/AuthContext';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './TopNavi.css';
 
-function NewNav() {
+function NewNav({ setActiveCount, userID, reviewList }) {
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
   const { auth, logout } = useAuth();
@@ -15,7 +16,7 @@ function NewNav() {
 
   const checkLogin = () => {
     if (auth.isLoggedIn) {
-      navigate('/centermap/');
+      navigate(`/centermap/`);
     } else {
       toast.info('크루원 신청을 위해서는 로그인이 필요합니다! 😓 ', {
         position: 'top-center',
@@ -84,7 +85,6 @@ function NewNav() {
               />
               <div className="inner">
                 <div className="flex text-xl right-1">
-                  <div></div>
                   {!auth.isLoggedIn && (
                     <div className="ml-10 mt-10">
                       {/* 로그인  */}
@@ -134,6 +134,9 @@ function NewNav() {
                     </div>
                   </>
                 )}
+                {reviewList && (
+                  <Alert userID={userID} reviewList={reviewList} />
+                )}
 
                 <nav className="menu">
                   <ul>
@@ -141,23 +144,19 @@ function NewNav() {
                       <a href="/">메인</a>
                     </li>
                     <li>
-                      {' '}
                       <a href="/introduce/">소개 </a>
                     </li>
 
                     <li>
-                      {' '}
                       <a href="/notice/"> 공지사항 </a>
                     </li>
 
                     {auth.is_staff ? (
                       <li>
-                        {' '}
                         <a href="/inquiry/">Q&A</a>
                       </li>
                     ) : (
                       <li>
-                        {' '}
                         <a
                           onClick={() => checkLogin()}
                           className="cursor-pointer"
@@ -167,7 +166,6 @@ function NewNav() {
                       </li>
                     )}
                     <li>
-                      {' '}
                       <a href="/review/"> 커뮤니티</a>
                     </li>
                   </ul>
