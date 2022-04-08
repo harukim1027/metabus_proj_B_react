@@ -90,7 +90,10 @@ function FindOwnerBoardList() {
               >
                 이 아이 주인 찾아요
               </h2>
-              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+              <p
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
                 Finding Owner
               </p>
             </div>

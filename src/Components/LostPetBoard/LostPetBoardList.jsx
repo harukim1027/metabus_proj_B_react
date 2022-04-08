@@ -91,7 +91,10 @@ function LostPetBoardList() {
               >
                 우리 아이 찾아요😭
               </h2>
-              <p style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}>
+              <p
+                className="bar_left"
+                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+              >
                 Lost My Pet
               </p>
             </div>
