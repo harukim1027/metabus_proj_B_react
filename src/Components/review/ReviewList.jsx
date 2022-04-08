@@ -183,7 +183,7 @@ function ReviewList() {
           />
         </div>
       </div>
-      <div className="review_list2"></div>
+      {/* <div className="review_list2"></div> */}
     </>
   );
 }

@@ -166,7 +166,7 @@ function MarkLocationMap({ location }) {
                 setMapCenter(2);
               }}
             >
-              현위치 보기
+              🚩 현위치 보기
             </button>
             <button
               className="p-2 bg-green-300 rounded-lg mr-4"

@@ -161,7 +161,7 @@ function SearchInfraMap() {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: '500px',
+            height: 'calc(100vh - 450px)',
             position: 'relative',
             bottom: '0px',
           }}
@@ -246,7 +246,7 @@ function SearchInfraMap() {
               }))
             }
           >
-            내 위치 가기
+            🚩 내 위치 가기
           </button>
           <button
             onClick={() => {

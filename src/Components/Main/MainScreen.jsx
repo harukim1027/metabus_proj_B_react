@@ -49,6 +49,17 @@ function MainScreen({ activeCount, setActiveCount }) {
     refetch();
   }, []);
 
+  const [{ data: AnimalList }] = useApiAxios(
+    {
+      url: `/streetanimal/api/animal/`,
+      method: 'GET',
+    },
+    { manual: true },
+  );
+  useEffect(() => {
+    refetch();
+  }, []);
+
   // console.log(reviewList);
   //-------------
 
@@ -134,28 +145,30 @@ function MainScreen({ activeCount, setActiveCount }) {
               {activeCount === 10 && (
                 <>
                   <div className="h-full">
-                    <div className="flex justify-center h-full">
-                      <AwesomeSlider
-                        className="Container w-11/12 h-5/6"
-                        mobileTouch={true}
-                        organicArrows={true}
-                        bullets={false}
-                      >
-                        <span className="w-5/6 h-5/6 mt-10">
-                          <div className="flex justify-center w-full">
-                            <div className="w-11/12 h-full rounded-lg">
-                              <PageAllCenterMap ismain={ismain} />
+                    <div className="flex flex-col justify-center">
+                      <div className="flex justify-center h-full">
+                        <AwesomeSlider
+                          className="Container w-11/12 h-5/6"
+                          mobileTouch={true}
+                          organicArrows={true}
+                          bullets={false}
+                        >
+                          <span className="w-5/6 h-5/6 mt-10">
+                            <div className="flex justify-center w-full">
+                              <div className="w-11/12 h-full rounded-lg">
+                                <PageAllCenterMap ismain={ismain} />
+                              </div>
                             </div>
-                          </div>
-                        </span>
-                        <span className="w-5/6 h-5/6 mt-10">
-                          <div className="flex justify-center w-full">
-                            <div className="w-11/12 h-full rounded-lg">
-                              <PageSearchInfraMap />
+                          </span>
+                          <span className="w-5/6 h-5/6 mt-10">
+                            <div className="flex justify-center w-full">
+                              <div className="w-11/12 h-full rounded-lg">
+                                <PageSearchInfraMap />
+                              </div>
                             </div>
-                          </div>
-                        </span>
-                      </AwesomeSlider>
+                          </span>
+                        </AwesomeSlider>
+                      </div>
                     </div>
                     <button
                       onClick={() => setActiveCount(1)}
@@ -172,15 +185,15 @@ function MainScreen({ activeCount, setActiveCount }) {
             <div className="main_bottom">
               <ul className="metabusInfo">
                 <li>
-                  <img src="" alt="" /> 오늘 구조된 동물{' '}
-                  <strong className="data-rescue">0</strong> 마리
+                  <img src="" alt="" /> 현재 보호중인 동물{' '}
+                  <strong className="data-rescue">4,863</strong> 마리
                 </li>
                 <li>
-                  <img src="" alt="" /> 입양률{' '}
+                  <img src="" alt="" /> 입양 진행률{' '}
                   <strong className="data-adoptaion">21</strong> %
                 </li>
                 <li>
-                  <img src="" alt="" /> 안락사율{' '}
+                  <img src="" alt="" /> 입양 완료율{' '}
                   <strong className="data-euthanasis">9</strong> %
                 </li>
               </ul>

@@ -73,7 +73,7 @@ function Myinfo() {
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 mypage_header rounded-xl shadow-md overflow-hidden sm:px-20 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 mypage_header rounded-xl overflow-hidden sm:px-20 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
             <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
               <span class="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
@@ -165,7 +165,7 @@ function Myinfo() {
                 &nbsp;회원정보 수정&nbsp;
               </a>
               <button
-                className="rounded-xl a border ml-10 p-3"
+                className="rounded-xl a border ml-10 p-3 mr-5"
                 onClick={() => handleDelete()}
               >
                 &nbsp;회원 탈퇴&nbsp;
