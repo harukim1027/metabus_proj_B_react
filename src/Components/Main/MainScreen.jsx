@@ -134,12 +134,7 @@ function MainScreen({ activeCount, setActiveCount }) {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => setActiveCount(1)}
-              className="z-10 absolute top-20 ml-10"
-            >
-              TOP▲
-            </button>
+
             <div
               className={
                 activeCount === 10
@@ -173,6 +168,12 @@ function MainScreen({ activeCount, setActiveCount }) {
                         </span>
                       </AwesomeSlider>
                     </div>
+                    <button
+                      onClick={() => setActiveCount(1)}
+                      className="z-10 absolute bottom-20"
+                    >
+                      TOP▲
+                    </button>
                   </div>
                 </>
               )}
@@ -180,7 +181,7 @@ function MainScreen({ activeCount, setActiveCount }) {
 
             {/* <!-- 메인 bottom --> */}
             <div className="main_bottom">
-              <ul className="metabusInfo xs:text-xs md:text-base xl:text-xl">
+              <ul className="metabusInfo">
                 <li>
                   <img src="" alt="" /> 현재 보호중인 동물{' '}
                   <strong className="data-rescue">4,863</strong> 마리
