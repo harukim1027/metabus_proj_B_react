@@ -172,15 +172,15 @@ function MainScreen({ activeCount, setActiveCount }) {
             <div className="main_bottom">
               <ul className="metabusInfo">
                 <li>
-                  <img src="" alt="" /> 오늘 구조된 동물{' '}
-                  <strong className="data-rescue">0</strong> 마리
+                  <img src="" alt="" /> 현재 보호중인 동물{' '}
+                  <strong className="data-rescue"></strong> 마리
                 </li>
                 <li>
-                  <img src="" alt="" /> 입양률{' '}
+                  <img src="" alt="" /> 입양 진행률{' '}
                   <strong className="data-adoptaion">21</strong> %
                 </li>
                 <li>
-                  <img src="" alt="" /> 안락사율{' '}
+                  <img src="" alt="" /> 입양 완료율{' '}
                   <strong className="data-euthanasis">9</strong> %
                 </li>
               </ul>
