@@ -49,6 +49,17 @@ function MainScreen({ activeCount, setActiveCount }) {
     refetch();
   }, []);
 
+  const [{ data: AnimalList }] = useApiAxios(
+    {
+      url: `/streetanimal/api/animal/`,
+      method: 'GET',
+    },
+    { manual: true },
+  );
+  useEffect(() => {
+    refetch();
+  }, []);
+
   // console.log(reviewList);
   //-------------
 
