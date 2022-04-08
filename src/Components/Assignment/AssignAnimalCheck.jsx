@@ -72,7 +72,7 @@ function AssignAnimalCheck() {
                               <img
                                 src={animal.image_url1}
                                 alt="동물 이미지1"
-                                className="content-center xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                className="xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                 onClick={() => window.open(animal.image_url1)}
                               />
                             )}
@@ -82,7 +82,7 @@ function AssignAnimalCheck() {
                               <img
                                 src={animal.image_url2}
                                 alt="동물 이미지2"
-                                className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                className="xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                 onClick={() => window.open(animal.image_url2)}
                               />
                             )}
@@ -92,7 +92,7 @@ function AssignAnimalCheck() {
                               <img
                                 src={animal.image_url3}
                                 alt="동물 이미지3"
-                                className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                className="xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                 onClick={() => window.open(animal.image_url3)}
                               />
                             )}
