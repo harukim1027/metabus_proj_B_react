@@ -246,7 +246,7 @@ function SearchInfraMap() {
               }))
             }
           >
-            내 위치 가기
+            🚩 내 위치 가기
           </button>
           <button
             onClick={() => {

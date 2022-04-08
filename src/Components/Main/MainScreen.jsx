@@ -49,6 +49,17 @@ function MainScreen({ activeCount, setActiveCount }) {
     refetch();
   }, []);
 
+  const [{ data: AnimalList }] = useApiAxios(
+    {
+      url: `/streetanimal/api/animal/`,
+      method: 'GET',
+    },
+    { manual: true },
+  );
+  useEffect(() => {
+    refetch();
+  }, []);
+
   // console.log(reviewList);
   //-------------
 
@@ -173,7 +184,7 @@ function MainScreen({ activeCount, setActiveCount }) {
               <ul className="metabusInfo">
                 <li>
                   <img src="" alt="" /> 현재 보호중인 동물{' '}
-                  <strong className="data-rescue"></strong> 마리
+                  <strong className="data-rescue">4,863</strong> 마리
                 </li>
                 <li>
                   <img src="" alt="" /> 입양 진행률{' '}

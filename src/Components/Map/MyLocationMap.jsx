@@ -228,7 +228,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
               className="p-2 bg-green-300 rounded-lg"
               onClick={() => setMyLoc(currentLoc)}
             >
-              현재 내 위치 바로가기
+              🚩 현재 내 위치 바로가기
             </button>
             {/* 지도에서 선택한 위치 주소 입력 */}
             <button
