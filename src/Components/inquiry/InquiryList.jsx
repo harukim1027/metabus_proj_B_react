@@ -98,7 +98,6 @@ function InquiryList() {
                   className="bar_left"
                   style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
                 >
-                  {/* <h2 className="transition translate-x-40 duration-500 ease-in-out"> */}
                   1:1 문의
                 </h2>
                 <p
@@ -109,20 +108,20 @@ function InquiryList() {
               </div>
               {/* 첫번재 영역 */}
               <div
-                className="leftBar2 bar_left"
+                className="leftBar3 bar_left"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               ></div>
 
               {/* 두번째 영역 */}
               <div
-                className="rightBar2 bar_right"
+                className="rightBar3 bar_right"
                 style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
               </div>
             </div>
           </div>
-          <div className="board_top_info2 :before">
+          <div className="board_top_info3 :before">
             <div className="info_desc">
               <p className="text-right">
                 메타버스는 <br />
@@ -179,6 +178,34 @@ function InquiryList() {
               </div>
             </div>
           </div>
+
+          {/* search input */}
+          {/* <div className="flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 mr-2 text-gray-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="text"
+              name="Search"
+              onChange={getQuery}
+              onKeyPress={handleKeyPress}
+              placeholder="Search"
+              className="w-1/3 py-2 border-b-2 border-gray-400 outline-none focus:border-yellow-400"
+            />
+          </div>
+          <br /> */}
+
           <hr className="mb-3" />
 
           <div className="mb-5">
