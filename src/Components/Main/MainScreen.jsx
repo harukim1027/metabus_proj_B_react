@@ -35,37 +35,6 @@ function MainScreen({ activeCount, setActiveCount }) {
     }
   }
 
-  const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
-    {
-      url: `/adopt_review/api/allreviews/`,
-      method: 'GET',
-    },
-    {
-      manual: true,
-    },
-  );
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  const [{ data: AnimalList }] = useApiAxios(
-    {
-      url: `/streetanimal/api/animal/`,
-      method: 'GET',
-    },
-    { manual: true },
-  );
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  // console.log(reviewList);
-  //-------------
-
-  // console.log('auth', auth);
-  // console.log('activecount: ', activeCount);
-
   return (
     <>
       <div></div>

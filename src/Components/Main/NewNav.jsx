@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import './TopNavi.css';
 
-function NewNav({ setActiveCount, userID, reviewList }) {
+function NewNav({ userID, reviewList }) {
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
   const { auth, logout } = useAuth();
@@ -134,7 +134,7 @@ function NewNav({ setActiveCount, userID, reviewList }) {
                     </div>
                   </>
                 )}
-                {reviewList && (
+                {userID && reviewList && (
                   <Alert userID={userID} reviewList={reviewList} />
                 )}
 
