@@ -16,8 +16,7 @@ function NewNav({ setActiveCount, userID, reviewList }) {
 
   const checkLogin = () => {
     if (auth.isLoggedIn) {
-      setOpen(!isOpen);
-      setActiveCount(10);
+      navigate(`/centermap/`);
     } else {
       toast.info('크루원 신청을 위해서는 로그인이 필요합니다! 😓 ', {
         position: 'top-center',
