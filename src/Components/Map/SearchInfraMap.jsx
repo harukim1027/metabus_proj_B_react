@@ -132,7 +132,7 @@ function SearchInfraMap() {
   }, [query]);
 
   return (
-    <div className="mt-10">
+    <div>
       <h2 className="text-center text-2xl font-bold">
         지도에서 반려동물 관련 인프라를 확인하세요.
       </h2>
@@ -229,7 +229,7 @@ function SearchInfraMap() {
             </MapMarker>
           ))}
           <h2>
-            현재 위치 주소에서{' '}
+            현재 위치하신 주소에서{' '}
             <h2 className="text-xl text-purple-800 font-bold inline mx-2">
               {keyword}
             </h2>{' '}

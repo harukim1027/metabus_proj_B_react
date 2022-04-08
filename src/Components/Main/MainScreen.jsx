@@ -62,7 +62,7 @@ function MainScreen() {
       <div id="header_warp">
         {/* <!-- //header_warp --> */}
         {/* <!-- 메인 --> */}
-        <div className="main">
+        <div className="">
           <div className="mainContents">
             <div
               className={
