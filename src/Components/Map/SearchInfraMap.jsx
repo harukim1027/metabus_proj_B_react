@@ -161,7 +161,7 @@ function SearchInfraMap() {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: 'calc(100vh - 400px)',
+            height: 'calc(100vh - 450px)',
             position: 'relative',
             bottom: '0px',
           }}
