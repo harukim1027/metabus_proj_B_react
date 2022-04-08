@@ -145,28 +145,30 @@ function MainScreen({ activeCount, setActiveCount }) {
               {activeCount === 10 && (
                 <>
                   <div className="h-full">
-                    <div className="flex justify-center h-full">
-                      <AwesomeSlider
-                        className="Container w-11/12 h-5/6"
-                        mobileTouch={true}
-                        organicArrows={true}
-                        bullets={false}
-                      >
-                        <span className="w-5/6 h-5/6 mt-10">
-                          <div className="flex justify-center w-full">
-                            <div className="w-11/12 h-full rounded-lg">
-                              <PageAllCenterMap ismain={ismain} />
+                    <div className="flex flex-col justify-center">
+                      <div className="flex justify-center h-full">
+                        <AwesomeSlider
+                          className="Container w-11/12 h-5/6"
+                          mobileTouch={true}
+                          organicArrows={true}
+                          bullets={false}
+                        >
+                          <span className="w-5/6 h-5/6 mt-10">
+                            <div className="flex justify-center w-full">
+                              <div className="w-11/12 h-full rounded-lg">
+                                <PageAllCenterMap ismain={ismain} />
+                              </div>
                             </div>
-                          </div>
-                        </span>
-                        <span className="w-5/6 h-5/6 mt-10">
-                          <div className="flex justify-center w-full">
-                            <div className="w-11/12 h-full rounded-lg">
-                              <PageSearchInfraMap />
+                          </span>
+                          <span className="w-5/6 h-5/6 mt-10">
+                            <div className="flex justify-center w-full">
+                              <div className="w-11/12 h-full rounded-lg">
+                                <PageSearchInfraMap />
+                              </div>
                             </div>
-                          </div>
-                        </span>
-                      </AwesomeSlider>
+                          </span>
+                        </AwesomeSlider>
+                      </div>
                     </div>
                     <button
                       onClick={() => setActiveCount(1)}
