@@ -4,10 +4,11 @@ import Alert from 'Components/review/Alert';
 import { useAuth } from 'contexts/AuthContext';
 import { ToastContainer } from 'react-toastify';
 import { useApiAxios } from 'api/base';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function PageMainScreen() {
   const { auth } = useAuth();
+  const [activeCount, setActiveCount] = useState(1);
 
   const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
     {
@@ -24,11 +25,14 @@ function PageMainScreen() {
 
   return (
     <>
-      {reviewList && <Alert userID={auth.userID} reviewList={reviewList} />}
-      <ToastContainer />
-      <NewNav />
+      <NewNav
+        activeCount={activeCount}
+        setActiveCount={setActiveCount}
+        userID={auth.userID}
+        reviewList={reviewList}
+      />
       <div>
-        <MainScreen />
+        <MainScreen activeCount={activeCount} setActiveCount={setActiveCount} />
       </div>
     </>
   );

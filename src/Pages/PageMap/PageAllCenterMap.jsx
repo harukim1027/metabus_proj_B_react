@@ -27,8 +27,8 @@ function PageAllCenterMap({ ismain }) {
 
   return (
     <>
-      {getCenterLoading && <LoadingIndicator />}
       <AllCenterMap centersData={centersData} ismain={ismain} />
+      {getCenterLoading && <LoadingIndicator />}
     </>
   );
 }
