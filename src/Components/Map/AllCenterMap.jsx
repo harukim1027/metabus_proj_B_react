@@ -170,7 +170,7 @@ function AllCenterMap({ centersData, ismain }) {
 
   return (
     <div>
-      <h2 className="text-center text-2xl font-bold">
+      <h2 className="text-center xs:text-xs md:text-base xl:text-xl 2xl:text-2xl font-bold">
         입양 신청할 보호소를 선택하세요.
       </h2>
       {/* 행정동 위치 표기 */}
@@ -186,7 +186,9 @@ function AllCenterMap({ centersData, ismain }) {
           width: 'fit-content',
         }}
       >
-        <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
+        <span class="xs:text-xs md:text-base xl:text-lg font-semibold">
+          지도중심기준 행정동 주소정보
+        </span>
         <br />
         <span className="text-lg">{addr}</span>
       </div>
