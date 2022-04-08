@@ -299,7 +299,7 @@
   left: 0;
   width: 100%;
   border-top: 1px solid #fff;
-  color: #fff;
+  color: rgb(126, 135, 255);
   z-index: 10;
 }
 .main_bottom .metabusInfo {
@@ -468,7 +468,7 @@
 
 /* 메인 두번째 섹션 */
 .section02 {
-  background-color: #a0cbf4;
+  background-color: #ecf5fd;
 }
 .section02 .innerCont {
   display: flex;
@@ -735,7 +735,7 @@
   min-height: 600px;
 }
 
-.menuLayer .footer {
+.footer {
   position: absolute;
   bottom: 4.44444vh;
   left: 80px;
