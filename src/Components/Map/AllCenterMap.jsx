@@ -199,7 +199,7 @@ function AllCenterMap({ centersData, ismain }) {
           isPanto={myLoc.isPanto}
           style={{
             width: '100%',
-            height: '500px',
+            height: 'calc(100vh - 400px)',
             position: 'relative',
             bottom: '0px',
           }}
