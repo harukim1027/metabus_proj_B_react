@@ -53,6 +53,7 @@ const EventMarkerContainer = memo(({ marker_obj }) => {
 });
 
 function AllCenterMap({ centersData, ismain }) {
+  const navigate = useNavigate();
   const [currentLoc, setCurrentLoc] = useState({
     center: {
       lat: 36.32754333444323,
@@ -249,8 +250,16 @@ function AllCenterMap({ centersData, ismain }) {
             </MapMarker>
           )}
           <div>
+            {!ismain && (
+              <button
+                className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+                onClick={() => navigate('/')}
+              >
+                홈으로 돌아가기
+              </button>
+            )}
             <button
-              className="p-2"
+              className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
               onClick={() =>
                 setMyLoc((prev) => ({
                   ...prev,
@@ -262,11 +271,6 @@ function AllCenterMap({ centersData, ismain }) {
             >
               내 위치
             </button>
-            {!ismain && (
-              <button className="p-2" onClick={() => window.history.back()}>
-                돌아가기
-              </button>
-            )}
           </div>
         </Map>
       )}
