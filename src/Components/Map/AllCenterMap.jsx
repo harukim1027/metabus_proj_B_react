@@ -269,7 +269,7 @@ function AllCenterMap({ centersData, ismain }) {
                 }))
               }
             >
-              내 위치
+              🚩 내 위치
             </button>
           </div>
         </Map>
