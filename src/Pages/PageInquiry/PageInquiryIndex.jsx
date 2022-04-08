@@ -7,7 +7,6 @@ import NewNav from 'Components/Main/NewNav';
 function PageInquiryIndex() {
   const { auth } = useAuth();
   const navigate = useNavigate();
-  console.log(auth);
 
   return (
     <div className="header">
