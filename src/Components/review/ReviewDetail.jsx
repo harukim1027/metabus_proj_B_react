@@ -148,9 +148,9 @@ function ReviewDetail({ reviewId }) {
                   <br />
 
                   <div>
-                    {review.review_image?.map((review) => (
+                    {review.review_image?.map((image) => (
                       <div className="h-2/3 overflow-hidden">
-                        <img src={review.image} alt={review.title} />
+                        <img src={image.image} alt="" />
                       </div>
                     ))}
                   </div>

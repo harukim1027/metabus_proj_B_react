@@ -125,36 +125,33 @@ function FindOwnerBoardDetail({ findboardId }) {
                     {findboard.title}
                   </h1>
 
-                  {findboard && (
-                    <div className="my-5 text-right">
-                      <span className=" font-bold">상태: </span>
-                      {auth.userID === findboard.user.userID ||
-                      auth.is_staff ? (
-                        <form onSubmit={handleSubmit} className="inline">
-                          <select
-                            name="status"
-                            value={fieldValues.status}
-                            onChange={handleFieldChange}
-                            className="rounded px-5 py-2"
-                            defaultValue={findboard.status}
-                          >
-                            <option value="">상태 변경</option>
-                            <option value="찾는중">찾는중</option>
-                            <option value="찾았어요">찾았어요</option>
-                          </select>
+                  <div className="my-5 text-right">
+                    <span className=" font-bold">상태: </span>
+                    {auth.userID === findboard.user.userID || auth.is_staff ? (
+                      <form onSubmit={handleSubmit} className="inline">
+                        <select
+                          name="status"
+                          value={fieldValues.status}
+                          onChange={handleFieldChange}
+                          className="rounded px-5 py-2"
+                          defaultValue={findboard.status}
+                        >
+                          <option value="">상태 변경</option>
+                          <option value="찾는중">찾는중</option>
+                          <option value="찾았어요">찾았어요</option>
+                        </select>
 
-                          <button className="bg-gray-300 hover:bg-gray-800 hover:text-white rounded-md px-2 py-1 ml-3">
-                            저장
-                          </button>
-                        </form>
-                      ) : (
-                        <span className=" font-bold">{findboard.status}</span>
-                      )}
-                    </div>
-                  )}
+                        <button className="bg-gray-300 hover:bg-gray-800 hover:text-white rounded-md px-2 py-1 ml-3">
+                          저장
+                        </button>
+                      </form>
+                    ) : (
+                      <span className=" font-bold">{findboard.status}</span>
+                    )}
+                  </div>
 
                   <hr className="mt-3 mb-3" />
-
+                  <h2 className="text-lg font-semibold">{findboard.content}</h2>
                   <div className="flex justify-center">
                     {findboard.board_image && (
                       <img src={findboard.board_image?.[0]?.image} alt="" />

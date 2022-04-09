@@ -95,6 +95,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
   const offset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - offset);
   INIT_FIELD_VALUES.find_time = today.toISOString().slice(0, 16);
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     findBoard || INIT_FIELD_VALUES,
   );
@@ -109,11 +110,24 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.user = auth.userID;
+        draft.user = findBoard ? findBoard.user.userID : auth.userID;
         draft.find_location = findBoard?.find_location;
       }),
     );
   }, [findBoard, auth]);
+
+  // 개/고양이 한쪽 품종 선택 후 다른걸로 바꿀 경우 전자 초기화
+  useEffect(() => {
+    if (fieldValues.animal_type === '개') {
+      setFieldValues((prev) => {
+        return { ...prev, cat_breed: '전체' };
+      });
+    } else {
+      setFieldValues((prev) => {
+        return { ...prev, dog_breed: '전체' };
+      });
+    }
+  }, [fieldValues.animal_type]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -123,8 +137,8 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
         const fileList = value;
         if (
           findBoard
-            ? fileList.length + findBoard?.board_image?.length > 0 &&
-              fileList.length + findBoard?.board_image?.length <= 5
+            ? findBoard?.board_image?.length > 0 &&
+              findBoard?.board_image?.length <= 5
             : fileList.length > 0 && fileList.length <= 5
         ) {
           fileList.forEach((file) => formData.append(name, file));
@@ -132,6 +146,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
           window.alert(
             '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
           );
+          e.stop();
         }
       } else {
         formData.append(name, value);
@@ -162,6 +177,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
             window.alert(
               '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
             );
+            e.stop();
           }
         }
       }
@@ -606,6 +622,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                               window.alert(
                                 '이미지는 최소 한장 이상 존재해야합니다.',
                               );
+                              e.stop();
                             }
                           }}
                         >

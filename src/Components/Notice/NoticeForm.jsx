@@ -146,10 +146,11 @@ function NoticeForm({ noticeId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
+        console.log('fileList.length: ', fileList.length);
         if (name === 'notice_image') {
           if (
             noticeData
-              ? fileList.length + noticeData?.notice_image?.length <= 5
+              ? noticeData?.notice_image?.length <= 5
               : fileList.length <= 5
           ) {
             fileList.forEach((file) => formData.append(name, file));
@@ -160,7 +161,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
         } else if (name === 'notice_file')
           if (
             noticeData
-              ? fileList.length + noticeData?.notice_file?.length <= 3
+              ? noticeData?.notice_file?.length <= 3
               : fileList.length <= 3
           ) {
             fileList.forEach((file) => {
@@ -197,6 +198,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
             });
           } else {
             window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+            e.stop();
           }
         }
       }
@@ -216,13 +218,15 @@ function NoticeForm({ noticeId, handleDidSave }) {
       if (Array.isArray(value)) {
         const fileList = value;
         if (name === 'file') {
-          if (fileList.length + noticeData.notice_file.length <= 5) {
+          if (fileList.length + noticeData.notice_file.length <= 3) {
             fileList.forEach((file) => {
               formData.append(name, file);
               formData.append('notice_no', noticeData.notice_no);
+              formData.append('filename', file.name);
             });
           } else {
-            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+            window.alert('파일은 최대 3개까지 첨부 가능합니다.');
+            e.stop();
           }
         }
       }

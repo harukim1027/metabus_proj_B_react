@@ -27,6 +27,7 @@ function PageFindOwnerBoardForm() {
         findBoard={findBoard}
         findBoardId={findBoardId}
         handleDidSave={(savedPost) =>
+          savedPost.find_board_no !== undefined &&
           navigate(`/findboard/${savedPost.find_board_no}/`)
         }
       />
