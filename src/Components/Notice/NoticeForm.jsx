@@ -9,6 +9,7 @@ import LoadingIndicator from 'LoadingIndicator';
 
 import './Notice.css';
 import '../../App.css';
+import DebugStates from 'DebugStates';
 
 const INIT_FIELD_VALUES = {
   title: '',
@@ -126,12 +127,15 @@ function NoticeForm({ noticeId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.image = '';
-        draft.file = '';
         draft.user = auth.userID;
       }),
     );
   }, [noticeData]);
+
+  // // 업로드할 파일명 뽑아서 넣기 (각자에 넣어주어야 하는데 그게 안됨)
+  // const upload_filename = document.getElementById('notice_file')?.files;
+  // upload_filename && console.log('upload_filename: ', upload_filename);
+  // upload_filename && console.log('length: ', upload_filename.length);
 
   // 저장 버튼 기능
   const handleSubmit = (e) => {
@@ -140,23 +144,28 @@ function NoticeForm({ noticeId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        if (
-          noticeData &&
-          fileList.length + noticeData?.notice_image?.length <= 5
-        ) {
-          fileList.forEach((file) => formData.append(name, file));
-        } else {
-          window.alert('사진은 최대 5개까지 첨부 가능합니다.');
-        }
-
-        if (
-          noticeData &&
-          fileList.length + noticeData?.notice_file?.length <= 3
-        ) {
-          fileList.forEach((file) => formData.append(name, file));
-        } else {
-          window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
-        }
+        if (name === 'notice_image') {
+          if (
+            noticeData
+              ? fileList.length + noticeData?.notice_image?.length <= 5
+              : fileList.length <= 5
+          ) {
+            fileList.forEach((file) => formData.append(name, file));
+          } else {
+            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+          }
+        } else if (name === 'notice_file')
+          if (
+            noticeData
+              ? fileList.length + noticeData?.notice_file?.length <= 3
+              : fileList.length <= 3
+          ) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+            });
+          } else {
+            window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
+          }
       } else {
         formData.append(name, value);
       }
@@ -170,7 +179,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
   };
 
   // 이미지 추가 (수정시)
-  const handleAddFormData = (e) => {
+  const handleAddImage = (e) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(fieldValues).forEach(([name, value]) => {
@@ -182,22 +191,9 @@ function NoticeForm({ noticeId, handleDidSave }) {
               formData.append(name, file);
               formData.append('notice_no', noticeData.notice_no);
             });
+          } else {
+            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
           }
-          // else {
-          //   window.alert('사진은 최대 5개까지 첨부 가능합니다.');
-          // }
-        }
-
-        if (name === 'file') {
-          if (fileList.length + noticeData.notice_file.length <= 3) {
-            fileList.forEach((file) => {
-              formData.append(name, file);
-              formData.append('notice_no', noticeData.notice_no);
-            });
-          }
-          // else {
-          //   window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
-          // }
         }
       }
     });
@@ -206,7 +202,27 @@ function NoticeForm({ noticeId, handleDidSave }) {
     }).then(() => {
       refetch();
     });
+  };
 
+  // 파일 추가
+  const handleAddFile = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        if (name === 'file') {
+          if (fileList.length + noticeData.notice_file.length <= 5) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+              formData.append('notice_no', noticeData.notice_no);
+            });
+          } else {
+            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+          }
+        }
+      }
+    });
     addFileRequest({
       data: formData,
     }).then(() => {
@@ -423,7 +439,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                         </p>
                       ))}
                     </ul>
-                    <button onClick={(e) => handleAddFormData(e)}>
+                    <button onClick={(e) => handleAddImage(e)}>
                       이미지 추가하기
                     </button>
                   </div>
@@ -436,9 +452,9 @@ function NoticeForm({ noticeId, handleDidSave }) {
               {noticeData && (
                 <>
                   <h2>첨부 파일들</h2>
-                  {noticeData.notice_file.map((file) => (
+                  {noticeData.notice_file?.map((file) => (
                     <>
-                      <div className="inline w-44">{file.file}</div>
+                      <div>{file.filename}</div>
 
                       <button
                         className="text-red-400"
@@ -475,6 +491,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                       {/* 개별 파일 input 박스 1*/}
                       <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
                         <input
+                          id="notice_file"
                           type="file"
                           multiple={true}
                           max={3}
@@ -509,7 +526,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
               ) : (
                 <div className="my-3 w-full">
                   <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
-                    파일 첨부
+                    파일 추가
                   </span>
                   <h2 className="text-gray-500 text-xxs">
                     ( 최대 3개까지 첨부파일을 등록할 수 있습니다. )
@@ -549,7 +566,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                         </button>
                       </li>
                     </ul>
-                    <button onClick={(e) => handleAddFormData(e)}>
+                    <button onClick={(e) => handleAddFile(e)}>
                       파일 추가하기
                     </button>
                   </div>
@@ -582,7 +599,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
           </div>
         </div>
       </div>
-      {/* <DebugStates fieldValues={fieldValues} /> */}
+      <DebugStates fieldValues={fieldValues} />
     </>
   );
 }
