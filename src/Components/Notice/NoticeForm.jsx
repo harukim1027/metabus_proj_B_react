@@ -20,19 +20,6 @@ function NoticeForm({ noticeId, handleDidSave }) {
   const [previewImage, setPreviewImage] = useState('');
   const navigate = useNavigate();
 
-  // 사진 등록시 미리보기
-  const imgpreview = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setPreviewImage(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-
   // 조회
   const [{ data: noticeData, loading: getLoading, error: getError }, refetch] =
     useApiAxios(
@@ -123,17 +110,24 @@ function NoticeForm({ noticeId, handleDidSave }) {
     noticeData || INIT_FIELD_VALUES,
   );
 
+  // 사진 등록시 미리보기
+  const imgpreview = (e, fileData) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setPreviewImage(reader.result);
+        resolve();
+        handleFieldChange(e);
+      };
+    });
+  };
+
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        // draft.image1 = '';
-        // draft.image2 = '';
-        // draft.image3 = '';
-        // draft.image4 = '';
-        // draft.image5 = '';
-        // draft.file1 = '';
-        // draft.file2 = '';
-        // draft.file3 = '';
+        draft.image = '';
+        draft.file = '';
         draft.user = auth.userID;
       }),
     );
@@ -147,14 +141,21 @@ function NoticeForm({ noticeId, handleDidSave }) {
       if (Array.isArray(value)) {
         const fileList = value;
         if (
-          noticeData
-            ? fileList.length + noticeData?.notice_image?.length >= 0 &&
-              fileList.length + noticeData?.notice_image?.length <= 5
-            : fileList.length >= 0 && fileList.length <= 5
+          noticeData &&
+          fileList.length + noticeData?.notice_image?.length <= 5
         ) {
           fileList.forEach((file) => formData.append(name, file));
         } else {
           window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+        }
+
+        if (
+          noticeData &&
+          fileList.length + noticeData?.notice_file?.length <= 3
+        ) {
+          fileList.forEach((file) => formData.append(name, file));
+        } else {
+          window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
         }
       } else {
         formData.append(name, value);
@@ -169,7 +170,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
   };
 
   // 이미지 추가 (수정시)
-  const handleAddImage = (e) => {
+  const handleAddFormData = (e) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(fieldValues).forEach(([name, value]) => {
@@ -181,13 +182,32 @@ function NoticeForm({ noticeId, handleDidSave }) {
               formData.append(name, file);
               formData.append('notice_no', noticeData.notice_no);
             });
-          } else {
-            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
           }
+          // else {
+          //   window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+          // }
+        }
+
+        if (name === 'file') {
+          if (fileList.length + noticeData.notice_file.length <= 3) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+              formData.append('notice_no', noticeData.notice_no);
+            });
+          }
+          // else {
+          //   window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
+          // }
         }
       }
     });
     addImageRequest({
+      data: formData,
+    }).then(() => {
+      refetch();
+    });
+
+    addFileRequest({
       data: formData,
     }).then(() => {
       refetch();
@@ -267,6 +287,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                       <img src={image.image} alt="" className="inline w-44" />
                       <div>
                         <button
+                          className="text-red-400"
                           onMouseOver={() => setImageNo(image.notice_image_no)}
                           onClick={(e) => {
                             e.preventDefault();
@@ -303,7 +324,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                           multiple={true}
                           max={5}
                           accept=".png, .jpg, .jpeg, .jfif"
-                          name="image"
+                          name="notice_image"
                           className="text-gray-800 "
                           onChange={(e) => {
                             imgpreview(e, e.target.files[0]);
@@ -402,7 +423,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                         </p>
                       ))}
                     </ul>
-                    <button onClick={(e) => handleAddImage(e)}>
+                    <button onClick={(e) => handleAddFormData(e)}>
                       이미지 추가하기
                     </button>
                   </div>
@@ -410,106 +431,130 @@ function NoticeForm({ noticeId, handleDidSave }) {
               )}
 
               <hr />
-              {/* 파일 첨부 인풋박스 시작 부분 */}
-              <div className="my-3 w-full">
-                <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
-                  파일 첨부
-                </span>
-                <h2 className="text-gray-500 text-xxs">
-                  ( 최대 3개까지 첨부파일을 등록할 수 있습니다. )
-                </h2>
 
-                {/* 개별 파일 input 박스 1*/}
-                <div className="flex justify-center bg-white py-5 w-full">
-                  {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
-                  <ul>
-                    {/* 개별 파일 input 박스 1*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".docx, .hwp, .xlsx, .pdf"
-                        name="file1"
-                        className="text-gray-800 "
-                        onChange={handleFieldChange}
-                      />
-                      <div>
-                        {(noticeData?.file1 || fieldValues.file1) &&
-                          '파일1이 존재합니다.'}
-                      </div>
+              {/* 첨부 파일 삭제 */}
+              {noticeData && (
+                <>
+                  <h2>첨부 파일들</h2>
+                  {noticeData.notice_file.map((file) => (
+                    <>
+                      <div className="inline w-44">{file.file}</div>
+
                       <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
+                        className="text-red-400"
+                        onMouseOver={() => setFileNo(file.notice_file_no)}
                         onClick={(e) => {
                           e.preventDefault();
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              file1: '',
-                            };
-                          });
+                          if (noticeData.notice_file.length >= 0) {
+                            deleteFile().then(() => refetch());
+                          }
                         }}
                       >
-                        X
+                        삭제
                       </button>
-                    </li>
-                    {/* 개별 파일 input 박스 2*/}
-                    {/* <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".docx, .hwp, .xlsx, .pdf"
-                        name="file2"
-                        className="text-gray-800 "
-                        onChange={handleFieldChange}
-                      />
-                      <div>
-                        {(noticeData?.file2 || fieldValues.file2) &&
-                          '파일2가 존재합니다.'}
-                      </div>
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              file2: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li> */}
-                    {/* 개별 파일 input 박스 3*/}
-                    {/* <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".docx, .hwp, .xlsx, .pdf"
-                        name="file3"
-                        className="text-gray-800 "
-                        onChange={handleFieldChange}
-                      />
-                      <div>
-                        {(noticeData?.file3 || fieldValues.file3) &&
-                          '파일3이 존재합니다.'}
-                      </div>
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              file3: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li> */}
-                  </ul>
+                      <br />
+                    </>
+                  ))}
+                </>
+              )}
+
+              {/* 파일 첨부 인풋박스 시작 부분 */}
+              {!noticeData ? (
+                <div className="my-3 w-full">
+                  <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
+                    파일 첨부
+                  </span>
+                  <h2 className="text-gray-500 text-xxs">
+                    ( 최대 3개까지 첨부파일을 등록할 수 있습니다. )
+                  </h2>
+
+                  {/* 개별 파일 input 박스 1*/}
+                  <div className="flex justify-center bg-white py-5 w-full">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 파일 input 박스 1*/}
+                      <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                        <input
+                          type="file"
+                          multiple={true}
+                          max={3}
+                          accept=".docx, .hwp, .xlsx, .pdf, .txt"
+                          name="notice_file"
+                          className="text-gray-800 "
+                          onChange={handleFieldChange}
+                        />
+                        {/* <div>
+                          {(noticeData?.notice_file ||
+                            fieldValues.notice_file) &&
+                            '파일이 존재합니다.'}
+                        </div> */}
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                notice_file: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="my-3 w-full">
+                  <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
+                    파일 첨부
+                  </span>
+                  <h2 className="text-gray-500 text-xxs">
+                    ( 최대 3개까지 첨부파일을 등록할 수 있습니다. )
+                  </h2>
+
+                  {/* 개별 파일 input 박스 1*/}
+                  <div className="flex justify-center bg-white py-5 w-full">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 파일 input 박스 1*/}
+                      <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                        <input
+                          type="file"
+                          accept=".docx, .hwp, .xlsx, .pdf, .txt"
+                          name="file"
+                          className="text-gray-800 "
+                          onChange={handleFieldChange}
+                        />
+                        {/* <div>
+                          {(noticeData?.notice_file ||
+                            fieldValues.notice_file) &&
+                            '파일이 존재합니다.'}
+                        </div> */}
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                notice_file: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                    <button onClick={(e) => handleAddFormData(e)}>
+                      파일 추가하기
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <div className="text-center">
                 <button className="shadow-md font-bold bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-1 px-2 rounded">
