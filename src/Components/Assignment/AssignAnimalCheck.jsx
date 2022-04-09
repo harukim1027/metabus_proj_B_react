@@ -293,10 +293,10 @@ function AssignAnimalCheck() {
         </button>
       </div>
       <button
-        onClick={() => navigate('/')}
+        onClick={() => window.history.back()}
         className="font-bold bg-green-300 hover:bg-green-900 text-white p-2 rounded-lg ml-4 mb-5"
       >
-        Home
+        Back
       </button>
     </>
   );
