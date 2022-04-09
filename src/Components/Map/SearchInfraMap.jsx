@@ -140,9 +140,16 @@ function SearchInfraMap() {
 
   return (
     <div>
-      <h2 className="text-center text-2xl font-bold">
-        지도에서 반려동물 관련 인프라를 확인하세요.
-      </h2>
+      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-200 relative inline-block">
+          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+            " 내 주변 검색하기 "
+          </span>
+        </span>
+      </blockquote>
+      <span className="text-center xs:text-xs md:text-base  font-bold">
+        : 🔍 지도에서 반려동물 관련 인프라를 검색할 수 있어요 ❕
+      </span>
       {/* 행정동 위치 표기 */}
       <div
         style={{

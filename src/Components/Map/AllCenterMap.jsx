@@ -170,9 +170,17 @@ function AllCenterMap({ centersData, ismain }) {
 
   return (
     <div className="h-full">
-      <h2 className="text-center xs:text-xs md:text-base xl:text-xl 2xl:text-2xl font-bold">
-        입양 신청할 보호소를 선택하세요.
-      </h2>
+      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
+          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+            " 현재 보호중인 동물 보기 "
+          </span>
+        </span>
+      </blockquote>
+      <span className="text-center xs:text-xs md:text-base  font-bold">
+        : 🏥 입양 신청할 보호소를 선택하세요 ❕
+      </span>
+
       {/* 행정동 위치 표기 */}
       <div
         style={{
