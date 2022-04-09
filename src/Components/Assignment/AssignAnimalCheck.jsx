@@ -107,24 +107,24 @@ function AssignAnimalCheck() {
                               organicArrows={true}
                               bullets={false}
                             >
-                              <span className="content-center h-full w-full">
+                              <span className="flex justify-center h-full w-full">
                                 {animal.image_url1 && (
                                   <img
                                     src={animal.image_url1}
                                     alt="동물 이미지1"
-                                    className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                    className="flex justify-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                     onClick={() =>
                                       window.open(animal.image_url1)
                                     }
                                   />
                                 )}
                               </span>
-                              <span className="content-center h-full w-full">
+                              <span className="flex justify-center h-full w-full">
                                 {animal.image_url2 && (
                                   <img
                                     src={animal.image_url2}
                                     alt="동물 이미지2"
-                                    className="content-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                    className="flex justify-center  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                     onClick={() =>
                                       window.open(animal.image_url2)
                                     }
@@ -135,12 +135,12 @@ function AssignAnimalCheck() {
                           ) : (
                             <>
                               {animal.image_url1 && (
-                                <span className="h-full w-full">
+                                <span className="flex justify-center h-full w-full">
                                   {animal.image_url1 && (
                                     <img
                                       src={animal.image_url1}
                                       alt="동물 이미지1"
-                                      className="content-center  md:mx-20  xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                      className="md:mx-20 xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
                                       onClick={() =>
                                         window.open(animal.image_url3)
                                       }
