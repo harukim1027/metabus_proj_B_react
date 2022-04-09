@@ -17,68 +17,16 @@ const INIT_FIELD_VALUES = {
 
 function NoticeForm({ noticeId, handleDidSave }) {
   const { auth } = useAuth();
-  const [image1, setImage1] = useState('');
-  const [image2, setImage2] = useState('');
-  const [image3, setImage3] = useState('');
-  const [image4, setImage4] = useState('');
-  const [image5, setImage5] = useState('');
+  const [previewImage, setPreviewImage] = useState('');
   const navigate = useNavigate();
 
-  // 사진 등록시
-  const imgpreview1 = (e, fileData) => {
+  // 사진 등록시 미리보기
+  const imgpreview = (e, fileData) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImage1(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-
-  const imgpreview2 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage2(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-
-  const imgpreview3 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage3(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-
-  const imgpreview4 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage4(reader.result);
-        resolve();
-        handleFieldChange(e);
-      };
-    });
-  };
-
-  const imgpreview5 = (e, fileData) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileData);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImage5(reader.result);
+        setPreviewImage(reader.result);
         resolve();
         handleFieldChange(e);
       };
@@ -86,7 +34,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
   };
 
   // 조회
-  const [{ data: noticeData, loading: getLoading, error: getError }] =
+  const [{ data: noticeData, loading: getLoading, error: getError }, refetch] =
     useApiAxios(
       {
         url: `/notice/api/notices/${noticeId}/`,
@@ -95,7 +43,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
       { manual: !noticeId },
     );
 
-  // 저장
+  // 게시글 저장
   const [
     {
       loading: saveLoading,
@@ -116,6 +64,61 @@ function NoticeForm({ noticeId, handleDidSave }) {
     { manual: true },
   );
 
+  // 이미지 저장
+  const [{ loading: addImageLoading, error: addImageError }, addImageRequest] =
+    useApiAxios(
+      {
+        url: `/notice/api/images/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+
+      { manual: true },
+    );
+
+  // 이미지 삭제
+  const [imageNo, setImageNo] = useState();
+  const [{ loading: rmImageLoading, error: rmImageError }, deleteImage] =
+    useApiAxios(
+      {
+        url: `/notice/api/images/${imageNo}/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  // 첨부파일 저장
+  const [{ loading: addFileLoading, error: addFileError }, addFileRequest] =
+    useApiAxios(
+      {
+        url: `/notice/api/files/`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
+  // 첨부파일 삭제
+  const [fileNo, setFileNo] = useState();
+  const [{ loading: rmFileLoading, error: rmFileError }, deleteFile] =
+    useApiAxios(
+      {
+        url: `/notice/api/files/${fileNo}/`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${auth.access}`,
+        },
+      },
+      { manual: true },
+    );
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     noticeData || INIT_FIELD_VALUES,
   );
@@ -123,14 +126,14 @@ function NoticeForm({ noticeId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.image1 = '';
-        draft.image2 = '';
-        draft.image3 = '';
-        draft.image4 = '';
-        draft.image5 = '';
-        draft.file1 = '';
-        draft.file2 = '';
-        draft.file3 = '';
+        // draft.image1 = '';
+        // draft.image2 = '';
+        // draft.image3 = '';
+        // draft.image4 = '';
+        // draft.image5 = '';
+        // draft.file1 = '';
+        // draft.file2 = '';
+        // draft.file3 = '';
         draft.user = auth.userID;
       }),
     );
@@ -143,7 +146,16 @@ function NoticeForm({ noticeId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        fileList.forEach((file) => formData.append(name, file));
+        if (
+          noticeData
+            ? fileList.length + noticeData?.notice_image?.length >= 0 &&
+              fileList.length + noticeData?.notice_image?.length <= 5
+            : fileList.length >= 0 && fileList.length <= 5
+        ) {
+          fileList.forEach((file) => formData.append(name, file));
+        } else {
+          window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+        }
       } else {
         formData.append(name, value);
       }
@@ -156,24 +168,31 @@ function NoticeForm({ noticeId, handleDidSave }) {
     });
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [noticeData]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
+  // 이미지 추가 (수정시)
+  const handleAddImage = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(fieldValues).forEach(([name, value]) => {
+      if (Array.isArray(value)) {
+        const fileList = value;
+        if (name === 'image') {
+          if (fileList.length + noticeData.notice_image.length <= 5) {
+            fileList.forEach((file) => {
+              formData.append(name, file);
+              formData.append('notice_no', noticeData.notice_no);
+            });
+          } else {
+            window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+          }
+        }
+      }
+    });
+    addImageRequest({
+      data: formData,
+    }).then(() => {
+      refetch();
     });
   };
-
-  useEffect(() => {
-    gotoTop();
-  }, [topLocation]);
 
   //-------------
 
@@ -239,255 +258,157 @@ function NoticeForm({ noticeId, handleDidSave }) {
               </div>
               <hr />
 
+              {/* 첨부 이미지 삭제 */}
+              {noticeData && (
+                <>
+                  <h2>첨부 이미지들</h2>
+                  {noticeData.notice_image.map((image) => (
+                    <>
+                      <img src={image.image} alt="" className="inline w-44" />
+                      <div>
+                        <button
+                          onMouseOver={() => setImageNo(image.notice_image_no)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            if (noticeData.notice_image.length >= 0) {
+                              deleteImage().then(() => refetch());
+                            }
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    </>
+                  ))}
+                </>
+              )}
+
               {/* 이미지 첨부 인풋박스 */}
-              <div className="my-3 w-full">
-                <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
-                  이미지 첨부
-                </span>
-                <h2 className="text-gray-500 text-xxs">
-                  ( 최대 5개까지 이미지를 등록할 수 있습니다. )
-                </h2>
+              {!noticeData ? (
+                <div className="my-5 w-full">
+                  <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
+                    이미지 첨부
+                  </span>
+                  <h2 className="text-gray-500 text-xxs">
+                    ( 최대 5개까지 이미지를 등록할 수 있습니다. )
+                  </h2>
 
-                <div className="flex justify-center bg-white py-5 w-full">
-                  {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
-                  <ul>
-                    {/* 개별 이미지 input 박스 1*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="image1"
-                        className="text-gray-800 "
-                        onChange={(e) => {
-                          imgpreview1(e, e.target.files[0]);
-                        }}
-                      />
-                      {!fieldValues.image1 ? (
-                        <div>
-                          <img
-                            src={noticeData?.image1}
-                            alt=""
-                            className="h-44"
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img src={image1} alt="" className="h-44" />
-                        </div>
-                      )}
+                  <div className="flex justify-center bg-white py-5 w-full">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 이미지 input 박스 1*/}
+                      <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                        <input
+                          type="file"
+                          multiple={true}
+                          max={5}
+                          accept=".png, .jpg, .jpeg, .jfif"
+                          name="image"
+                          className="text-gray-800 "
+                          onChange={(e) => {
+                            imgpreview(e, e.target.files[0]);
+                          }}
+                        />
+                        {!previewImage && (
+                          <div>
+                            <img
+                              src={noticeData?.image}
+                              alt=""
+                              className="h-44"
+                            />
+                          </div>
+                        )}
 
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage1('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image1: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image1?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        {message}
-                      </p>
-                    ))}
-
-                    {/* 개별 이미지 input 박스 2*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="image2"
-                        className="text-gray-800 "
-                        onChange={(e) => {
-                          imgpreview2(e, e.target.files[0]);
-                        }}
-                      />
-                      {!fieldValues.image2 ? (
                         <div>
-                          <img
-                            src={noticeData?.image2}
-                            alt=""
-                            className="h-44"
-                          />
+                          <img src={previewImage} alt="" className="h-44" />
                         </div>
-                      ) : (
-                        <div>
-                          <img src={image2} alt="" className="h-44" />
-                        </div>
-                      )}
 
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage2('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image2: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image2?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        {message}
-                      </p>
-                    ))}
-
-                    {/* 개별 이미지 input 박스 3*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="image3"
-                        className="text-gray-800 "
-                        onChange={(e) => {
-                          imgpreview3(e, e.target.files[0]);
-                        }}
-                      />
-                      {!fieldValues.image3 ? (
-                        <div>
-                          <img
-                            src={noticeData?.image3}
-                            alt=""
-                            className="h-44"
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img src={image3} alt="" className="h-44" />
-                        </div>
-                      )}
-
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage3('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image3: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image3?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        {message}
-                      </p>
-                    ))}
-
-                    {/* 개별 이미지 input 박스 4*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="image4"
-                        className="text-gray-800 "
-                        onChange={(e) => {
-                          imgpreview4(e, e.target.files[0]);
-                        }}
-                      />
-                      {!fieldValues.image4 ? (
-                        <div>
-                          <img
-                            src={noticeData?.image4}
-                            alt=""
-                            className="h-44"
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img src={image4} alt="" className="h-44" />
-                        </div>
-                      )}
-
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage4('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image4: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image4?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        {message}
-                      </p>
-                    ))}
-
-                    {/* 개별 이미지 input 박스 5*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
-                      <input
-                        type="file"
-                        accept=".png, .jpg, .jpeg, .jfif"
-                        name="image5"
-                        className="text-gray-800 "
-                        onChange={(e) => {
-                          imgpreview5(e, e.target.files[0]);
-                        }}
-                      />
-                      {!fieldValues.image5 ? (
-                        <div>
-                          <img
-                            src={noticeData?.image5}
-                            alt=""
-                            className="h-44"
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img src={image5} alt="" className="h-44" />
-                        </div>
-                      )}
-
-                      <button
-                        className="rounded-full px-2 py-1 bg-sky-300"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setImage5('');
-                          setFieldValues((prevFieldValues) => {
-                            return {
-                              ...prevFieldValues,
-                              image5: '',
-                            };
-                          });
-                        }}
-                      >
-                        X
-                      </button>
-                    </li>
-                    {saveErrorMessages.image5?.map((message, index) => (
-                      <p key={index} className="text-xxs text-red-400">
-                        {message}
-                      </p>
-                    ))}
-                  </ul>
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPreviewImage('');
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                notice_image: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="my-5 w-full">
+                  <span className="block tracking-wide text-blue-900 text-xl font-bold mb-2 ">
+                    이미지 추가
+                  </span>
+                  <h2 className="text-gray-500 text-xxs">
+                    ( 최대 5개까지 이미지를 등록할 수 있습니다. )
+                  </h2>
+
+                  <div className="flex justify-center bg-white py-5 w-full">
+                    {/* 이미지 첨부 인풋박스 ul태그 시작 부분*/}
+                    <ul>
+                      {/* 개별 이미지 input 박스 1*/}
+                      <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                        <input
+                          type="file"
+                          accept=".png, .jpg, .jpeg, .jfif"
+                          name="image"
+                          className="text-gray-800 "
+                          onChange={(e) => {
+                            imgpreview(e, e.target.files[0]);
+                          }}
+                        />
+                        {!previewImage && (
+                          <div>
+                            <img
+                              src={noticeData?.image}
+                              alt=""
+                              className="h-44"
+                            />
+                          </div>
+                        )}
+
+                        <div>
+                          <img src={previewImage} alt="" className="h-44" />
+                        </div>
+
+                        <button
+                          className="rounded-full px-2 py-1 bg-sky-300"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setPreviewImage('');
+                            setFieldValues((prevFieldValues) => {
+                              return {
+                                ...prevFieldValues,
+                                notice_image: [],
+                              };
+                            });
+                          }}
+                        >
+                          X
+                        </button>
+                      </li>
+                      {saveErrorMessages.notice_image?.map((message, index) => (
+                        <p key={index} className="text-xxs text-red-400">
+                          {/* {message} */}
+                          이미지 첨부가 필요합니다!
+                        </p>
+                      ))}
+                    </ul>
+                    <button onClick={(e) => handleAddImage(e)}>
+                      이미지 추가하기
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <hr />
               {/* 파일 첨부 인풋박스 시작 부분 */}
               <div className="my-3 w-full">
@@ -531,7 +452,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                       </button>
                     </li>
                     {/* 개별 파일 input 박스 2*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                    {/* <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
                       <input
                         type="file"
                         accept=".docx, .hwp, .xlsx, .pdf"
@@ -557,9 +478,9 @@ function NoticeForm({ noticeId, handleDidSave }) {
                       >
                         X
                       </button>
-                    </li>
+                    </li> */}
                     {/* 개별 파일 input 박스 3*/}
-                    <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
+                    {/* <li className="flex justify-between items-center text-base px-4 py-3 border-2 rounded-md xs:mx-5 sm:mx-0">
                       <input
                         type="file"
                         accept=".docx, .hwp, .xlsx, .pdf"
@@ -585,10 +506,11 @@ function NoticeForm({ noticeId, handleDidSave }) {
                       >
                         X
                       </button>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>
+
               <div className="text-center">
                 <button className="shadow-md font-bold bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-1 px-2 rounded">
                   저장
