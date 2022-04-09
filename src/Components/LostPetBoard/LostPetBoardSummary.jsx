@@ -16,13 +16,13 @@ function LostPetBoardSummary({ lostpetboard }) {
             </div>
           )}
 
-          <div className="px-6 py-4">
+          <div className="px-4">
             <ul>
               <li className="text-gray-700 text-xs">
                 유실장소:{lostpetboard.lost_location}
               </li>
               <li className="text-gray-700 text-xs">
-                동물종류:{lostpetboard.animal_type},
+                동물종류:{lostpetboard.animal_type} &gt;
                 {lostpetboard.animal_type === '개'
                   ? lostpetboard.dog_breed
                   : lostpetboard.cat_breed}
