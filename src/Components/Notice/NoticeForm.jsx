@@ -303,7 +303,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
                           multiple={true}
                           max={5}
                           accept=".png, .jpg, .jpeg, .jfif"
-                          name="image"
+                          name="notice_image"
                           className="text-gray-800 "
                           onChange={(e) => {
                             imgpreview(e, e.target.files[0]);
