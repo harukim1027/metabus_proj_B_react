@@ -14,6 +14,8 @@ import DebugStates from 'DebugStates';
 const INIT_FIELD_VALUES = {
   title: '',
   content: '',
+  notice_image: [],
+  notice_file: [],
 };
 
 function NoticeForm({ noticeId, handleDidSave }) {
@@ -153,6 +155,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
             fileList.forEach((file) => formData.append(name, file));
           } else {
             window.alert('사진은 최대 5개까지 첨부 가능합니다.');
+            e.stop();
           }
         } else if (name === 'notice_file')
           if (
@@ -165,6 +168,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
             });
           } else {
             window.alert('첨부파일은 최대 3개까지 첨부 가능합니다.');
+            e.stop();
           }
       } else {
         formData.append(name, value);

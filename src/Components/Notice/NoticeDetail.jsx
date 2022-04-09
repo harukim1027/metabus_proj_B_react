@@ -136,12 +136,9 @@ function NoticeDetail({ noticeId }) {
                             </svg>
 
                             <>
-                              <a
-                                href={notice.notice_file[0]?.file}
-                                className="ml-2 flex-1 w-0 truncate"
-                              >
+                              <span className="ml-2 flex-1 w-0 truncate">
                                 {notice.notice_file[0]?.filename}
-                              </a>
+                              </span>
 
                               {notice.notice_file[0]?.file && (
                                 <div className="ml-4 flex-shrink-0">
