@@ -114,7 +114,7 @@ function MainScreen({ activeCount, setActiveCount }) {
               {activeCount === 10 && (
                 <>
                   <div className="h-full">
-                    <div className="flex flex-col justify-center">
+                    <div className="flex flex-col justify-center h-full">
                       <div className="flex justify-center h-full">
                         <AwesomeSlider
                           className="Container w-11/12 h-5/6"

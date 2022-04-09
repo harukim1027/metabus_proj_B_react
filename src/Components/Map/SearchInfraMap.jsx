@@ -12,6 +12,7 @@ function SearchInfraMap() {
     },
     errMsg: null,
     isLoading: true,
+    test: '왜 너야',
   });
   const [myLoc, setMyLoc] = useState({});
   const [addr, setAddr] = useState('');
@@ -36,6 +37,7 @@ function SearchInfraMap() {
               lng: position.coords.longitude, // 경도
             },
             isLoading: false,
+            test: '바뀐거야',
           }));
         },
         (err) => {
@@ -71,7 +73,9 @@ function SearchInfraMap() {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
           // infoDiv.innerHTML = result[i].address_name;
+          console.log('지금 설정된 addr: ', result[i].address_name);
           setAddr(result[i].address_name);
+
           break;
         }
       }
@@ -92,6 +96,9 @@ function SearchInfraMap() {
 
   console.log('addr: ', addr);
   console.log('query: ', query);
+  console.log('currentLoc: ', currentLoc);
+  console.log('myLoc: ', myLoc);
+  console.log('----------');
 
   // 키워드 검색기능
   useEffect(() => {
@@ -129,7 +136,7 @@ function SearchInfraMap() {
   useEffect(() => {
     if (!map) return;
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-  }, [query]);
+  }, [map]);
 
   return (
     <div>
@@ -168,12 +175,11 @@ function SearchInfraMap() {
           level={3}
           onCreate={(map) => {
             setMap(map);
-            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
           }}
-          onTileLoaded={(map) => {
-            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('dragend');
-          }}
+          // onTileLoaded={(map) => {
+          //   searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+          //   // console.log('dragend');
+          // }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },

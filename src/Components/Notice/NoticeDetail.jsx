@@ -40,25 +40,6 @@ function NoticeDetail({ noticeId }) {
     }
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [notice]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [notice]);
-
   //-------------
 
   return (
@@ -98,19 +79,29 @@ function NoticeDetail({ noticeId }) {
                   <hr className="mt-3 mb-3" />
 
                   <div className="w-full flex justify-center">
-                    <img src={notice.image1} alt="" />
+                    {notice.notice_image && (
+                      <img src={notice.notice_image?.[0]?.image} alt="" />
+                    )}
                   </div>
                   <div className="w-full flex justify-center">
-                    <img src={notice.image2} alt="" />
+                    {notice.notice_image && (
+                      <img src={notice.notice_image?.[1]?.image} alt="" />
+                    )}
                   </div>
                   <div className="w-full flex justify-center">
-                    <img src={notice.image3} alt="" />
+                    {notice.notice_image && (
+                      <img src={notice.notice_image?.[2]?.image} alt="" />
+                    )}
                   </div>
                   <div className="w-full flex justify-center">
-                    <img src={notice.image4} alt="" />
+                    {notice.notice_image && (
+                      <img src={notice.notice_image?.[3]?.image} alt="" />
+                    )}
                   </div>
                   <div className="w-full flex justify-center">
-                    <img src={notice.image5} alt="" />
+                    {notice.notice_image && (
+                      <img src={notice.notice_image?.[4]?.image} alt="" />
+                    )}
                   </div>
 
                   {/* 내용 */}
@@ -137,9 +128,9 @@ function NoticeDetail({ noticeId }) {
                             aria-hidden="true"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
                           </svg>
 
@@ -176,9 +167,9 @@ function NoticeDetail({ noticeId }) {
                             aria-hidden="true"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
                           </svg>
                           {notice.notice_file && (
@@ -211,9 +202,9 @@ function NoticeDetail({ noticeId }) {
                             aria-hidden="true"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
                           </svg>
                           {notice.notice_file && (

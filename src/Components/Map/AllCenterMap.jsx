@@ -169,7 +169,7 @@ function AllCenterMap({ centersData, ismain }) {
   }
 
   return (
-    <div>
+    <div className="h-full">
       <h2 className="text-center xs:text-xs md:text-base xl:text-xl 2xl:text-2xl font-bold">
         입양 신청할 보호소를 선택하세요.
       </h2>
@@ -261,7 +261,7 @@ function AllCenterMap({ centersData, ismain }) {
               </button>
             )}
             <button
-              className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+              className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
               onClick={() =>
                 setMyLoc((prev) => ({
                   ...prev,
