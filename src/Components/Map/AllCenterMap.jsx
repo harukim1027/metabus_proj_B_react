@@ -209,7 +209,7 @@ function AllCenterMap({ centersData, ismain }) {
             width: '100%',
             height: 'calc(100vh - 400px)',
             position: 'relative',
-            bottom: '0px',
+            top: '0px',
           }}
           level="9"
           onCreate={(map) => {
@@ -259,17 +259,17 @@ function AllCenterMap({ centersData, ismain }) {
               </div>
             </MapMarker>
           )}
-          <div>
+          <div className="relative -top-20 z-50 flex justify-center">
             {!ismain && (
               <button
-                className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+                className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
                 onClick={() => navigate('/')}
               >
                 홈으로 돌아가기
               </button>
             )}
             <button
-              className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
               onClick={() =>
                 setMyLoc((prev) => ({
                   ...prev,

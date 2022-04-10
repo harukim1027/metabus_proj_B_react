@@ -150,6 +150,13 @@ function SearchInfraMap() {
       <span className="text-center xs:text-xs md:text-base  font-bold">
         : 🔍 지도에서 반려동물 관련 인프라를 검색할 수 있어요 ❕
       </span>
+      <h2>
+        현재 위치하신 주소에서{' '}
+        <h2 className="text-xl text-purple-800 font-bold inline mx-2">
+          {keyword}
+        </h2>{' '}
+        키워드로 검색한 정보입니다.
+      </h2>
       {/* 행정동 위치 표기 */}
       <div
         style={{
@@ -241,62 +248,58 @@ function SearchInfraMap() {
               )}
             </MapMarker>
           ))}
-          <h2>
-            현재 위치하신 주소에서{' '}
-            <h2 className="text-xl text-purple-800 font-bold inline mx-2">
-              {keyword}
-            </h2>{' '}
-            키워드로 검색한 정보입니다.
-          </h2>
-          <button
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-            onClick={() =>
-              setMyLoc((prev) => ({
-                ...prev,
-                center: currentLoc.center,
-                isLoading: false,
-                isPanto: true,
-              }))
-            }
-          >
-            🚩 내 위치 가기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 동물병원`);
-              setKeyword('동물병원');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            동물 병원 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견미용`);
-              setKeyword('애견미용');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 미용 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견호텔`);
-              setKeyword('애견호텔');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 호텔 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견용품`);
-              setKeyword('애견용품');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 용품샵 찾기
-          </button>
+
+          <div className="relative -top-20 z-50">
+            <button
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+              onClick={() =>
+                setMyLoc((prev) => ({
+                  ...prev,
+                  center: currentLoc.center,
+                  isLoading: false,
+                  isPanto: true,
+                }))
+              }
+            >
+              🚩 내 위치 가기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 동물병원`);
+                setKeyword('동물병원');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              동물 병원 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견미용`);
+                setKeyword('애견미용');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 미용 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견호텔`);
+                setKeyword('애견호텔');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 호텔 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견용품`);
+                setKeyword('애견용품');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 용품샵 찾기
+            </button>
+          </div>
         </Map>
       )}
     </div>
