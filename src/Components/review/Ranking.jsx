@@ -53,7 +53,7 @@ function Ranking() {
         현재 입양자 중 다이어리 작성{' '}
         <h2 className="text-xl font-bold text-red-400 inline">TOP3</h2> 입니다!
       </h2>
-      {getSortedArr ? (
+      {getSortedArr(userArr)[0] ? (
         <>
           <div className="flex justify-center mx-20">
             <div className="mt-24">
@@ -99,7 +99,7 @@ function Ranking() {
               )}
             </div>
           </div>
-          <div className=" relative flex justify-center bottom-44 -z-10">
+          <div className=" relative flex justify-center -top-40 -z-10">
             <img src="/123.png" alt="" style={{ width: 'auto' }} />
           </div>
         </>
