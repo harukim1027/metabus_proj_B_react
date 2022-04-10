@@ -5,15 +5,7 @@ function SearchInfraMap() {
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
-  const [currentLoc, setCurrentLoc] = useState({
-    center: {
-      lat: 36.32754333444323,
-      lng: 127.44633210644454,
-    },
-    errMsg: null,
-    isLoading: true,
-    test: '왜 너야',
-  });
+  const [currentLoc, setCurrentLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
   const [addr, setAddr] = useState('');
   const [keyword, setKeyword] = useState('동물병원');
@@ -136,12 +128,26 @@ function SearchInfraMap() {
   useEffect(() => {
     if (!map) return;
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-  }, [map]);
+  }, [map, currentLoc]);
 
   return (
     <div>
-      <h2 className="text-center text-2xl font-bold">
-        지도에서 반려동물 관련 인프라를 확인하세요.
+      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-200 relative inline-block">
+          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+            " 내 주변 검색하기 "
+          </span>
+        </span>
+      </blockquote>
+      <p className="text-center xs:text-xs md:text-base  font-bold">
+        : 🔍 지도에서 반려동물 관련 인프라를 검색할 수 있어요 ❕
+      </p>
+      <h2>
+        현재 위치하신 주소에서{' '}
+        <h2 className="text-xl text-purple-800 font-bold inline mx-2">
+          {keyword}
+        </h2>{' '}
+        키워드로 검색한 정보입니다.
       </h2>
       {/* 행정동 위치 표기 */}
       <div
@@ -176,10 +182,13 @@ function SearchInfraMap() {
           onCreate={(map) => {
             setMap(map);
           }}
-          // onTileLoaded={(map) => {
-          //   searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-          //   // console.log('dragend');
-          // }}
+          onTileLoaded={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            setMyLoc({
+              center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
+            });
+            // console.log('dragend');
+          }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
@@ -234,62 +243,58 @@ function SearchInfraMap() {
               )}
             </MapMarker>
           ))}
-          <h2>
-            현재 위치하신 주소에서{' '}
-            <h2 className="text-xl text-purple-800 font-bold inline mx-2">
-              {keyword}
-            </h2>{' '}
-            키워드로 검색한 정보입니다.
-          </h2>
-          <button
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-            onClick={() =>
-              setMyLoc((prev) => ({
-                ...prev,
-                center: currentLoc.center,
-                isLoading: false,
-                isPanto: true,
-              }))
-            }
-          >
-            🚩 내 위치 가기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 동물병원`);
-              setKeyword('동물병원');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            동물 병원 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견미용`);
-              setKeyword('애견미용');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 미용 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견호텔`);
-              setKeyword('애견호텔');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 호텔 찾기
-          </button>
-          <button
-            onClick={() => {
-              setQuery(`${addr} 애견용품`);
-              setKeyword('애견용품');
-            }}
-            className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
-          >
-            애견 용품샵 찾기
-          </button>
+
+          <div className="relative -top-20 z-50">
+            <button
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+              onClick={() =>
+                setMyLoc((prev) => ({
+                  ...prev,
+                  center: currentLoc.center,
+                  isLoading: false,
+                  isPanto: true,
+                }))
+              }
+            >
+              🚩 내 위치 가기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 동물병원`);
+                setKeyword('동물병원');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              동물 병원 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견미용`);
+                setKeyword('애견미용');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 미용 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견호텔`);
+                setKeyword('애견호텔');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 호텔 찾기
+            </button>
+            <button
+              onClick={() => {
+                setQuery(`${addr} 애견용품`);
+                setKeyword('애견용품');
+              }}
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+            >
+              애견 용품샵 찾기
+            </button>
+          </div>
         </Map>
       )}
     </div>

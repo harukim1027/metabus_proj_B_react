@@ -15,13 +15,13 @@ function FindOwnerBoardSummary({ findboard }) {
               />
             </div>
           )}
-          <div className="px-6 py-4">
+          <div className="px-4">
             <ul>
               <li className="text-gray-700 text-xs">
                 발견장소: {findboard.find_location}
               </li>
               <li className="text-gray-700 text-xs">
-                동물종류: {findboard.animal_type},
+                동물종류: {findboard.animal_type} &gt;
                 {findboard.animal_type === '개'
                   ? findboard.dog_breed
                   : findboard.cat_breed}

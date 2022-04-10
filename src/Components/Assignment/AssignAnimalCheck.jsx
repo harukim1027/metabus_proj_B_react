@@ -1,4 +1,5 @@
 import { useApiAxios } from 'api/base';
+import NewNav from 'Components/Main/NewNav';
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
@@ -43,7 +44,7 @@ function AssignAnimalCheck() {
   return (
     <>
       <br />
-
+      <NewNav />
       <h2 className="text-base text-blue-900 my-auto text-center font-semibold">
         {' '}
         🐶&nbsp; 동물의 상세 정보를 확인하시고 입양 의사를 결정해주세요.&nbsp;
@@ -62,7 +63,7 @@ function AssignAnimalCheck() {
                       animal.image_url2 &&
                       animal.image_url1 ? (
                         <AwesomeSlider
-                          className="Container"
+                          className="check_Container"
                           mobileTouch={true}
                           organicArrows={true}
                           bullets={false}
@@ -140,7 +141,7 @@ function AssignAnimalCheck() {
                                     <img
                                       src={animal.image_url1}
                                       alt="동물 이미지1"
-                                      className="md:mx-20 xs:h-full xs:w-full md:w-3/4 md:h-3/4 cursor-pointer"
+                                      className="md:mx-20  md:w-3/4 md:h-3/4 cursor-pointer"
                                       onClick={() =>
                                         window.open(animal.image_url3)
                                       }
@@ -293,10 +294,10 @@ function AssignAnimalCheck() {
         </button>
       </div>
       <button
-        onClick={() => navigate('/')}
+        onClick={() => window.history.back()}
         className="font-bold bg-green-300 hover:bg-green-900 text-white p-2 rounded-lg ml-4 mb-5"
       >
-        Home
+        Back
       </button>
     </>
   );

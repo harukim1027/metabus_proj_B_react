@@ -1,9 +1,9 @@
 import { useApiAxios } from 'api/base';
 import { useEffect, useState } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
-import { ToastContainer, toast } from 'react-toastify';
 import LoadingIndicator from 'LoadingIndicator';
 import { useNavigate } from 'react-router-dom';
+
 const INIT_FIELD_VALUES = {
   userID: '',
   name: '',
@@ -34,9 +34,6 @@ function ChangePassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
-  console.log('findUser: ', findUser);
-  console.log('userList: ', userList);
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
@@ -237,7 +234,7 @@ function ChangePassword() {
                                 <button
                                   onClick={() =>
                                     window.open(
-                                      'http://api.highlight329.com/accounts/password_reset/',
+                                      'http://localhost:8000/accounts/password_reset/',
                                       '_blank',
                                       navigate('/accounts/login/'),
                                     )

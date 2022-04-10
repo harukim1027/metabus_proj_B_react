@@ -68,9 +68,9 @@ function AssignCheck(props) {
 
   return (
     <>
-      <div className="header flex justify-center " id="topLoc">
-        <div className="mx-5 flex flex-wrap justify-center overflow-hidden md:px-10 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="assignments_header rounded-xl shadow-md flex flex-wrap justify-center w-full">
+      <div className="header mx-20 " id="topLoc">
+        <div className="mx-20 content-center overflow-hidden md:px-10 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+          <div className="mx-20 assignments_header rounded-xl  w-full">
             <main className="" role="main">
               <h1 className="mt-5 font-semibold text-2xl text-center">
                 🐼 크루 신청하기
@@ -94,43 +94,44 @@ function AssignCheck(props) {
               <hr />
               <br />
 
-              <div className="w-full  ">
-                <span className="xs:w-full md:w-5/6 after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold ">
+              <div className="mx-20 w-full  ">
+                <span className="mb-10 xs:w-full  after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold ">
                   입양 절차
                 </span>
-                <div className="xs:w-full md:w-5/6 ml-20 content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
+                <div className="mx-20 xs:w-full  content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
                   <AwesomeSlider
-                    className="Container3"
+                    className="check_Container"
                     mobileTouch={true}
-                    organicArrows={true}
-                    bullets={false}
+                    organicArrows={false}
+                    bullets={true}
                   >
-                    <span className=" font-semibold italic md:w-5/6 xs:w-3/4">
+                    <span className="mx-20 font-semibold italic ">
                       <img
                         src="/assigncheck1.png"
                         alt="assigncheck1"
-                        className="xs:w-full md:w-5/6"
+                        className="xs:w-3/4"
                       />
                     </span>
 
-                    <span className="font-semibold italic md:w-5/6 xs:w-3/4">
+                    <span className="mx-20 font-semibold italic ">
                       <img
                         src="/assigncheck2.png"
                         alt="assigncheck2"
-                        className="xs:w-full md:w-5/6"
+                        className="xs:w-3/4"
                       />
                     </span>
 
-                    <span className="font-semibold italic md:w-5/6 xs:w-3/4">
+                    <span className="mx-20 font-semibold italic ">
                       <img
                         src="/assigncheck3.png"
                         alt="assigncheck"
-                        className="xs:w-full md:w-5/6"
+                        className="xs:w-3/4"
                       />
                     </span>
                   </AwesomeSlider>
-                  <div className=" xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500 mr-5">
-                    <label className="bg-blue-100 mb-5">
+                  <div className="mt-10 xs:text-base md:text-lg lg:text-xl text-center font-semibold text-gray-500 ">
+                    <br />
+                    <label className="bg-blue-100 mb-5 mt-10">
                       &nbsp;입양 절차를 숙지했습니다&nbsp;
                       <input
                         type="checkbox"
@@ -147,21 +148,21 @@ function AssignCheck(props) {
                   <>
                     <hr className="pb-6 mx-10" />
 
-                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold">
+                    <span className="mb-10 after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold">
                       입양 전 주의 사항
                     </span>
                     <div className="flex justify-center w-full">
-                      <div className="xs:w-full md:w-5/6 ">
+                      <div className="w-full ">
                         <div className="xs:w-full">
                           <AwesomeSlider
-                            className="Container"
+                            className="check_Container2"
                             mobileTouch={true}
-                            organicArrows={true}
-                            bullets={false}
+                            organicArrows={false}
+                            bullets={true}
                           >
                             <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
                               <img
-                                className="w-full h-full"
+                                className="assign_photo2 "
                                 src="/safe_info1.png"
                                 alt="save_info1"
                               />
@@ -171,7 +172,7 @@ function AssignCheck(props) {
 
                             <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
                               <img
-                                className="w-full h-full"
+                                className="assign_photo2"
                                 src="/safe_info2.png"
                                 alt="save_info2"
                               />
@@ -179,7 +180,7 @@ function AssignCheck(props) {
 
                             <span className="flex flex-wrap justify-center font-semibold italic xs:w-full ">
                               <img
-                                className="w-full h-full"
+                                className="assign_photo2 "
                                 src="/safe_info3.png"
                                 alt="save_info3"
                               />
@@ -187,7 +188,7 @@ function AssignCheck(props) {
 
                             <span className="flex flex-wrap justify-center font-semibold italic xs:w-full">
                               <img
-                                className="w-full h-full"
+                                className="assign_photo2"
                                 src="/safe_info4.png"
                                 alt="save_info4"
                               />
@@ -198,15 +199,17 @@ function AssignCheck(props) {
                               className="flex flex-wrap justify-center font-semibold italic xs:w-full"
                             >
                               <img
-                                className="w-full h-full"
+                                className="assign_photo2"
                                 src="/safe_info5.png"
                                 alt="save_info5"
                               />
                             </span>
                           </AwesomeSlider>
                         </div>
-
-                        <div className="xs:text-base md:text-lg lg:text-xl text-right pb-5 font-bold text-gray-500 mr-5">
+                        <br className="mx-20" />
+                        <br />
+                        <br />
+                        <div className="xs:text-base md:text-lg lg:text-xl text-center pb-5 font-bold text-gray-500 mr-5">
                           <label className="bg-blue-100">
                             &nbsp;안전 수칙을 숙지했습니다&nbsp;
                             <input
@@ -219,7 +222,7 @@ function AssignCheck(props) {
                             />
                           </label>
                         </div>
-                        <div className="pb-3 text-right">
+                        <div className="pb-3 text-center">
                           <label className=" xs:text-base md:text-lg lg:text-xl bg-yellow-100 font-bold mr-5">
                             &nbsp;모두 동의합니다&nbsp;
                             <input

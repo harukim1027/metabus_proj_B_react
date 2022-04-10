@@ -8,12 +8,10 @@ import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 import 'react-awesome-slider/dist/styles.css';
 import '../review/SlideStyle.css';
 
-import ReviewSummaryMain from 'Components/review/ReviewSummaryMain';
-import { useApiAxios } from 'api/base';
-import ReviewSummary from 'Components/review/ReviewSummary';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import AwesomeSlider from 'react-awesome-slider';
 import Fame from 'Components/review/HallOfFame';
+import Ranking from 'Components/review/Ranking';
 
 function MainScreen({ activeCount, setActiveCount }) {
   // console.log(activeCount);
@@ -97,9 +95,32 @@ function MainScreen({ activeCount, setActiveCount }) {
               }
               onWheel={(e) => wheel(e)}
             >
-              <div className="flex justify-center mt-40 ">
-                <div className="w-2/3">
-                  <Fame />
+              <div className="h-full">
+                <div className="flex flex-col justify-center h-full">
+                  <div className="flex justify-center h-full">
+                    <AwesomeSlider
+                      className="Container w-11/12"
+                      style={{ height: 'calc(100vh - 100px)' }}
+                      mobileTouch={true}
+                      organicArrows={true}
+                      bullets={false}
+                    >
+                      <span className="w-5/6 h-5/6 mt-10">
+                        <div className="flex justify-center w-full">
+                          <div className="w-11/12 h-full rounded-lg">
+                            <Fame />
+                          </div>
+                        </div>
+                      </span>
+                      <span className="w-5/6 h-5/6 mt-10">
+                        <div className="flex justify-center w-full">
+                          <div className="w-11/12 h-full rounded-lg">
+                            <Ranking />
+                          </div>
+                        </div>
+                      </span>
+                    </AwesomeSlider>
+                  </div>
                 </div>
               </div>
             </div>

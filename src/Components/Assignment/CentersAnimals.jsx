@@ -137,10 +137,10 @@ function CentersAnimals() {
       />
 
       <button
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/centermap/')}
         className="font-bold ml-10 mt-10 mb-10 bg-green-300 hover:bg-green-900 hover:text-white p-2 rounded-lg"
       >
-        Home
+        Back
       </button>
     </div>
   );

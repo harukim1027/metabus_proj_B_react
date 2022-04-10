@@ -170,9 +170,17 @@ function AllCenterMap({ centersData, ismain }) {
 
   return (
     <div className="h-full">
-      <h2 className="text-center xs:text-xs md:text-base xl:text-xl 2xl:text-2xl font-bold">
-        입양 신청할 보호소를 선택하세요.
-      </h2>
+      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
+          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+            " 현재 보호중인 동물 보기 "
+          </span>
+        </span>
+      </blockquote>
+      <p className="text-center xs:text-xs md:text-base  font-bold">
+        : 🏥 입양 신청할 보호소를 선택하세요 ❕
+      </p>
+
       {/* 행정동 위치 표기 */}
       <div
         style={{
@@ -201,7 +209,7 @@ function AllCenterMap({ centersData, ismain }) {
             width: '100%',
             height: 'calc(100vh - 400px)',
             position: 'relative',
-            bottom: '0px',
+            top: '0px',
           }}
           level="9"
           onCreate={(map) => {
@@ -251,17 +259,17 @@ function AllCenterMap({ centersData, ismain }) {
               </div>
             </MapMarker>
           )}
-          <div>
+          <div className="relative -top-14 z-50 flex justify-center">
             {!ismain && (
               <button
-                className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
+                className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
                 onClick={() => navigate('/')}
               >
                 홈으로 돌아가기
               </button>
             )}
             <button
-              className="text-lg hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
               onClick={() =>
                 setMyLoc((prev) => ({
                   ...prev,

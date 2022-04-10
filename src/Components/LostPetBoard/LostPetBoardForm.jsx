@@ -100,6 +100,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   const offset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - offset);
   INIT_FIELD_VALUES.lost_time = today.toISOString().slice(0, 16);
+
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     lostpetBoard || INIT_FIELD_VALUES,
   );
@@ -115,7 +116,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.user = auth.userID;
+        draft.user = lostpetBoard ? lostpetBoard.user.userID : auth.userID;
         draft.lost_location = lostpetBoard?.lost_location;
       }),
     );
@@ -142,8 +143,8 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
         const fileList = value;
         if (
           lostpetBoard
-            ? fileList.length + lostpetBoard?.board_image?.length > 0 &&
-              fileList.length + lostpetBoard?.board_image?.length <= 5
+            ? lostpetBoard.board_image.length > 0 &&
+              lostpetBoard.board_image.length <= 5
             : fileList.length > 0 && fileList.length <= 5
         ) {
           fileList.forEach((file) => formData.append(name, file));
@@ -151,6 +152,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
           window.alert(
             '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
           );
+          e.stop();
         }
       } else {
         formData.append(name, value);
@@ -641,6 +643,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                               window.alert(
                                 '이미지는 최소 한장 이상 존재해야합니다.',
                               );
+                              e.stop();
                             }
                           }}
                         >
