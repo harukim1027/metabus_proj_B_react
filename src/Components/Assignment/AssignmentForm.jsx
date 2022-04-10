@@ -179,13 +179,13 @@ function AssignmentForm({ handleDidSave }) {
                 </p>
                 {animal && (
                   <>
-                    <div className="flex justify-contents-between">
+                    <div className="flex justify-between">
                       <>
                         {animal.image_url3 &&
                         animal.image_url2 &&
                         animal.image_url1 ? (
                           <AwesomeSlider
-                            className="Container3"
+                            className="Container "
                             mobileTouch={true}
                             organicArrows={true}
                             bullets={false}
@@ -195,7 +195,7 @@ function AssignmentForm({ handleDidSave }) {
                                 <img
                                   src={animal.image_url1}
                                   alt="동물 이미지"
-                                  className="h-full w-3/4 mb-5  "
+                                  className="assign_photo2 "
                                 />
                               )}
                             </span>
@@ -204,7 +204,7 @@ function AssignmentForm({ handleDidSave }) {
                                 <img
                                   src={animal.image_url2}
                                   alt="동물 이미지"
-                                  className="h-full w-3/4 mb-5"
+                                  className="assign_photo2"
                                 />
                               )}
                             </span>
@@ -213,7 +213,7 @@ function AssignmentForm({ handleDidSave }) {
                                 <img
                                   src={animal.image_url3}
                                   alt="동물 이미지"
-                                  className="h-full w-3/4 mb-5"
+                                  className="assign_photo2"
                                 />
                               )}
                             </span>
@@ -232,7 +232,7 @@ function AssignmentForm({ handleDidSave }) {
                                     <img
                                       src={animal.image_url1}
                                       alt="동물 이미지"
-                                      className="h-full w-3/4 mb-5"
+                                      className="assign_photo2"
                                     />
                                   )}
                                 </span>
@@ -241,7 +241,7 @@ function AssignmentForm({ handleDidSave }) {
                                     <img
                                       src={animal.image_url2}
                                       alt="동물 이미지"
-                                      className="h-full w-3/4 mb-5"
+                                      className="assign_photo2"
                                     />
                                   )}
                                 </span>
@@ -254,7 +254,7 @@ function AssignmentForm({ handleDidSave }) {
                                       <img
                                         src={animal.image_url1}
                                         alt="동물 이미지"
-                                        className="h-full w-3/4 mb-5"
+                                        className="assign_photo2"
                                       />
                                     )}
                                   </span>
@@ -266,7 +266,7 @@ function AssignmentForm({ handleDidSave }) {
                       </>
 
                       <>
-                        <div className="flex justify-contents-between">
+                        <div className="flex justify-between">
                           <table className="">
                             <tr className="sm:w-full">
                               <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
@@ -343,6 +343,7 @@ function AssignmentForm({ handleDidSave }) {
                 {/* 첫번째 form 부분 */}
                 <>
                   <span className="header rounded-xl overflow-hidden  sm:w-full sm:mx-5 xs:w-full xs:mx-5 md:w-5/6 md:px-20 lg:w-2/3 my-10">
+                    <p className="text-right font-bold text-xl">1</p>
                     <hr />
                     {/* 신청자 이름 */}
                     <div className="my-5">
@@ -480,7 +481,9 @@ function AssignmentForm({ handleDidSave }) {
                   <span>
                     {/* 거주지 사진 */}
                     <div className=" w-full">
-                      <hr className="mt-7" />
+                      <p className="text-right font-bold text-xl">2</p>
+
+                      <hr />
                       <span className="mt-10 ml-5  mb-2 after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-base font-bold">
                         거주지 사진
                       </span>
@@ -503,7 +506,7 @@ function AssignmentForm({ handleDidSave }) {
                             />
                             {image1 && (
                               <div>
-                                <img src={image1} alt="" className="h-44" />
+                                <img src={image1} alt="" className="h-20" />
                               </div>
                             )}
                           </li>
@@ -530,7 +533,7 @@ function AssignmentForm({ handleDidSave }) {
                             />
                             {image2 && (
                               <div>
-                                <img src={image2} alt="" className="h-44" />
+                                <img src={image2} alt="" className="h-20" />
                               </div>
                             )}
                           </li>
@@ -557,7 +560,7 @@ function AssignmentForm({ handleDidSave }) {
                             />
                             {image3 && (
                               <div>
-                                <img src={image3} alt="" className="h-44" />
+                                <img src={image3} alt="" className="h-20" />
                               </div>
                             )}
                           </li>
@@ -574,8 +577,17 @@ function AssignmentForm({ handleDidSave }) {
                         </ul>
                       </div>
                     </div>
-                    <hr className="bg-gray-100" />
+                  </span>
+                </>
 
+                <>
+                  <span>
+                    <p className="text-right font-bold text-xl">3</p>
+
+                    <span className="animate-pulse text-center block tracking-wide text-gray-700 xs:text-sm md:text-base font-bold mb-2 bg-yellow-200">
+                      마지막 절차에요 !!
+                    </span>
+                    <hr />
                     {/* 만남 희망 날짜 */}
                     <div className="my-5 w-full flex justify-between">
                       <div className="relative">

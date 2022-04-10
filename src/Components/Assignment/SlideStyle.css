@@ -9,6 +9,13 @@
   height: 700px;
   width: 1000x;
 }
+
+.check_Container1 {
+  --content-background-color: transparent;
+  height: 1000px;
+  width: 1400x;
+}
+
 .check_Container2 {
   --content-background-color: transparent;
   height: 570px;

@@ -8,9 +8,6 @@ import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
 import 'react-awesome-slider/dist/styles.css';
 import '../review/SlideStyle.css';
 
-import ReviewSummaryMain from 'Components/review/ReviewSummaryMain';
-import { useApiAxios } from 'api/base';
-import ReviewSummary from 'Components/review/ReviewSummary';
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import AwesomeSlider from 'react-awesome-slider';
 import Fame from 'Components/review/HallOfFame';
