@@ -80,27 +80,27 @@ function NoticeDetail({ noticeId }) {
 
                   <div className="w-full flex justify-center">
                     {notice.notice_image && (
-                      <img src={notice.notice_image?.[0]?.image} alt="" />
+                      <img src={notice.notice_image[0]?.image} alt="" />
                     )}
                   </div>
                   <div className="w-full flex justify-center">
                     {notice.notice_image && (
-                      <img src={notice.notice_image?.[1]?.image} alt="" />
+                      <img src={notice.notice_image[1]?.image} alt="" />
                     )}
                   </div>
                   <div className="w-full flex justify-center">
                     {notice.notice_image && (
-                      <img src={notice.notice_image?.[2]?.image} alt="" />
+                      <img src={notice.notice_image[2]?.image} alt="" />
                     )}
                   </div>
                   <div className="w-full flex justify-center">
                     {notice.notice_image && (
-                      <img src={notice.notice_image?.[3]?.image} alt="" />
+                      <img src={notice.notice_image[3]?.image} alt="" />
                     )}
                   </div>
                   <div className="w-full flex justify-center">
                     {notice.notice_image && (
-                      <img src={notice.notice_image?.[4]?.image} alt="" />
+                      <img src={notice.notice_image[4]?.image} alt="" />
                     )}
                   </div>
 
@@ -116,72 +116,34 @@ function NoticeDetail({ noticeId }) {
                   <span className="mt-3 text-base font-bold text-gray-500">
                     첨부파일
                   </span>
-                  <div className="bg-white px-4 py-5 sm:grid sm:gap-4 sm:px-6">
-                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                      <li className="pl-3 pr-4 py-3 flex justify-between text-sm">
-                        <div className="w-0 flex-1 flex items-center">
-                          <svg
-                            className="flex-shrink-0 h-5 w-5 text-gray-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                  {notice.notice_file && (
+                    <div className="bg-white px-4 py-5 sm:grid sm:gap-4 sm:px-6">
+                      <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                        <li className="pl-3 pr-4 py-3 flex justify-between text-sm">
+                          <div className="w-0 flex-1 flex items-center">
+                            <svg
+                              className="flex-shrink-0 h-5 w-5 text-gray-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
 
-                          {notice.notice_file && (
-                            <>
-                              <a
-                                href={notice.notice_file?.file}
-                                className="ml-2 flex-1 w-0 truncate"
-                              >
-                                {/* {notice.notice_file?.[0]?.file} */}
-                              </a>
-
-                              {notice.notice_file?.[0]?.file && (
-                                <div className="ml-4 flex-shrink-0">
-                                  <a
-                                    href={notice.notice_file?.[0]?.file}
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                  >
-                                    Download
-                                  </a>
-                                </div>
-                              )}
-                            </>
-                          )}
-                        </div>
-                      </li>
-                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                        <div className="w-0 flex-1 flex items-center">
-                          <svg
-                            className="flex-shrink-0 h-5 w-5 text-gray-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {notice.notice_file && (
                             <>
                               <span className="ml-2 flex-1 w-0 truncate">
-                                {/* {notice.notice_file?.[1]?.file} */}
+                                {notice.notice_file[0]?.filename}
                               </span>
 
-                              {notice.notice_file?.[1]?.file && (
+                              {notice.notice_file[0]?.file && (
                                 <div className="ml-4 flex-shrink-0">
                                   <a
-                                    href={notice.notice_file?.[1]?.file}
+                                    href={notice.notice_file[0]?.file}
                                     className="font-medium text-indigo-600 hover:text-indigo-500"
                                   >
                                     Download
@@ -189,34 +151,33 @@ function NoticeDetail({ noticeId }) {
                                 </div>
                               )}
                             </>
-                          )}
-                        </div>
-                      </li>
-                      <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                        <div className="w-0 flex-1 flex items-center">
-                          <svg
-                            className="flex-shrink-0 h-5 w-5 text-gray-400"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          {notice.notice_file && (
+                          </div>
+                        </li>
+                        <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                          <div className="w-0 flex-1 flex items-center">
+                            <svg
+                              className="flex-shrink-0 h-5 w-5 text-gray-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+
                             <>
                               <span className="ml-2 flex-1 w-0 truncate">
-                                {/* {notice.notice_file?.[2]?.file} */}
+                                {notice.notice_file[1]?.filename}
                               </span>
 
-                              {notice.notice_file?.[2]?.file && (
+                              {notice.notice_file[1]?.file && (
                                 <div className="ml-4 flex-shrink-0">
                                   <a
-                                    href={notice.notice_file?.[2]?.file}
+                                    href={notice.notice_file[1]?.file}
                                     className="font-medium text-indigo-600 hover:text-indigo-500"
                                   >
                                     Download
@@ -224,13 +185,48 @@ function NoticeDetail({ noticeId }) {
                                 </div>
                               )}
                             </>
-                          )}
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                          </div>
+                        </li>
+                        <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                          <div className="w-0 flex-1 flex items-center">
+                            <svg
+                              className="flex-shrink-0 h-5 w-5 text-gray-400"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+
+                            <>
+                              <span className="ml-2 flex-1 w-0 truncate">
+                                {notice.notice_file[2]?.filename}
+                              </span>
+
+                              {notice.notice_file[2]?.file && (
+                                <div className="ml-4 flex-shrink-0">
+                                  <a
+                                    href={notice.notice_file[2]?.file}
+                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                  >
+                                    Download
+                                  </a>
+                                </div>
+                              )}
+                            </>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </>
               )}
+
               <div className="my-5 text-right">
                 {auth.is_staff && (
                   <button

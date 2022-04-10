@@ -112,7 +112,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
   useEffect(() => {
     setFieldValues(
       produce((draft) => {
-        draft.user = auth.userID;
+        draft.user = review ? review.user.userID : auth.userID;
         draft.adoptassignment = selectanimalAssign;
       }),
     );
@@ -126,8 +126,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
         const fileList = value;
         if (
           review
-            ? fileList.length + review?.review_image?.length > 0 &&
-              fileList.length + review?.review_image?.length <= 5
+            ? review.review_image.length > 0 && review.review_image.length <= 5
             : fileList.length > 0 && fileList.length <= 5
         ) {
           fileList.forEach((file) => formData.append(name, file));
@@ -135,6 +134,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
           window.alert(
             '사진은 최소 1개 이상 첨부해야하고, 최대 5개까지 첨부 가능합니다.',
           );
+          e.stop();
         }
       } else {
         formData.append(name, value);
