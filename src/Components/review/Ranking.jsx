@@ -53,55 +53,66 @@ function Ranking() {
         현재 입양자 중 다이어리 작성{' '}
         <h2 className="text-xl font-bold text-red-400 inline">TOP3</h2> 입니다!
       </h2>
-      {reviewList && (
-        <div className="flex justify-center mx-20">
-          <div className="mt-24">
-            2등{' '}
-            <span className="text-blue-600 text-xl font-semibold">
-              {getSortedArr(userArr)[1]?.[0]}
-            </span>
-            님! 총{' '}
-            <span className="text-red-600 text-xl font-semibold">
-              {getSortedArr(userArr)[1]?.[1]}
-            </span>
-            번 작성!
-            {reviewList && getSortedArr(userArr)[1] && (
-              <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
-            )}
+      {getSortedArr ? (
+        <>
+          <div className="flex justify-center mx-20">
+            <div className="mt-24">
+              2등{' '}
+              <span className="text-blue-600 text-xl font-semibold">
+                {getSortedArr(userArr)[1]?.[0]}
+              </span>
+              님! 총{' '}
+              <span className="text-red-600 text-xl font-semibold">
+                {getSortedArr(userArr)[1]?.[1]}
+              </span>
+              번 작성!
+              {reviewList && getSortedArr(userArr)[1] && (
+                <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
+              )}
+            </div>
+            <div className="">
+              1등{' '}
+              <span className="text-blue-600 text-xl font-semibold">
+                {getSortedArr(userArr)[0]?.[0]}
+              </span>
+              님! 총{' '}
+              <span className="text-red-600 text-xl font-semibold">
+                {getSortedArr(userArr)[0]?.[1]}
+              </span>
+              번 작성!
+              {reviewList && getSortedArr(userArr)[0] && (
+                <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
+              )}
+            </div>
+            <div className="mt-32">
+              3등{' '}
+              <span className="text-blue-600 text-xl font-semibold">
+                {getSortedArr(userArr)[2]?.[0]}
+              </span>
+              님! 총
+              <span className="text-red-600 text-xl font-semibold">
+                {getSortedArr(userArr)[2]?.[1]}
+              </span>
+              번 작성!
+              {reviewList && getSortedArr(userArr)[2] && (
+                <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
+              )}
+            </div>
           </div>
-          <div className="">
-            1등{' '}
-            <span className="text-blue-600 text-xl font-semibold">
-              {getSortedArr(userArr)[0]?.[0]}
-            </span>
-            님! 총{' '}
-            <span className="text-red-600 text-xl font-semibold">
-              {getSortedArr(userArr)[0]?.[1]}
-            </span>
-            번 작성!
-            {reviewList && getSortedArr(userArr)[0] && (
-              <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
-            )}
+          <div className=" relative flex justify-center bottom-44 -z-10">
+            <img src="/123.png" alt="" style={{ width: 'auto' }} />
           </div>
-          <div className="mt-32">
-            3등{' '}
-            <span className="text-blue-600 text-xl font-semibold">
-              {getSortedArr(userArr)[2]?.[0]}
-            </span>
-            님! 총
-            <span className="text-red-600 text-xl font-semibold">
-              {getSortedArr(userArr)[2]?.[1]}
-            </span>
-            번 작성!
-            {reviewList && getSortedArr(userArr)[2] && (
-              <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
-            )}
-          </div>
+        </>
+      ) : (
+        <div className="my-auto">
+          <h2>아직 다이어리를 작성하신 분이 없습니다!</h2>
+          <h2>
+            다이어리를 작성하고{' '}
+            <h2 className="text-xl font-semibold text-red-500">1위</h2>의 자리에
+            올라보세요!
+          </h2>
         </div>
       )}
-      <div className=" relative flex justify-center bottom-44 -z-10">
-        <img src="/123.png" alt="" style={{ width: 'auto' }} />
-      </div>
     </>
   );
 }
