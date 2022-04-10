@@ -177,9 +177,9 @@ function AllCenterMap({ centersData, ismain }) {
           </span>
         </span>
       </blockquote>
-      <span className="text-center xs:text-xs md:text-base  font-bold">
+      <p className="text-center xs:text-xs md:text-base  font-bold">
         : 🏥 입양 신청할 보호소를 선택하세요 ❕
-      </span>
+      </p>
 
       {/* 행정동 위치 표기 */}
       <div

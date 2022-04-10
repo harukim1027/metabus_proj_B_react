@@ -139,9 +139,9 @@ function SearchInfraMap() {
           </span>
         </span>
       </blockquote>
-      <span className="text-center xs:text-xs md:text-base  font-bold">
+      <p className="text-center xs:text-xs md:text-base  font-bold">
         : 🔍 지도에서 반려동물 관련 인프라를 검색할 수 있어요 ❕
-      </span>
+      </p>
       <h2>
         현재 위치하신 주소에서{' '}
         <h2 className="text-xl text-purple-800 font-bold inline mx-2">
