@@ -1,5 +1,5 @@
 import NewNav from 'Components/Main/NewNav';
-import MyComments from 'Components/Mypage/MyComments';
+import MyComments from 'Components/Mypage/Comments/MyComments';
 import Sidebar from 'Components/Mypage/Sidebar';
 
 function PageMyComments() {
