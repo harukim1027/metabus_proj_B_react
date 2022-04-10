@@ -6,9 +6,9 @@ import ReactPaginate from 'react-paginate';
 import LoadingIndicator from 'LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
 
-const INIT_FIELD_VALUES = { category: '입양 다이어리' };
+const INIT_FIELD_VALUES = { category: '잃어버렸어요!' };
 
-function MyReview() {
+function MylostPetBoard() {
   const { auth } = useAuth();
   const navigate = useNavigate();
   // 페이징
@@ -19,9 +19,9 @@ function MyReview() {
   const itemsPerPage = 5;
 
   // get 요청
-  const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
+  const [{ data: lostPetBoardList, loading, error }, refetch] = useApiAxios(
     {
-      url: `/adopt_review/api/reviews/`,
+      url: `/lost_pet_board/api/board/`,
       method: 'GET',
     },
     {
@@ -50,6 +50,8 @@ function MyReview() {
       const params = {
         page: newPage,
         query: auth.userID,
+        category:
+          fieldValues.category === '입양 다이어리' ? '' : fieldValues.category,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
@@ -86,7 +88,7 @@ function MyReview() {
   // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [reviewList]);
+  }, [lostPetBoardList]);
 
   const gotoTop = () => {
     // 클릭하면 스크롤이 위로 올라가는 함수
@@ -98,9 +100,9 @@ function MyReview() {
 
   useEffect(() => {
     gotoTop();
-  }, [reviewList]);
-  console.log('fieldValues', fieldValues);
+  }, [lostPetBoardList]);
 
+  console.log('fieldValues', fieldValues);
   //-------------
 
   return (
@@ -144,7 +146,7 @@ function MyReview() {
                       value={fieldValues.category}
                       onChange={handleFieldChange}
                       className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
-                      defaultValue="입양 다이어리"
+                      defaultValue="잃어버렸어요!"
                     >
                       <option value="입양 다이어리">입양 다이어리</option>
                       <option value="잃어버렸어요!">잃어버렸어요!</option>
@@ -207,33 +209,35 @@ function MyReview() {
               </thead>
 
               <tbody className="bg-white divide-y divide-gray-200">
-                {reviewList && (
+                {lostPetBoardList && (
                   <>
-                    {reviewList.results
+                    {lostPetBoardList.results
                       .filter((a) => a.user.userID === auth.userID)
-                      .map((review) => (
+                      .map((lostpetboard) => (
                         <tr
-                          key={review.review_no}
+                          key={lostpetboard.lost_board_no}
                           onClick={() =>
-                            navigate(`/review/${review.review_no}/`)
+                            navigate(
+                              `/lostpetboard/${lostpetboard.lost_board_no}/`,
+                            )
                           }
                           className="cursor-pointer"
                         >
                           <td className="py-4 lg:text-xl md:text-base sm:text-sm xs:text-xxs">
-                            {review.review_no}
+                            {lostpetboard.lost_board_no}
                           </td>
                           <td className="py-4 font-semibold lg:text-xl md:text-md sm:text-sm xs:text-xxs">
                             <span className="bg-purple-100 rounded-full">
-                              {review.title.length > 15
-                                ? review.title.substring(0, 15) + '...'
-                                : review.title}
+                              {lostpetboard.title.length > 15
+                                ? lostpetboard.title.substring(0, 15) + '...'
+                                : lostpetboard.title}
                             </span>
                           </td>
                           <td className="px-3 py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs whitespace-nowrap">
-                            {review.user.nickname}
+                            {lostpetboard.user.nickname}
                           </td>
                           <td className="py-4 sm:text-sm xs:text-xxs">
-                            {review.created_at}
+                            {lostpetboard.created_at}
                           </td>
                         </tr>
                       ))}
@@ -258,4 +262,4 @@ function MyReview() {
   );
 }
 
-export default MyReview;
+export default MylostPetBoard;

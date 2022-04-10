@@ -70,6 +70,8 @@ import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import CentersAnimals from 'Components/Assignment/CentersAnimals';
 import AssignAnimalCheck from 'Components/Assignment/AssignAnimalCheck';
 import { ToastContainer } from 'react-toastify';
+import MylostPetBoard from 'Components/Mypage/MyLostPet';
+import MyFindBoard from 'Components/Mypage/MyFindBoard';
 
 function App() {
   const { auth } = useAuth();
@@ -225,6 +227,12 @@ function App() {
                 element={<PageMyAssignInfo />}
               />
               <Route path="/mypage/myposts/" element={<PageMyReview />} />
+              <Route
+                path="/mypage/lostpetboard/"
+                element={<MylostPetBoard />}
+              />
+              <Route path="/mypage/findboard/" element={<MyFindBoard />} />
+
               <Route path="/mypage/mycomments/" element={<PageMyComments />} />
               <Route path="/mypage/myinquiry/" element={<PageMyInquiry />} />
 
