@@ -5,7 +5,12 @@
 
 .Container2 {
   --content-background-color: transparent;
-  height: 80px;
+  height: 150px;
+}
+
+.Container3 {
+  --content-background-color: transparent;
+  height: 300px;
 }
 
 .ItemWrapper {

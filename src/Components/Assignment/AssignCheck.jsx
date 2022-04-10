@@ -100,7 +100,7 @@ function AssignCheck(props) {
                 </span>
                 <div className="xs:w-full md:w-5/6 ml-20 content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
                   <AwesomeSlider
-                    className="Container3"
+                    className="check_Container"
                     mobileTouch={true}
                     organicArrows={true}
                     bullets={false}
@@ -130,7 +130,8 @@ function AssignCheck(props) {
                     </span>
                   </AwesomeSlider>
                   <div className=" xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500 mr-5">
-                    <label className="bg-blue-100 mb-5">
+                    <br />
+                    <label className="bg-blue-100 mb-5 mt-5">
                       &nbsp;입양 절차를 숙지했습니다&nbsp;
                       <input
                         type="checkbox"
@@ -154,7 +155,7 @@ function AssignCheck(props) {
                       <div className="xs:w-full md:w-5/6 ">
                         <div className="xs:w-full">
                           <AwesomeSlider
-                            className="Container"
+                            className="check_Container"
                             mobileTouch={true}
                             organicArrows={true}
                             bullets={false}

@@ -62,7 +62,7 @@ function AssignAnimalCheck() {
                       animal.image_url2 &&
                       animal.image_url1 ? (
                         <AwesomeSlider
-                          className="Container"
+                          className="check_Container"
                           mobileTouch={true}
                           organicArrows={true}
                           bullets={false}

@@ -4,9 +4,15 @@
   width: 600px;
 }
 
+.check_Container {
+  --content-background-color: transparent;
+  height: 700px;
+  width: 600px;
+}
+
 .Container3 {
   --content-background-color: transparent;
-  height: 800px;
+  height: 125px;
   width: 500px;
 }
 

@@ -97,8 +97,8 @@ function MainScreen({ activeCount, setActiveCount }) {
               }
               onWheel={(e) => wheel(e)}
             >
-              <div className="flex justify-center mt-40 ">
-                <div className="w-2/3">
+              <div className="flex justify-center mt-20">
+                <div className="w-2/3 h-full">
                   <Fame />
                 </div>
               </div>
