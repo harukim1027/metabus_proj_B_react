@@ -86,7 +86,7 @@ function InquiryList() {
 
             {/* 두번째 영역 */}
             <div className="rightBar3 inquiry_bar_right">
-              <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
+              <img src="/dog_yellow.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
         </div>
