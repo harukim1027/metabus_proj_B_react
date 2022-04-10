@@ -5,15 +5,7 @@ function SearchInfraMap() {
   const [info, setInfo] = useState();
   const [markers, setMarkers] = useState([]);
   const [map, setMap] = useState();
-  const [currentLoc, setCurrentLoc] = useState({
-    center: {
-      lat: 36.32754333444323,
-      lng: 127.44633210644454,
-    },
-    errMsg: null,
-    isLoading: true,
-    test: '왜 너야',
-  });
+  const [currentLoc, setCurrentLoc] = useState({});
   const [myLoc, setMyLoc] = useState({});
   const [addr, setAddr] = useState('');
   const [keyword, setKeyword] = useState('동물병원');
@@ -136,7 +128,7 @@ function SearchInfraMap() {
   useEffect(() => {
     if (!map) return;
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-  }, [map]);
+  }, [map, currentLoc]);
 
   return (
     <div>
@@ -190,10 +182,13 @@ function SearchInfraMap() {
           onCreate={(map) => {
             setMap(map);
           }}
-          // onTileLoaded={(map) => {
-          //   searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-          //   // console.log('dragend');
-          // }}
+          onTileLoaded={(map) => {
+            searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+            setMyLoc({
+              center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
+            });
+            // console.log('dragend');
+          }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
