@@ -49,9 +49,12 @@ function Ranking() {
     console.log(getSortedArr(userArr)[0][0]);
   return (
     <>
-      <h2 className="mb-20">
-        현재 입양자 중 다이어리 작성{' '}
-        <h2 className="text-xl font-bold text-red-400 inline">TOP3</h2> 입니다!
+      <h2 className="bg-white mb-20">
+        입양 다이어리 최다 작성자{' '}
+        <h2 className="text-xl font-extrabold text-red-400 inline bg-yellow-100">
+          TOP3
+        </h2>{' '}
+        입니다!
       </h2>
       {getSortedArr(userArr)[0] ? (
         <>
@@ -99,20 +102,28 @@ function Ranking() {
               )}
             </div>
           </div>
-          <div className=" relative flex justify-center -top-40 -z-10">
-            <img src="/123.png" alt="" style={{ width: 'auto' }} />
-          </div>
         </>
       ) : (
         <div className="my-auto">
-          <h2>아직 다이어리를 작성하신 분이 없습니다!</h2>
-          <h2>
+          <img
+            src="/imogi.png"
+            alt="놀란 얼굴"
+            style={{ width: 'auto' }}
+            className="mx-80"
+          />
+          <h2 className="text-2xl font-bold mb-10">
+            앗 ! 아직 다이어리를 작성하신 분이 없어요 ..
+          </h2>
+          <h2 className="mb-40">
             다이어리를 작성하고{' '}
-            <h2 className="text-xl font-semibold text-red-500">1위</h2>의 자리에
-            올라보세요!
+            <h2 className="text-2xl font-semibold text-red-500">1위</h2>의
+            자리에 올라보세요!
           </h2>
         </div>
-      )}
+      )}{' '}
+      <div className=" relative flex justify-center -top-40 -z-10">
+        <img src="/123.png" alt="" style={{ width: 'auto' }} />
+      </div>
     </>
   );
 }
