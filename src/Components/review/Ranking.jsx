@@ -65,7 +65,7 @@ function Ranking() {
               {getSortedArr(userArr)[1]?.[1]}
             </span>
             번 작성!
-            {reviewList && getSortedArr(userArr) && (
+            {reviewList && getSortedArr(userArr)[1] && (
               <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
             )}
           </div>
@@ -79,7 +79,7 @@ function Ranking() {
               {getSortedArr(userArr)[0]?.[1]}
             </span>
             번 작성!
-            {reviewList && getSortedArr(userArr) && (
+            {reviewList && getSortedArr(userArr)[0] && (
               <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
             )}
           </div>
@@ -93,7 +93,7 @@ function Ranking() {
               {getSortedArr(userArr)[2]?.[1]}
             </span>
             번 작성!
-            {reviewList && getSortedArr(userArr) && (
+            {reviewList && getSortedArr(userArr)[2] && (
               <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
             )}
           </div>
