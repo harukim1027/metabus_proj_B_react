@@ -1,11 +1,8 @@
 import { useApiAxios } from 'api/base';
-import LoadingIndicator from 'LoadingIndicator';
-import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import './SlideStyle.css';
 import './HallOfFame.css';
 import { useEffect, useState } from 'react';
-import ReviewSummary from './ReviewSummary';
 
 function Fame() {
   const [help, setHelp] = useState(false);
@@ -62,18 +59,22 @@ function Fame() {
             {/* 첫번째 영역 */}
             <div className="fame_pageTop2">
               <span className=" block tracking-wide text-gray-700 xs:text-sm md:text-base font-bold mb-2">
-                {help && (
-                  <div className="justify-center">
-                    <span>명예의 전당은 다이어리&nbsp;</span>
-                    <span
-                      className="bg-yellow-100 font-bold"
-                      style={{ 'text-decoration': 'underline' }}
-                    >
-                      글 작성 수
-                    </span>
-                    <span>로 랭킹이 정해집니다</span>
-                  </div>
-                )}
+                <div
+                  className={
+                    help
+                      ? 'justify-center opacity-100'
+                      : 'justify-center opacity-0'
+                  }
+                >
+                  <span>명예의 전당은 다이어리&nbsp;</span>
+                  <span
+                    className="bg-yellow-100 font-bold"
+                    style={{ 'text-decoration': 'underline' }}
+                  >
+                    글 작성 수
+                  </span>
+                  <span>로 랭킹이 정해집니다</span>
+                </div>
               </span>
               <div
                 className="leftBar2 fame_bar_left"
