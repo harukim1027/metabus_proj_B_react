@@ -1,17 +1,12 @@
-import '../../App.css';
-import './MainCrew.css';
-import { useEffect, useState } from 'react';
-import { useAuth } from 'contexts/AuthContext';
-import { toast } from 'react-toastify';
-import Alert from 'Components/review/Alert';
 import PageAllCenterMap from 'Pages/PageMap/PageAllCenterMap';
-import 'react-awesome-slider/dist/styles.css';
-import '../review/SlideStyle.css';
-
 import PageSearchInfraMap from 'Pages/PageMap/PageSearchInfraMap';
 import AwesomeSlider from 'react-awesome-slider';
 import Fame from 'Components/review/HallOfFame';
 import Ranking from 'Components/review/Ranking';
+import 'react-awesome-slider/dist/styles.css';
+import '../review/SlideStyle.css';
+import '../../App.css';
+import './MainCrew.css';
 
 function MainScreen({ activeCount, setActiveCount }) {
   // console.log(activeCount);
@@ -36,9 +31,7 @@ function MainScreen({ activeCount, setActiveCount }) {
   return (
     <>
       <div></div>
-      {/* 본문 시작 */}
       <div id="header_warp">
-        {/* <!-- //header_warp --> */}
         {/* <!-- 메인 --> */}
         <div>
           <div className="mainContents">

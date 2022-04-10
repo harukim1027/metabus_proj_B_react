@@ -109,7 +109,7 @@ function LostPetBoardList() {
               className="rightBar bar_right"
               style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
             >
-              <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
+              <img src="/dog_red.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ function LostPetBoardList() {
       </div>
       <div className="lost_list"></div>
       <div className="header flex flex-wrap justify-center">
-        <div className="lost_header mx-5 rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="lost_header mx-5 rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -258,7 +258,6 @@ function LostPetBoardList() {
           />
         </div>
       </div>
-      <div className="lost_list2 mb-10"></div>
     </>
   );
 }

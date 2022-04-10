@@ -82,16 +82,16 @@ function FindOwnerBoardList() {
     <>
       <div>
         <div className="sub_content">
-          <div className="pageTop2">
+          <div className="find_pageTop2">
             <div className="tit">
               <h2
-                className="bar_left"
+                className="find_bar_left"
                 style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 이 아이 주인 찾아요
               </h2>
               <p
-                className="bar_left"
+                className="find_bar_left"
                 style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
                 Finding Owner
@@ -99,20 +99,20 @@ function FindOwnerBoardList() {
             </div>
             {/* 첫번재 영역 */}
             <div
-              className="leftBar bar_left"
+              className="leftBar find_bar_left"
               style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
             ></div>
 
             {/* 두번째 영역 */}
             <div
-              className="rightBar bar_right"
+              className="rightBar find_bar_right"
               style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
             >
-              <img src="/dog_green.png" alt="" style={{ opacity: 1 }} />
+              <img src="/pet-hand_blue.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
         </div>
-        <div className="board_top_info3 :before">
+        <div className="find_board_top_info3 :before">
           <div className="info_desc">
             <p className="text-right">
               메타버스는 <br />
@@ -123,7 +123,7 @@ function FindOwnerBoardList() {
       </div>
       <div className="find_list"></div>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 notice_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 notice_header rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
@@ -257,7 +257,6 @@ function FindOwnerBoardList() {
           />
         </div>
       </div>
-      <div className="lost_list2 mb-10"></div>
     </>
   );
 }
