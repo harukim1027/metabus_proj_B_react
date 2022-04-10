@@ -594,20 +594,20 @@ function AssignmentForm({ handleDidSave }) {
                         <span className="ml-5  mb-2 after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-base font-bold">
                           만남 희망 날짜
                         </span>
-                        <p className="xs:text-sm md:text-base mx-5 text-gray-400 mb-2 mt-1">
+                        <p className="mt-5 xs:text-sm md:text-base mx-5 text-gray-400 mb-5 ">
                           센터 방문 날짜를 선택해주세요!
                         </p>
                         <input
                           type="date"
                           name="date_to_meet"
                           onChange={handleFieldChange}
-                          className="mx-5 appearance-none rounded-md bg-gray-100 focus:bg-white focus:border-gray-400 p-3 xs:w-2/3 xs:text-sm sm:w-1/2 sm:text-lg md:w-2/3 xl:w-3/4"
+                          className="mx-5 appearance-none rounded-md bg-gray-100 focus:bg-white focus:border-gray-400 p-3 w-full"
                         />
                         {saveErrorMessages.date_to_meet?.map(
                           (message, index) => (
                             <p
                               key={index}
-                              className="mb-3 xs:text-sm text-red-400 ml-3"
+                              className="mt-5 xs:text-sm text-red-400 ml-3"
                             >
                               ! 날짜를 다시 선택해주세요.
                             </p>
@@ -615,16 +615,15 @@ function AssignmentForm({ handleDidSave }) {
                         )}
                       </div>
                       {/* 신청버튼 */}
-                      <div className="flex  justify-between my-5">
-                        <button
-                          className="hover:scale-110 duration-500 sm:w-20 "
-                          readOnly
-                        >
-                          <img src="/assignicon2.png" alt="button"></img>
-                        </button>
-                      </div>
                     </div>
-
+                    <div className="mx-20 my-5">
+                      <button
+                        className="hover:scale-110 duration-500 sm:w-20 "
+                        readOnly
+                      >
+                        <img src="/assignicon2.png" alt="button"></img>
+                      </button>
+                    </div>
                     <div className=" xs:text-xs">
                       {saveLoading && (
                         <LoadingIndicator>저장 중...</LoadingIndicator>
