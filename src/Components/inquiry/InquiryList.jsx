@@ -66,73 +66,42 @@ function InquiryList() {
     }
   };
 
-  // // 스크롤 기능
-  // const [topLocation, setTopLocation] = useState(0);
-  // // console.log('topLocation: ', topLocation);
-  // useEffect(() => {
-  //   setTopLocation(document.querySelector('#topLoc').offsetTop);
-  // }, [inquiryList]);
-
-  // const gotoTop = () => {
-  //   // 클릭하면 스크롤이 위로 올라가는 함수
-  //   window.scrollTo({
-  //     top: topLocation,
-  //     behavior: 'smooth',
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   gotoTop();
-  // }, [inquiryList]);
-
   //-------------
 
   return (
     <>
       <div id="container">
-        <div id="contents">
-          <div className="sub_content">
-            <div className="pageTop">
-              <div className="tit">
-                <h2
-                  className="bar_left"
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  1:1 문의
-                </h2>
-                <p
-                  style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-                >
-                  Inquiry
-                </p>
-              </div>
-              {/* 첫번재 영역 */}
-              <div
-                className="leftBar3 bar_left"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              ></div>
-
-              {/* 두번째 영역 */}
-              <div
-                className="rightBar3 bar_right"
-                style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
-                <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
-              </div>
-            </div>
-          </div>
-          <div className="board_top_info3 :before">
-            <div className="info_desc">
-              <p className="text-right">
-                메타버스는 <br />
-                사지 않고 가족이 되는 문화를 만듭니다.
+        <div className="inquiry_sub_content">
+          <div className="inquiry_pageTop">
+            <div className="tit">
+              <h2 className="inquiry_bar_left" style={{ opacity: 1 }}>
+                1:1 문의
+              </h2>
+              <p className="inquiry_bar_left" style={{ opacity: 1 }}>
+                Inquiry
               </p>
             </div>
+            {/* 첫번재 영역 */}
+            <div className="leftBar3 inquiry_bar_left"></div>
+
+            {/* 두번째 영역 */}
+            <div className="rightBar3 inquiry_bar_right">
+              <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
+            </div>
+          </div>
+        </div>
+        <div className="inquiry_board_top_info :before">
+          <div className="info_desc">
+            <p className="text-right">
+              메타버스는 <br />
+              사지 않고 가족이 되는 문화를 만듭니다.
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="header flex flex-wrap justify-center" id="topLoc">
+      <div className="inquiry_list"></div>
+      <div className="header flex flex-wrap justify-center">
         <div className="mx-5 inquiry_header rounded-xl shadow-md overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <div className="flex xl:justify-end xs:justify-center">
             {loading && (
@@ -146,15 +115,12 @@ function InquiryList() {
               </>
             )}
           </div>
-          <div className="inquiry_list xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
+
           <br />
           <br />
 
           {/* 검색 필드 */}
           <div className="mb-6 mt-10">
-            <p className="xs:text-center xs:text-xxs md:text-base md:text-center xl:text-right md:mb-3 text-gray-500 ">
-              "번호, 등록번호, 신청자명, ID, 닉네임 중 검색"
-            </p>
             <div className="xs:flex-none xl:flex xl:justify-between">
               <div></div>
               <div className="xs:mt-5 xl:mt-0">
@@ -165,7 +131,7 @@ function InquiryList() {
                     onChange={getQuery}
                     onKeyPress={handleKeyPress}
                     className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
-                    placeholder="Search ... "
+                    placeholder="제목, 작성자를 검색하세요."
                   />
                   <button
                     onClick={handleBTNPress}
@@ -178,33 +144,6 @@ function InquiryList() {
               </div>
             </div>
           </div>
-
-          {/* search input */}
-          {/* <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 mr-2 text-gray-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-            <input
-              type="text"
-              name="Search"
-              onChange={getQuery}
-              onKeyPress={handleKeyPress}
-              placeholder="Search"
-              className="w-1/3 py-2 border-b-2 border-gray-400 outline-none focus:border-yellow-400"
-            />
-          </div>
-          <br /> */}
 
           <hr className="mb-3" />
 
@@ -322,7 +261,6 @@ function InquiryList() {
           />
         </div>
       </div>
-      <div className="inquiry_list2 xs:w-3/4 md:w-5/6 xl:w-7/8 mb-10"></div>
     </>
   );
 }
