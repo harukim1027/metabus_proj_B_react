@@ -6,9 +6,16 @@
 
 .check_Container {
   --content-background-color: transparent;
-  height: 700px;
-  width: 600px;
+  height: 650px;
+  width: 1000x;
 }
+.check_Container2 {
+  --content-background-color: transparent;
+  height: 800px;
+  width: 1000x;
+}
+
+
 
 .Container3 {
   --content-background-color: transparent;
