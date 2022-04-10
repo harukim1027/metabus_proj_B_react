@@ -27,7 +27,7 @@ function MyComments() {
   );
 
   const fetchComments = useCallback(
-    async (newPage = query) => {
+    async (newPage, newQuery = query) => {
       const params = {
         page: newPage,
         query: auth.userID,
@@ -48,6 +48,19 @@ function MyComments() {
     fetchComments(event.selected + 1);
   };
 
+  const getQuery = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleBTNPress = () => {
+    fetchComments(1, query);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      fetchComments(1, query);
+    }
+  };
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
   // console.log('topLocation: ', topLocation);

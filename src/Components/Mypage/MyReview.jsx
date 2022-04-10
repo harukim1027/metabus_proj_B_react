@@ -42,9 +42,6 @@ function MyReview() {
     moveCategory();
   }, [fieldValues]);
 
-  // 검색을 위한 초기값 설정
-  const [searchLocation, setSearchLocation] = useState('');
-
   const fetchReview = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
@@ -151,23 +148,6 @@ function MyReview() {
                       <option value="주인 찾습니다!">주인 찾습니다!</option>
                     </select>
                   </form>
-                </div>
-                <div className="flex justify-center xs:mt-5 xl:mt-0">
-                  <input
-                    type="text"
-                    name="query"
-                    onChange={getQuery}
-                    onKeyPress={handleKeyPress}
-                    className="rounded bg-gray-100 focus:outline-none focus:border-gray-400 xs:w-1/2 md:w-72 text-sm px-3 py-2 mr-4 border-2"
-                    placeholder="제목, 작성자 ID를 검색하세요."
-                  />
-                  <button
-                    onClick={handleBTNPress}
-                    className="rounded bg-purple-500 hover:bg-purple-700 border-purple-500 hover:border-purple-700 md:text-xl  xs:text-md text-white md:w-24 xs:w-16 px-3 border-2"
-                    readOnly
-                  >
-                    검색
-                  </button>
                 </div>
               </div>
             </div>
