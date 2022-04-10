@@ -189,6 +189,7 @@
   animation-direction: normal;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+  font-weight: 300;
 }
 
 @keyframes barL_ani {

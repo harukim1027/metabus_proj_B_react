@@ -85,10 +85,10 @@ function FindOwnerBoardList() {
           <div className="find_pageTop2">
             <div className="tit">
               <h2
-                className="find_bar_left"
+                className="find_bar_left font-extrabold "
                 style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
               >
-                이 아이 주인 찾아요
+                이 아이, 주인 찾아요 🙀
               </h2>
               <p
                 className="find_bar_left"
