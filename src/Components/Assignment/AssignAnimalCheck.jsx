@@ -1,4 +1,5 @@
 import { useApiAxios } from 'api/base';
+import NewNav from 'Components/Main/NewNav';
 import { useAuth } from 'contexts/AuthContext';
 import { useEffect } from 'react';
 import AwesomeSlider from 'react-awesome-slider';
@@ -43,7 +44,7 @@ function AssignAnimalCheck() {
   return (
     <>
       <br />
-
+      <NewNav />
       <h2 className="text-base text-blue-900 my-auto text-center font-semibold">
         {' '}
         🐶&nbsp; 동물의 상세 정보를 확인하시고 입양 의사를 결정해주세요.&nbsp;

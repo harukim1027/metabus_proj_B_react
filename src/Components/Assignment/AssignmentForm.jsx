@@ -327,8 +327,11 @@ function AssignmentForm({ handleDidSave }) {
             <hr />
             {fieldValues.animal && (
               <>
-                <p className="text-center text-blue-900 font-bold mt-10 text-xl">
-                  METABUS 입양 신청서
+                <p className="text-center text-black font-extrabold mt-10 text-2xl">
+                  [ METABUS 입양 신청서 ]
+                </p>
+                <p className="text-center text-gray-400 font-bold  text-base">
+                  꼭 ! 신중하게 입양 신청을 해주세요!
                 </p>
               </>
             )}

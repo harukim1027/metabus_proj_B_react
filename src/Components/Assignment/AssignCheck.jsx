@@ -94,11 +94,11 @@ function AssignCheck(props) {
               <hr />
               <br />
 
-              <div className="w-full  ">
+              <div className="mx-20 w-full  ">
                 <span className="mb-10 xs:w-full  after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold ">
                   입양 절차
                 </span>
-                <div className="xs:w-full  content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
+                <div className="mx-20 xs:w-full  content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
                   <AwesomeSlider
                     className="check_Container"
                     mobileTouch={true}
