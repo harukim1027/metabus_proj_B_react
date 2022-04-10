@@ -70,7 +70,7 @@ function InquiryList() {
 
   return (
     <>
-      <div id="container">
+      <div>
         <div className="inquiry_sub_content">
           <div className="inquiry_pageTop">
             <div className="tit">
