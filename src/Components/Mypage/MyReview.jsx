@@ -4,6 +4,9 @@ import { useEffect, useState, useCallback } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import ReactPaginate from 'react-paginate';
 import LoadingIndicator from 'LoadingIndicator';
+import useFieldValues from 'hooks/useFieldValues';
+
+const INIT_FIELD_VALUES = { category: '입양 다이어리' };
 
 function MyReview() {
   const { auth } = useAuth();
@@ -25,6 +28,19 @@ function MyReview() {
       manual: true,
     },
   );
+
+  const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
+
+  const moveCategory = () => {
+    fieldValues.category === '입양 다이어리' && navigate(`/mypage/myposts`);
+    fieldValues.category === '잃어버렸어요!' &&
+      navigate(`/mypage/lostpetboard/`);
+    fieldValues.category === '주인 찾습니다!' && navigate(`/mypage/findboard/`);
+  };
+
+  useEffect(() => {
+    moveCategory();
+  }, [fieldValues]);
 
   const fetchReview = useCallback(
     async (newPage, newQuery = query) => {
@@ -48,6 +64,20 @@ function MyReview() {
     fetchReview(event.selected + 1);
   };
 
+  const getQuery = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleBTNPress = () => {
+    fetchReview(1, query);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      fetchReview(1, query);
+    }
+  };
+
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
   // console.log('topLocation: ', topLocation);
@@ -66,6 +96,7 @@ function MyReview() {
   useEffect(() => {
     gotoTop();
   }, [reviewList]);
+  console.log('fieldValues', fieldValues);
 
   //-------------
 
@@ -96,6 +127,34 @@ function MyReview() {
               조회에 실패했습니다.조회하고자 하는 정보를 다시 확인해주세요.
             </div>
           )}
+
+          <div className="mb-6 mt-10">
+            <div>
+              <div className=" xs:flex-none xl:flex xl:justify-between">
+                <div>
+                  <form
+                    onSubmit={() => moveCategory()}
+                    className="flex justify-center"
+                  >
+                    <select
+                      name="category"
+                      value={fieldValues.category}
+                      onChange={handleFieldChange}
+                      className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
+                      defaultValue="입양 다이어리"
+                    >
+                      <option value="입양 다이어리">입양 다이어리</option>
+                      <option value="잃어버렸어요!">잃어버렸어요!</option>
+                      <option value="주인 찾습니다!">주인 찾습니다!</option>
+                    </select>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr className="mb-3" />
+
           <div className="mb-5 overflow-hidden">
             <table className="mt-3 mb-5 mr-5 border text-center min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
