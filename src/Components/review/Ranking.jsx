@@ -53,50 +53,52 @@ function Ranking() {
         현재 입양자 중 다이어리 작성{' '}
         <h2 className="text-xl font-bold text-red-400 inline">TOP3</h2> 입니다!
       </h2>
-      <div className="flex justify-center mx-20">
-        <div className="mt-24">
-          2등{' '}
-          <span className="text-blue-600 text-xl font-semibold">
-            {getSortedArr(userArr)[1]?.[0]}
-          </span>
-          님! 총{' '}
-          <span className="text-red-600 text-xl font-semibold">
-            {getSortedArr(userArr)[1]?.[1]}
-          </span>
-          번 작성!
-          {reviewList && getSortedArr(userArr) && (
-            <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
-          )}
+      {reviewList && (
+        <div className="flex justify-center mx-20">
+          <div className="mt-24">
+            2등{' '}
+            <span className="text-blue-600 text-xl font-semibold">
+              {getSortedArr(userArr)[1]?.[0]}
+            </span>
+            님! 총{' '}
+            <span className="text-red-600 text-xl font-semibold">
+              {getSortedArr(userArr)[1]?.[1]}
+            </span>
+            번 작성!
+            {reviewList && getSortedArr(userArr) && (
+              <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
+            )}
+          </div>
+          <div className="">
+            1등{' '}
+            <span className="text-blue-600 text-xl font-semibold">
+              {getSortedArr(userArr)[0]?.[0]}
+            </span>
+            님! 총{' '}
+            <span className="text-red-600 text-xl font-semibold">
+              {getSortedArr(userArr)[0]?.[1]}
+            </span>
+            번 작성!
+            {reviewList && getSortedArr(userArr) && (
+              <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
+            )}
+          </div>
+          <div className="mt-32">
+            3등{' '}
+            <span className="text-blue-600 text-xl font-semibold">
+              {getSortedArr(userArr)[2]?.[0]}
+            </span>
+            님! 총
+            <span className="text-red-600 text-xl font-semibold">
+              {getSortedArr(userArr)[2]?.[1]}
+            </span>
+            번 작성!
+            {reviewList && getSortedArr(userArr) && (
+              <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
+            )}
+          </div>
         </div>
-        <div className="">
-          1등{' '}
-          <span className="text-blue-600 text-xl font-semibold">
-            {getSortedArr(userArr)[0]?.[0]}
-          </span>
-          님! 총{' '}
-          <span className="text-red-600 text-xl font-semibold">
-            {getSortedArr(userArr)[0]?.[1]}
-          </span>
-          번 작성!
-          {reviewList && getSortedArr(userArr) && (
-            <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
-          )}
-        </div>
-        <div className="mt-32">
-          3등{' '}
-          <span className="text-blue-600 text-xl font-semibold">
-            {getSortedArr(userArr)[2]?.[0]}
-          </span>
-          님! 총
-          <span className="text-red-600 text-xl font-semibold">
-            {getSortedArr(userArr)[2]?.[1]}
-          </span>
-          번 작성!
-          {reviewList && getSortedArr(userArr) && (
-            <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
-          )}
-        </div>
-      </div>
+      )}
       <div className=" relative flex justify-center bottom-44 -z-10">
         <img src="/123.png" alt="" style={{ width: 'auto' }} />
       </div>
