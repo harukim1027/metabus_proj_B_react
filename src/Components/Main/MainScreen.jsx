@@ -99,7 +99,8 @@ function MainScreen({ activeCount, setActiveCount }) {
                 <div className="flex flex-col justify-center h-full">
                   <div className="flex justify-center h-full">
                     <AwesomeSlider
-                      className="Container w-11/12 h-5/6"
+                      className="Container w-11/12"
+                      style={{ height: 'calc(100vh - 100px)' }}
                       mobileTouch={true}
                       organicArrows={true}
                       bullets={false}

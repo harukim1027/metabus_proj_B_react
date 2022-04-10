@@ -1,5 +1,6 @@
 import { useApiAxios } from 'api/base';
 import { useEffect, useState } from 'react';
+import ReviewSummaryMain from './ReviewSummaryMain';
 
 function Ranking() {
   const [{ data: reviewList, loading, error }, refetch] = useApiAxios(
@@ -14,7 +15,7 @@ function Ranking() {
 
   // 1. userID 정렬
   const userArr = reviewList?.map((userData) => {
-    return userData.user?.nickname;
+    return userData.user?.userID;
   });
   function getSortedArr(array) {
     // 2. 출연 빈도
@@ -43,10 +44,17 @@ function Ranking() {
     refetch();
   }, []);
 
+  reviewList &&
+    getSortedArr(userArr)[0] &&
+    console.log(getSortedArr(userArr)[0][0]);
   return (
     <>
-      <div className="flex justify-center">
-        <div className="">
+      <h2 className="mb-20">
+        현재 입양자 중 다이어리 작성{' '}
+        <h2 className="text-xl font-bold text-red-400 inline">TOP3</h2> 입니다!
+      </h2>
+      <div className="flex justify-center mx-20">
+        <div className="mt-24">
           2등{' '}
           <span className="text-blue-600 text-xl font-semibold">
             {getSortedArr(userArr)[1]?.[0]}
@@ -56,8 +64,11 @@ function Ranking() {
             {getSortedArr(userArr)[1]?.[1]}
           </span>
           번 작성!
+          {reviewList && getSortedArr(userArr) && (
+            <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
+          )}
         </div>
-        <div className="mx-20">
+        <div className="">
           1등{' '}
           <span className="text-blue-600 text-xl font-semibold">
             {getSortedArr(userArr)[0]?.[0]}
@@ -66,9 +77,12 @@ function Ranking() {
           <span className="text-red-600 text-xl font-semibold">
             {getSortedArr(userArr)[0]?.[1]}
           </span>
-          번 작성!{' '}
+          번 작성!
+          {reviewList && getSortedArr(userArr) && (
+            <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
+          )}
         </div>
-        <div className="">
+        <div className="mt-32">
           3등{' '}
           <span className="text-blue-600 text-xl font-semibold">
             {getSortedArr(userArr)[2]?.[0]}
@@ -78,10 +92,13 @@ function Ranking() {
             {getSortedArr(userArr)[2]?.[1]}
           </span>
           번 작성!
+          {reviewList && getSortedArr(userArr) && (
+            <ReviewSummaryMain userID={getSortedArr(userArr)[2][0]} />
+          )}
         </div>
       </div>
-      <div className="flex justify-center">
-        <img src="/123.png" alt="" style={{ width: 'calc(100vw - 200px)' }} />
+      <div className=" relative flex justify-center bottom-44 -z-10">
+        <img src="/123.png" alt="" style={{ width: 'auto' }} />
       </div>
     </>
   );
