@@ -103,9 +103,16 @@ function ReviewDetail({ reviewId }) {
                   </h1>
                   <hr className="mt-3 mb-3" />
 
+                  <div className="text-right mb-5">
+                    글쓴이 :{' '}
+                    <span className="font-semibold">
+                      {review.user.nickname}
+                    </span>
+                  </div>
+
                   {/* 입양한 동물 정보 박스 */}
                   <div className="flex justify-center">
-                    <div className="inline-block rounded-md shadow-md overflow-hidden mx-4 my-4 w-96 h-full">
+                    <div className="inline-block rounded-md shadow-md overflow-hidden mx-4 my-4 w-96 h-full mb-5 py-2 px-3">
                       <div className="sm:flex sm:justify-center">
                         <div className="overflow-hidden">
                           <img
@@ -147,19 +154,18 @@ function ReviewDetail({ reviewId }) {
                   </div>
                   <br />
 
-                  <div>
+                  <div className="border-2 rounded-md mb-5 py-2 px-3">
                     {review.review_image?.map((image) => (
                       <div className="h-2/3 overflow-hidden">
                         <img src={image.image} alt="" />
                       </div>
                     ))}
+                    {/*  */}
+                    <h2 className="sm:col-span-2 mb-3 max-w-2xl text-lg text-gray-900 whitespace-pre-wrap mt-10">
+                      {review.content}
+                    </h2>{' '}
                   </div>
 
-                  {/*  */}
-
-                  <h2 className="sm:mt-0 sm:col-span-2 mt-2 mb-3 max-w-2xl text-lg text-gray-900 whitespace-pre-wrap">
-                    {review.content}
-                  </h2>
                   <br />
                   <hr className="mt-3 mb-3" />
 

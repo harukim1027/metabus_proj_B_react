@@ -110,7 +110,8 @@ function MarkLocationMap({ location }) {
     console.log('myLoc: ', myLoc);
   }, [myLoc]);
   return (
-    <div>
+    <div className="border-2 p-2 rounded-lg">
+      <h2 className="text-center text-xl font-semibold mb-2">등록된 위치</h2>
       {myLoc.center && markedLoc.center && (
         <Map
           center={mapCenter === 1 ? markedLoc.center : myLoc.center}
@@ -125,7 +126,6 @@ function MarkLocationMap({ location }) {
             });
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
           }}
-          className="mt-10"
         >
           {/* 현위치 마커 */}
           {!currentLoc.isLoading && (
@@ -160,7 +160,7 @@ function MarkLocationMap({ location }) {
             }}
           >
             <button
-              className="p-2 bg-green-300 rounded-lg mr-4"
+              className="p-2 hover:bg-red-300 rounded-lg mr-4 duration-150"
               onClick={() => {
                 setMyLoc(currentLoc);
                 setMapCenter(2);
@@ -169,7 +169,7 @@ function MarkLocationMap({ location }) {
               🚩 현위치 보기
             </button>
             <button
-              className="p-2 bg-green-300 rounded-lg mr-4"
+              className="p-2 hover:bg-red-300 rounded-lg mr-4 duration-150"
               onClick={() => {
                 setMapCenter(1);
               }}

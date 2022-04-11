@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 function Alert({ userID, reviewList }) {
   const date1 = new Date();
-  const vdate = date1.setDate(date1.getDate() + 40);
+  const vdate = date1.setDate(date1.getDate() - 30);
   const date2 = new Date(
     reviewList
       ?.filter((review) => review.user.userID === userID)

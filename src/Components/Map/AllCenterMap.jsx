@@ -259,7 +259,7 @@ function AllCenterMap({ centersData, ismain }) {
               </div>
             </MapMarker>
           )}
-          <div className="relative -top-14 z-50 flex justify-center">
+          <div className="relative -top-16 z-50 flex justify-center">
             {!ismain && (
               <button
                 className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg m-2 duration-150"
@@ -269,7 +269,7 @@ function AllCenterMap({ centersData, ismain }) {
               </button>
             )}
             <button
-              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50"
+              className="text-lg bg-white hover:text-white hover:bg-blue-500 p-2 rounded-lg duration-150 z-50 m-2"
               onClick={() =>
                 setMyLoc((prev) => ({
                   ...prev,
