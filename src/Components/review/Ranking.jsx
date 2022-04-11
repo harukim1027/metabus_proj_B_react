@@ -1,4 +1,5 @@
 import { useApiAxios } from 'api/base';
+import autoprefixer from 'autoprefixer';
 import { useEffect, useState } from 'react';
 import ReviewSummaryMain from './ReviewSummaryMain';
 
@@ -59,7 +60,7 @@ function Ranking() {
       {getSortedArr(userArr)[0] ? (
         <>
           <div className="flex justify-center mx-20">
-            <div className="mt-24">
+            <div className="mt-24 w-56 mb-10">
               2등{' '}
               <span className="text-blue-600 text-xl font-semibold">
                 {getSortedArr(userArr)[1]?.[0]}
@@ -73,7 +74,7 @@ function Ranking() {
                 <ReviewSummaryMain userID={getSortedArr(userArr)[1][0]} />
               )}
             </div>
-            <div className="">
+            <div className=" w-56 mb-10">
               1등{' '}
               <span className="text-blue-600 text-xl font-semibold">
                 {getSortedArr(userArr)[0]?.[0]}
@@ -87,7 +88,7 @@ function Ranking() {
                 <ReviewSummaryMain userID={getSortedArr(userArr)[0][0]} />
               )}
             </div>
-            <div className="mt-32">
+            <div className="mt-32 w-56 mb-10">
               3등{' '}
               <span className="text-blue-600 text-xl font-semibold">
                 {getSortedArr(userArr)[2]?.[0]}
@@ -121,7 +122,14 @@ function Ranking() {
           </h2>
         </div>
       )}{' '}
-      <div className=" relative flex justify-center -top-20 -z-10">
+      <div
+        className="flex justify-center -z-10"
+        style={{
+          position: 'relative',
+          bottom: '200px',
+          margin: 'auto 0',
+        }}
+      >
         <img src="/123.png" alt="" style={{ width: 'auto' }} />
       </div>
     </>
