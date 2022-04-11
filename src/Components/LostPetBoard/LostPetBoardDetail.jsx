@@ -177,54 +177,78 @@ function LostPetBoardDetail({ lostpetboardId }) {
                   </div>
 
                   <hr className="mt-3 mb-3" />
-                  <h2 className="text-lg font-semibold">
-                    {lostpetboard.content}
-                  </h2>
-                  <div className="flex justify-center">
-                    {lostpetboard.board_image && (
-                      <img src={lostpetboard.board_image?.[0]?.image} alt="" />
-                    )}
-                  </div>
-                  <div className="flex justify-center">
-                    {lostpetboard.board_image && (
-                      <img src={lostpetboard.board_image?.[1]?.image} alt="" />
-                    )}
-                  </div>
-                  <div className="flex justify-center">
-                    {lostpetboard.board_image && (
-                      <img src={lostpetboard.board_image?.[2]?.image} alt="" />
-                    )}
-                  </div>
-                  <div className="flex justify-center">
-                    {lostpetboard.board_image && (
-                      <img src={lostpetboard.board_image?.[3]?.image} alt="" />
-                    )}
-                  </div>
-                  <div className="flex justify-center">
-                    {lostpetboard.board_image && (
-                      <img src={lostpetboard.board_image?.[4]?.image} alt="" />
-                    )}
-                  </div>
 
-                  <ul>
-                    <li>동물이름 : {lostpetboard?.pet_name}</li>
-                    <li>동물종류 : {lostpetboard?.animal_type}</li>
-                    <li>
-                      품종 :{' '}
-                      {lostpetboard?.animal_type === '개'
-                        ? lostpetboard?.dog_breed
-                        : lostpetboard?.cat_breed}
-                    </li>
-                    <li>
-                      성별 : {''}
-                      {lostpetboard?.sex}
-                    </li>
-                    <li>인식표 : {lostpetboard?.animal_tag}</li>
-                    <li>주인 연락처 : {lostpetboard?.user.phone_number}</li>
-                    <li>유실 시각 : {lostpetboard?.lost_time}</li>
-                    <li>유실 장소 : {lostpetboard?.lost_location}</li>
-                  </ul>
-
+                  <div className="text-right mb-5">
+                    글쓴이 :{' '}
+                    <span className="font-semibold">
+                      {lostpetboard.user.nickname}
+                    </span>
+                  </div>
+                  <div className="border-2 p-2 rounded-md mb-5">
+                    <h2 className="text-lg font-semibold mb-10 ml-5">
+                      {lostpetboard.content}
+                    </h2>
+                    <div className="flex justify-center">
+                      {lostpetboard.board_image && (
+                        <img
+                          src={lostpetboard.board_image?.[0]?.image}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div className="flex justify-center">
+                      {lostpetboard.board_image && (
+                        <img
+                          src={lostpetboard.board_image?.[1]?.image}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div className="flex justify-center">
+                      {lostpetboard.board_image && (
+                        <img
+                          src={lostpetboard.board_image?.[2]?.image}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div className="flex justify-center">
+                      {lostpetboard.board_image && (
+                        <img
+                          src={lostpetboard.board_image?.[3]?.image}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div className="flex justify-center">
+                      {lostpetboard.board_image && (
+                        <img
+                          src={lostpetboard.board_image?.[4]?.image}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <div className="border-2 rounded-md mb-5 py-2 px-3">
+                    <ul>
+                      <li>동물이름 : {lostpetboard?.pet_name}</li>
+                      <li>동물종류 : {lostpetboard?.animal_type}</li>
+                      <li>
+                        품종 :{' '}
+                        {lostpetboard?.animal_type === '개'
+                          ? lostpetboard?.dog_breed
+                          : lostpetboard?.cat_breed}
+                      </li>
+                      <li>
+                        성별 : {''}
+                        {lostpetboard?.sex}
+                      </li>
+                      <li>인식표 : {lostpetboard?.animal_tag}</li>
+                      <li>주인 연락처 : {lostpetboard?.user.phone_number}</li>
+                      <li>유실 시각 : {lostpetboard?.lost_time}</li>
+                      <li>유실 장소 : {lostpetboard?.lost_location}</li>
+                    </ul>
+                  </div>
                   <div>
                     <MarkLocationMap location={lostpetboard?.lost_location} />
                   </div>
