@@ -336,7 +336,10 @@ function AssignmentForm({ handleDidSave }) {
               </>
             )}
 
-            <form className="assignments_header " onSubmit={handleSubmit}>
+            <form
+              className="assignments_header "
+              onSubmit={(e) => e.preventDefault()}
+            >
               <AwesomeSlider
                 className="check_Container"
                 mobileTouch={true}
@@ -623,6 +626,7 @@ function AssignmentForm({ handleDidSave }) {
                       <button
                         className="hover:scale-110 duration-500 sm:w-20 "
                         readOnly
+                        onClick={handleSubmit}
                       >
                         <img src="/assignicon2.png" alt="button"></img>
                       </button>
