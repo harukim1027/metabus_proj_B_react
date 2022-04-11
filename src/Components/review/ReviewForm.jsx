@@ -140,12 +140,22 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
         formData.append(name, value);
       }
     });
-    saveRequest({
-      data: formData,
-    }).then((response) => {
-      const savedPost = response.data;
-      if (handleDidSave) handleDidSave(savedPost);
-    });
+    if (
+      fieldValues.title !== '' &&
+      fieldValues.content !== '' &&
+      fieldValues.adoptassignment
+    ) {
+      saveRequest({
+        data: formData,
+      }).then((response) => {
+        console.log('response: ', response);
+        const savedPost = response.data.review_no;
+        if (handleDidSave) handleDidSave(savedPost);
+      });
+    } else {
+      window.alert('리뷰하실 동물을 선택하고, 제목과 본문을 입력해주세요.');
+      e.stop();
+    }
   };
   console.log(saveErrorMessages);
 
@@ -490,7 +500,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
                   />
                   {saveErrorMessages.title?.map((message, index) => (
                     <p key={index} className="text-base text-red-400">
-                      제목을 한글로 입력해주세요.
+                      {message}
                     </p>
                   ))}
                 </div>

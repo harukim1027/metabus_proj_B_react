@@ -28,9 +28,7 @@ function PageReviewForm() {
         review={review}
         reviewId={reviewId}
         refetchReview={refetchReview}
-        handleDidSave={(savedPost) =>
-          navigate(`/review/${savedPost.review_no}/`)
-        }
+        handleDidSave={(savedPost) => navigate(`/review/${savedPost}/`)}
       />
     </>
   );
