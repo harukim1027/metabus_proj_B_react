@@ -190,7 +190,7 @@ function MyLostPetComments() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {commentList && (
                   <>
-                    {commentList
+                    {commentList.results
                       .filter((a) => a.user === auth.userID)
                       .map((lostpetcomments) => (
                         <tr
