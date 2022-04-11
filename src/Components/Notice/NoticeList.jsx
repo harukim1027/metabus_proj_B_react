@@ -133,8 +133,7 @@ function NoticeList() {
 
           {/* 검색 필드 */}
           <div className="mb-6 mt-10">
-            <div className="xs:flex-none xl:flex xl:justify-between">
-              <div></div>
+            <div className="xs:flex-none xl:flex">
               <div className="xs:mt-5 xl:mt-0">
                 <div className="flex justify-center">
                   <input

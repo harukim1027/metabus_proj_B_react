@@ -43,10 +43,10 @@ const Sidebar = () => {
     <>
       <div
         ref={side}
-        className=" sidebar absolute"
+        className=" sidebar fixed"
         style={{
           width: '200px',
-          height: '380px',
+          height: '410px',
           transform: `translatex(${-xPosition}px)`,
         }}
       >
