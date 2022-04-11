@@ -67,10 +67,10 @@ function AssignCheck(props) {
   //-------------
 
   return (
-    <>
-      <div className="header mx-20 " id="topLoc">
-        <div className="mx-20 content-center overflow-hidden md:px-10 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="mx-20 assignments_header rounded-xl  w-full">
+    <div className="mx-60 justify-center">
+      <div className="header" id="topLoc">
+        <div className="content-center overflow-hidden pt-5 pb-10 my-10 w-full">
+          <div className="assignments_header rounded-xl  w-full">
             <main className="" role="main">
               <h1 className="mt-5 font-semibold text-2xl text-center">
                 🐼 크루 신청하기
@@ -94,18 +94,18 @@ function AssignCheck(props) {
               <hr />
               <br />
 
-              <div className="mx-20 w-full  ">
+              <div className="w-full  ">
                 <span className="mb-10 xs:w-full  after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-black xs:text-xl xs:ml-10 md:text-2xl font-extrabold ">
                   입양 절차
                 </span>
-                <div className="mx-20 xs:w-full  content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
+                <div className="xs:w-full  content-center xs:text-base md:text-lg lg:text-xl text-right font-semibold text-gray-500">
                   <AwesomeSlider
                     className="check_Container"
                     mobileTouch={true}
                     organicArrows={false}
                     bullets={true}
                   >
-                    <span className="mx-20 font-semibold italic ">
+                    <span className="mx-20 font-semibold italic flex justify-center">
                       <img
                         src="/assigncheck1.png"
                         alt="assigncheck1"
@@ -113,7 +113,7 @@ function AssignCheck(props) {
                       />
                     </span>
 
-                    <span className="mx-20 font-semibold italic ">
+                    <span className="mx-20 font-semibold italic flex justify-center ">
                       <img
                         src="/assigncheck2.png"
                         alt="assigncheck2"
@@ -121,7 +121,7 @@ function AssignCheck(props) {
                       />
                     </span>
 
-                    <span className="mx-20 font-semibold italic ">
+                    <span className="mx-20 font-semibold italic flex justify-center ">
                       <img
                         src="/assigncheck3.png"
                         alt="assigncheck"
@@ -262,7 +262,7 @@ function AssignCheck(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

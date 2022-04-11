@@ -345,7 +345,7 @@ function AssignmentForm({ handleDidSave }) {
               <AwesomeSlider
                 className="check_Container"
                 mobileTouch={true}
-                organicArrows={false}
+                organicArrows={true}
                 bullets={true}
               >
                 {/* 첫번째 form 부분 */}
