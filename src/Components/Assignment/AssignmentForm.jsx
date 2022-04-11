@@ -141,6 +141,8 @@ function AssignmentForm({ handleDidSave }) {
     });
   };
 
+  // console.log('saveErrorMessages: ', saveErrorMessages && saveErrorMessages);
+
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
@@ -595,19 +597,19 @@ function AssignmentForm({ handleDidSave }) {
                     </span>
                     <hr />
                     {/* 만남 희망 날짜 */}
-                    <div className="my-5 w-full flex justify-between">
+                    <div className="my-5 w-full">
                       <div className="relative">
                         <span className="ml-5  mb-2 after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-gray-700 xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-base font-bold">
                           만남 희망 날짜
                         </span>
-                        <p className="mt-5 xs:text-sm md:text-base mx-5 text-gray-400 mb-5 ">
+                        <p className="mt-5 xs:text-sm md:text-base ml-5 text-gray-400 mb-5 ">
                           센터 방문 날짜를 선택해주세요!
                         </p>
                         <input
                           type="date"
                           name="date_to_meet"
                           onChange={handleFieldChange}
-                          className="mx-5 appearance-none rounded-md bg-gray-100 focus:bg-white focus:border-gray-400 p-3 w-full"
+                          className="mx-auto appearance-none rounded-md bg-gray-100 focus:bg-white focus:border-gray-400 p-3 w-full"
                         />
                         {saveErrorMessages.date_to_meet?.map(
                           (message, index) => (
@@ -615,10 +617,13 @@ function AssignmentForm({ handleDidSave }) {
                               key={index}
                               className="mt-5 xs:text-sm text-red-400 ml-3"
                             >
-                              ! 날짜를 다시 선택해주세요.
+                              {message}
                             </p>
                           ),
                         )}
+                        <p className="text-sm text-red-500 ml-5">
+                          미래의 날짜를 선택해주세요.
+                        </p>
                       </div>
                       {/* 신청버튼 */}
                     </div>
