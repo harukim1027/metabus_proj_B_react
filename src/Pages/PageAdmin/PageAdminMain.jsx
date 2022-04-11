@@ -11,7 +11,7 @@ function PageAdminMain() {
       </div>
       <div className="flex justify-center">
         <button
-          className="mt-10 mb-10 p-2 text-xl font-semibold hover:bg-gray-700 hover:text-white rounded-xl"
+          className="mt-10 mb-10 p-2 text-xl shadow-md bg-slate-200 font-semibold hover:bg-gray-700 hover:text-white rounded-xl"
           onClick={() => navigate('/')}
         >
           메인화면으로

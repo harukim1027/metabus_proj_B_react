@@ -89,7 +89,7 @@ function UserManagementIndex() {
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="bg-white rounded-xl shadow-md px-20 pt-5 pb-10 my-10 w-2/3">
+        <div className="bg-white rounded-xl px-20 pt-5 pb-10 my-10 w-2/3">
           <blockquote className="mt-5 text-6xl mb-3 font-semibold italic text-center text-slate-900">
             <span className="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
               <span className="relative text-white">" 회원 관리 "</span>

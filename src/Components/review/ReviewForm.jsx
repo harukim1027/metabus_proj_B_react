@@ -147,6 +147,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
       if (handleDidSave) handleDidSave(savedPost);
     });
   };
+  console.log(saveErrorMessages);
 
   // 이미지 추가 (수정시)
   const handleAddImage = (e) => {
