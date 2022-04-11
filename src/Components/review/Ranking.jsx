@@ -121,7 +121,7 @@ function Ranking() {
           </h2>
         </div>
       )}{' '}
-      <div className=" relative flex justify-center -top-40 -z-10">
+      <div className=" relative flex justify-center -top-20 -z-10">
         <img src="/123.png" alt="" style={{ width: 'auto' }} />
       </div>
     </>
