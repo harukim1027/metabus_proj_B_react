@@ -5,12 +5,10 @@ import { useAuth } from 'contexts/AuthContext';
 import ReactPaginate from 'react-paginate';
 import LoadingIndicator from 'LoadingIndicator';
 import useFieldValues from 'hooks/useFieldValues';
-import NewNav from 'Components/Main/NewNav';
-import Sidebar from 'Components/Mypage/Sidebar';
 
-const INIT_FIELD_VALUES = { category: '주인 찾습니다!' };
+const INIT_FIELD_VALUES = { category: '입양 다이어리' };
 
-function MyFindBoard() {
+function MyComments() {
   const { auth } = useAuth();
   const navigate = useNavigate();
   // 페이징
@@ -21,36 +19,34 @@ function MyFindBoard() {
   const itemsPerPage = 5;
 
   // get 요청
-  const [{ data: findBoardList, loading, error }, refetch] = useApiAxios(
+  const [{ data: commentList, loading, error }, refetch] = useApiAxios(
     {
-      url: `/find_owner_board/api/board/`,
+      url: `/adopt_review/api/comments/`,
       method: 'GET',
     },
     {
       manual: true,
     },
   );
-
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
 
   const moveCategory = () => {
-    fieldValues.category === '입양 다이어리' && navigate(`/mypage/myposts`);
+    fieldValues.category === '입양 다이어리' && navigate(`/mypage/mycomments`);
     fieldValues.category === '잃어버렸어요!' &&
-      navigate(`/mypage/lostpetboard/`);
-    fieldValues.category === '주인 찾습니다!' && navigate(`/mypage/findboard/`);
+      navigate(`/mypage/lostpetcomments/`);
+    fieldValues.category === '주인 찾습니다!' &&
+      navigate(`/mypage/findboardcomments/`);
   };
 
   useEffect(() => {
     moveCategory();
   }, [fieldValues]);
 
-  const fetchBoard = useCallback(
+  const fetchComments = useCallback(
     async (newPage, newQuery = query) => {
       const params = {
         page: newPage,
         query: auth.userID,
-        category:
-          fieldValues.category === '입양 다이어리' ? '' : fieldValues.category,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
@@ -61,11 +57,11 @@ function MyFindBoard() {
   );
 
   useEffect(() => {
-    fetchBoard(1);
+    fetchComments(1);
   }, []);
 
   const handlePageClick = (event) => {
-    fetchBoard(event.selected + 1);
+    fetchComments(event.selected + 1);
   };
 
   const getQuery = (e) => {
@@ -73,21 +69,20 @@ function MyFindBoard() {
   };
 
   const handleBTNPress = () => {
-    fetchBoard(1, query);
+    fetchComments(1, query);
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      fetchBoard(1, query);
+      fetchComments(1, query);
     }
   };
-
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
   // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [findBoardList]);
+  }, [commentList]);
 
   const gotoTop = () => {
     // 클릭하면 스크롤이 위로 올라가는 함수
@@ -99,21 +94,18 @@ function MyFindBoard() {
 
   useEffect(() => {
     gotoTop();
-  }, [findBoardList]);
+  }, [commentList]);
 
   //-------------
 
   return (
     <>
-      <NewNav />
-
-      <Sidebar />
       <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 mypage_header rounded-xl shadow-md overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 mypage_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote class="mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
             <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block">
               <span class="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
-                " 내 작성글 "
+                " 내 작성 댓글 "
               </span>
             </span>
           </blockquote>
@@ -159,8 +151,6 @@ function MyFindBoard() {
             </div>
           </div>
 
-          <hr className="mb-3" />
-
           <div className="mb-5 overflow-hidden">
             <table className="mt-3 mb-5 mr-5 border text-center min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -175,7 +165,7 @@ function MyFindBoard() {
                     scope="col"
                     className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs border border-slate-200 bg-gray-50 py-3 text-center  font-bold text-gray-500 uppercase tracking-wider"
                   >
-                    제목
+                    댓글 내용
                   </th>
                   <th
                     scope="col"
@@ -193,33 +183,32 @@ function MyFindBoard() {
               </thead>
 
               <tbody className="bg-white divide-y divide-gray-200">
-                {findBoardList && (
+                {commentList && (
                   <>
-                    {findBoardList.results
-                      .filter((a) => a.user.userID === auth.userID)
-                      .map((findBoard) => (
+                    {commentList
+                      .filter((a) => a.user === auth.userID)
+                      .map((review) => (
                         <tr
-                          key={findBoard.find_board_no}
-                          onClick={() =>
-                            navigate(`/findboard/${findBoard.find_board_no}/`)
-                          }
+                          key={review.review_comment_no}
+                          onClick={() => navigate(`/review/${review.review}/`)}
                           className="cursor-pointer"
                         >
                           <td className="py-4 lg:text-xl md:text-base sm:text-sm xs:text-xxs">
-                            {findBoard.find_board_no}
+                            {review.review_comment_no}
                           </td>
                           <td className="py-4 font-semibold lg:text-xl md:text-md sm:text-sm xs:text-xxs">
                             <span className="bg-purple-100 rounded-full">
-                              {findBoard.title.length > 15
-                                ? findBoard.title.substring(0, 15) + '...'
-                                : findBoard.title}
+                              {review.comment_content.length > 15
+                                ? review.comment_content.substring(0, 15) +
+                                  '...'
+                                : review.comment_content}
                             </span>
                           </td>
                           <td className="px-3 py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs whitespace-nowrap">
-                            {findBoard.user.nickname}
+                            {review.user}
                           </td>
                           <td className="py-4 sm:text-sm xs:text-xxs">
-                            {findBoard.created_at.slice(0, 10)}
+                            {review.created_at.slice(0, 10)}
                           </td>
                         </tr>
                       ))}
@@ -244,4 +233,4 @@ function MyFindBoard() {
   );
 }
 
-export default MyFindBoard;
+export default MyComments;
