@@ -175,12 +175,17 @@ function NoticeForm({ noticeId, handleDidSave }) {
         formData.append(name, value);
       }
     });
-    saveRequest({
-      data: formData,
-    }).then((response) => {
-      const savedPost = response.data;
-      if (handleDidSave) handleDidSave(savedPost);
-    });
+    if (fieldValues.title !== '') {
+      saveRequest({
+        data: formData,
+      }).then((response) => {
+        const savedPost = response.data;
+        if (handleDidSave) handleDidSave(savedPost);
+      });
+    } else {
+      window.alert('제목은 필수입니다.');
+      e.stop();
+    }
   };
 
   // 이미지 추가 (수정시)

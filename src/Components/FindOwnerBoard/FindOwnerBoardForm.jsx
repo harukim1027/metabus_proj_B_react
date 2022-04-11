@@ -152,12 +152,23 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
         formData.append(name, value);
       }
     });
-    saveRequest({
-      data: formData,
-    }).then((response) => {
-      const savedPost = response.data;
-      if (handleDidSave) handleDidSave(savedPost);
-    });
+    if (
+      fieldValues.title !== '' &&
+      fieldValues.content !== '' &&
+      fieldValues.animal_type !== '동물 종류' &&
+      fieldValues.find_location !== '' &&
+      fieldValues.animal_tag !== ''
+    ) {
+      saveRequest({
+        data: formData,
+      }).then((response) => {
+        const savedPost = response.data;
+        if (handleDidSave) handleDidSave(savedPost);
+      });
+    } else {
+      window.alert('별표(*)가 있는 필수 내용을 전부 입력해주세요');
+      e.stop();
+    }
   };
 
   // 이미지 추가 (수정시)
@@ -638,7 +649,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
               {!findBoard ? (
                 <div className="my-5 w-full">
                   {/* 등록시 */}
-                  <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
+                  <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block tracking-wide text-blue-900 text-base font-bold mb-2 ">
                     이미지 첨부
                   </span>
                   <h2 className="text-gray-500 text-xxs text-">
