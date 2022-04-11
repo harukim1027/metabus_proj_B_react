@@ -74,56 +74,58 @@ function CentersAnimals() {
           </h2>
         </div>
         {loading && <LoadingIndicator />}
-        {centersAnimals?.results.map((animal) => (
-          <div
-            className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer"
-            onClick={() => {
-              navigate(`/assignment/checkanimal/${animal.announce_no}/`);
-            }}
-          >
-            <img
-              src={animal.image_url1}
-              alt="동물 이미지"
-              className="w-36 h-40 mx-5"
-            />
-            <div className="py-5 flex-1">
-              <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
-                <tr className="sm:w-full">
-                  <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                    축종
-                  </th>
-                  <td className="">{animal.kind_of_animal}</td>
-                </tr>
-                <tr className="sm:w-full">
-                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                    품종
-                  </th>
-                  <td>{animal.breed}</td>
-                </tr>
+        {centersAnimals?.results
+          .filter((a) => a.protect_status === '보호중')
+          .map((animal) => (
+            <div
+              className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer"
+              onClick={() => {
+                navigate(`/assignment/checkanimal/${animal.announce_no}/`);
+              }}
+            >
+              <img
+                src={animal.image_url1}
+                alt="동물 이미지"
+                className="w-36 h-40 mx-5"
+              />
+              <div className="py-5 flex-1">
+                <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
+                  <tr className="sm:w-full">
+                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                      축종
+                    </th>
+                    <td className="">{animal.kind_of_animal}</td>
+                  </tr>
+                  <tr className="sm:w-full">
+                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                      품종
+                    </th>
+                    <td>{animal.breed}</td>
+                  </tr>
 
-                <tr className="sm:w-full">
-                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                    성별
-                  </th>
-                  <td>{animal.sex}</td>
-                </tr>
-                <tr className="sm:w-full">
-                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                    나이
-                  </th>
-                  <td>{animal.age}</td>
-                </tr>
+                  <tr className="sm:w-full">
+                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                      성별
+                    </th>
+                    <td>{animal.sex}</td>
+                  </tr>
+                  <tr className="sm:w-full">
+                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                      나이
+                    </th>
+                    <td>{animal.age}</td>
+                  </tr>
 
-                <tr className="sm:w-full">
-                  <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                    특징
-                  </th>
-                  <td>{animal.info}</td>
-                </tr>
-              </table>
+                  <tr className="sm:w-full">
+                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                      특징
+                    </th>
+                    <td>{animal.info}</td>
+                  </tr>
+                </table>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <ReactPaginate
         previousLabel="<"
