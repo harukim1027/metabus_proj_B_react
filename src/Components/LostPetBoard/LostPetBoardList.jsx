@@ -82,38 +82,26 @@ function LostPetBoardList() {
   return (
     <>
       <div>
-        <div className="sub_content">
-          <div className="pageTop2">
+        <div className="lostpet_sub_content">
+          <div className="lostpet_pageTop">
             <div className="tit">
-              <h2
-                className="bar_left"
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
-                우리 아이 찾아요 😹
+              <h2 className="lostpet_bar_left" style={{ opacity: 1 }}>
+                잃어버렸어요 😹
               </h2>
-              <p
-                className="bar_left"
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
+              <p className="lostpet_bar_left" style={{ opacity: 1 }}>
                 Lost My Pet
               </p>
             </div>
             {/* 첫번재 영역 */}
-            <div
-              className="leftBar bar_left"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            ></div>
+            <div className="leftBar lostpet_bar_left"></div>
 
             {/* 두번째 영역 */}
-            <div
-              className="rightBar bar_right"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            >
+            <div className="rightBar lostpet_bar_right">
               <img src="/dog_red.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
         </div>
-        <div className="board_top_info3 :before">
+        <div className="lostpet_board_top_info :before">
           <div className="info_desc">
             <p className="text-right">
               메타버스는 <br />
@@ -122,10 +110,11 @@ function LostPetBoardList() {
           </div>
         </div>
       </div>
-      <div className="lost_list"></div>
+
       <div className="header flex flex-wrap justify-center">
         <div className="lost_header mx-5 rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="flex xl:justify-end xs:justify-center">
+          <div className="lost_list"></div>
+          <div className="flex xl:justify-end xs:justify-center mt-10">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
             )}

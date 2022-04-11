@@ -26,14 +26,10 @@
   height: auto;
 }
 
-.assign_explanation2 {
-  width: 600px;
-  height: auto;
-}
-
 .notice_sub_content {
   width: 100%;
   padding-top: 100px;
+  padding-bottom:100px;
   overflow: hidden;
 }
 

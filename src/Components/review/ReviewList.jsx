@@ -65,33 +65,21 @@ function ReviewList() {
   return (
     <>
       <div>
-        <div className="sub_content">
+        <div className="review_sub_content">
           <div className="pageTop">
             <div className="tit">
-              <h2
-                className="bar_left"
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
+              <h2 className="bar_left" style={{ opacity: 1 }}>
                 입양후기
               </h2>
-              <p
-                className="bar_left"
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
+              <p className="bar_left" style={{ opacity: 1 }}>
                 ADOPT REVIEW
               </p>
             </div>
             {/* 첫번재 영역 */}
-            <div
-              className="leftBar2 bar_left"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            ></div>
+            <div className="leftBar2 bar_left"></div>
 
             {/* 두번째 영역 */}
-            <div
-              className="rightBar2 bar_right"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            >
+            <div className="rightBar2 bar_right">
               <img src="/pet-hand3.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
@@ -108,7 +96,8 @@ function ReviewList() {
 
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="flex xl:justify-end xs:justify-center">
+          <div className="review_list"></div>
+          <div className="flex xl:justify-end xs:justify-center mt-10">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
             )}
@@ -121,7 +110,6 @@ function ReviewList() {
               </>
             )}
           </div>{' '}
-          <div className="review_list"></div>
           <br />
           <br />
           {/* 검색 필드 + CSS */}

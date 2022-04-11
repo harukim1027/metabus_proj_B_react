@@ -100,10 +100,10 @@ function InquiryList() {
         </div>
       </div>
 
-      <div className="inquiry_list"></div>
       <div className="header flex flex-wrap justify-center">
         <div className="mx-5 inquiry_header rounded-xl  overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="flex xl:justify-end xs:justify-center">
+          <div className="inquiry_list"></div>
+          <div className="flex xl:justify-end xs:justify-center mt-10">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
             )}
@@ -115,7 +115,6 @@ function InquiryList() {
               </>
             )}
           </div>
-
           <br />
           <br />
 

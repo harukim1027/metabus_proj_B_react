@@ -53,17 +53,18 @@
   object-fit: cover;
 }
 
-.sub_content{
+.review_sub_content{
   width:100%;
-  padding-top:100px; 
+  padding-top:100px;
+  padding-bottom:100px;
   overflow:hidden;}
 
 
-.sub_content .content{
+.review_sub_content .content{
   width:1200px; 
   margin:0 auto;}
 
-.sub_content .content.content_box{
+.review_sub_content .content.content_box{
   float:none; 
   margin-top:40px;}
 

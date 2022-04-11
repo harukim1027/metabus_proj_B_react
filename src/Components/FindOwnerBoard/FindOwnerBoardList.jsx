@@ -86,28 +86,19 @@ function FindOwnerBoardList() {
             <div className="tit">
               <h2
                 className="find_bar_left font-extrabold "
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
+                style={{ opacity: 1 }}
               >
-                이 아이, 주인 찾아요 🙀
+                주인 찾아요 🙀
               </h2>
-              <p
-                className="find_bar_left"
-                style={{ opacity: 1, transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-              >
+              <p className="find_bar_left" style={{ opacity: 1 }}>
                 Finding Owner
               </p>
             </div>
             {/* 첫번재 영역 */}
-            <div
-              className="leftBar find_bar_left"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            ></div>
+            <div className="leftBar find_bar_left"></div>
 
             {/* 두번째 영역 */}
-            <div
-              className="rightBar find_bar_right"
-              style={{ transform: 'matrix(1, 0, 0, 1, 0, 0)' }}
-            >
+            <div className="rightBar find_bar_right">
               <img src="/pet-hand_blue.png" alt="" style={{ opacity: 1 }} />
             </div>
           </div>
@@ -121,10 +112,11 @@ function FindOwnerBoardList() {
           </div>
         </div>
       </div>
-      <div className="find_list"></div>
+
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl overflow-hidden xs:px-0 sm:px-20 pt-5 pb-10 my-10 w-2/3  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <div className="flex xl:justify-end xs:justify-center">
+          <div className="find_list"></div>
+          <div className="flex xl:justify-end xs:justify-center mt-10">
             {loading && (
               <LoadingIndicator>&nbsp;&nbsp;로딩 중...</LoadingIndicator>
             )}
