@@ -92,9 +92,9 @@ function AnimalList() {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="notice_header rounded-xl px-20 pt-5 pb-10 my-10 w-2/3">
-          <blockquote class="mt-5 text-6xl mb-3 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block">
-              <span class="relative text-white">" 유기동물 관리 "</span>
+          <blockquote className="mt-5 text-6xl mb-3 font-semibold italic text-center text-slate-900">
+            <span className="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block">
+              <span className="relative text-white">" 유기동물 관리 "</span>
             </span>
           </blockquote>
 
@@ -171,8 +171,9 @@ function AnimalList() {
 
               <tbody className="bg-white divide-y divide-gray-200">
                 {AnimalList &&
-                  AnimalList.results.map((animal) => (
+                  AnimalList.results.map((animal, index) => (
                     <tr
+                      key={index}
                       onClick={() =>
                         navigate(`/admin/animal/${animal.announce_no}/`)
                       }

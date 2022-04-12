@@ -215,12 +215,31 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     });
   };
 
+  // 스크롤 기능
+  const [topLocation, setTopLocation] = useState(0);
+  // console.log('topLocation: ', topLocation);
+  useEffect(() => {
+    setTopLocation(document.querySelector('#topLoc').offsetTop);
+  }, [findBoard]);
+
+  const gotoTop = () => {
+    // 클릭하면 스크롤이 위로 올라가는 함수
+    window.scrollTo({
+      top: topLocation,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    gotoTop();
+  }, [topLocation]);
+
   //-------------
 
   return (
     <>
       {/* review_header : 배경 흰색 */}
-      <div className="header flex flex-wrap justify-center">
+      <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 review_header rounded-xl overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-10 mb-6 text-2xl font-semibold italic text-center text-slate-900">
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">

@@ -153,8 +153,9 @@ function UserManagementIndex() {
 
               <tbody className="bg-white divide-y divide-gray-200">
                 {userData &&
-                  userData.results.map((user) => (
+                  userData.results.map((user, index) => (
                     <tr
+                      key={index}
                       onClick={() =>
                         navigate(`/admin/usermanage/${user.userID}/`)
                       }
