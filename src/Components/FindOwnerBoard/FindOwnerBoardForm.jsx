@@ -221,7 +221,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     <>
       {/* review_header : 배경 흰색 */}
       <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 review_header rounded-xl shadow-md overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 review_header rounded-xl overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-10 mb-6 text-2xl font-semibold italic text-center text-slate-900">
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">
               <span className="relative text-white">
@@ -249,7 +249,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
 
       {/* FindOwnerBoard 글 폼 */}
       <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 notice_header rounded-md shadow-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 notice_header rounded-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           {/* 제목 입력 input 박스 */}
           <div className="w-full">
             <form
