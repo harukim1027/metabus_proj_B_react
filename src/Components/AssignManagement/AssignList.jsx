@@ -86,9 +86,9 @@ function AssignList() {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="notice_header rounded-xl px-20 pt-5 pb-10 my-10 w-2/3">
-          <blockquote class="mt-5 text-6xl mb-3 font-semibold italic text-center text-slate-900">
-            <span class="my-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block">
-              <span class="relative text-white">" 입양신청 목록 "</span>
+          <blockquote className="mt-5 text-6xl mb-3 font-semibold italic text-center text-slate-900">
+            <span className="my-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block">
+              <span className="relative text-white">" 입양신청 목록 "</span>
             </span>
           </blockquote>
           {/* 로딩 에러 */}
@@ -170,8 +170,9 @@ function AssignList() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {assignList?.results?.map((assign) => (
+                    {assignList?.results?.map((assign, index) => (
                       <tr
+                        key={index}
                         className="cursor-pointer"
                         onClick={() =>
                           navigate(

@@ -73,9 +73,9 @@ function AnimalDetail({ animalId }) {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="notice_header rounded-xl overflow-hidden px-20 pt-5 pb-10 my-10 w-2/3">
-          <blockquote class="mt-5 text-6xl font-semibold italic text-center text-slate-900">
-            <span class="mt-3 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block">
-              <span class="relative text-white">" 동물 정보 "</span>
+          <blockquote className="mt-5 text-6xl font-semibold italic text-center text-slate-900">
+            <span className="mt-3 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block">
+              <span className="relative text-white">" 동물 정보 "</span>
             </span>
           </blockquote>
 
