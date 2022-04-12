@@ -45,7 +45,7 @@ function CentersAnimals() {
   };
 
   return (
-    <div>
+    <div className="bg-white">
       <NewNav />
       <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
         <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
@@ -78,7 +78,7 @@ function CentersAnimals() {
           .filter((a) => a.protect_status === '보호중')
           .map((animal) => (
             <div
-              className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer"
+              className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer bg-white"
               onClick={() => {
                 navigate(`/assignment/checkanimal/${animal.announce_no}/`);
               }}
