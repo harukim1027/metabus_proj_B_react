@@ -39,3 +39,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.slider_bg {
+  --content-background-color: white;
+  height: 80vh;
+}
+
+.slider_bg2 {
+  --content-background-color: white;
+  height: calc(100vh - 400px);
+}

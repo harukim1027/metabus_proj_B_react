@@ -105,14 +105,15 @@ function AssignDetail({ assignId }) {
       <div className="header" id="topLoc">
         <div className="box  pt-5 pb-10 sm:w-full xs:w-full">
           <AwesomeSlider
-            className="Container3"
+            className="slider_bg"
             mobileTouch={true}
-            organicArrows={false}
+            organicArrows={true}
             bullets={true}
+            onTransitionRequest={() => setImagebutton(false)}
           >
             {/* 신청자 정보  */}
             <span className="">
-              <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
+              <blockquote class="text-6xl font-semibold italic text-center text-slate-900">
                 <span class="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
                   <span class="relative text-white">" 신청자 정보 "</span>
                 </span>
@@ -133,7 +134,7 @@ function AssignDetail({ assignId }) {
               )}
 
               <div className="overflow-hidden">
-                <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
+                <table className="mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
                   <tr className="sm:w-full">
                     <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
                       신청 번호
@@ -248,13 +249,13 @@ function AssignDetail({ assignId }) {
 
             {/* 입양 신청 정보 */}
             <span>
-              <blockquote className="mt-10 text-6xl font-semibold italic text-center text-slate-900">
-                <span className="mt-20 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
+              <blockquote className="text-6xl font-semibold italic text-center text-slate-900">
+                <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-400 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
                   <span className="relative text-white">" 동물 정보 "</span>
                 </span>
               </blockquote>
 
-              <div className="mx-5 assignmanagement_header rounded-xl md:px-10 sm:px-0 pt-5 pb-10 my-10 xs:w-full">
+              <div className="assignmanagement_header rounded-xl md:px-10 sm:px-0 pt-5 pb-10 xs:w-full">
                 {/* <div className=" pt-6 mb-3"> */}
 
                 {auth.is_staff && (
@@ -272,7 +273,7 @@ function AssignDetail({ assignId }) {
                   </div>
                 )}
                 <div className="my-5 overflow-hidden">
-                  <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
+                  <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200 bg-white">
                     <tr>
                       <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
                         공고번호
@@ -338,7 +339,7 @@ function AssignDetail({ assignId }) {
               </div>
             </span>
 
-            <div className="">
+            <div className="flex justify-center w-5/6">
               <div className="mx-5 bg-white rounded-xl  overflow-hidden sm:w-full xs:w-full">
                 <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
                   <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
@@ -357,106 +358,97 @@ function AssignDetail({ assignId }) {
                   </span>
                 </div>
                 {/* 동물 사진 부분  */}
-                <div className="text-center">
-                  <button onClick={() => setImagebutton(!imageButton)}>
-                    동물 사진 보기
-                  </button>
-                  {imageButton && (
-                    <div className=" h-full w-full">
-                      <div className="content-center overflow-hidden">
+
+                <div>
+                  {assignData && (
+                    <>
+                      {assignData.animal.image_url3 &&
+                      assignData.animal.image_url2 &&
+                      assignData.animal.image_url1 ? (
+                        <AwesomeSlider
+                          className="slider_bg2"
+                          mobileTouch={true}
+                          organicArrows={false}
+                          bullets={true}
+                        >
+                          <span className="flex justify-center h-full">
+                            {assignData.animal.image_url1 && (
+                              <img
+                                src={assignData.animal.image_url1}
+                                alt="동물 이미지"
+                                className="h-full w-full"
+                              />
+                            )}
+                          </span>
+                          <span className="flex justify-center h-full">
+                            {assignData.animal.image_url2 && (
+                              <img
+                                src={assignData.animal.image_url2}
+                                alt="동물 이미지"
+                                className="h-full w-full"
+                              />
+                            )}
+                          </span>
+                          <span className="flex justify-center h-full">
+                            {assignData.animal.image_url3 && (
+                              <img
+                                src={assignData.animal.image_url3}
+                                alt="동물 이미지"
+                                className="h-full w-full"
+                              />
+                            )}
+                          </span>
+                        </AwesomeSlider>
+                      ) : (
                         <>
-                          {assignData && (
+                          {assignData.animal.image_url1 &&
+                          assignData.animal.image_url2 ? (
+                            <AwesomeSlider
+                              className="slider_bg2"
+                              mobileTouch={true}
+                              organicArrows={false}
+                              bullets={true}
+                            >
+                              <span className="flex justify-center h-full">
+                                {assignData.animal.image_url1 && (
+                                  <img
+                                    src={assignData.animal.image_url1}
+                                    alt="동물 이미지"
+                                    className=""
+                                  />
+                                )}
+                              </span>
+                              <span className="flex justify-center h-full">
+                                {assignData.animal.image_url2 && (
+                                  <img
+                                    src={assignData.animal.image_url2}
+                                    alt="동물 이미지"
+                                    className=""
+                                  />
+                                )}
+                              </span>
+                            </AwesomeSlider>
+                          ) : (
                             <>
-                              {assignData.animal.image_url3 &&
-                              assignData.animal.image_url2 &&
-                              assignData.animal.image_url1 ? (
-                                <AwesomeSlider
-                                  className="Container"
-                                  mobileTouch={true}
-                                  organicArrows={true}
-                                  bullets={false}
-                                >
-                                  <span className=" h-full w-full">
-                                    {assignData.animal.image_url1 && (
-                                      <img
-                                        src={assignData.animal.image_url1}
-                                        alt="동물 이미지"
-                                        className="h-full w-full"
-                                      />
-                                    )}
-                                  </span>
-                                  <span className="h-full w-full">
-                                    {assignData.animal.image_url2 && (
-                                      <img
-                                        src={assignData.animal.image_url2}
-                                        alt="동물 이미지"
-                                        className="h-full w-full"
-                                      />
-                                    )}
-                                  </span>
-                                  <span className="h-full w-full">
-                                    {assignData.animal.image_url3 && (
-                                      <img
-                                        src={assignData.animal.image_url3}
-                                        alt="동물 이미지"
-                                        className="h-full w-full"
-                                      />
-                                    )}
-                                  </span>
-                                </AwesomeSlider>
-                              ) : (
-                                <>
-                                  {assignData.animal.image_url1 &&
-                                  assignData.animal.image_url2 ? (
-                                    <AwesomeSlider
-                                      className="Container"
-                                      mobileTouch={true}
-                                      organicArrows={true}
-                                      bullets={false}
-                                    >
-                                      <span className="h-full w-full">
-                                        {assignData.animal.image_url1 && (
-                                          <img
-                                            src={assignData.animal.image_url1}
-                                            alt="동물 이미지"
-                                            className="h-full w-full"
-                                          />
-                                        )}
-                                      </span>
-                                      <span className="h-full w-full">
-                                        {assignData.animal.image_url2 && (
-                                          <img
-                                            src={assignData.animal.image_url2}
-                                            alt="동물 이미지"
-                                            className="h-full w-full"
-                                          />
-                                        )}
-                                      </span>
-                                    </AwesomeSlider>
-                                  ) : (
-                                    <>
-                                      {assignData.animal.image_url1 && (
-                                        <span className="h-full w-full">
-                                          {assignData.animal.image_url1 && (
-                                            <img
-                                              src={assignData.animal.image_url1}
-                                              alt="동물 이미지"
-                                              className="h-full w-full"
-                                            />
-                                          )}
-                                        </span>
-                                      )}
-                                    </>
+                              {assignData.animal.image_url1 && (
+                                <span className="flex justify-center h-2/3 w-11/12">
+                                  {assignData.animal.image_url1 && (
+                                    <img
+                                      src={assignData.animal.image_url1}
+                                      alt="동물 이미지"
+                                      className="h-full w-full"
+                                    />
                                   )}
-                                </>
+                                </span>
                               )}
                             </>
                           )}
                         </>
-                      </div>
-                    </div>
+                      )}
+                    </>
                   )}
                 </div>
+
                 <div className="my-5 text-right mr-5">
                   {auth.is_staff && (
                     <button
