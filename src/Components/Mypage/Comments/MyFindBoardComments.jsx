@@ -197,7 +197,7 @@ function MyFindBoardComments() {
                           key={lostpetcomments.find_comment_no}
                           onClick={() =>
                             navigate(
-                              `/find_owner_board/${lostpetcomments.review}/`,
+                              `/findboard/${lostpetcomments.find_board_no}/`,
                             )
                           }
                           className="cursor-pointer"
