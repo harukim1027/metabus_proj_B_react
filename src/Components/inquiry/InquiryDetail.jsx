@@ -64,9 +64,9 @@ function InquiryDetail({ inquiryId }) {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl md:px-20 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 font-semibold italic text-center text-slate-900">
-            <span class="mt-3 mb-5 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-300 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
-              <span class="relative text-white">" 1:1 문의 "</span>
+          <blockquote className="mt-5 font-semibold italic text-center text-slate-900">
+            <span className="mt-3 mb-5 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-300 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
+              <span className="relative text-white">" 1:1 문의 "</span>
             </span>
           </blockquote>
 
@@ -105,7 +105,7 @@ function InquiryDetail({ inquiryId }) {
                     내용
                   </span>
                   <h2
-                    readonly
+                    readOnly
                     className="xs:py-5 md:w-full text-2xl text-gray-500 xs:text-base sm:text-2xl whitespace-pre-wrap"
                   >
                     {inquiry.content}

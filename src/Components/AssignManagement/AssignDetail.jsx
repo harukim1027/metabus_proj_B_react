@@ -113,9 +113,9 @@ function AssignDetail({ assignId }) {
           >
             {/* 신청자 정보  */}
             <span className="">
-              <blockquote class="text-6xl font-semibold italic text-center text-slate-900">
-                <span class="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
-                  <span class="relative text-white">" 신청자 정보 "</span>
+              <blockquote className="text-6xl font-semibold italic text-center text-slate-900">
+                <span className="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
+                  <span className="relative text-white">" 신청자 정보 "</span>
                 </span>
               </blockquote>
               {/* 로딩 에러 */}
@@ -341,9 +341,9 @@ function AssignDetail({ assignId }) {
 
             <div className="flex justify-center w-5/6">
               <div className="mx-5 bg-white rounded-xl  overflow-hidden sm:w-full xs:w-full">
-                <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
-                  <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
-                    <span class="relative text-white">
+                <blockquote className="mt-10 text-6xl font-semibold italic text-center text-slate-900">
+                  <span className="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
+                    <span className="relative text-white">
                       "{assignData?.adopter_name} 님의 신청 상태"
                     </span>
                   </span>

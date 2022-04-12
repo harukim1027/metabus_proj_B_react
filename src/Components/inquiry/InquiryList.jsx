@@ -186,8 +186,9 @@ function InquiryList() {
                 </tr>
               </thead>
               <tbody className="bg-red divide-y divide-gray-200">
-                {inquiryList?.results.map((inquiry) => (
+                {inquiryList?.results.map((inquiry, index) => (
                   <tr
+                    key={index}
                     onClick={() => navigate(`/inquiry/${inquiry.inquiry_no}/`)}
                     className="cursor-pointer"
                   >

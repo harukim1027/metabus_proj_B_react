@@ -170,9 +170,9 @@ function AllCenterMap({ centersData, ismain }) {
 
   return (
     <div className="h-full">
-      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
-          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+      <blockquote className="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
+          <span className="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
             " 현재 보호중인 동물 보기 "
           </span>
         </span>
@@ -194,7 +194,7 @@ function AllCenterMap({ centersData, ismain }) {
           width: 'fit-content',
         }}
       >
-        <span class="xs:text-xs md:text-base xl:text-lg font-semibold">
+        <span className="xs:text-xs md:text-base xl:text-lg font-semibold">
           지도중심기준 행정동 주소정보
         </span>
         <br />

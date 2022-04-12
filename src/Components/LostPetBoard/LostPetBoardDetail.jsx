@@ -263,8 +263,9 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
                       {AnimalList?.length !== 0 ? (
-                        AnimalList?.map((animal) => (
+                        AnimalList?.map((animal, index) => (
                           <div
+                            key={index}
                             className=" w-52 h-60 inline-block m-2 hover:scale-110 duration-150 cursor-pointer"
                             onClick={() =>
                               navigate(
