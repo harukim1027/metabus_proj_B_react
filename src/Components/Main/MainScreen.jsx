@@ -26,7 +26,7 @@ function MainScreen({ activeCount, setActiveCount }) {
     refetchCount();
   }, []);
 
-  console.log('count: ', count);
+  // console.log('count: ', count);
 
   function wheel(event) {
     // event.preventDefault();
@@ -197,7 +197,7 @@ function MainScreen({ activeCount, setActiveCount }) {
                 <li>
                   <img src="" alt="" /> 입양 완료율{' '}
                   <strong className="data-euthanasis">
-                    {((count?.complite / count.count) * 100).toFixed(2)}
+                    {((count?.complite / count?.count) * 100).toFixed(2)}
                   </strong>{' '}
                   %
                 </li>
