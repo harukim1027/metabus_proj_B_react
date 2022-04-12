@@ -93,7 +93,7 @@ function UserAssignList({ userId }) {
                     No
                   </th>
                   <th className="px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-1/4">
-                    동물 등록번호
+                    동물 번호
                   </th>
                   <th className="px-6 py-3 text-center text-lg font-bold text-gray-500 uppercase tracking-wider w-1/4">
                     신청날짜
@@ -119,7 +119,7 @@ function UserAssignList({ userId }) {
 
                     <td className="px-6 py-4">
                       <div className="inline-flex text-lg leading-5 font-semibold rounded-full bg-blue-100">
-                        {assign.animal.animal_reg_num}
+                        {assign.animal.announce_no}
                       </div>
                     </td>
 
