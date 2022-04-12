@@ -92,35 +92,51 @@ function App() {
             >
               Home
             </button>
-            {auth.isLoggedIn ? (
-              <button
-                onClick={() => logout()}
-                className="mx-4 font-semibold hover:scale-105"
-              >
-                Logout
-              </button>
+            {!auth.isLoggedIn ? (
+              <>
+                <button
+                  onClick={() => navigate('/accounts/login/')}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => navigate('/accounts/checksignup/')}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  SignUp
+                </button>
+              </>
+            ) : auth.is_staff ? (
+              <>
+                <button
+                  onClick={() => logout()}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  Logout
+                </button>
+                <button
+                  onClick={() => navigate('/admin/main/')}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  Admin
+                </button>
+              </>
             ) : (
-              <button
-                onClick={() => navigate('/accounts/login/')}
-                className="mx-4 font-semibold hover:scale-105"
-              >
-                Login
-              </button>
-            )}
-            {auth.isLoggedIn && auth.is_staff ? (
-              <button
-                onClick={() => navigate('/admin/main/')}
-                className="ml-4 mr-8 font-semibold hover:scale-105"
-              >
-                Admin
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate('/mypage/userinfo/')}
-                className="ml-4 mr-8 font-semibold hover:scale-105"
-              >
-                My Page
-              </button>
+              <>
+                <button
+                  onClick={() => logout()}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  Logout
+                </button>
+                <button
+                  onClick={() => navigate('/mypage/userinfo/')}
+                  className="mx-4 font-semibold hover:scale-105"
+                >
+                  MyPage
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -129,8 +145,8 @@ function App() {
           <Route path="/menu/" element={<PageTopNav />} />
           {/* accounts */}
           <Route path="/accounts/login/" element={<PageLoginForm />} />
-          <Route path="/accounts/signup/" element={<PageSignupForm />} />
           <Route path="/accounts/checksignup/" element={<PageCheckSignup />} />
+          <Route path="/accounts/signup/" element={<PageSignupForm />} />
           <Route path="/accounts/findid/" element={<PageFindId />} />
           <Route
             path="/accounts/changepassword/"
