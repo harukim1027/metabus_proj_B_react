@@ -1,5 +1,6 @@
 import { useApiAxios } from 'api/base';
 import autoprefixer from 'autoprefixer';
+import LoadingIndicator from 'LoadingIndicator';
 import { useEffect, useState } from 'react';
 import ReviewSummaryMain from './ReviewSummaryMain';
 
@@ -104,6 +105,8 @@ function Ranking() {
             </div>
           </div>
         </>
+      ) : loading ? (
+        <LoadingIndicator />
       ) : (
         <div className="my-auto">
           <img
