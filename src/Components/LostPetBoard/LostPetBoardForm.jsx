@@ -23,7 +23,6 @@ const INIT_FIELD_VALUES = {
   lost_location: '',
   lost_time: '',
   content: '',
-  image: '',
 };
 
 function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
