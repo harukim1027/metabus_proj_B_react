@@ -735,12 +735,12 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
         </div>
       </div>
 
-      <DebugStates
+      {/* <DebugStates
         review={review}
         getLoading={getLoading}
         getError={getError}
         fieldValues={fieldValues}
-      />
+      /> */}
     </>
   );
 }
