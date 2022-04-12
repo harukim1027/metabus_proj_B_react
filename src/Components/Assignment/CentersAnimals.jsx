@@ -78,7 +78,7 @@ function CentersAnimals() {
           .filter((a) => a.protect_status === '보호중')
           .map((animal) => (
             <div
-              className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-110 hover:translate-x-7 duration-150 h-45 cursor-pointer bg-white"
+              className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-105 hover:translate-x-5 duration-150 h-60 cursor-pointer bg-white"
               onClick={() => {
                 navigate(`/assignment/checkanimal/${animal.announce_no}/`);
               }}
