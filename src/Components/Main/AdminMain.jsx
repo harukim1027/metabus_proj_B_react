@@ -13,9 +13,9 @@ function AdminMain() {
           <div className="flex flex-wrap justify-center  overflow-x-auto  relative mx-20">
             <div className="admin_header mb-10 rounded-xl pb-5 py-2 align-middle inline-block ">
               {/* 메인 글씨 */}
-              <blockquote class="mt-5 text-6xl font-semibold italic text-center text-slate-900">
-                <span class="mt-3 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-gray-400 relative inline-block">
-                  <span class="relative text-white">" 관리 페이지 "</span>
+              <blockquote className="mt-5 text-6xl font-semibold italic text-center text-slate-900">
+                <span className="mt-3 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-gray-400 relative inline-block">
+                  <span className="relative text-white">" 관리 페이지 "</span>
                 </span>
               </blockquote>
               <hr className="mt-5 mb-5 " />

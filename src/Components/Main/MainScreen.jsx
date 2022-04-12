@@ -7,10 +7,26 @@ import 'react-awesome-slider/dist/styles.css';
 import '../review/SlideStyle.css';
 import '../../App.css';
 import './MainCrew.css';
+import { useApiAxios } from 'api/base';
+import { useEffect } from 'react';
 
 function MainScreen({ activeCount, setActiveCount }) {
   // console.log(activeCount);
   const ismain = 1;
+
+  const [{ data: count }, refetchCount] = useApiAxios(
+    {
+      url: '/streetanimal/stat/',
+      method: 'GET',
+    },
+    { manual: true },
+  );
+
+  useEffect(() => {
+    refetchCount();
+  }, []);
+
+  console.log('count: ', count);
 
   function wheel(event) {
     // event.preventDefault();
@@ -169,15 +185,21 @@ function MainScreen({ activeCount, setActiveCount }) {
               <ul className="metabusInfo">
                 <li>
                   <img src="" alt="" /> 현재 보호중인 동물{' '}
-                  <strong className="data-rescue">4,863</strong> 마리
+                  <strong className="data-rescue">{count?.count}</strong> 마리
                 </li>
                 <li>
                   <img src="" alt="" /> 입양 진행률{' '}
-                  <strong className="data-adoptaion">21</strong> %
+                  <strong className="data-adoptaion">
+                    {((count?.process / count?.count) * 100).toFixed(2)}
+                  </strong>{' '}
+                  %
                 </li>
                 <li>
                   <img src="" alt="" /> 입양 완료율{' '}
-                  <strong className="data-euthanasis">9</strong> %
+                  <strong className="data-euthanasis">
+                    {((count?.complite / count.count) * 100).toFixed(2)}
+                  </strong>{' '}
+                  %
                 </li>
               </ul>
             </div>

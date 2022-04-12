@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 // main
 import PageMainScreen from 'Pages/PageMainScreen';
@@ -76,7 +76,8 @@ import MyLostPetComments from 'Components/Mypage/Comments/MyLostPetComments';
 import MyFindBoardComments from 'Components/Mypage/Comments/MyFindBoardComments';
 
 function App() {
-  const { auth } = useAuth();
+  const { auth, logout } = useAuth();
+  const navigate = useNavigate();
   return (
     <>
       <div className="app header">
@@ -84,6 +85,44 @@ function App() {
           <p>
             Contact Us <strong>✉ metabusemail@gmail.com</strong>
           </p>
+          <div>
+            <button
+              onClick={() => navigate('/')}
+              className="mx-4 font-semibold hover:scale-105"
+            >
+              Home
+            </button>
+            {auth.isLoggedIn ? (
+              <button
+                onClick={() => logout()}
+                className="mx-4 font-semibold hover:scale-105"
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/accounts/login/')}
+                className="mx-4 font-semibold hover:scale-105"
+              >
+                Login
+              </button>
+            )}
+            {auth.isLoggedIn && auth.is_staff ? (
+              <button
+                onClick={() => navigate('/admin/main/')}
+                className="ml-4 mr-8 font-semibold hover:scale-105"
+              >
+                Admin
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/mypage/userinfo/')}
+                className="ml-4 mr-8 font-semibold hover:scale-105"
+              >
+                My Page
+              </button>
+            )}
+          </div>
         </div>
         <Routes>
           <Route path="/" element={<PageMainScreen />} />

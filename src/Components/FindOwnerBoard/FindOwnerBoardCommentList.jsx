@@ -19,14 +19,14 @@ function FindOwnerBoardCommentList({ findboardId }) {
     <>
       {findBoardList?.comments.map((comment) => (
         <div className="comment-main col-6">
-          <ol class="tweet-list">
-            <li class="tweet-card">
-              <div class="tweet-content">
-                <div class="tweet-header">
-                  <span class="fullname">
+          <ol className="tweet-list">
+            <li className="tweet-card">
+              <div className="tweet-content">
+                <div className="tweet-header">
+                  <span className="fullname">
                     <strong>{comment.user}</strong>
                   </span>
-                  <span class="tweet-time">
+                  <span className="tweet-time">
                     {' '}
                     - <TimeAgo comment={comment.updated_at} />{' '}
                     <FindOwnerBoardCommentDetail
@@ -37,9 +37,13 @@ function FindOwnerBoardCommentList({ findboardId }) {
                   </span>
                 </div>
                 <div>
-                  <img class="tweet-card-avatar" src="/logo.jpg" alt="logo" />
+                  <img
+                    className="tweet-card-avatar"
+                    src="/logo.jpg"
+                    alt="logo"
+                  />
                 </div>
-                <div class="tweet-text">
+                <div className="tweet-text">
                   <p data-aria-label-part="0">
                     <br />
                     {comment.comment_content}
