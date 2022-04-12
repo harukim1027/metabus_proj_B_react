@@ -16,33 +16,6 @@ function Fame() {
     },
   );
 
-  // 1. userID 정렬
-  const userArr = reviewList?.map((userData) => {
-    return userData.user?.userID;
-  });
-  function getSortedArr(array) {
-    // 2. 출연 빈도
-    const counts = array?.reduce((pv, cv) => {
-      pv[cv] = (pv[cv] || 0) + 1;
-      return pv;
-    }, []);
-
-    // console.log('counts', counts);
-    // 3. 개수 배열
-    const result = [];
-    for (const key in counts) {
-      result.push([key, counts[key]]);
-    }
-    // 4. 내림차순
-    result
-      .sort((first, second) => {
-        return second[1] - first[1];
-      })
-      .slice(0, 2);
-    // console.log('result', result);
-    return result;
-  }
-
   useEffect(() => {
     refetch();
   }, []);

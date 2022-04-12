@@ -100,6 +100,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     findBoard || INIT_FIELD_VALUES,
   );
 
+  const fieldtime = new Date(fieldValues.find_time);
   // 마커 위치의 주소 input에 넣기
   useEffect(() => {
     setFieldValues((prev) => {
@@ -157,7 +158,8 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
       fieldValues.content !== '' &&
       fieldValues.animal_type !== '동물 종류' &&
       fieldValues.find_location !== '' &&
-      fieldValues.animal_tag !== ''
+      fieldValues.animal_tag !== '' &&
+      fieldtime.valueOf() < today.valueOf()
     ) {
       saveRequest({
         data: formData,
@@ -582,10 +584,21 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                   value={fieldValues.find_time}
                   onChange={handleFieldChange}
                   placeholder="발견 시각을 입력해주세요."
-                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
+                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3"
                 />
+                <h2
+                  className={
+                    findBoard
+                      ? 'text-sm text-red-500'
+                      : 'text-sm text-red-500 mb-6'
+                  }
+                >
+                  미래의 시간은 입력하실 수 없습니다.
+                </h2>
                 {findBoard && (
-                  <h2>등록되어 있는 시각 : {findBoard.find_time}</h2>
+                  <h2 className="mb-6">
+                    등록되어 있는 시각 : {findBoard.find_time}
+                  </h2>
                 )}
                 {saveErrorMessages.find_time?.map((message, index) => (
                   <p key={index} className="text-base text-red-400">

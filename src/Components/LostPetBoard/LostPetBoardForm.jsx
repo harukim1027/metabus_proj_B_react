@@ -98,12 +98,16 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   // 시간 기본값 추가
   const offset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - offset);
+  // console.log('today: ', today.valueOf());
+
   INIT_FIELD_VALUES.lost_time = today.toISOString().slice(0, 16);
 
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     lostpetBoard || INIT_FIELD_VALUES,
   );
 
+  const fieldtime = new Date(fieldValues.lost_time);
+  // console.log('fieldValues.lost_time: ', fieldtime.valueOf());
   // 마커 위치의 주소 input에 넣기
   useEffect(() => {
     setFieldValues((prev) => {
@@ -163,7 +167,8 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
       fieldValues.animal_type !== '동물 종류' &&
       fieldValues.lost_location !== '' &&
       fieldValues.pet_name !== '' &&
-      fieldValues.animal_tag !== ''
+      fieldValues.animal_tag !== '' &&
+      fieldtime.valueOf() < today.valueOf()
     ) {
       saveRequest({
         data: formData,
@@ -604,10 +609,21 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
                   value={fieldValues.lost_time}
                   onChange={handleFieldChange}
                   placeholder="유실 시각을 입력해주세요."
-                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3 mb-6"
+                  className="rounded-md text-sm  bg-gray-100 focus:bg-white focus:border-gray-400 w-full p-3"
                 />
+                <h2
+                  className={
+                    lostpetBoard
+                      ? 'text-sm text-red-500'
+                      : 'text-sm text-red-500 mb-6'
+                  }
+                >
+                  미래의 시간은 입력하실 수 없습니다.
+                </h2>
                 {lostpetBoard && (
-                  <h2>등록되어 있는 시각 : {lostpetBoard.lost_time}</h2>
+                  <h2 className="mb-6">
+                    등록되어 있는 시각 : {lostpetBoard.lost_time}
+                  </h2>
                 )}
                 {saveErrorMessages.lost_time?.map((message, index) => (
                   <p key={index} className="text-base text-red-400">
