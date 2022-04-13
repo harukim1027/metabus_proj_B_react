@@ -136,8 +136,8 @@ function NoticeForm({ noticeId, handleDidSave }) {
 
   // // 업로드할 파일명 뽑아서 넣기 (각자에 넣어주어야 하는데 그게 안됨)
   // const upload_filename = document.getElementById('notice_file')?.files;
-  // upload_filename && console.log('upload_filename: ', upload_filename);
-  // upload_filename && console.log('length: ', upload_filename.length);
+  // upload_filename && // console.log('upload_filename: ', upload_filename);
+  // upload_filename && // console.log('length: ', upload_filename.length);
 
   // 저장 버튼 기능
   const handleSubmit = (e) => {
@@ -146,7 +146,7 @@ function NoticeForm({ noticeId, handleDidSave }) {
     Object.entries(fieldValues).forEach(([name, value]) => {
       if (Array.isArray(value)) {
         const fileList = value;
-        console.log('fileList.length: ', fileList.length);
+        // console.log('fileList.length: ', fileList.length);
         if (name === 'notice_image') {
           if (
             noticeData

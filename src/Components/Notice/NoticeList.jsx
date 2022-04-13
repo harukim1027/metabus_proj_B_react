@@ -155,8 +155,9 @@ function NoticeList() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {noticeList?.results?.map((notice) => (
+                {noticeList?.results?.map((notice, index) => (
                   <tr
+                    key={index}
                     onClick={() => navigate(`/notice/${notice.notice_no}/`)}
                     className="cursor-pointer"
                   >

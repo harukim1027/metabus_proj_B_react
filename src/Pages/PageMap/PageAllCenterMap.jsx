@@ -23,7 +23,7 @@ function PageAllCenterMap({ ismain }) {
     refetch();
   }, []);
   //-------------------
-  // console.log('centersData: ', centersData);
+  // // console.log('centersData: ', centersData);
 
   return (
     <>

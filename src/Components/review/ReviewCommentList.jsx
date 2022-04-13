@@ -27,7 +27,7 @@ function ReviewCommentList({ reviewId }) {
                   <span class="fullname">
                     <strong>{comment.user.nickname}</strong>
                   </span>
-                  <span class="tweet-time">
+                  <span className="tweet-time">
                     {' '}
                     - <TimeAgo comment={comment.updated_at} />{' '}
                     <ReviewCommentDetail
@@ -38,9 +38,13 @@ function ReviewCommentList({ reviewId }) {
                   </span>
                 </div>
                 <div>
-                  <img class="tweet-card-avatar" src="/logo.jpg" alt="logo" />
+                  <img
+                    className="tweet-card-avatar"
+                    src="/logo.jpg"
+                    alt="logo"
+                  />
                 </div>
-                <div class="tweet-text">
+                <div className="tweet-text">
                   <p data-aria-label-part="0">
                     <br />
                     {comment.comment_content}

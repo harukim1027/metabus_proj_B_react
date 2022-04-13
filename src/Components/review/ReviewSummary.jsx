@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 function ReviewSummary({ review }) {
-  // console.log('review:', review);
+  // // console.log('review:', review);
 
   return (
     <>

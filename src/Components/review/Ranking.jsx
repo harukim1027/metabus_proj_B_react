@@ -26,7 +26,7 @@ function Ranking() {
       return pv;
     }, []);
 
-    // console.log('counts', counts);
+    // // console.log('counts', counts);
     // 3. 개수 배열
     const result = [];
     for (const key in counts) {
@@ -38,7 +38,7 @@ function Ranking() {
         return second[1] - first[1];
       })
       .slice(0, 2);
-    // console.log('result', result);
+    // // console.log('result', result);
     return result;
   }
 
@@ -46,16 +46,16 @@ function Ranking() {
     refetch();
   }, []);
 
-  reviewList &&
-    getSortedArr(userArr)[0] &&
-    console.log(getSortedArr(userArr)[0][0]);
+  // reviewList &&
+  //   getSortedArr(userArr)[0] &&
+  // console.log(getSortedArr(userArr)[0][0]);
   return (
     <>
       <h2 className="bg-white mb-20">
         입양 다이어리 최다 작성자{' '}
-        <h2 className="text-xl font-extrabold text-red-400 inline bg-yellow-100">
+        <span className="text-xl font-extrabold text-red-400 inline bg-yellow-100">
           TOP3
-        </h2>{' '}
+        </span>{' '}
         입니다!
       </h2>
       {getSortedArr(userArr)[0] ? (
@@ -120,7 +120,7 @@ function Ranking() {
           </h2>
           <h2 className="mb-40">
             다이어리를 작성하고{' '}
-            <h2 className="text-2xl font-semibold text-red-500">1위</h2>의
+            <span className="text-2xl font-semibold text-red-500">1위</span>의
             자리에 올라보세요!
           </h2>
         </div>

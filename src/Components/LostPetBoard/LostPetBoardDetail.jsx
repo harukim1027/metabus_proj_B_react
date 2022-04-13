@@ -52,11 +52,11 @@ function LostPetBoardDetail({ lostpetboardId }) {
     { manual: true },
   );
 
-  console.log(lostpetboard?.lost_location.slice(0, 2));
+  // // console.log(lostpetboard?.lost_location.slice(0, 2));
   useEffect(() => {
     refetchSimilar();
   }, [lostpetboard]);
-  console.log('AnimalList: ', AnimalList);
+  // // console.log('AnimalList: ', AnimalList);
 
   // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteLostboard] =
@@ -160,7 +160,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
                           value={fieldValues.status}
                           onChange={handleFieldChange}
                           className="rounded px-5 py-2"
-                          defaultValue={lostpetboard.status}
+                          // defaultValue={lostpetboard.status}
                         >
                           <option value="">상태 변경</option>
                           <option value="찾는중">찾는중</option>
@@ -263,8 +263,9 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     <span>혹시 이 아이 아닌가요?</span>
                     <div>
                       {AnimalList?.length !== 0 ? (
-                        AnimalList?.map((animal) => (
+                        AnimalList?.map((animal, index) => (
                           <div
+                            key={index}
                             className=" w-52 h-60 inline-block m-2 hover:scale-110 duration-150 cursor-pointer"
                             onClick={() =>
                               navigate(

@@ -23,7 +23,7 @@ function ReviewCommentForm({
     { manual: !commentID },
   );
 
-  console.log('getdata:', getdata);
+  // console.log('getdata:', getdata);
 
   // 저장
   const [
@@ -55,8 +55,8 @@ function ReviewCommentForm({
     getdata || INIT_FIELD_VALUES,
   );
 
-  console.log('fieldValues', fieldValues);
-  console.log('commentID', commentID);
+  // console.log('fieldValues', fieldValues);
+  // console.log('commentID', commentID);
 
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
@@ -110,7 +110,7 @@ function ReviewCommentForm({
           <div className="shadow-md">
             <form className="w-full p-4">
               <div className="mb-2 mt-0">
-                <label form="comment" class="text-lg text-gray-600">
+                <label form="comment" className="text-lg text-gray-600">
                   댓글
                 </label>
                 {auth.isLoggedIn ? (

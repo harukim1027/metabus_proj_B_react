@@ -50,7 +50,7 @@ function AnimalDetail({ animalId }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [animal]);
@@ -184,100 +184,102 @@ function AnimalDetail({ animalId }) {
             {animal && (
               <>
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      공고번호
-                    </th>
-                    <td>{animal.announce_no}</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        공고번호
+                      </th>
+                      <td>{animal.announce_no}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      동물 종류
-                    </th>
-                    <td>{animal.kind_of_animal}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        동물 종류
+                      </th>
+                      <td>{animal.kind_of_animal}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      품종
-                    </th>
-                    <td>{animal.breed}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        품종
+                      </th>
+                      <td>{animal.breed}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      털색
-                    </th>
-                    <td>{animal.color}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        털색
+                      </th>
+                      <td>{animal.color}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      성별
-                    </th>
-                    <td>{animal.sex}</td>
-                  </tr>
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      나이
-                    </th>
-                    <td>{animal.age}</td>
-                  </tr>
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      몸무게
-                    </th>
-                    <td>{animal.weight} kg</td>
-                  </tr>
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      발생 장소
-                    </th>
-                    <td>{animal.place_of_discovery}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        성별
+                      </th>
+                      <td>{animal.sex}</td>
+                    </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        나이
+                      </th>
+                      <td>{animal.age}</td>
+                    </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        몸무게
+                      </th>
+                      <td>{animal.weight} kg</td>
+                    </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        발생 장소
+                      </th>
+                      <td>{animal.place_of_discovery}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      접수 일시
-                    </th>
-                    <td>{animal.date_time_of_receipt}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        접수 일시
+                      </th>
+                      <td>{animal.date_time_of_receipt}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      중성화여부
-                    </th>
-                    <td>{animal.neutering}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        중성화여부
+                      </th>
+                      <td>{animal.neutering}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      특징
-                    </th>
-                    <td>{animal.info}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        특징
+                      </th>
+                      <td>{animal.info}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      관할 지역
-                    </th>
-                    <td>{animal.competent_organization}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        관할 지역
+                      </th>
+                      <td>{animal.competent_organization}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      보호상태
-                    </th>
-                    <td>{animal.protect_status}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        보호상태
+                      </th>
+                      <td>{animal.protect_status}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      관할 보호센터명
-                    </th>
-                    <td>{animal.center_name.center_name}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        관할 보호센터명
+                      </th>
+                      <td>{animal.center_name.center_name}</td>
+                    </tr>
+                  </tbody>
                 </table>
               </>
             )}

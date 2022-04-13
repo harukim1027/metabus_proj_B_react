@@ -24,7 +24,7 @@ function ReviewSummaryMain({ userID }) {
       recentReviews?.results.sort((a, b) => a.created_at - b.created_at)[0],
     );
   }, [recentReviews]);
-  console.log('recent: ', recent);
+  // console.log('recent: ', recent);
 
   return (
     <>

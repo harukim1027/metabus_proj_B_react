@@ -35,7 +35,7 @@ function AssignAnimalCheck() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        bodyClassName: 'font-bold text-2xl p-5',
+        bodyclassName: 'font-bold text-2xl p-5',
       });
       navigate('/accounts/login/');
     }
@@ -159,126 +159,138 @@ function AssignAnimalCheck() {
               </>
               <div className="flex justify-center">
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      공고번호
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.announce_no}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      축종
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.kind_of_animal}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      품종
-                    </th>
-                    <td className="text-left">&nbsp;&nbsp;{animal.breed}</td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      털색
-                    </th>
-                    <td className="text-left">&nbsp;&nbsp;{animal.color}</td>
-                  </tr>
+                  <tbody>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        공고번호
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.announce_no}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        축종
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.kind_of_animal}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        품종
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.breed}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        털색
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.color}
+                      </td>
+                    </tr>
 
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      성별
-                    </th>
-                    <td className="text-left">&nbsp;&nbsp;{animal.sex}</td>
-                  </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        성별
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.sex}
+                      </td>
+                    </tr>
 
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      나이
-                    </th>
-                    <td className="text-left">&nbsp;&nbsp;{animal.age}</td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      체중
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.weight} kg
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      발견 장소
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.place_of_discovery}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      접수 일자
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.date_time_of_receipt}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      중성화 여부
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.neutering}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      중성화 여부
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.neutering}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      특징
-                    </th>
-                    <td className="text-left">&nbsp;&nbsp;{animal.info}</td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      관할 지역
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.competent_organization}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      보호 상태
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.protect_status}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      보호중 센터
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.center_name.center_name}
-                    </td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      보호 센터 전화번호
-                    </th>
-                    <td className="text-left">
-                      &nbsp;&nbsp;{animal.center_name.center_call}
-                    </td>
-                  </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        나이
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.age}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        체중
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.weight} kg
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        발견 장소
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.place_of_discovery}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        접수 일자
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.date_time_of_receipt}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        중성화 여부
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.neutering}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        중성화 여부
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.neutering}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        특징
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.info}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        관할 지역
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.competent_organization}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        보호 상태
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.protect_status}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        보호중 센터
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.center_name.center_name}
+                      </td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        보호 센터 전화번호
+                      </th>
+                      <td className="text-left border">
+                        &nbsp;&nbsp;{animal.center_name.center_call}
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>

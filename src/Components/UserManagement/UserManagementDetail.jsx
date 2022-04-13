@@ -47,7 +47,7 @@ function UserManagementDetail({ userId }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [userData]);
@@ -85,47 +85,49 @@ function UserManagementDetail({ userId }) {
             {userData && (
               <>
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200 whitespace-nowrap bg-white">
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      유저아이디
-                    </th>
-                    <td className="px-6">{userData?.userID}</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        유저아이디
+                      </th>
+                      <td className="px-6">{userData?.userID}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      이름
-                    </th>
-                    <td className="px-6">{userData?.name}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        이름
+                      </th>
+                      <td className="px-6">{userData?.name}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      닉네임
-                    </th>
-                    <td className="px-6">{userData?.nickname}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        닉네임
+                      </th>
+                      <td className="px-6">{userData?.nickname}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      연락처
-                    </th>
-                    <td className="px-6">{userData?.phone_number}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        연락처
+                      </th>
+                      <td className="px-6">{userData?.phone_number}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      이메일
-                    </th>
-                    <td className="px-6">{userData?.email}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        이메일
+                      </th>
+                      <td className="px-6">{userData?.email}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
-                      거주지역
-                    </th>
-                    <td className="px-6">{userData?.region}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
+                        거주지역
+                      </th>
+                      <td className="px-6">{userData?.region}</td>
+                    </tr>
+                  </tbody>
                 </table>
               </>
             )}

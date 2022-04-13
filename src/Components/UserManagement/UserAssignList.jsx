@@ -33,7 +33,8 @@ function UserAssignList({ userId }) {
     async (newPage, newQuery = query) => {
       const params = {
         page: newPage,
-        query: userId,
+        query: newQuery,
+        author: userId,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
@@ -53,7 +54,7 @@ function UserAssignList({ userId }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [AssignStatusData]);
@@ -104,8 +105,9 @@ function UserAssignList({ userId }) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {AssignStatusData?.results.map((assign) => (
+                {AssignStatusData?.results.map((assign, index) => (
                   <tr
+                    key={index}
                     onClick={() =>
                       navigate(`/admin/assignmanage/${assign.assignment_no}/`)
                     }

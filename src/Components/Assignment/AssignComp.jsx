@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function AssignComp({ assignId, assignData }) {
   const navigate = useNavigate();
 
-  // console.log('assignData: ', assignData);
+  // // console.log('assignData: ', assignData);
 
   // patch  요청
   const [{ loading, error }, changeAPS] = useApiAxios(
@@ -34,7 +34,7 @@ function AssignComp({ assignId, assignData }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [adaniData]);
@@ -57,9 +57,9 @@ function AssignComp({ assignId, assignData }) {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 assignments_header rounded-xl overflow-hidden md:px-20 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 mb-3 font-semibold italic text-center text-slate-900">
-            <span class="my-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block xs:text-2xl sm:text-4xl lg:text-6xl">
-              <span class="relative text-white">" 입양신청 완료! "</span>
+          <blockquote className="mt-5 mb-3 font-semibold italic text-center text-slate-900">
+            <span className="my-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block xs:text-2xl sm:text-4xl lg:text-6xl">
+              <span className="relative text-white">" 입양신청 완료! "</span>
             </span>
           </blockquote>
           {/* 로딩 에러 */}

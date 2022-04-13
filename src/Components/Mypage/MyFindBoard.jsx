@@ -84,7 +84,7 @@ function MyFindBoard() {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [findBoardList]);
@@ -147,7 +147,7 @@ function MyFindBoard() {
                       value={fieldValues.category}
                       onChange={handleFieldChange}
                       className="md:text-xl xs:text-base border-2 border-purple-400 rounded p-2 xs:w-32 md:w-60 text-center py-2"
-                      defaultValue="주인 찾습니다!"
+                      // defaultValue="주인 찾습니다!"
                     >
                       <option value="입양 다이어리">입양 다이어리</option>
                       <option value="잃어버렸어요!">잃어버렸어요!</option>

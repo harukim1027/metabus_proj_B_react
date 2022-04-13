@@ -6,7 +6,7 @@ import './Map.css';
 const EventMarkerContainer = memo(({ marker_obj }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  console.log(1);
+  // // console.log(1);
   return (
     <>
       <MapMarker
@@ -87,7 +87,7 @@ function AllCenterMap({ centersData, ismain }) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-          // console.log('coords: ', coords);
+          // // console.log('coords: ', coords);
           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
           // map.setCenter(coords);
           setLocations((prevLocs) => [
@@ -139,8 +139,8 @@ function AllCenterMap({ centersData, ismain }) {
   useEffect(() => {
     setMyLoc(currentLoc);
   }, [currentLoc]);
-  // console.log('geocode:', geocode);
-  // console.log('locations: ', locations);
+  // // console.log('geocode:', geocode);
+  // // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
   //-------------
@@ -170,9 +170,9 @@ function AllCenterMap({ centersData, ismain }) {
 
   return (
     <div className="h-full">
-      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
-          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+      <blockquote className="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-300 relative inline-block">
+          <span className="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
             " 현재 보호중인 동물 보기 "
           </span>
         </span>
@@ -194,7 +194,7 @@ function AllCenterMap({ centersData, ismain }) {
           width: 'fit-content',
         }}
       >
-        <span class="xs:text-xs md:text-base xl:text-lg font-semibold">
+        <span className="xs:text-xs md:text-base xl:text-lg font-semibold">
           지도중심기준 행정동 주소정보
         </span>
         <br />
@@ -217,14 +217,14 @@ function AllCenterMap({ centersData, ismain }) {
           }}
           onTileLoaded={(map) => {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('dragend');
+            // // console.log('dragend');
           }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             });
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // console.log('dragend');
+            // // console.log('dragend');
           }}
         >
           {/* 전체 보호센터 위치 마커 */}

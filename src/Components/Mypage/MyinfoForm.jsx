@@ -39,7 +39,7 @@ function MyinfoForm({ handleDidSave }) {
   useEffect(() => {
     refetch();
   }, []);
-  console.log(userData);
+  // console.log(userData);
 
   // 데이터 PATCH 요청 : 수정목적
   // 저장
@@ -121,7 +121,7 @@ function MyinfoForm({ handleDidSave }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [userData]);
@@ -144,9 +144,9 @@ function MyinfoForm({ handleDidSave }) {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 mypage_header rounded-xl overflow-hidden sm:px-20 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
-              <span class="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
+          <blockquote className="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+            <span className="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
+              <span className="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
                 " 내 회원정보 수정"
               </span>
             </span>

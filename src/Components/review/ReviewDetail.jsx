@@ -43,7 +43,7 @@ function ReviewDetail({ reviewId }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [review]);
@@ -62,15 +62,15 @@ function ReviewDetail({ reviewId }) {
 
   //-------------
 
-  console.log('review:', review);
+  // console.log('review:', review);
 
   return (
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 review_header rounded-xl overflow-hidden pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-3 mb-10 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl ">
-              <span class="relative text-white">" 입양 다이어리 "</span>
+          <blockquote className="mt-3 mb-10 font-semibold italic text-center text-slate-900">
+            <span className="mt-7 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-400 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl ">
+              <span className="relative text-white">" 입양 다이어리 "</span>
             </span>
           </blockquote>
 
@@ -155,8 +155,8 @@ function ReviewDetail({ reviewId }) {
                   <br />
 
                   <div className="border-2 rounded-md mb-5 py-2 px-3">
-                    {review.review_image?.map((image) => (
-                      <div className="h-2/3 overflow-hidden">
+                    {review.review_image?.map((image, index) => (
+                      <div className="h-2/3 overflow-hidden" key={index}>
                         <img src={image.image} alt="" />
                       </div>
                     ))}

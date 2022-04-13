@@ -20,8 +20,8 @@ function Fame() {
     refetch();
   }, []);
 
-  //   console.log('userArr', userArr);
-  //   console.log('getSortedArr', getSortedArr(userArr));
+  //   // console.log('userArr', userArr);
+  //   // console.log('getSortedArr', getSortedArr(userArr));
 
   return (
     <>
@@ -42,7 +42,7 @@ function Fame() {
                   <span>명예의 전당은 다이어리&nbsp;</span>
                   <span
                     className="bg-yellow-100 font-bold"
-                    style={{ 'text-decoration': 'underline' }}
+                    style={{ textDecoration: 'underline' }}
                   >
                     글 작성 수
                   </span>

@@ -68,7 +68,7 @@ function FindOwnerBoardDetail({ findboardId }) {
 
   INIT_FIELD_VALUES.status = findboard?.status;
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
-  // console.log(fieldValues);
+  // // console.log(fieldValues);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -134,7 +134,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                           value={fieldValues.status}
                           onChange={handleFieldChange}
                           className="rounded px-5 py-2"
-                          defaultValue={findboard.status}
+                          // defaultValue={findboard.status}
                         >
                           <option value="">상태 변경</option>
                           <option value="찾는중">찾는중</option>

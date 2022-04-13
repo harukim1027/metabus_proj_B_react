@@ -15,7 +15,7 @@ function LoginForm() {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, []);
@@ -83,22 +83,22 @@ function LoginForm() {
         is_staff,
       });
 
-      // console.log('access :', access);
-      // console.log('refresh :', refresh);
-      // console.log('userID :', userID);
-      // console.log('nickname :', nickname);
-      // console.log('name :', name);
-      // console.log('phone_number :', phone_number);
-      // console.log('email :', email);
-      // console.log('region :', region);
-      // console.log('password_quiz :', password_quiz);
-      // console.log('password_quiz_answer :', password_quiz_answer);
-      // console.log('is_staff :', is_staff);
+      // // console.log('access :', access);
+      // // console.log('refresh :', refresh);
+      // // console.log('userID :', userID);
+      // // console.log('nickname :', nickname);
+      // // console.log('name :', name);
+      // // console.log('phone_number :', phone_number);
+      // // console.log('email :', email);
+      // // console.log('region :', region);
+      // // console.log('password_quiz :', password_quiz);
+      // // console.log('password_quiz_answer :', password_quiz_answer);
+      // // console.log('is_staff :', is_staff);
 
       // 인증 후, 이동할 주소를 지정합니다.
       navigate('/');
     });
-    console.log(fieldValues);
+    // // console.log(fieldValues);
   };
 
   return (

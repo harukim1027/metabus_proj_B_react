@@ -49,7 +49,7 @@ function InquiryForm({ inquiryId, handleDidSave }) {
 
   INIT_FIELD_VALUES.user = auth.userID;
 
-  console.log('inquiryId :', inquiryId);
+  // console.log('inquiryId :', inquiryId);
 
   const { fieldValues, handleFieldChange, setFieldValues } = useFieldValues(
     inquiry || INIT_FIELD_VALUES,
@@ -83,7 +83,7 @@ function InquiryForm({ inquiryId, handleDidSave }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [inquiry]);
