@@ -134,7 +134,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                           value={fieldValues.status}
                           onChange={handleFieldChange}
                           className="rounded px-5 py-2"
-                          defaultValue={findboard.status}
+                          // defaultValue={findboard.status}
                         >
                           <option value="">상태 변경</option>
                           <option value="찾는중">찾는중</option>
