@@ -46,21 +46,18 @@ function FindOwnerBoardCommentForm({
     { manual: true },
   );
 
-  INIT_FIELD_VALUES.user = auth.userID;
-  INIT_FIELD_VALUES.find_board_no = findboardId;
+  INIT_FIELD_VALUES.user = getdata ? getdata.user.userID : auth.userID;
+  INIT_FIELD_VALUES.find_board_no = getdata
+    ? getdata.find_board_no.find_board_no
+    : findboardId;
+  INIT_FIELD_VALUES.comment_content = getdata ? getdata.comment_content : '';
   // INIT_FIELD_VALUES.comment_content = review?.comments.comment_content;
 
-  const { fieldValues, setFieldValues, handleFieldChange, clearFieldValues } =
-    useFieldValues(getdata || INIT_FIELD_VALUES);
+  const { fieldValues, handleFieldChange, clearFieldValues } =
+    useFieldValues(INIT_FIELD_VALUES);
 
   // console.log('fieldValues', fieldValues);
   // console.log('commentID', commentID);
-
-  useEffect(() => {
-    setFieldValues((prevFieldValues) => ({
-      ...prevFieldValues,
-    }));
-  }, [setFieldValues]);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -90,8 +87,8 @@ function FindOwnerBoardCommentForm({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (fieldValues === '') {
-      window.confirm('댓글 내용을 입력해주세요.');
+    if (fieldValues.comment_content === '') {
+      window.alert('댓글 내용을 입력해주세요.');
     } else
       saveRequest({
         data: fieldValues,

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import useFieldValues from 'hooks/useFieldValues';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import DebugStates from 'DebugStates';
 
 const INIT_FIELD_VALUES = {
   comment_content: '',
@@ -28,7 +29,6 @@ function ReviewCommentForm({
   // 저장
   const [
     {
-      data: findBoard,
       loading: saveLoading,
       error: saveError,
       errorMessages: saveErrorMessages,
@@ -47,22 +47,14 @@ function ReviewCommentForm({
     { manual: true },
   );
 
-  INIT_FIELD_VALUES.user = auth.userID;
-  INIT_FIELD_VALUES.review = reviewId;
-  // INIT_FIELD_VALUES.comment_content = review?.comments.comment_content;
-
-  const { fieldValues, setFieldValues, handleFieldChange } = useFieldValues(
-    getdata || INIT_FIELD_VALUES,
-  );
+  INIT_FIELD_VALUES.user = getdata ? getdata.user.userID : auth.userID;
+  INIT_FIELD_VALUES.review = getdata ? getdata.review.review_no : reviewId;
+  INIT_FIELD_VALUES.comment_content = getdata ? getdata.comment_content : '';
+  const { fieldValues, handleFieldChange, clearFieldValues } =
+    useFieldValues(INIT_FIELD_VALUES);
 
   // console.log('fieldValues', fieldValues);
   // console.log('commentID', commentID);
-
-  useEffect(() => {
-    setFieldValues((prevFieldValues) => ({
-      ...prevFieldValues,
-    }));
-  }, [setFieldValues]);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -85,16 +77,18 @@ function ReviewCommentForm({
       });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    saveRequest({
-      data: fieldValues,
-    }).then((response) => {
-      const savedPost = response.data;
-
-      if (savedPost) refetch();
-    });
+    if (fieldValues.comment_content === '') {
+      window.alert('댓글 내용을 입력해주세요.');
+    } else
+      saveRequest({
+        data: fieldValues,
+      }).then(() => {
+        clearFieldValues();
+        refetch();
+      });
   };
 
   const didYouLog = () => {
@@ -173,6 +167,7 @@ function ReviewCommentForm({
           </div>
         </h1>
       </div>
+      <DebugStates fieldValues={fieldValues} />
     </>
   );
 }

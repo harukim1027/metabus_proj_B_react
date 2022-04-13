@@ -172,6 +172,7 @@ function ReviewDetail({ reviewId }) {
                   {/* 댓글 */}
                   <>
                     <ReviewCommentList
+                      review={review}
                       reviewId={reviewId}
                       refetch={refetch}
                       nickname={review.user.nickname}

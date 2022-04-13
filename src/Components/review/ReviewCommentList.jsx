@@ -6,16 +6,7 @@ import ReviewCommentForm from './ReviewCommentForm';
 import 'css/pagination_review.css';
 import TimeAgo from './TimeAgo';
 
-function ReviewCommentList({ reviewId }) {
-  const [{ data: review, loading, error }, refetch] = useApiAxios(
-    `/adopt_review/api/reviews/${reviewId}/`,
-    { manual: true },
-  );
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
+function ReviewCommentList({ review, refetch, reviewId }) {
   return (
     <>
       {review?.comments.map((comment) => (
