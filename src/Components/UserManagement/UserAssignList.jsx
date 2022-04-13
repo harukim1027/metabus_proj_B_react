@@ -104,8 +104,9 @@ function UserAssignList({ userId }) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {AssignStatusData?.results.map((assign) => (
+                {AssignStatusData?.results.map((assign, index) => (
                   <tr
+                    key={index}
                     onClick={() =>
                       navigate(`/admin/assignmanage/${assign.assignment_no}/`)
                     }

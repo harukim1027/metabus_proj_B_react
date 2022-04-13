@@ -118,8 +118,9 @@ function UserInquiryList({ userId }) {
               </thead>
 
               <tbody className="bg-white divide-y divide-gray-200">
-                {UserInquiryData?.results.map((inquiry) => (
+                {UserInquiryData?.results.map((inquiry, index) => (
                   <tr
+                    key={index}
                     className=" cursor-pointer"
                     onClick={() => navigate(`/inquiry/${inquiry.inquiry_no}/`)}
                   >

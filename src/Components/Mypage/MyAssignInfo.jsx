@@ -71,9 +71,9 @@ function MyAssignInfo() {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 mypage_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block">
-              <span class="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
+          <blockquote className="mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+            <span className="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-400 relative inline-block">
+              <span className="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
                 " 내 입양신청 "
               </span>
             </span>
@@ -125,8 +125,8 @@ function MyAssignInfo() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {MyAssignData?.results.map((assign) => (
-                  <tr>
+                {MyAssignData?.results.map((assign, index) => (
+                  <tr key={index}>
                     <td
                       className="py-4 lg:text-xl md:text-base sm:text-sm xs:text-xxs cursor-pointer"
                       onClick={() =>
