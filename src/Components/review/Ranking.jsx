@@ -26,7 +26,7 @@ function Ranking() {
       return pv;
     }, []);
 
-    // console.log('counts', counts);
+    // // console.log('counts', counts);
     // 3. 개수 배열
     const result = [];
     for (const key in counts) {
@@ -38,7 +38,7 @@ function Ranking() {
         return second[1] - first[1];
       })
       .slice(0, 2);
-    // console.log('result', result);
+    // // console.log('result', result);
     return result;
   }
 
@@ -46,9 +46,9 @@ function Ranking() {
     refetch();
   }, []);
 
-  reviewList &&
-    getSortedArr(userArr)[0] &&
-    console.log(getSortedArr(userArr)[0][0]);
+  // reviewList &&
+  //   getSortedArr(userArr)[0] &&
+  // console.log(getSortedArr(userArr)[0][0]);
   return (
     <>
       <h2 className="bg-white mb-20">

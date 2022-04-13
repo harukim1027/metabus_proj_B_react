@@ -23,7 +23,7 @@ function ReviewCommentForm({
     { manual: !commentID },
   );
 
-  console.log('getdata:', getdata);
+  // console.log('getdata:', getdata);
 
   // 저장
   const [
@@ -55,8 +55,8 @@ function ReviewCommentForm({
     getdata || INIT_FIELD_VALUES,
   );
 
-  console.log('fieldValues', fieldValues);
-  console.log('commentID', commentID);
+  // console.log('fieldValues', fieldValues);
+  // console.log('commentID', commentID);
 
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({

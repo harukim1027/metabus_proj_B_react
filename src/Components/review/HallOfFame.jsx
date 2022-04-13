@@ -20,8 +20,8 @@ function Fame() {
     refetch();
   }, []);
 
-  //   console.log('userArr', userArr);
-  //   console.log('getSortedArr', getSortedArr(userArr));
+  //   // console.log('userArr', userArr);
+  //   // console.log('getSortedArr', getSortedArr(userArr));
 
   return (
     <>

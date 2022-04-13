@@ -98,7 +98,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   // 시간 기본값 추가
   const offset = new Date().getTimezoneOffset() * 60000;
   const today = new Date(Date.now() - offset);
-  // console.log('today: ', today.valueOf());
+  // // console.log('today: ', today.valueOf());
 
   INIT_FIELD_VALUES.lost_time = today.toISOString().slice(0, 16);
 
@@ -107,7 +107,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
   );
 
   const fieldtime = new Date(fieldValues.lost_time);
-  // console.log('fieldValues.lost_time: ', fieldtime.valueOf());
+  // // console.log('fieldValues.lost_time: ', fieldtime.valueOf());
   // 마커 위치의 주소 input에 넣기
   useEffect(() => {
     setFieldValues((prev) => {
@@ -225,7 +225,7 @@ function LostPetBoardForm({ lostpetboardId, handleDidSave }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [lostpetBoard]);

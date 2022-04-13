@@ -8,7 +8,7 @@ import '../../App.css';
 function InfoAnimal() {
   // 스크롤 기능
   const [finalImg, setFinalImg] = useState(false);
-  console.log(finalImg);
+  // console.log(finalImg);
 
   const handleClick = () => {
     setFinalImg(!finalImg);

@@ -23,10 +23,10 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
   const [filtAssign, setFiltAssign] = useState([]);
   const [clicked, setClicked] = useState(0);
 
-  // console.log('review: ', review);
+  // // console.log('review: ', review);
 
   const [selectanimalAssign, setSelectanimalAssign] = useState('');
-  console.log('selectanimalAssign: ', selectanimalAssign);
+  // console.log('selectanimalAssign: ', selectanimalAssign);
 
   const [{ data: assignmentList, loading: getLoading, error: getError }] =
     useApiAxios(
@@ -148,7 +148,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
       saveRequest({
         data: formData,
       }).then((response) => {
-        console.log('response: ', response);
+        // console.log('response: ', response);
         const savedPost = response.data.review_no;
         if (handleDidSave) handleDidSave(savedPost);
       });
@@ -157,7 +157,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
       e.stop();
     }
   };
-  console.log(saveErrorMessages);
+  // console.log(saveErrorMessages);
 
   // 이미지 추가 (수정시)
   const handleAddImage = (e) => {
@@ -200,13 +200,13 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
     });
   };
 
-  // console.log('fieldValues', fieldValues);
-  // console.log('selectanimalAssign: ', selectanimalAssign);
-  // console.log('AnimalList', AnimalList);
+  // // console.log('fieldValues', fieldValues);
+  // // console.log('selectanimalAssign: ', selectanimalAssign);
+  // // console.log('AnimalList', AnimalList);
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [review]);
@@ -220,7 +220,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
   };
 
   const [formLoc, setFormLoc] = useState(0);
-  // console.log('formLoc: ', formLoc);
+  // // console.log('formLoc: ', formLoc);
   useEffect(() => {
     setFormLoc(document.querySelector('#form').offsetTop);
   }, [selectanimalAssign]);

@@ -18,8 +18,8 @@ function Alert({ userID, reviewList }) {
       );
   }, [reviewList]);
 
-  // console.log('date1', date1);
-  // console.log('date2', date2);
+  // // console.log('date1', date1);
+  // // console.log('date2', date2);
 
   return <></>;
 }

@@ -43,7 +43,7 @@ function ReviewDetail({ reviewId }) {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [review]);
@@ -62,7 +62,7 @@ function ReviewDetail({ reviewId }) {
 
   //-------------
 
-  console.log('review:', review);
+  // console.log('review:', review);
 
   return (
     <>

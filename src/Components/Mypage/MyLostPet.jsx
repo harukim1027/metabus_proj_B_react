@@ -87,7 +87,7 @@ function MylostPetBoard() {
 
   // 스크롤 기능
   const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // // console.log('topLocation: ', topLocation);
   useEffect(() => {
     setTopLocation(document.querySelector('#topLoc').offsetTop);
   }, [lostPetBoardList]);
@@ -104,7 +104,7 @@ function MylostPetBoard() {
     gotoTop();
   }, [lostPetBoardList]);
 
-  console.log('fieldValues', fieldValues);
+  // console.log('fieldValues', fieldValues);
   //-------------
 
   return (

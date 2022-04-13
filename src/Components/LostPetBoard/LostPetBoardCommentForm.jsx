@@ -51,8 +51,8 @@ function LostPetBoardCommentForm({
   const { fieldValues, setFieldValues, handleFieldChange, clearFieldValues } =
     useFieldValues(getdata || INIT_FIELD_VALUES);
 
-  console.log('fieldValues', fieldValues);
-  console.log('commentID', commentID);
+  // console.log('fieldValues', fieldValues);
+  // console.log('commentID', commentID);
 
   useEffect(() => {
     setFieldValues((prevFieldValues) => ({
