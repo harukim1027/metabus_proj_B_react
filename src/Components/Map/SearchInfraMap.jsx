@@ -65,7 +65,7 @@ function SearchInfraMap() {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
           // infoDiv.innerHTML = result[i].address_name;
-          console.log('지금 설정된 addr: ', result[i].address_name);
+          // console.log('지금 설정된 addr: ', result[i].address_name);
           setAddr(result[i].address_name);
 
           break;
@@ -86,11 +86,11 @@ function SearchInfraMap() {
     setQuery(addr + ' 동물병원');
   }, [currentLoc, addr === '']);
 
-  console.log('addr: ', addr);
-  console.log('query: ', query);
-  console.log('currentLoc: ', currentLoc);
-  console.log('myLoc: ', myLoc);
-  console.log('----------');
+  // console.log('addr: ', addr);
+  // console.log('query: ', query);
+  // console.log('currentLoc: ', currentLoc);
+  // console.log('myLoc: ', myLoc);
+  // console.log('----------');
 
   // 키워드 검색기능
   useEffect(() => {
@@ -132,9 +132,9 @@ function SearchInfraMap() {
 
   return (
     <div>
-      <blockquote class="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-        <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-200 relative inline-block">
-          <span class="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
+      <blockquote className="xs:mt-2 md:mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+        <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-200 relative inline-block">
+          <span className="xl:text-2xl md:text-2xl xs:text-xl relative text-white">
             " 내 주변 검색하기 "
           </span>
         </span>
@@ -144,9 +144,9 @@ function SearchInfraMap() {
       </p>
       <h2>
         현재 위치하신 주소에서{' '}
-        <h2 className="text-xl text-purple-800 font-bold inline mx-2">
+        <span className="text-xl text-purple-800 font-bold inline mx-2">
           {keyword}
-        </h2>{' '}
+        </span>{' '}
         키워드로 검색한 정보입니다.
       </h2>
       {/* 행정동 위치 표기 */}
@@ -162,7 +162,9 @@ function SearchInfraMap() {
           width: 'fit-content',
         }}
       >
-        <span class="text-lg font-semibold">지도중심기준 행정동 주소정보</span>
+        <span className="text-lg font-semibold">
+          지도중심기준 행정동 주소정보
+        </span>
         <br />
         <span id="centerAddr" className="text-lg">
           {addr}

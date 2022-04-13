@@ -6,7 +6,7 @@ import './Map.css';
 const EventMarkerContainer = memo(({ marker_obj }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  console.log(1);
+  // console.log(1);
   return (
     <>
       <MapMarker
