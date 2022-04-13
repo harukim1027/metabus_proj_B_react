@@ -11,7 +11,7 @@ import { useApiAxios } from 'api/base';
 import { useEffect } from 'react';
 
 function MainScreen({ activeCount, setActiveCount }) {
-  // // console.log(activeCount);
+  // console.log(activeCount);
   const ismain = 1;
 
   const [{ data: count }, refetchCount] = useApiAxios(
@@ -26,7 +26,7 @@ function MainScreen({ activeCount, setActiveCount }) {
     refetchCount();
   }, []);
 
-  // // console.log('count: ', count);
+  // console.log('count: ', count);
 
   function wheel(event) {
     // event.preventDefault();

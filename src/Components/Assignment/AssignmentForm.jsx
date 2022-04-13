@@ -125,7 +125,7 @@ function AssignmentForm({ handleDidSave }) {
       data: formData,
     }).then((response) => {
       const savedPost = response.data;
-      // // console.log(savedPost);
+      // console.log(savedPost);
       if (handleDidSave) handleDidSave(savedPost);
     });
   };
@@ -141,7 +141,7 @@ function AssignmentForm({ handleDidSave }) {
     });
   };
 
-  // // console.log('saveErrorMessages: ', saveErrorMessages && saveErrorMessages);
+  // console.log('saveErrorMessages: ', saveErrorMessages && saveErrorMessages);
 
   return (
     <>

@@ -52,11 +52,11 @@ function LostPetBoardDetail({ lostpetboardId }) {
     { manual: true },
   );
 
-  // // console.log(lostpetboard?.lost_location.slice(0, 2));
+  // console.log(lostpetboard?.lost_location.slice(0, 2));
   useEffect(() => {
     refetchSimilar();
   }, [lostpetboard]);
-  // // console.log('AnimalList: ', AnimalList);
+  // console.log('AnimalList: ', AnimalList);
 
   // delete 요청
   const [{ loading: deleteLoading, error: deleteError }, deleteLostboard] =

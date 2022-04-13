@@ -9,7 +9,7 @@ const CommunitySidebar = () => {
   const side = useRef();
   const navigate = useNavigate();
   const { auth } = useAuth();
-  // // console.log(isOpen);
+  // console.log(isOpen);
 
   // button 클릭 시 토글
   const toggleMenu = () => {

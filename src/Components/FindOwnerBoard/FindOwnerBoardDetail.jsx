@@ -68,7 +68,7 @@ function FindOwnerBoardDetail({ findboardId }) {
 
   INIT_FIELD_VALUES.status = findboard?.status;
   const { fieldValues, handleFieldChange } = useFieldValues(INIT_FIELD_VALUES);
-  // // console.log(fieldValues);
+  // console.log(fieldValues);
 
   const handleSubmit = (e) => {
     e.preventDefault();

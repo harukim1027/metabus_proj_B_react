@@ -28,7 +28,7 @@ function MarkLocationMap({ location }) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        // // console.log('coords: ', coords);
+        // console.log('coords: ', coords);
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         // map.setCenter(coords);
         setMarkedLoc({
@@ -75,8 +75,8 @@ function MarkLocationMap({ location }) {
   useEffect(() => {
     setMyLoc(currentLoc);
   }, [currentLoc]);
-  // // console.log('geocode:', geocode);
-  // // console.log('locations: ', locations);
+  // console.log('geocode:', geocode);
+  // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
   // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------

@@ -63,8 +63,8 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
   useEffect(() => {
     setMyLoc(currentLoc);
   }, [currentLoc]);
-  // // console.log('geocode:', geocode);
-  // // console.log('locations: ', locations);
+  // console.log('geocode:', geocode);
+  // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
   // ---------------지오코더로 좌표를 주소로 변환하는 함수들-----------
@@ -112,7 +112,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
   }, [position]);
 
   // console.log('detailAddr: ', detailAddr, 'position: ', position);
-  // // console.log('currentLoc: ', currentLoc);
+  // console.log('currentLoc: ', currentLoc);
   useEffect(() => {
     // console.log('myLoc: ', myLoc);
   }, [myLoc]);
@@ -124,7 +124,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
           style={{ width: '100%', height: '350px' }}
           level="3"
           onClick={(_t, mouseEvent) => {
-            // // console.log('mouseEvent: ', mouseEvent);
+            // console.log('mouseEvent: ', mouseEvent);
             setPosition({
               center: {
                 lat: mouseEvent.latLng.getLat(),
@@ -143,7 +143,7 @@ function MyLocationMap({ setInputAddr, setShowMap }) {
           // 지도 중심의 행정동 표시를 위해 함수 사용
           onCenterChanged={(map) => {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // // console.log('map.getCenter: ', map.getCenter());
+            // console.log('map.getCenter: ', map.getCenter());
           }}
           onDragEnd={(map) => {
             setMyLoc({

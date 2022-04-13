@@ -65,7 +65,7 @@ function SearchInfraMap() {
         // 행정동의 region_type 값은 'H' 이므로
         if (result[i].region_type === 'H') {
           // infoDiv.innerHTML = result[i].address_name;
-          // // console.log('지금 설정된 addr: ', result[i].address_name);
+          // console.log('지금 설정된 addr: ', result[i].address_name);
           setAddr(result[i].address_name);
 
           break;
@@ -86,11 +86,11 @@ function SearchInfraMap() {
     setQuery(addr + ' 동물병원');
   }, [currentLoc, addr === '']);
 
-  // // console.log('addr: ', addr);
-  // // console.log('query: ', query);
-  // // console.log('currentLoc: ', currentLoc);
-  // // console.log('myLoc: ', myLoc);
-  // // console.log('----------');
+  // console.log('addr: ', addr);
+  // console.log('query: ', query);
+  // console.log('currentLoc: ', currentLoc);
+  // console.log('myLoc: ', myLoc);
+  // console.log('----------');
 
   // 키워드 검색기능
   useEffect(() => {
@@ -189,14 +189,14 @@ function SearchInfraMap() {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             });
-            // // console.log('dragend');
+            // console.log('dragend');
           }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             });
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // // console.log('dragend');
+            // console.log('dragend');
           }}
         >
           {/* ---------- */}

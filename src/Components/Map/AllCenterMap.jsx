@@ -6,7 +6,7 @@ import './Map.css';
 const EventMarkerContainer = memo(({ marker_obj }) => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  // // console.log(1);
+  // console.log(1);
   return (
     <>
       <MapMarker
@@ -87,7 +87,7 @@ function AllCenterMap({ centersData, ismain }) {
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-          // // console.log('coords: ', coords);
+          // console.log('coords: ', coords);
           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
           // map.setCenter(coords);
           setLocations((prevLocs) => [
@@ -139,8 +139,8 @@ function AllCenterMap({ centersData, ismain }) {
   useEffect(() => {
     setMyLoc(currentLoc);
   }, [currentLoc]);
-  // // console.log('geocode:', geocode);
-  // // console.log('locations: ', locations);
+  // console.log('geocode:', geocode);
+  // console.log('locations: ', locations);
   // -----------------useEffect 하나 끝---------------------------
 
   //-------------
@@ -217,14 +217,14 @@ function AllCenterMap({ centersData, ismain }) {
           }}
           onTileLoaded={(map) => {
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // // console.log('dragend');
+            // console.log('dragend');
           }}
           onIdle={(map) => {
             setMyLoc({
               center: { lat: map.getCenter().Ma, lng: map.getCenter().La },
             });
             searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-            // // console.log('dragend');
+            // console.log('dragend');
           }}
         >
           {/* 전체 보호센터 위치 마커 */}
