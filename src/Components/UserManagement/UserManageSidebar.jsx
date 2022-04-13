@@ -37,31 +37,31 @@ function UserManageSidebar({ userId }) {
             <div className="flex flex-col">
               <ul>
                 <li className="rounded-lg mb-4">
-                  <li className="p-1 hover:bg-white">
+                  <div className="p-1 hover:bg-white">
                     <div
                       onClick={() => navigate(`/admin/usermanage/${userId}/`)}
                       className="flex items-center gap-4 text-lg text-gray-700 font-semibold px-4 py-3 rounded-lg cursor-pointer"
                     >
                       회원정보
                     </div>
-                  </li>
+                  </div>
                 </li>
+
                 <li className="rounded-lg mb-2">
-                  <li className="p-1 hover:bg-white">
-                    <div>
-                      <div
-                        onClick={() =>
-                          navigate(`/admin/usermanage/${userId}/userassign/`)
-                        }
-                        className="flex items-center gap-4 text-lg text-gray-700 font-semibold px-4 py-3 rounded-lg cursor-pointer"
-                      >
-                        입양신청
-                      </div>
+                  <div className="p-1 hover:bg-white">
+                    <div
+                      onClick={() =>
+                        navigate(`/admin/usermanage/${userId}/userassign/`)
+                      }
+                      className="flex items-center gap-4 text-lg text-gray-700 font-semibold px-4 py-3 rounded-lg cursor-pointer"
+                    >
+                      입양신청
                     </div>
-                  </li>
+                  </div>
                 </li>
+
                 <li className="rounded-lg mb-2 ">
-                  <li className="p-1 hover:bg-white">
+                  <div className="p-1 hover:bg-white">
                     <div
                       onClick={() =>
                         navigate(`/admin/usermanage/${userId}/userreview/`)
@@ -70,10 +70,11 @@ function UserManageSidebar({ userId }) {
                     >
                       입양 다이어리
                     </div>
-                  </li>
+                  </div>
                 </li>
+
                 <li className="rounded-lg mb-2 text-gray-700">
-                  <li className="p-1 hover:bg-white">
+                  <div className="p-1 hover:bg-white">
                     <div
                       onClick={() =>
                         navigate(`/admin/usermanage/${userId}/userinquiry/`)
@@ -82,17 +83,18 @@ function UserManageSidebar({ userId }) {
                     >
                       문의사항
                     </div>
-                  </li>
+                  </div>
                 </li>
+
                 <li className="rounded-lg mb-2 text-gray-700">
-                  <li className="p-1 hover:bg-white">
+                  <div className="p-1 hover:bg-white">
                     <div
                       onClick={() => navigate(`/admin/usermanage/`)}
                       className="flex items-center gap-4 text-lg text-gray-700 font-semibold px-4 py-3 rounded-lg cursor-pointer"
                     >
                       목록으로
                     </div>
-                  </li>
+                  </div>
                 </li>
               </ul>
             </div>

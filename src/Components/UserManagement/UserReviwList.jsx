@@ -104,8 +104,9 @@ function UserReviewList({ userId }) {
               <tbody className="bg-white divide-y divide-gray-200">
                 {UserReviewData?.results
                   .filter((review) => review.user.userID === userId)
-                  .map((review) => (
+                  .map((review, index) => (
                     <tr
+                      key={index}
                       className="cursor-pointer"
                       onClick={() => navigate(`/review/${review.review_no}/`)}
                     >

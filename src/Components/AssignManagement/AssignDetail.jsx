@@ -135,89 +135,91 @@ function AssignDetail({ assignId }) {
 
               <div className="overflow-hidden">
                 <table className="mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      신청 번호
-                    </th>
-                    <td>{assignData?.assignment_no}</td>
-                  </tr>
+                  <tbody>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        신청 번호
+                      </th>
+                      <td>{assignData?.assignment_no}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      신청일
-                    </th>
-                    <td>{assignData?.created_at}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        신청일
+                      </th>
+                      <td>{assignData?.created_at}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      신청자 이름
-                    </th>
-                    <td>{assignData?.adopter_name}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        신청자 이름
+                      </th>
+                      <td>{assignData?.adopter_name}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      회원명
-                    </th>
-                    <td>{assignData?.user.name}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        회원명
+                      </th>
+                      <td>{assignData?.user.name}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      회원 연락처
-                    </th>
-                    <td>{assignData?.user.phone_number}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        회원 연락처
+                      </th>
+                      <td>{assignData?.user.phone_number}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      회원 e-mail
-                    </th>
-                    <td>{assignData?.user.email}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        회원 e-mail
+                      </th>
+                      <td>{assignData?.user.email}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      월 수입
-                    </th>
-                    <td>{assignData?.monthly_income}만</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        월 수입
+                      </th>
+                      <td>{assignData?.monthly_income}만</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      주거 형태
-                    </th>
-                    <td>{assignData?.residential_type}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        주거 형태
+                      </th>
+                      <td>{assignData?.residential_type}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      애완동물 유무
-                    </th>
-                    <td>{assignData?.have_pet_or_not ? '있음' : '없음'}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        애완동물 유무
+                      </th>
+                      <td>{assignData?.have_pet_or_not ? '있음' : '없음'}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      만남 희망일
-                    </th>
-                    <td>{assignData?.date_to_meet}</td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        만남 희망일
+                      </th>
+                      <td>{assignData?.date_to_meet}</td>
+                    </tr>
 
-                  <tr>
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      진행 상태
-                    </th>
-                    <td
-                      onClick={() => {
-                        auth.is_staff && setClicked(!clicked);
-                      }}
-                    >
-                      {assignData?.status}
-                      {auth.is_staff && <span>(수정하려면 클릭)</span>}
-                    </td>
-                  </tr>
+                    <tr>
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        진행 상태
+                      </th>
+                      <td
+                        onClick={() => {
+                          auth.is_staff && setClicked(!clicked);
+                        }}
+                      >
+                        {assignData?.status}
+                        {auth.is_staff && <span>(수정하려면 클릭)</span>}
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
                 {clicked === true && assignData && (
                   <div>
@@ -274,66 +276,68 @@ function AssignDetail({ assignId }) {
                 )}
                 <div className="my-5 overflow-hidden">
                   <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200 bg-white">
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        공고번호
-                      </th>
-                      <td>{assignData?.animal.announce_no}</td>
-                    </tr>
+                    <tbody>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          공고번호
+                        </th>
+                        <td>{assignData?.animal.announce_no}</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        품종
-                      </th>
-                      <td>
-                        {assignData?.animal.kind_of_animal} &gt;{' '}
-                        {assignData?.animal.breed}
-                      </td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          품종
+                        </th>
+                        <td>
+                          {assignData?.animal.kind_of_animal} &gt;{' '}
+                          {assignData?.animal.breed}
+                        </td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        성별
-                      </th>
-                      <td>{assignData?.animal.sex}</td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          성별
+                        </th>
+                        <td>{assignData?.animal.sex}</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        나이
-                      </th>
-                      <td>{assignData?.animal.age}세</td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          나이
+                        </th>
+                        <td>{assignData?.animal.age}세</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        무게
-                      </th>
-                      <td>{assignData?.animal.weight}kg</td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          무게
+                        </th>
+                        <td>{assignData?.animal.weight}kg</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        특징
-                      </th>
-                      <td>{assignData?.animal.info}</td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          특징
+                        </th>
+                        <td>{assignData?.animal.info}</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        관할 기관
-                      </th>
-                      <td>{assignData?.animal.competent_organization}</td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          관할 기관
+                        </th>
+                        <td>{assignData?.animal.competent_organization}</td>
+                      </tr>
 
-                    <tr>
-                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                        보호 상태
-                      </th>
-                      <td className="bg-yellow-100 font-semibold">
-                        {assignData?.animal.protect_status}
-                      </td>
-                    </tr>
+                      <tr>
+                        <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                          보호 상태
+                        </th>
+                        <td className="bg-yellow-100 font-semibold">
+                          {assignData?.animal.protect_status}
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
