@@ -668,8 +668,7 @@ function AssignmentForm({ handleDidSave }) {
           </div>
         </div>
 
-        {/* 
-      <DebugStates fieldValues={fieldValues} /> */}
+        {/* <DebugStates fieldValues={fieldValues} /> */}
       </div>
     </>
   );
