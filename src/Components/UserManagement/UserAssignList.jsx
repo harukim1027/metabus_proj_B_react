@@ -33,7 +33,8 @@ function UserAssignList({ userId }) {
     async (newPage, newQuery = query) => {
       const params = {
         page: newPage,
-        query: userId,
+        query: newQuery,
+        author: userId,
       };
       const { data } = await refetch({ params });
       setPage(newPage);
