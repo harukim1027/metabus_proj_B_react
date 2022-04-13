@@ -109,9 +109,9 @@ function SignupForm() {
     <>
       <div className="header flex flex-wrap justify-center" id="topLoc">
         <div className="mx-5 notice_header rounded-xl overflow-hidden sm:px-20 pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
-          <blockquote class="mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
-            <span class="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
-              <span class="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
+          <blockquote className="mt-5 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl mb-3 font-semibold italic text-center text-slate-900">
+            <span className="mt-7 mb-3 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block">
+              <span className="xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-xl relative text-white">
                 " 회원가입 "
               </span>
             </span>
@@ -325,9 +325,9 @@ function SignupForm() {
                       <option value="강원">강원</option>
                     </select>
 
-                    <div class="pointer-events-none absolute inset-y-0 right-5 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center px-2 text-gray-700">
                       <svg
-                        class="fill-current h-4 w-4"
+                        className="fill-current h-4 w-4"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
@@ -364,9 +364,9 @@ function SignupForm() {
                       <option value="아버지 성함은?">아버지 성함은?</option>
                       <option value="좋아하는 음식은?">좋아하는 음식은?</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-5 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 right-5 flex items-center px-2 text-gray-700">
                       <svg
-                        class="fill-current h-4 w-4"
+                        className="fill-current h-4 w-4"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >

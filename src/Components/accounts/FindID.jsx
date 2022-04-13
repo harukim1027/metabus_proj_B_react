@@ -173,9 +173,9 @@ function FindId() {
                               href="/accounts/login/"
                               className=" text-right text-base hover:bg-blue-200 hover:text-white font-semibold"
                             >
-                              <span class="h-3 w-3 text-gray-700">
-                                <span class=" animate-ping absolute inline-flex h-5 w-5 rounded-full bg-sky-400 opacity-75"></span>
-                                <span class="relative rounded-full h-3 w-3 bg-sky-500"></span>{' '}
+                              <span className="h-3 w-3 text-gray-700">
+                                <span className=" animate-ping absolute inline-flex h-5 w-5 rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative rounded-full h-3 w-3 bg-sky-500"></span>{' '}
                                 로그인하러 가기{' '}
                               </span>
                             </a>

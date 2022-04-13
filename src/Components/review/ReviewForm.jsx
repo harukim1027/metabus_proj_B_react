@@ -249,7 +249,7 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
         <div className="mx-5 review_header rounded-xl overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-10 mb-6 text-2xl font-semibold italic text-center text-slate-900">
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-purple-500 relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">
-              <span class="relative text-white">
+              <span className="relative text-white">
                 {!reviewId
                   ? ' " 입양 다이어리 작성 " '
                   : ' " 입양 다이어리 수정 " '}

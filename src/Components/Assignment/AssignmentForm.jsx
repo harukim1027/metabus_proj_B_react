@@ -270,54 +270,72 @@ function AssignmentForm({ handleDidSave }) {
                       <>
                         <div className="flex justify-between">
                           <table className="">
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
-                                공고번호
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.announce_no}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
-                                축종
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.kind_of_animal}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
-                                품종
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.breed}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
-                                털색
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.color}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
-                                성별
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.sex}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
-                                나이
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.age}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
-                                중성화 여부
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.neutering}</td>
-                            </tr>
-                            <tr className="sm:w-full">
-                              <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
-                                보호상태
-                              </th>
-                              <td>&nbsp;&nbsp;{animal.protect_status}</td>
-                            </tr>
+                            <tbody>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
+                                  공고번호
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.announce_no}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
+                                  축종
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.kind_of_animal}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base  font-bold text-gray-500 tracking-wider">
+                                  품종
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.breed}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
+                                  털색
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.color}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
+                                  성별
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.sex}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
+                                  나이
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.age}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
+                                  중성화 여부
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.neutering}
+                                </td>
+                              </tr>
+                              <tr className="sm:w-full">
+                                <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base font-bold text-gray-500 tracking-wider">
+                                  보호상태
+                                </th>
+                                <td className="border">
+                                  &nbsp;&nbsp;{animal.protect_status}
+                                </td>
+                              </tr>
+                            </tbody>
                           </table>
                         </div>
                       </>

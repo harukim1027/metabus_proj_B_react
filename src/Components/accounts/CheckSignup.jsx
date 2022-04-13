@@ -77,9 +77,9 @@ function CheckSignup(props) {
             <div className="flex justify-center text-center">
               <div className="px-4 py-5 xs:w-full sm:w-2/3">
                 <br />
-                <blockquote class="font-semibold italic text-center text-slate-900">
-                  <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block">
-                    <span class="xl:text-4xl lg:text-2xl md:text-xl sm:text-xl xs:text-xl relative text-white">
+                <blockquote className="font-semibold italic text-center text-slate-900">
+                  <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block">
+                    <span className="xl:text-4xl lg:text-2xl md:text-xl sm:text-xl xs:text-xl relative text-white">
                       " 약관 및 개인정보 처리방침 "
                     </span>
                   </span>

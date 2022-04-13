@@ -144,9 +144,9 @@ function ChangePassword() {
                       <option value="아버지 성함은?">아버지 성함은?</option>
                       <option value="좋아하는 음식은?">좋아하는 음식은?</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                       <svg
-                        class="fill-current h-4 w-4"
+                        className="fill-current h-4 w-4"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
@@ -241,7 +241,7 @@ function ChangePassword() {
                                   }
                                   className="text-xl hover:bg-blue-200 hover:text-white font-semibold"
                                 >
-                                  <span class="h-3 w-3 text-blue-900 bg-gray-200 hover:text-white">
+                                  <span className="h-3 w-3 text-blue-900 bg-gray-200 hover:text-white">
                                     링크로 이동하기
                                   </span>
                                 </button>

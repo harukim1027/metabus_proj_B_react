@@ -47,9 +47,9 @@ function CentersAnimals() {
   return (
     <div className="bg-white">
       <NewNav />
-      <blockquote class="mt-10 text-6xl font-semibold italic text-center text-slate-900">
-        <span class="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
-          <span class="relative text-white">"크루원 신청하기"</span>
+      <blockquote className="mt-10 text-6xl font-semibold italic text-center text-slate-900">
+        <span className="mt-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-3xl">
+          <span className="relative text-white">"크루원 신청하기"</span>
         </span>
       </blockquote>
       <div className="mt-20">
@@ -57,12 +57,12 @@ function CentersAnimals() {
           🏠
         </h2>
         <h2>
-          <h2 className=" text-2xl text-black flex justify-center font-bold ">
+          <span className=" text-2xl text-black flex justify-center font-bold ">
             {centerId}
-          </h2>
-          <h2 className=" text-base text-black flex justify-center ">
+          </span>
+          <span className=" text-base text-black flex justify-center ">
             &nbsp; 에서 보호중인 동물들
-          </h2>
+          </span>
         </h2>
 
         <hr className="mt-5" />
@@ -78,6 +78,7 @@ function CentersAnimals() {
           .filter((a) => a.protect_status === '보호중')
           .map((animal) => (
             <div
+              key={animal.announce_no}
               className=" mx-20 box_assign shadow-md rounded-lg my-3 overflow-hidden hover:scale-105 hover:translate-x-5 duration-150 h-60 cursor-pointer bg-white"
               onClick={() => {
                 navigate(`/assignment/checkanimal/${animal.announce_no}/`);
@@ -90,38 +91,40 @@ function CentersAnimals() {
               />
               <div className="py-5 flex-1">
                 <table className="mb-5 mr-5 mt-6 border text-center min-w-full divide-y divide-gray-200">
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      축종
-                    </th>
-                    <td className="">{animal.kind_of_animal}</td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      품종
-                    </th>
-                    <td>{animal.breed}</td>
-                  </tr>
+                  <tbody>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        축종
+                      </th>
+                      <td className="border">{animal.kind_of_animal}</td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        품종
+                      </th>
+                      <td className="border">{animal.breed}</td>
+                    </tr>
 
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      성별
-                    </th>
-                    <td>{animal.sex}</td>
-                  </tr>
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      나이
-                    </th>
-                    <td>{animal.age}</td>
-                  </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        성별
+                      </th>
+                      <td className="border">{animal.sex}</td>
+                    </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        나이
+                      </th>
+                      <td className="border">{animal.age}</td>
+                    </tr>
 
-                  <tr className="sm:w-full">
-                    <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
-                      특징
-                    </th>
-                    <td>{animal.info}</td>
-                  </tr>
+                    <tr className="sm:w-full">
+                      <th className="border border-slate-200 bg-gray-50 px-1 py-2 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
+                        특징
+                      </th>
+                      <td className="border">{animal.info}</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
