@@ -52,8 +52,6 @@ function MylostPetBoard() {
       const params = {
         page: newPage,
         query: auth.userID,
-        category:
-          fieldValues.category === '입양 다이어리' ? '' : fieldValues.category,
       };
       const { data } = await refetch({ params });
       setPage(newPage);

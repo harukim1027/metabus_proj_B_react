@@ -186,11 +186,13 @@ function MyComments() {
                 {commentList && (
                   <>
                     {commentList.results
-                      .filter((a) => a.user === auth.userID)
+                      .filter((a) => a.user.userID === auth.userID)
                       .map((review) => (
                         <tr
                           key={review.review_comment_no}
-                          onClick={() => navigate(`/review/${review.review}/`)}
+                          onClick={() =>
+                            navigate(`/review/${review.review.review_no}/`)
+                          }
                           className="cursor-pointer"
                         >
                           <td className="py-4 lg:text-xl md:text-base sm:text-sm xs:text-xxs">
@@ -205,7 +207,7 @@ function MyComments() {
                             </span>
                           </td>
                           <td className="px-3 py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs whitespace-nowrap">
-                            {review.user}
+                            {review.user.nickname}
                           </td>
                           <td className="py-4 sm:text-sm xs:text-xxs">
                             {review.created_at.slice(0, 10)}

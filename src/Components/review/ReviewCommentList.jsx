@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import ReviewCommentDetail from './ReviewCommentDetail';
 import ReviewCommentForm from './ReviewCommentForm';
-import 'css/Comment.css';
+import 'css/pagination_review.css';
 import TimeAgo from './TimeAgo';
 
 function ReviewCommentList({ reviewId }) {
@@ -25,7 +25,7 @@ function ReviewCommentList({ reviewId }) {
               <div class="tweet-content">
                 <div class="tweet-header">
                   <span class="fullname">
-                    <strong>{comment.user}</strong>
+                    <strong>{comment.user.nickname}</strong>
                   </span>
                   <span class="tweet-time">
                     {' '}

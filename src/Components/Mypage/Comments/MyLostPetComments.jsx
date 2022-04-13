@@ -191,13 +191,13 @@ function MyLostPetComments() {
                 {commentList && (
                   <>
                     {commentList.results
-                      .filter((a) => a.user === auth.userID)
+                      .filter((a) => a.user.userID === auth.userID)
                       .map((lostpetcomments) => (
                         <tr
                           key={lostpetcomments.lost_comment_no}
                           onClick={() =>
                             navigate(
-                              `/lostpetboard/${lostpetcomments.lost_board_no}/`,
+                              `/lostpetboard/${lostpetcomments.lost_board_no.lost_board_no}/`,
                             )
                           }
                           className="cursor-pointer"
@@ -216,7 +216,7 @@ function MyLostPetComments() {
                             </span>
                           </td>
                           <td className="px-3 py-4 xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-xxs whitespace-nowrap">
-                            {lostpetcomments.user}
+                            {lostpetcomments.user.nickname}
                           </td>
                           <td className="py-4 sm:text-sm xs:text-xxs">
                             {lostpetcomments.created_at.slice(0, 10)}

@@ -31,7 +31,7 @@ function ReviewCommentDetail({ comment, reviewId, refetch }) {
 
   return (
     <>
-      {(auth.userID === comment?.user || auth.is_staff) && (
+      {(auth.userID === comment?.user.userID || auth.is_staff) && (
         <button
           className="sm:w-9 text-gray-400"
           onMouseOver={() => setCommentID(comment?.review_comment_no)}
@@ -42,7 +42,7 @@ function ReviewCommentDetail({ comment, reviewId, refetch }) {
           수정
         </button>
       )}
-      {(auth.userID === comment?.user || auth.is_staff) && (
+      {(auth.userID === comment?.user.userID || auth.is_staff) && (
         <button
           className="sm:w-7 text-gray-400"
           onMouseOver={() => setDelComment(comment?.review_comment_no)}

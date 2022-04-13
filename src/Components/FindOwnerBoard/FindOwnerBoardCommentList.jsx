@@ -24,7 +24,7 @@ function FindOwnerBoardCommentList({ findboardId }) {
               <div className="tweet-content">
                 <div className="tweet-header">
                   <span className="fullname">
-                    <strong>{comment.user}</strong>
+                    <strong>{comment.user.nickname}</strong>
                   </span>
                   <span className="tweet-time">
                     {' '}
