@@ -11,11 +11,11 @@ function ReviewCommentList({ review, refetch, reviewId }) {
     <>
       {review?.comments.map((comment) => (
         <div className="comment-main col-6">
-          <ol class="tweet-list">
-            <li class="tweet-card">
-              <div class="tweet-content">
-                <div class="tweet-header">
-                  <span class="fullname">
+          <ol className="tweet-list">
+            <li className="tweet-card">
+              <div className="tweet-content">
+                <div className="tweet-header">
+                  <span className="fullname">
                     <strong>{comment.user.nickname}</strong>
                   </span>
                   <span className="tweet-time">
