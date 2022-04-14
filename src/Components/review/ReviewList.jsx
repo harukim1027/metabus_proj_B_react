@@ -138,6 +138,13 @@ function ReviewList() {
             </div>
           </div>
           <hr className="mb-3" />
+          {reviewList?.results?.length === 0 && (
+            <>
+              <div className="flex flex-wrap justify-center rounded mt-10">
+                <img src="/not_yet1.png" alt="" />
+              </div>
+            </>
+          )}
           <div className="flex flex-wrap justify-center rounded mb-20 mt-10">
             {reviewList?.results?.map((review) => (
               <div
@@ -149,13 +156,13 @@ function ReviewList() {
             ))}
           </div>
           {auth.isLoggedIn && !auth.is_staff && (
-            <div className="flex justify-end mr-5">
+            <div className="float-right">
               <button
                 onClick={() => navigate('/review/new/')}
-                className="hover:scale-110 xs:w-10 sm:w-14"
+                className="hover:scale-110 w-3/4 h-3/4"
                 readOnly
               >
-                <img src="/pen2.png" alt="button"></img>
+                <img src="/not_yet2.png" alt="button"></img>
               </button>
             </div>
           )}
