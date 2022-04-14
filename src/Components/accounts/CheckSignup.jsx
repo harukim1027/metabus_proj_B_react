@@ -83,7 +83,7 @@ function CheckSignup(props) {
                       " 약관 및 개인정보 처리방침 "
                     </span>
                   </span>
-                  <p className=" md:text-3xl sm:text-xl xs:text-xl mt-3 mb-3">
+                  <p className=" md:text-2xl sm:text-xl xs:text-xl mt-3 mb-3">
                     안내를 반드시 읽고, 동의해주세요 !
                   </p>
                 </blockquote>
@@ -113,65 +113,61 @@ function CheckSignup(props) {
                   </div>
                 </div>
 
-                {firstCheckBoxActive && (
-                  <>
-                    <hr className="pb-6" />
-                    <div
-                      className="mx-5"
-                      style={{
-                        visibility: 'inherit',
-                        opacity: 1,
-                        display: 'block',
-                        transform:
-                          'matrix(1, 0, 0, 1, 0, 0) translate3d(0px, 0px, 0px)',
-                      }}
-                    >
-                      <p className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-sm after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-gray-700 font-bold mb-2">
-                        개인정보 수집 및 이용에 관한 동의 사항 [ 필수 ]
-                      </p>
-                      <Agreementation />
+                <hr className="pb-6" />
+                <div
+                  className="mx-5"
+                  style={{
+                    visibility: 'inherit',
+                    opacity: 1,
+                    display: 'block',
+                    transform:
+                      'matrix(1, 0, 0, 1, 0, 0) translate3d(0px, 0px, 0px)',
+                  }}
+                >
+                  <p className="xl:text-xl lg:text-xl md:text-base sm:text-sm xs:text-sm after:content-['*'] after:ml-0.5 after:text-red-500 block uppercase tracking-wide text-gray-700 font-bold mb-2">
+                    개인정보 수집 및 이용에 관한 동의 사항 [ 필수 ]
+                  </p>
+                  <Agreementation />
 
-                      <div className="xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm sm:mt-0 sm:col-span-2 text-right pb-5 font-bold text-gray-700">
-                        <label>개인정보 수집 및 이용에 동의합니다 </label>
-                        <input
-                          type="checkbox"
-                          label="개인정보 수집 및 이용에 동의합니다."
-                          checked={contract_check ? 'checked' : null}
-                          onClick={isSecondCheckBoxClicked}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="mx-5 pb-3 text-right ">
-                      <label className="xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm sm:mt-0 sm:col-span-2 bg-yellow-100 font-bold">
-                        모두 동의합니다
-                        <input
-                          checked={all_check ? 'checked' : null}
-                          type="checkbox"
-                          onClick={() => {
-                            set_all_check(!all_check);
-                          }}
-                        />
-                      </label>
-                    </div>
-                    <hr />
-                    <div className=" lg:text-2xl md:text-xl sm:text-xl xs:text-base sm:mt-0 sm:col-span-2 text-red-400 text-center">
-                      <br />
-                      약관 동의를 해야 회원가입을 할 수 있어요 ! 🐰
-                    </div>
-                    <div className="text-center my-3">
-                      {all_check && (
-                        <Button
-                          onClick={() => navigate('/accounts/signup/')}
-                          disabled
-                        >
-                          회원가입
-                        </Button>
-                      )}
-                    </div>
-                    <br />
-                  </>
-                )}
+                  <div className="xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm sm:mt-0 sm:col-span-2 text-right pb-5 font-bold text-gray-700">
+                    <label>개인정보 수집 및 이용에 동의합니다 </label>
+                    <input
+                      type="checkbox"
+                      label="개인정보 수집 및 이용에 동의합니다."
+                      checked={contract_check ? 'checked' : null}
+                      onClick={isSecondCheckBoxClicked}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="mx-5 pb-3 text-right ">
+                  <label className="xl:text-xl lg:text-xl md:text-base sm:text-base xs:text-sm sm:mt-0 sm:col-span-2 bg-yellow-100 font-bold">
+                    모두 동의합니다
+                    <input
+                      checked={all_check ? 'checked' : null}
+                      type="checkbox"
+                      onClick={() => {
+                        set_all_check(!all_check);
+                      }}
+                    />
+                  </label>
+                </div>
+                <hr />
+                <div className=" lg:text-2xl md:text-xl sm:text-xl xs:text-base sm:mt-0 sm:col-span-2 text-red-400 text-center">
+                  <br />
+                  약관 동의를 해야 회원가입을 할 수 있어요 ! 🐰
+                </div>
+                <div className="text-center my-3">
+                  {all_check && (
+                    <Button
+                      onClick={() => navigate('/accounts/signup/')}
+                      disabled
+                    >
+                      회원가입
+                    </Button>
+                  )}
+                </div>
+                <br />
               </div>
             </div>
           </main>
