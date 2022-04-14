@@ -46,7 +46,6 @@ function MainScreen({ activeCount, setActiveCount }) {
 
   return (
     <>
-      <div></div>
       <div id="header_warp">
         {/* <!-- 메인 --> */}
         <div>
@@ -58,6 +57,7 @@ function MainScreen({ activeCount, setActiveCount }) {
                   : 'page section01 preEle'
               }
               onWheel={(e) => wheel(e)}
+              onTouchMove={(e) => wheel(e)}
             >
               <img
                 className="xs:w-5/6 xl:w-3/5"
@@ -69,7 +69,7 @@ function MainScreen({ activeCount, setActiveCount }) {
                 <div className="inner">
                   <h2>
                     Don't Buy A Family
-                    <br /> Become The Family
+                    <br /> Be A Family
                   </h2>
                   <p>
                     METABUS는 <br /> 사지 않고 <br />
@@ -83,7 +83,7 @@ function MainScreen({ activeCount, setActiveCount }) {
                 <div className="inner">
                   <h2>
                     Don't Buy A Family
-                    <br /> Become The Family
+                    <br /> Be A Family
                   </h2>
                   <p>
                     METABUS는 <br />
