@@ -83,7 +83,7 @@ function CheckSignup(props) {
                       " 약관 및 개인정보 처리방침 "
                     </span>
                   </span>
-                  <p className="xl:text-4xl lg:text-2xl md:text-xl sm:text-xl xs:text-xl mt-3 mb-3">
+                  <p className=" md:text-3xl sm:text-xl xs:text-xl mt-3 mb-3">
                     안내를 반드시 읽고, 동의해주세요 !
                   </p>
                 </blockquote>
@@ -155,7 +155,7 @@ function CheckSignup(props) {
                       </label>
                     </div>
                     <hr />
-                    <div className="xl:text-3xl lg:text-2xl md:text-xl sm:text-xl xs:text-base sm:mt-0 sm:col-span-2 text-red-400 text-center">
+                    <div className=" lg:text-2xl md:text-xl sm:text-xl xs:text-base sm:mt-0 sm:col-span-2 text-red-400 text-center">
                       <br />
                       약관 동의를 해야 회원가입을 할 수 있어요 ! 🐰
                     </div>

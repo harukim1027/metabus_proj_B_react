@@ -52,7 +52,7 @@ function NewNav({ userID, reviewList }) {
             className="btn-open-gnb"
           >
             <img
-              className="hover:scale-110 duration-200"
+              className="xs:w-3/4 xs:h-3/4 sm:w-full sm:h-full hover:scale-110 duration-200"
               src="/sidemenuicon3.png"
               alt="button"
             ></img>
