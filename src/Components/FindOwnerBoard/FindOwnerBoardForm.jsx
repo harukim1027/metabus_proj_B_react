@@ -215,32 +215,13 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     });
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [findBoard]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [topLocation]);
-
   //-------------
 
   return (
     <>
       {/* review_header : 배경 흰색 */}
-      <div className="header flex flex-wrap justify-center" id="topLoc">
-        <div className="mx-5 review_header rounded-xl overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+      <div className="header flex flex-wrap justify-center">
+        <div className="mx-5 review_header rounded-xl shadow-md overflow-hidden md:px-20 pt-5 pb-10 my-10  lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           <blockquote className="mt-10 mb-6 text-2xl font-semibold italic text-center text-slate-900">
             <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-black relative inline-block  xs:text-2xl sm:text-4xl lg:text-6xl  font-extrabold">
               <span className="relative text-white">
@@ -268,7 +249,7 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
 
       {/* FindOwnerBoard 글 폼 */}
       <div className="header flex flex-wrap justify-center">
-        <div className="mx-5 notice_header rounded-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
+        <div className="mx-5 notice_header rounded-md shadow-md overflow-hidden pt-5 pb-10 my-10 lg:w-2/3 md:w-5/6 sm:w-full xs:w-full">
           {/* 제목 입력 input 박스 */}
           <div className="w-full">
             <form
@@ -685,7 +666,10 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                     이미지 첨부
                   </span>
                   <h2 className="text-gray-500 text-xxs text-">
-                    ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                    ( 이미지는 필수로 최소{' '}
+                    <span className="text-red-500 font-semibold">1개</span> 이상
+                    등록해야하고, 최대{' '}
+                    <span className="text-red-500 font-semibold">5개</span>까지
                     등록할 수 있습니다. )
                   </h2>
 
@@ -747,10 +731,14 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                 <div className="my-5 w-full">
                   {/* 수정시 */}
                   <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
-                    이미지 추가
+                    이미지 추가 (추가 시, 파일을 선택한 후 아래 ➕ 버튼을
+                    눌러주세요.)
                   </span>
                   <h2 className="text-gray-500 text-xxs text-">
-                    ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
+                    ( 이미지는 필수로 최소{' '}
+                    <span className="text-red-500 font-semibold">1개</span> 이상
+                    등록해야하고, 최대{' '}
+                    <span className="text-red-500 font-semibold">5개</span>까지
                     등록할 수 있습니다. )
                   </h2>
 
@@ -806,15 +794,18 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
                         </p>
                       ))}
                     </ul>
-                    <button onClick={(e) => handleAddImage(e)}>
-                      사진 추가하기
+                    <button
+                      onClick={(e) => handleAddImage(e)}
+                      className="font-bold hover:scale-110 duration-150 ml-5"
+                    >
+                      ➕사진 추가하기
                     </button>
                   </div>
                 </div>
               )}
-              <h2>
-                ※글 작성 시 동물 주인과의 연락을 위해 회원정보에 저장된
-                전화번호가 자동으로 저장됩니다.
+              <h2 className="mb-5 text-center">
+                ※글 작성 시 발견자와의 연락을 위해 회원정보에 저장된 전화번호가
+                자동으로 저장됩니다.
               </h2>
 
               {/* 저장, 취소 버튼 */}
@@ -852,12 +843,12 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
         </div>
       </div>
 
-      <DebugStates
+      {/* <DebugStates
         findBoard={findBoard}
         // getLoading={getLoading}
         // getError={getError}
         fieldValues={fieldValues}
-      />
+      /> */}
     </>
   );
 }

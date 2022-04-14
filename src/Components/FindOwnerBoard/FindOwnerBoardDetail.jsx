@@ -187,6 +187,7 @@ function FindOwnerBoardDetail({ findboardId }) {
                         <img src={findboard.board_image?.[4]?.image} alt="" />
                       )}
                     </div>
+                    <h2 className="text-lg">{findboard?.content}</h2>
                   </div>
 
                   <div className="border-2 rounded-md mb-5 py-2 px-3">

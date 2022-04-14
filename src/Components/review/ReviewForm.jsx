@@ -565,8 +565,11 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
                       이미지 첨부
                     </span>
                     <h2 className="text-gray-500 text-xxs text-">
-                      ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
-                      등록할 수 있습니다. )
+                      ( 이미지는 필수로 최소{' '}
+                      <span className="text-red-500 font-semibold">1개</span>{' '}
+                      이상 등록해야하고, 최대{' '}
+                      <span className="text-red-500 font-semibold">5개</span>
+                      까지 등록할 수 있습니다. )
                     </h2>
 
                     <div className="bg-white py-5">
@@ -629,11 +632,15 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
                   <div className="my-5 w-full">
                     {/* 수정시 */}
                     <span className=" block tracking-wide text-blue-900 text-base font-bold mb-2 ">
-                      이미지 추가
+                      이미지 추가 (추가 시, 파일을 선택한 후 아래 ➕ 버튼을
+                      눌러주세요.)
                     </span>
                     <h2 className="text-gray-500 text-xxs text-">
-                      ( 이미지는 필수로 최소 1개 이상 등록해야하고, 최대 5개까지
-                      등록할 수 있습니다. )
+                      ( 이미지는 필수로 최소{' '}
+                      <span className="text-red-500 font-semibold">1개</span>{' '}
+                      이상 등록해야하고, 최대{' '}
+                      <span className="text-red-500 font-semibold">5개</span>
+                      까지 등록할 수 있습니다. )
                     </h2>
 
                     <div className="bg-white py-5">
@@ -690,8 +697,11 @@ function ReviewForm({ review, reviewId, handleDidSave, refetchReview }) {
                           ),
                         )}
                       </ul>
-                      <button onClick={(e) => handleAddImage(e)}>
-                        사진 추가하기
+                      <button
+                        onClick={(e) => handleAddImage(e)}
+                        className="font-bold hover:scale-110 duration-150 ml-5"
+                      >
+                        ➕사진 추가하기
                       </button>
                     </div>
                   </div>

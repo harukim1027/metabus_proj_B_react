@@ -228,6 +228,7 @@ function LostPetBoardDetail({ lostpetboardId }) {
                         />
                       )}
                     </div>
+                    <h2 className="text-lg">{lostpetboard?.content}</h2>
                   </div>
                   <div className="border-2 rounded-md mb-5 py-2 px-3">
                     <ul>
