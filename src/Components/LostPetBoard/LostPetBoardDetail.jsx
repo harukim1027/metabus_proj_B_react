@@ -192,9 +192,6 @@ function LostPetBoardDetail({ lostpetboardId }) {
                     </span>
                   </div>
                   <div className="border-2 p-2 rounded-md mb-5">
-                    <h2 className="text-lg font-semibold mb-10 ml-5">
-                      {lostpetboard.content}
-                    </h2>
                     <div className="flex justify-center">
                       {lostpetboard.board_image && (
                         <img
@@ -235,7 +232,9 @@ function LostPetBoardDetail({ lostpetboardId }) {
                         />
                       )}
                     </div>
-                    <h2 className="text-lg">{lostpetboard?.content}</h2>
+                    <h2 className="text-lg font-semibold mb-10 ml-5">
+                      {lostpetboard.content}
+                    </h2>
                   </div>
                   <div className="border-2 rounded-md mb-5 py-2 px-3">
                     <ul>

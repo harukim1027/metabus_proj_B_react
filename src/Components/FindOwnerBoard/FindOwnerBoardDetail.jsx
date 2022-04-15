@@ -166,9 +166,6 @@ function FindOwnerBoardDetail({ findboardId }) {
                     </span>
                   </div>
                   <div className="border-2 p-2 rounded-md mb-5">
-                    <h2 className="text-lg font-semibold mb-10 ml-5">
-                      {findboard.content}
-                    </h2>
                     <div className="flex justify-center">
                       {findboard.board_image && (
                         <img src={findboard.board_image?.[0]?.image} alt="" />
@@ -194,7 +191,9 @@ function FindOwnerBoardDetail({ findboardId }) {
                         <img src={findboard.board_image?.[4]?.image} alt="" />
                       )}
                     </div>
-                    <h2 className="text-lg">{findboard?.content}</h2>
+                    <h2 className="text-lg font-semibold mb-10 ml-5">
+                      {findboard.content}
+                    </h2>
                   </div>
 
                   <div className="border-2 rounded-md mb-5 py-2 px-3">
