@@ -145,7 +145,13 @@ function InquiryList() {
           </div>
 
           <hr className="mb-3" />
-
+          {inquiryList?.results?.length === 0 && (
+            <>
+              <div className="flex flex-wrap justify-center rounded mt-10">
+                <img src="/not_yet_inquiry.png" alt="" />
+              </div>
+            </>
+          )}
           <div className="mb-5">
             <table className="mb-5 border text-center min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

@@ -38,7 +38,7 @@ function PageAssignDetail() {
       <div className="text-center mt-5">
         <button
           className="font-bold text-xl"
-          onClick={() => navigate(`/admin/assignmanage/`)}
+          onClick={() => window.history.back()}
         >
           이전으로
         </button>

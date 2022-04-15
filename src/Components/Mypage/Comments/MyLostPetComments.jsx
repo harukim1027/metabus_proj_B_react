@@ -155,7 +155,13 @@ function MyLostPetComments() {
               </div>
             </div>
           </div>
-
+          {commentList?.results?.length === 0 && (
+            <>
+              <div className="flex flex-wrap justify-center rounded mt-10">
+                <img src="/not_yet_comment.png" alt="" />
+              </div>
+            </>
+          )}
           <div className="mb-5 overflow-hidden">
             <table className="mt-3 mb-5 mr-5 border text-center min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -227,6 +233,14 @@ function MyLostPetComments() {
                 )}
               </tbody>
             </table>
+            <div className="text-center mt-20 mb-10">
+              <button
+                className="font-bold text-xl"
+                onClick={() => window.history.back()}
+              >
+                이전으로
+              </button>
+            </div>
           </div>
           <ReactPaginate
             previousLabel="<"
