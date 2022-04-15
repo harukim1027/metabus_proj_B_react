@@ -6,10 +6,13 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Forbidden from 'Components/ErrorPage/Forbidden403';
 import NewNav from 'Components/Main/NewNav';
+import { useNavigate } from 'react-router-dom';
 
 function PageAssignDetail() {
   const { assignId } = useParams();
   const { auth } = useAuth();
+  const navigate = useNavigate();
+
   const [{ data: assignData }, refetch] = useApiAxios(
     {
       url: `/adopt_assignment/api/assignment/${assignId}/`,
@@ -32,6 +35,14 @@ function PageAssignDetail() {
       ) : (
         <Forbidden />
       )}
+      <div className="text-center mt-5">
+        <button
+          className="font-bold text-xl"
+          onClick={() => navigate(`/admin/assignmanage/`)}
+        >
+          이전으로
+        </button>
+      </div>
     </>
   );
 }

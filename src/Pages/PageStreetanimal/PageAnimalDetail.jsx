@@ -7,10 +7,20 @@ function PageAnimalDetail() {
   const { animalId } = useParams();
 
   return (
-    <div>
-      <NewNav />
-      <AnimalDetail animalId={animalId} />
-    </div>
+    <>
+      <div>
+        <NewNav />
+        <AnimalDetail animalId={animalId} />
+      </div>
+      <div className="text-center">
+        <button
+          className="font-bold text-xl"
+          onClick={() => window.history.back()}
+        >
+          이전으로
+        </button>
+      </div>
+    </>
   );
 }
 

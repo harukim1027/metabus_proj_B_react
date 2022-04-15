@@ -17,6 +17,14 @@ function PageUserInquiryList() {
           <UserInquiryList userId={userId} />
         </div>
       </div>
+      <div className="text-center">
+        <button
+          className="font-bold text-xl"
+          onClick={() => window.history.back()}
+        >
+          이전으로
+        </button>
+      </div>
     </>
   );
 }

@@ -6,14 +6,24 @@ import ReviewList from 'Components/review/ReviewList';
 
 function PageReviewIndex() {
   return (
-    <div>
-      <NewNav />
-      <CommunitySidebar />
+    <>
+      <div>
+        <NewNav />
+        <CommunitySidebar />
 
-      {/* <Alert /> */}
-      <ReviewList />
-      {/* <Fame /> */}
-    </div>
+        {/* <Alert /> */}
+        <ReviewList />
+        {/* <Fame /> */}
+      </div>
+      <div className="text-center">
+        <button
+          className="font-bold text-xl"
+          onClick={() => window.history.back()}
+        >
+          이전으로
+        </button>
+      </div>
+    </>
   );
 }
 
