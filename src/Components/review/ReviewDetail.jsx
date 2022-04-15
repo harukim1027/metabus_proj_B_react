@@ -144,7 +144,10 @@ function ReviewDetail({ reviewId }) {
 
                   <div className="border-2 rounded-md mb-5 py-2 px-3">
                     {review.review_image?.map((image, index) => (
-                      <div className="h-2/3 overflow-hidden" key={index}>
+                      <div
+                        className="h-full w-full overflow-hidden"
+                        key={index}
+                      >
                         <img src={image.image} alt="" />
                       </div>
                     ))}
