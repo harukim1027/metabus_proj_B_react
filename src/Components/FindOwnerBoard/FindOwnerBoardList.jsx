@@ -76,6 +76,13 @@ function FindOwnerBoardList() {
     }
   };
 
+  // 처음 화면 로딩시 최상단으로 로딩
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   //-------------
 
   return (
@@ -225,18 +232,6 @@ function FindOwnerBoardList() {
               </div>
             ))}
           </div>
-
-          {auth.isLoggedIn && !auth.is_staff && (
-            <div className="flex justify-end mr-5">
-              <button
-                onClick={() => navigate('/findboard/new/')}
-                className="hover:scale-110 xs:w-10 sm:w-14"
-                readOnly
-              >
-                <img src="/pen2.png" alt="button"></img>
-              </button>
-            </div>
-          )}
           <ReactPaginate
             previousLabel="<"
             breakLabel="..."
@@ -247,6 +242,20 @@ function FindOwnerBoardList() {
             renderOnZeroPageCount={null}
             className="pagination_findBoard"
           />
+          {auth.isLoggedIn && !auth.is_staff && (
+            <div className="flex justify-between">
+              <div></div>
+              <div>
+                <button
+                  onClick={() => navigate('/findboard/new/')}
+                  className="hover:scale-110 w-40"
+                  readOnly
+                >
+                  <img src="/not_yet2.png" alt="button"></img>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

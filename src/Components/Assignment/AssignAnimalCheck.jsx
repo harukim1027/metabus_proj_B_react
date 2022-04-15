@@ -141,7 +141,7 @@ function AssignAnimalCheck() {
                                     <img
                                       src={animal.image_url1}
                                       alt="동물 이미지1"
-                                      className="md:mx-20  md:w-3/4 md:h-3/4 cursor-pointer"
+                                      className="md:mx-20  md:w-3/4 md:h-3/4 lg:w-1/2 cursor-pointer"
                                       onClick={() =>
                                         window.open(animal.image_url3)
                                       }

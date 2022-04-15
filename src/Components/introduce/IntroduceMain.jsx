@@ -16,14 +16,17 @@ function IntroduceMain() {
     5: useScrollFadeIn('down', 1.5, 0.6),
   };
 
-  const goTop = () => {
+  const goTopSmooth = () => {
     window.scrollTo({
       top: 0,
+      behavior: 'smooth',
     });
   };
 
   useEffect(() => {
-    goTop();
+    window.scrollTo({
+      top: 0,
+    });
   }, []);
 
   //-------------
@@ -278,7 +281,7 @@ function IntroduceMain() {
         <button
           className="mb-5  hover:animate-bounce rounded-lg text-5xl"
           onClick={() => {
-            goTop();
+            goTopSmooth();
           }}
         >
           🔝

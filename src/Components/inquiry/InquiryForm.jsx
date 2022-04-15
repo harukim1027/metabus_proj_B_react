@@ -81,24 +81,12 @@ function InquiryForm({ inquiryId, handleDidSave }) {
     });
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // 처음 화면 로딩시 최상단으로 로딩
   useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [inquiry]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
     window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
+      top: 0,
     });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [topLocation]);
+  }, []);
 
   //-------------
 

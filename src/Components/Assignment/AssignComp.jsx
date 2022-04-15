@@ -32,25 +32,12 @@ function AssignComp({ assignId, assignData }) {
     refetch();
   }, [assignData]);
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // 처음 화면 로딩시 최상단으로 로딩
   useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [adaniData]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
     window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
+      top: 0,
     });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [adaniData]);
-
+  }, []);
   //-------------
 
   return (
@@ -81,7 +68,7 @@ function AssignComp({ assignId, assignData }) {
             공고번호 : {adaniData?.announce_no}
           </h2>
           <div className="flex justify-center my-3">
-            <img src={adaniData?.image_url1} alt="" className="h-80" />
+            <img src={adaniData?.image_url1} alt="" className=" w-80" />
           </div>
           <div className="flex justify-center my-3">
             <ul className=" w-1/3 font-semibold text-lg">

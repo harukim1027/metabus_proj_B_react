@@ -13,27 +13,6 @@ const INITIAL_FIELD_VALUES = { userID: '', password: '' };
 function LoginForm() {
   const navigate = useNavigate();
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
-  useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, []);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
-    window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
-    });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [topLocation]);
-
-  //-------------
-
   // post요청은 하단에 에러메시지가 위치.
   const { login } = useAuth();
 
@@ -100,6 +79,15 @@ function LoginForm() {
     });
     // console.log(fieldValues);
   };
+
+  // 처음 화면 로딩시 최상단으로 로딩
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
+  //-------------
 
   return (
     <div className="mt-10 accounts_header mx-5" id="topLoc">

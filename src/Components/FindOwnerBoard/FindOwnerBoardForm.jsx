@@ -215,6 +215,14 @@ function FindOwnerBoardForm({ findBoardId, handleDidSave }) {
     });
   };
 
+  // 처음 화면 로딩시 최상단으로 로딩
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, []);
+
   //-------------
 
   return (

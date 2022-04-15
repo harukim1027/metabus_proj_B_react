@@ -79,24 +79,12 @@ function AssignDetail({ assignId }) {
     }
   };
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // 처음 화면 로딩시 최상단으로 로딩
   useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [assignData]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
     window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
+      top: 0,
     });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [assignData]);
+  }, []);
 
   //-------------
 
@@ -231,7 +219,7 @@ function AssignDetail({ assignId }) {
                         savedPost && setClicked(0);
                         if (savedPost?.status === '입양 완료') {
                           patchAnimalStatus({
-                            data: { protect_status: '입양 완료!' },
+                            data: { protect_status: '입양 완료' },
                           });
                         } else if (savedPost?.status === '거절') {
                           patchAnimalStatus({
@@ -435,15 +423,15 @@ function AssignDetail({ assignId }) {
                           ) : (
                             <>
                               {assignData.animal.image_url1 && (
-                                <span className="flex justify-center h-2/3 w-11/12">
+                                <div className="flex justify-center">
                                   {assignData.animal.image_url1 && (
                                     <img
                                       src={assignData.animal.image_url1}
                                       alt="동물 이미지"
-                                      className="h-full w-full"
+                                      className="w-1/3"
                                     />
                                   )}
-                                </span>
+                                </div>
                               )}
                             </>
                           )}

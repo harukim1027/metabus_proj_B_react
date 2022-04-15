@@ -12,7 +12,6 @@ import PageAdminMain from 'Pages/PageAdmin/PageAdminMain';
 // admin/Animal
 import PageAnimalList from 'Pages/PageStreetanimal/PageAnimalList';
 import PageAnimalDetail from 'Pages/PageStreetanimal/PageAnimalDetail';
-import PageAnimalForm from 'Pages/PageStreetanimal/PageAnimalForm';
 // admin/UserManagement
 import PageUserManagementIndex from 'Pages/PageUserManagement/PageUserManagementIndex';
 import PageUserManagementDetail from 'Pages/PageUserManagement/PageUserManagementDetail';
@@ -179,11 +178,6 @@ function App() {
 
               {/* admin/Animal */}
               <Route path="/admin/animal/" element={<PageAnimalList />} />
-              <Route path="/admin/animal/new/" element={<PageAnimalForm />} />
-              <Route
-                path="/admin/animal/:animalId/edit/"
-                element={<PageAnimalForm />}
-              />
 
               {/* /admin/assignmanage/ */}
               <Route path="/admin/assignmanage/" element={<PageAssignList />} />

@@ -6,9 +6,11 @@ import LoadingIndicator from 'LoadingIndicator';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import './SlideStyle.css';
+import AnimalProtStatus from './AnimalProtStatus';
 
 function AnimalDetail({ animalId }) {
   const { auth } = useAuth();
+  const [clicked, setClicked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,24 +50,12 @@ function AnimalDetail({ animalId }) {
     refetch();
   }, []);
 
-  // 스크롤 기능
-  const [topLocation, setTopLocation] = useState(0);
-  // console.log('topLocation: ', topLocation);
+  // 처음 화면 로딩시 최상단으로 로딩
   useEffect(() => {
-    setTopLocation(document.querySelector('#topLoc').offsetTop);
-  }, [animal]);
-
-  const gotoTop = () => {
-    // 클릭하면 스크롤이 위로 올라가는 함수
     window.scrollTo({
-      top: topLocation,
-      behavior: 'smooth',
+      top: 0,
     });
-  };
-
-  useEffect(() => {
-    gotoTop();
-  }, [animal]);
+  }, []);
 
   //-------------
 
@@ -270,7 +260,31 @@ function AnimalDetail({ animalId }) {
                       <th className="border border-slate-200 bg-gray-50 px-6 py-3 text-center text-xl font-bold text-gray-500 uppercase tracking-wider w-72">
                         보호상태
                       </th>
-                      <td>{animal.protect_status}</td>
+                      <td>
+                        {animal.protect_status}
+                        {auth.is_staff && (
+                          <button
+                            className="mx-2 text-red-400"
+                            onClick={() => {
+                              auth.is_staff && setClicked(!clicked);
+                            }}
+                          >
+                            수정
+                          </button>
+                        )}
+                        {clicked === true && auth.is_staff && (
+                          <div>
+                            <AnimalProtStatus
+                              animal={animal}
+                              animalId={animalId}
+                              handleDidSave={(savedPost) => {
+                                savedPost && refetch();
+                                setClicked(false);
+                              }}
+                            />
+                          </div>
+                        )}
+                      </td>
                     </tr>
 
                     <tr>
@@ -295,12 +309,6 @@ function AnimalDetail({ animalId }) {
                 >
                   삭제
                 </button>
-                <Link
-                  to={`/admin/animal/${animalId}/edit/`}
-                  className="ml-3 flex-shrink-0 bg-red-500 hover:bg-red-700 border-red-500 hover:border-red-700 text-sm border-4 text-white py-1 px-2 rounded"
-                >
-                  수정
-                </Link>
 
                 <Link
                   to="/admin/animal/"

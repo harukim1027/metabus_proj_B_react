@@ -60,6 +60,13 @@ function ReviewList() {
     }
   };
 
+  // 처음 화면 로딩시 최상단으로 로딩
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
+
   //-------------
 
   return (
@@ -155,17 +162,6 @@ function ReviewList() {
               </div>
             ))}
           </div>
-          {auth.isLoggedIn && !auth.is_staff && (
-            <div className="float-right">
-              <button
-                onClick={() => navigate('/review/new/')}
-                className="hover:scale-110 w-3/4 h-3/4"
-                readOnly
-              >
-                <img src="/not_yet2.png" alt="button"></img>
-              </button>
-            </div>
-          )}
           <ReactPaginate
             previousLabel="<"
             breakLabel="..."
@@ -176,6 +172,20 @@ function ReviewList() {
             renderOnZeroPageCount={null}
             className="pagination_review"
           />
+          {auth.isLoggedIn && !auth.is_staff && (
+            <div className="flex justify-between">
+              <div></div>
+              <div>
+                <button
+                  onClick={() => navigate('/review/new/')}
+                  className="hover:scale-110 w-40"
+                  readOnly
+                >
+                  <img src="/not_yet2.png" alt="button"></img>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {/* <div className="review_list2"></div> */}
