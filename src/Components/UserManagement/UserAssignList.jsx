@@ -133,9 +133,7 @@ function UserAssignList({ userId }) {
               </tbody>
             </table>
           </div>
-          <button onClick={() => navigate(`/admin/assignmanage/`)}>
-            이전으로
-          </button>
+
           <ReactPaginate
             previousLabel="<"
             breakLabel="..."

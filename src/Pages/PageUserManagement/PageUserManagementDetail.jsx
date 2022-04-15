@@ -20,9 +20,6 @@ function PageUserManagementDetail() {
           <UserManagementDetail userId={userId} />
         </div>
       </div>
-      <div>
-        <button onClick={() => window.history.back()}>이전으로</button>
-      </div>
     </>
   );
 }

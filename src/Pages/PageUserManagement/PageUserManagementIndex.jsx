@@ -11,12 +11,12 @@ function PageUserManagementIndex() {
         <NewNav />
         <UserManagementIndex />
       </div>
-      <div className="text-center">
+      <div className="text-center mt-5">
         <button
-          className="font-bold text-xl"
-          onClick={() => window.history.back()}
+          className="font-bold text-xl mb-10"
+          onClick={() => navigate(`/admin/main/`)}
         >
-          이전으로
+          관리자 화면으로
         </button>
       </div>
     </>

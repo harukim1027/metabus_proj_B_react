@@ -115,8 +115,6 @@ function AssignList() {
                 </button>
               </div>
             </div>
-            {loading && <LoadingIndicator>'조회 중 ...'</LoadingIndicator>}
-            {error && '조회 중 오류가 발생했습니다. 조회된 정보가 없습니다.'}
           </div>
           <div className="mb-5">
             {assignList && (

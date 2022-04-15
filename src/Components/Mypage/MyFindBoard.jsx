@@ -233,14 +233,14 @@ function MyFindBoard() {
             className="pagination_review"
           />
         </div>
-        <div className="text-center">
-          <button
-            className="font-bold text-xl"
-            onClick={() => window.history.back()}
-          >
-            이전으로
-          </button>
-        </div>
+      </div>
+      <div className="text-center mt-5">
+        <button
+          className="font-bold text-xl mb-10"
+          onClick={() => window.history.back()}
+        >
+          이전으로
+        </button>
       </div>
     </>
   );

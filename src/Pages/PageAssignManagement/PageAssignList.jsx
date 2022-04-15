@@ -14,7 +14,7 @@ function PageAssignList() {
           className="font-bold text-xl"
           onClick={() => navigate(`/admin/main/`)}
         >
-          이전으로
+          관리자 화면으로
         </button>
       </div>
     </>

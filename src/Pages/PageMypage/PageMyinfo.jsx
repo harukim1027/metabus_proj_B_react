@@ -16,9 +16,9 @@ function PageMyinfo() {
           <Myinfo />
         </div>
       </div>
-      <div className="text-center">
+      <div className="text-center mt-5">
         <button
-          className="font-bold text-xl"
+          className="font-bold text-xl mb-10"
           onClick={() => window.history.back()}
         >
           이전으로

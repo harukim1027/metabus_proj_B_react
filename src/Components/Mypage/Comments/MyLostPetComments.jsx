@@ -233,14 +233,6 @@ function MyLostPetComments() {
                 )}
               </tbody>
             </table>
-            <div className="text-center mt-20 mb-10">
-              <button
-                className="font-bold text-xl"
-                onClick={() => window.history.back()}
-              >
-                이전으로
-              </button>
-            </div>
           </div>
           <ReactPaginate
             previousLabel="<"
@@ -253,6 +245,14 @@ function MyLostPetComments() {
             className="pagination_review"
           />
         </div>
+      </div>
+      <div className="text-center mt-5">
+        <button
+          className="font-bold text-xl mb-10"
+          onClick={() => window.history.back()}
+        >
+          이전으로
+        </button>
       </div>
     </>
   );
