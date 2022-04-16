@@ -194,17 +194,6 @@ function AnimalList() {
                   ))}
               </tbody>
             </table>
-            {auth.is_staff && (
-              <div className="flex justify-end mr-5">
-                <button
-                  onClick={() => navigate('/admin/animal/new/')}
-                  className="hover:scale-110 xs:w-10 sm:w-14"
-                  readOnly
-                >
-                  <img src="/pen2.png" alt="button"></img>
-                </button>
-              </div>
-            )}
           </div>
           <ReactPaginate
             previousLabel="<"

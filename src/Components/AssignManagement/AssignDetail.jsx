@@ -198,42 +198,98 @@ function AssignDetail({ assignId }) {
                       <th className="border border-slate-200 bg-gray-50 px-3 py-3 text-center xs:text-base sm:text-xl font-bold text-gray-500 tracking-wider">
                         진행 상태
                       </th>
-                      <td
-                        onClick={() => {
-                          auth.is_staff && setClicked(!clicked);
-                        }}
-                      >
+                      <td>
                         {assignData?.status}
-                        {auth.is_staff && <span>(수정하려면 클릭)</span>}
+                        {auth.is_staff && (
+                          <button
+                            className="mx-2 text-red-400"
+                            onClick={() => {
+                              auth.is_staff && setClicked(!clicked);
+                            }}
+                          >
+                            수정
+                          </button>
+                        )}
+                        {clicked === true && assignData && (
+                          <div>
+                            <AssignStatus
+                              assignId={assignId}
+                              assignData={assignData}
+                              handleDidSave={(savedPost) => {
+                                savedPost && refetch();
+                                savedPost && setClicked(0);
+                                if (savedPost?.status === '입양 완료') {
+                                  patchAnimalStatus({
+                                    data: { protect_status: '입양 완료' },
+                                  });
+                                } else if (savedPost?.status === '거절') {
+                                  patchAnimalStatus({
+                                    data: { protect_status: '보호중' },
+                                  });
+                                } else {
+                                  patchAnimalStatus({
+                                    data: { protect_status: '입양 매칭 중' },
+                                  });
+                                }
+                              }}
+                            />
+                          </div>
+                        )}
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                {clicked === true && assignData && (
-                  <div>
-                    <AssignStatus
-                      assignId={assignId}
-                      assignData={assignData}
-                      handleDidSave={(savedPost) => {
-                        savedPost && refetch();
-                        savedPost && setClicked(0);
-                        if (savedPost?.status === '입양 완료') {
-                          patchAnimalStatus({
-                            data: { protect_status: '입양 완료' },
-                          });
-                        } else if (savedPost?.status === '거절') {
-                          patchAnimalStatus({
-                            data: { protect_status: '보호중' },
-                          });
-                        } else {
-                          patchAnimalStatus({
-                            data: { protect_status: '입양 매칭 중' },
-                          });
+              </div>
+            </span>
+
+            {/* 거주지 사진 */}
+            <span>
+              <blockquote className="text-6xl font-semibold italic text-center text-slate-900">
+                <span className="mt-3 mb-10 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-blue-900 relative inline-block xs:text-2xl sm:text-4xl md:text-6xl">
+                  <span className="relative text-white">
+                    " 신청자 거주지 사진 "
+                  </span>
+                </span>
+              </blockquote>
+              <div className=" flex justify-center">
+                <div>
+                  <div className="rounded-lg w-56 max-h-52 overflow-hidden mb-2">
+                    <div>
+                      <img
+                        src={assignData?.picture_of_residence1}
+                        alt=""
+                        onClick={() =>
+                          window.open(assignData?.picture_of_residence1)
                         }
-                      }}
-                    />
+                        className="cursor-pointer"
+                      />
+                    </div>
                   </div>
-                )}
+                  <div className="rounded-lg w-56 max-h-52 overflow-hidden mb-2">
+                    <div>
+                      <img
+                        src={assignData?.picture_of_residence2}
+                        alt=""
+                        onClick={() =>
+                          window.open(assignData?.picture_of_residence2)
+                        }
+                        className="cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                  <div className="rounded-lg w-56 max-h-52 overflow-hidden">
+                    <div>
+                      <img
+                        src={assignData?.picture_of_residence3}
+                        alt=""
+                        onClick={() =>
+                          window.open(assignData?.picture_of_residence3)
+                        }
+                        className="cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </span>
 
